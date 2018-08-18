@@ -1333,7 +1333,7 @@ ul.register_form li span{
 }
 .email_address{
 	height: 40px;
-	width:100%;
+	width:50%;
 	background: #f0f0f0;
     border: 1px solid #e5e5e5;
 }
@@ -3810,3 +3810,18 @@ a.add-tag-btn {
 .button-right {
   float: right;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

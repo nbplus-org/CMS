@@ -65,15 +65,48 @@
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="create_account">
-							<h2>Login or Create an Account</h2>
+							<h2>登陆或注册</h2>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 						<div class="new_customer">
-							<h3>NEW CUSTOMERS</h3>
+							<h3>新用户</h3>
 							<p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
+						    <ul class="register_form">
+								<li>用户名<span>*</span></li>
+								<li>
+									<div class="email_address">
+										<input type="text" class="email_test"/>
+									</div>
+								</li>
+								<li>密码<span>*</span></li>
+								<li>
+									<div class="email_address">
+										<input type="text" class="password"/>
+									</div>
+								</li>
+								<li>昵称<span>*</span></li>
+								<li>
+									<div class="email_address">
+										<input type="text" class="password"/>
+									</div>
+								</li>
+								<li>电话<span>*</span></li>
+								<li>
+									<div class="qwer">
+										<input type="text" class="password"/>
+									</div>
+								</li>
+								<li>邮箱<span>*</span></li>
+								<li>
+									<div class="email_address">
+										<input type="text" class="password"/>
+									</div>
+								</li>
+								<li><h2><span>*</span>Required Fields</h2></li>
+							</ul>
 						</div>
 						<div class="create_button_area">
 							<button type="submit" class="create_button">
