@@ -76,7 +76,7 @@ a{transition: all .3s linear;}
 	height:auto;
 	display: block;
 }
-.account_card_area ul#account_nav, .account_card_area ul#account_nav li div.account_menu_list .account_single_item ul#account_single_nav_1, .account_card_area ul#account_nav li div.account_menu_list .account_single_item ul#account_single_nav_2, .account_card_area ul#account_nav li div.account_menu_list .account_single_item ul#account_single_nav_3, ul#nav_menu, ul.register_form, ul#breadcrumbs, ul.catagory, ul#single_popular, ul.pagination_list, ul#options_selection, .my_tabs_description ul.tab_style, .product_description ul#Motorola, ul#first_level, .rating_contact ul#review_contact, .product_tag_area ul#product_tags, ul#order_history, ul#login_panel, ul.billing_in, ul#progress_btn{
+.account_card_area ul#account_nav, .account_card_area ul#account_nav li div.account_menu_list .account_single_item ul#account_single_nav_1, .account_card_area ul#account_nav li div.account_menu_list .account_single_item ul#account_single_nav_2, .account_card_area ul#account_nav li div.account_menu_list .account_single_item ul#account_single_nav_3, ul#nav_menu, ul.register_form, ul.login_form, ul#breadcrumbs, ul.catagory, ul#single_popular, ul.pagination_list, ul#options_selection, .my_tabs_description ul.tab_style, .product_description ul#Motorola, ul#first_level, .rating_contact ul#review_contact, .product_tag_area ul#product_tags, ul#order_history, ul#login_panel, ul.billing_in, ul#progress_btn{
 	margin:0;
 	padding:0;
 	list-style:none;
@@ -1292,7 +1292,8 @@ ul.footer_menu {
     padding: 10px;
     font-size: 1.08em;
     line-height: 1.25;
-    margin: 0 0 20px;
+    height:40px;
+   	width:57%;
     text-transform: uppercase;
 }
 .new_customer p{
@@ -1331,15 +1332,32 @@ ul.register_form li h2{
 ul.register_form li span{
 	color:#FF343B;
 }
+
+<!--============================================-->
+ul.login_form li {
+	color:#555;
+	margin: 0 0 6px;
+}
+ul.login_form li h2{
+	color:#FF343B;
+	font-size:12px;
+}
+ul.login_form li span{
+	color:#FF343B;
+}
+<!--==============================================-->
+
 .email_address{
 	height: 40px;
-	width:100%;
+	width:57%;
 	background: #f0f0f0;
     border: 1px solid #e5e5e5;
 }
 .email_address .email_test{
 	background: #f0f0f0;
 	padding: 9px 10px;
+	width: 292px;
+	height: 40px
 }
 .email_address .password{
 	background: #f0f0f0;
@@ -3810,3 +3828,18 @@ a.add-tag-btn {
 .button-right {
   float: right;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
