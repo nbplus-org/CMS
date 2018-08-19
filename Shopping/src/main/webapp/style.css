@@ -1348,7 +1348,7 @@ ul.login_form li span{
 <!--==============================================-->
 
 .email_address{
-	height: 40px;
+	height: 30px;
 	width:57%;
 	background: #f0f0f0;
     border: 1px solid #e5e5e5;
@@ -1357,7 +1357,7 @@ ul.login_form li span{
 	background: #f0f0f0;
 	padding: 9px 10px;
 	width: 292px;
-	height: 40px
+	height: 30px
 }
 .email_address .password{
 	background: #f0f0f0;
