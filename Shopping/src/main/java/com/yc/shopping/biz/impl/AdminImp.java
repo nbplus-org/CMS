@@ -7,6 +7,6 @@ import com.yc.shopping.biz.AdminInterface;
  * @author wang
  *
  */
-public class AdminInterfaceImpl implements AdminInterface{
+public class AdminImp implements AdminInterface{
 
 }

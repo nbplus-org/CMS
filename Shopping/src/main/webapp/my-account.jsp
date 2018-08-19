@@ -55,8 +55,6 @@
 	<!--Start Header Top area -->
 
 
-<<<<<<< HEAD
-
 	<%@include file="header.jsp"%>
 
 	<!--End Mobile Menu area -->

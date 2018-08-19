@@ -1,5 +1,10 @@
 package com.yc.shopping.vo;
 
+/**
+ * 
+ * @author Computer-huangbiao
+ *
+ */
 public class ClothesVO {
 
 	private Integer clothesId;

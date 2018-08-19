@@ -7,7 +7,7 @@ import com.yc.shopping.biz.UserInterface;
  * @author wang
  *
  */
-public class UserInterfaceImpl implements UserInterface{
+public class UserImp implements UserInterface{
 
 	
 	

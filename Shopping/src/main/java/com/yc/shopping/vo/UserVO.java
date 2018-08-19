@@ -2,6 +2,11 @@ package com.yc.shopping.vo;
 
 import java.util.Date;
 
+/**
+ * 
+ * @author Computer-huangbiao
+ *
+ */
 public class UserVO {
 	
 	private Integer uId;
