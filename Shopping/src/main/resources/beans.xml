@@ -15,7 +15,7 @@
     http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 	<!-- spring 包扫描 -->
-	<context:component-scan base-package="com.yc" />
+	<context:component-scan base-package="com.yc.shopping" />
 	
 	<!-- ======================以下是 spring mvc 相关配置======================= -->
 	<!-- spring mvc 用于处理静态资源 -->
@@ -49,7 +49,7 @@
 		<!-- 引用 spring 数据源 -->
 		<property name="dataSource" ref="dataSource"></property>
 		<!-- 注册 mybatis 映射文件，纯接口方案可以省略这段配置 -->
-		<property name="mapperLocations" value="classpath:com.yc.shopping..*.xml"></property>
+
 		<!-- 配置其他 mybatis 框架属性 -->
 		<property name="configurationProperties">
 			<props>
@@ -59,7 +59,7 @@
 	</bean>
 	<!-- mapper 接口扫描bean，正确配置这个 bean 才能获取到 mybatis mapper -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.yc.shopping" />
+		<property name="basePackage" value="com.yc.shopping.dao" />
 	</bean>
 	
 	<!-- ======================以下是 spring 事务管理的相关配置======================= -->

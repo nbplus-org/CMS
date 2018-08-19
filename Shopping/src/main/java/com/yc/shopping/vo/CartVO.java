@@ -1,45 +1,36 @@
 package com.yc.shopping.vo;
 
 /**
- * 
- * @author Computer-huangbiao
+ * 购物车表（CartTable）
+ * @author Administrator
  *
  */
 public class CartVO {
+
 	
-	private Integer cartId;
+	private Integer cartid;//购物车编号
 	
-	private Integer uId;
+	private Integer uid;//用户编号----------外键
+
+	private Integer clodetailid;//服装详情编号-------外键
 	
-	/**
-	 * 服装详情编号
-	 */
-	private Integer cloDetailId ;
-
-	public Integer getCartId() {
-		return cartId;
+	public Integer getCartid() {
+		return cartid;
 	}
-
-	public void setCartId(Integer cartId) {
-		this.cartId = cartId;
+	public void setCartid(Integer cartid) {
+		this.cartid = cartid;
 	}
-
-	public Integer getuId() {
-		return uId;
+	public Integer getUid() {
+		return uid;
 	}
-
-	public void setuId(Integer uId) {
-		this.uId = uId;
+	public void setUid(Integer uid) {
+		this.uid = uid;
 	}
-
-	public Integer getCloDetailId() {
-		return cloDetailId;
+	public Integer getClodetailid() {
+		return clodetailid;
 	}
-
-	public void setCloDetailId(Integer cloDetailId) {
-		this.cloDetailId = cloDetailId;
+	public void setClodetailid(Integer clodetailid) {
+		this.clodetailid = clodetailid;
 	}
-	
-	
 	
 }

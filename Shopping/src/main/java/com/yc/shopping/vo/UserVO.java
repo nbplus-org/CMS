@@ -1,111 +1,88 @@
 package com.yc.shopping.vo;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
- * 
- * @author Computer-huangbiao
+ * 用户表（UserTable）
+ * @author Administrator
  *
  */
 public class UserVO {
+
 	
-	private Integer uId;
+	private Integer uid;//用户编号
 	
-	private String uName;
+	private String uname;//用户账号，（用户名）
 	
-	/**
-	 * 昵称
-	 */
-	private String nickName;
+	private String nickname;//用户昵称（nickname）
 	
-	private String uPwd;
+	private String upwd;//用户密码（userpassword）
 	
-	private byte uSex;
+	private String usex;//用户性别（usersex）
 	
-	private String uPhone;
+	private String uphone;//用户电话（userphone）
 	
-	private String uEmail;
+	private String uemail;//用户邮箱（useremail）
 	
-	/**
-	 * 积分，默认为-1
-	 */
-	private String uIntegral;
+	private Integer uintegral;//用户积分（默认为-1）
 	
-	private Date uBirthday;
-	
-	public Integer getuId() {
-		return uId;
-	}
-
-	public void setuId(Integer uId) {
-		this.uId = uId;
-	}
-
-	public String getuName() {
-		return uName;
-	}
-
-	public void setuName(String uName) {
-		this.uName = uName;
-	}
-
-	public String getNickName() {
-		return nickName;
-	}
-
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
-	}
-
-	public String getuPwd() {
-		return uPwd;
-	}
-
-	public void setuPwd(String uPwd) {
-		this.uPwd = uPwd;
-	}
-
-	public byte getuSex() {
-		return uSex;
-	}
-
-	public void setuSex(byte uSex) {
-		this.uSex = uSex;
-	}
-
-	public String getuPhone() {
-		return uPhone;
-	}
-
-	public void setuPhone(String uPhone) {
-		this.uPhone = uPhone;
-	}
-
-	public String getuEmail() {
-		return uEmail;
-	}
-
-	public void setuEmail(String uEmail) {
-		this.uEmail = uEmail;
-	}
-
-	public String getuIntegral() {
-		return uIntegral;
-	}
-
-	public void setuIntegral(String uIntegral) {
-		this.uIntegral = uIntegral;
-	}
-
-	public Date getuBirthday() {
-		return uBirthday;
-	}
-
-	public void setuBirthday(Date uBirthday) {
-		this.uBirthday = uBirthday;
-	}
+	private Timestamp ubirthday;//用户生日（或注册日期）
 	
 	
+	public Integer getUid() {
+		return uid;
+	}
+	public void setUid(Integer uid) {
+		this.uid = uid;
+	}
+	public String getUname() {
+		return uname;
+	}
+	public void setUname(String uname) {
+		this.uname = uname;
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public String getUpwd() {
+		return upwd;
+	}
+	public void setUpwd(String upwd) {
+		this.upwd = upwd;
+	}
+	public String getUsex() {
+		return usex;
+	}
+	public void setUsex(String usex) {
+		this.usex = usex;
+	}
+	public String getUphone() {
+		return uphone;
+	}
+	public void setUphone(String uphone) {
+		this.uphone = uphone;
+	}
+	public String getUemail() {
+		return uemail;
+	}
+	public void setUemail(String uemail) {
+		this.uemail = uemail;
+	}
+	public Integer getUintegral() {
+		return uintegral;
+	}
+	public void setUintegral(Integer uintegral) {
+		this.uintegral = uintegral;
+	}
+	public Timestamp getUbirthday() {
+		return ubirthday;
+	}
+	public void setUbirthday(Timestamp ubirthday) {
+		this.ubirthday = ubirthday;
+	}
 	
 	
 }

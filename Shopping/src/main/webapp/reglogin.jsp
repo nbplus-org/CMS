@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
@@ -67,7 +68,6 @@
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="create_account">
 						<h2>登陆和注册</h2>
-=======
 		
 					</div>
 				</div>
@@ -83,21 +83,21 @@
 								<li>用户名<span>*</span></li>
 								<li>
 									<div class="email_address">
-										<input type="text" class="email_test" /> <input type="hidden"
+										<input type="text" class="email_test" name="uname"/> <input type="hidden"
 											name="tsname" />
 									</div>
 								</li>
 								<li>密码<span>*</span></li>
 								<li>
 									<div class="email_address">
-										<input type="text" class="email_test" />
+										<input type="password"  name="upwd"/>
 									</div>
 								</li>
 
 								<li>手机号<span>*</span></li>
 								<li>
 									<div>
-										<input type="text" name="phone" style="background: #f0f0f0" />
+										<input type="text" name="uphone" style="background: #f0f0f0" />
 										<button>点击发送验证码</button>
 										<input type="hidden" name="tsphone" />
 									</div>
@@ -110,6 +110,13 @@
 											type="hidden" name="tscode" />
 									</div>
 								</li>
+								
+								<li>
+									<div class="email_address">
+										<input id="man" type="radio" checked="checked" name="1" />男<input id="woman" type="radio"  name="0"/>女
+									</div>
+								</li>
+								
 							</ul>
 						</div>
 						<div class="create_button_area">
@@ -118,25 +125,38 @@
 					</div>
 			</form>
 
-			<form action="" method="post">
+			<form action="login.do" method="post">
 
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<div class="new_customer">
 						<h3>老客户请来这登陆</h3>
-
+			          
 						<ul class="register_form">
 							<li>用户名<span>*</span></li>
 							<li>
 								<div class="email_address">
-									<input type="text" name="uname" class="email_test" />
+									<input type="text" name="uname" class="email_test" required placeholder="请输入用户名" />
+								<c:forEach items="${msg}">
+								   <span style="color:red">${msg}</span>
+								</c:forEach>
 								</div>
 							</li>
 							<li>密码<span>*</span></li>
 							<li>
 								<div class="email_address">
-									<input type="text" name="upwd" class="email_test" />
+									<input type="password" class="email_test" name="upwd" required placeholder="请输入密码" />
 								</div>
 							</li>
+							<li>验证码<span>*</span></li>
+							<li>
+								<div class="email_address">
+									<input type="text" class="email_test" name="vcode" id="vcode" required placeholder="请输入下面的验证码" />
+									<img alt="" src="vcode.s" onclick="src='vcode.s?'+new Date()" width="75px" >
+								    <c:forEach items="${msgcode}">
+								      <span style="color:red">${msgcode}</span>
+								    </c:forEach>
+								</div>
+							</li>	
 						</ul>
 					</div>
 					<div class="create_button_area">

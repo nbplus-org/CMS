@@ -1,112 +1,93 @@
 package com.yc.shopping.vo;
 
 /**
- * 
- * @author Computer-huangbiao
+ * 服装表（clothesTable）
+ * @author Administrator
  *
  */
 public class ClothesVO {
 
-	private Integer clothesId;
 	
-	private Integer aId;
+	private Integer clothesid;//服装编号
 	
-	private String clothesName;
-
-	private String clothesType;
+	private Integer aid;//管理员编号----外键
 	
-	private String clothesBigTag;
+	private String clothesname;//服装名称
 	
-	private String clothesBrand;
+	private String clothestype;//服装类型
 	
-	private String brandPic;
+	private String clothesbigtag;//服装大标签
 	
-	private String clothesIntroduce;
+	private String clothesbrand;//服装品牌
 	
-	private String clothesOrigprice;
+	private String brandpic;//品牌图片
 	
-	private String clothesPrice;
-
-	public Integer getClothesId() {
-		return clothesId;
-	}
-
-	public void setClothesId(Integer clothesId) {
-		this.clothesId = clothesId;
-	}
-
-	public Integer getaId() {
-		return aId;
-	}
-
-	public void setaId(Integer aId) {
-		this.aId = aId;
-	}
-
-	public String getClothesName() {
-		return clothesName;
-	}
-
-	public void setClothesName(String clothesName) {
-		this.clothesName = clothesName;
-	}
-
-	public String getClothesType() {
-		return clothesType;
-	}
-
-	public void setClothesType(String clothesType) {
-		this.clothesType = clothesType;
-	}
-
-	public String getClothesBigTag() {
-		return clothesBigTag;
-	}
-
-	public void setClothesBigTag(String clothesBigTag) {
-		this.clothesBigTag = clothesBigTag;
-	}
-
-	public String getClothesBrand() {
-		return clothesBrand;
-	}
-
-	public void setClothesBrand(String clothesBrand) {
-		this.clothesBrand = clothesBrand;
-	}
-
-	public String getBrandPic() {
-		return brandPic;
-	}
-
-	public void setBrandPic(String brandPic) {
-		this.brandPic = brandPic;
-	}
-
-	public String getClothesIntroduce() {
-		return clothesIntroduce;
-	}
-
-	public void setClothesIntroduce(String clothesIntroduce) {
-		this.clothesIntroduce = clothesIntroduce;
-	}
-
-	public String getClothesOrigprice() {
-		return clothesOrigprice;
-	}
-
-	public void setClothesOrigprice(String clothesOrigprice) {
-		this.clothesOrigprice = clothesOrigprice;
-	}
-
-	public String getClothesPrice() {
-		return clothesPrice;
-	}
-
-	public void setClothesPrice(String clothesPrice) {
-		this.clothesPrice = clothesPrice;
-	}
+	private String clothesintroduce;//服装简介
+	
+	private Integer clothesorigprice;//服装原价
+	
+	private Integer clothesprice;//服装现价
 	
 	
+	public Integer getClothesid() {
+		return clothesid;
+	}
+	public void setClothesid(Integer clothesid) {
+		this.clothesid = clothesid;
+	}
+	public Integer getAid() {
+		return aid;
+	}
+	public void setAid(Integer aid) {
+		this.aid = aid;
+	}
+	public String getClothesname() {
+		return clothesname;
+	}
+	public void setClothesname(String clothesname) {
+		this.clothesname = clothesname;
+	}
+	public String getClothestype() {
+		return clothestype;
+	}
+	public void setClothestype(String clothestype) {
+		this.clothestype = clothestype;
+	}
+	public String getClothesbigtag() {
+		return clothesbigtag;
+	}
+	public void setClothesbigtag(String clothesbigtag) {
+		this.clothesbigtag = clothesbigtag;
+	}
+	public String getClothesbrand() {
+		return clothesbrand;
+	}
+	public void setClothesbrand(String clothesbrand) {
+		this.clothesbrand = clothesbrand;
+	}
+	public String getBrandpic() {
+		return brandpic;
+	}
+	public void setBrandpic(String brandpic) {
+		this.brandpic = brandpic;
+	}
+	public String getClothesintroduce() {
+		return clothesintroduce;
+	}
+	public void setClothesintroduce(String clothesintroduce) {
+		this.clothesintroduce = clothesintroduce;
+	}
+	public Integer getClothesorigprice() {
+		return clothesorigprice;
+	}
+	public void setClothesorigprice(Integer clothesorigprice) {
+		this.clothesorigprice = clothesorigprice;
+	}
+	public Integer getClothesprice() {
+		return clothesprice;
+	}
+	public void setClothesprice(Integer clothesprice) {
+		this.clothesprice = clothesprice;
+	}	
 	
 }
