@@ -53,6 +53,7 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 	<!--Start Header Top area -->
+<<<<<<< HEAD
 
 
 	<%@include file="header.jsp"%>
@@ -166,6 +167,108 @@
 				</div>
 			</form>
 		</div>
+=======
+
+
+	<%@include file="header.jsp"%>
+
+	<!--End Mobile Menu area -->
+
+	<!--End Main Menu area -->
+	<!--Start Register & login area -->
+	<div class="my_account_page_area">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="create_account">
+						<h2>登陆和注册</h2>
+		
+					</div>
+				</div>
+			</div>
+
+			<form action="" method="post">
+
+				<div class="row">
+					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+						<div class="new_customer">
+							<h3>新用户请来这注册</h3>
+							<ul class="register_form">
+								<li>用户名<span>*</span></li>
+								<li>
+									<div class="email_address">
+										<input type="text" class="email_test" name="uname"/> <input type="hidden"
+											name="tsname" />
+									</div>
+								</li>
+								<li>密码<span>*</span></li>
+								<li>
+									<div class="email_address">
+										<input type="password"  name="upwd"/>
+									</div>
+								</li>
+
+								<li>手机号<span>*</span></li>
+								<li>
+									<div>
+										<input type="text" name="uphone" style="background: #f0f0f0" />
+										<button>点击发送验证码</button>
+										<input type="hidden" name="tsphone" />
+									</div>
+								</li>
+
+								<li>验证码<span>*</span></li>
+								<li>
+									<div class="email_address">
+										<input type="text" name="code" class="email_test" /> <input
+											type="hidden" name="tscode" />
+									</div>
+								</li>
+								
+								<li>
+									<div class="email_address">
+										<input id="man" type="radio" checked="checked" name="1" />男<input id="woman" type="radio"  name="0"/>女
+									</div>
+								</li>
+								
+							</ul>
+						</div>
+						<div class="create_button_area">
+							<button type="submit" class="create_button">注册</button>
+						</div>
+					</div>
+			</form>
+
+			<form action="" method="post">
+
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+					<div class="new_customer">
+						<h3>老客户请来这登陆</h3>
+
+						<ul class="register_form">
+							<li>用户名<span>*</span></li>
+							<li>
+								<div class="email_address">
+									<input type="text" name="uname" class="email_test" />
+								</div>
+							</li>
+							<li>密码<span>*</span></li>
+							<li>
+								<div class="email_address">
+									<input type="password" name="upwd"  />
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="create_button_area">
+						<a href="">忘记密码?</a>
+						<button type="submit" class="create_button">登陆</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+>>>>>>> branch 'master' of https://github.com/nbplus-org/CMS.git
 	</div>
 	<!--End Register & login area -->
 

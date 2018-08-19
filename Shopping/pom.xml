@@ -123,11 +123,15 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.39</version>
 		</dependency>
+
+		<!-- 发邮件依赖 -->
 		<dependency>
 			<groupId>javax-mail</groupId>
 			<artifactId>javax.mail</artifactId>
 			<version>1.6.0</version>
 		</dependency>
+		
+		
 	</dependencies>
 
 	<groupId>com.yc</groupId>

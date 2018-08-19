@@ -27,7 +27,8 @@ public class MyUtils {
 			count++;
 		}
 		String code = sbf.toString();
-		//Data.code=code;		//存值
+
+		DataUtils.code=code;		//存值
 		
 		try {
 			//1、创建参数配置，用于连接邮件服务器的参数配置
@@ -40,10 +41,10 @@ public class MyUtils {
 			session.setDebug(false);
 			//3、创建一封邮件
 			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(myEmailAccount,"源辰报考助手","UTF-8"));
+			message.setFrom(new InternetAddress(myEmailAccount,"nbsp购物系统","UTF-8"));
 			message.setRecipient(MimeMessage.RecipientType.TO,new InternetAddress(receiveMail,"用户","UTF-8"));
 			message.setSubject("验证码", "UTF-8" );
-			message.setContent("亲，欢迎注册源辰报考助手，愿你能找到合适的大学		你的验证码为："+code,"text/html;charset=UTF-8");
+			message.setContent("亲，你的验证码为："+code,"text/html;charset=UTF-8");
 			message.setSentDate(new Date());
 			message.saveChanges();
 			//4、根据Session获取邮件传输对象
