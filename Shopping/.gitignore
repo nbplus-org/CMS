@@ -1,9 +1,2 @@
 /target/
-/.metadata/
-/.recommenders/
-/RemoteSystemsTempFiles/
-/Servers/*/*
-/Servers/.*
-/libraries
-*.jar
-/pom.xml/
+

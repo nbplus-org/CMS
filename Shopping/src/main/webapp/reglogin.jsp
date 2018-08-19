@@ -67,12 +67,12 @@
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="create_account">
 						<h2>登陆和注册</h2>
-		
+
 					</div>
 				</div>
 			</div>
 
-			<form action="" method="post">
+			<form action="" method="post" onsubmit=" return true ">
 
 				<div class="row">
 					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -82,21 +82,32 @@
 								<li>用户名<span>*</span></li>
 								<li>
 									<div class="email_address">
-										<input type="text" class="email_test" name="uname"/> <input type="hidden"
+										<input type="text" class="email_test" name="uName"
+											placeholder="请输入用户名 / 账号" /> <input type="hidden"
 											name="tsname" />
 									</div>
 								</li>
 								<li>密码<span>*</span></li>
 								<li>
 									<div class="email_address">
-										<input type="password"  name="upwd"/>
+										<input type="password" class="email_test" name="uPwd"
+											placeholder="6-16位数字或英文或符号" />
 									</div>
 								</li>
 
 								<li>手机号<span>*</span></li>
 								<li>
-									<div>
-										<input type="text" name="uphone" style="background: #f0f0f0" />
+									<div class="email_address">
+										<input type="text" class="email_test" name="uPhone"
+											placeholder="请输入手机号" /> <input type="hidden" name="tsname" />
+									</div>
+								</li>
+
+								<li>邮箱<span>*</span></li>
+								<li>
+									<div class="email_address">
+										<input type="text" name="uEmail" style="background: #f0f0f0;"
+											placeholder="请输入邮箱" />
 										<button>点击发送验证码</button>
 										<input type="hidden" name="tsphone" />
 									</div>
@@ -105,17 +116,18 @@
 								<li>验证码<span>*</span></li>
 								<li>
 									<div class="email_address">
-										<input type="text" name="code" class="email_test" /> <input
-											type="hidden" name="tscode" />
+										<input type="text" name="code" class="email_test"
+											placeholder="请输入验证码" /> <input type="hidden" name="tscode" />
 									</div>
 								</li>
-								
+
 								<li>
 									<div class="email_address">
-										<input id="man" type="radio" checked="checked" name="1" />男<input id="woman" type="radio"  name="0"/>女
+										<input type="radio" checked="checked" name="uSex" value="1"/>男    <input
+											id="woman" type="radio" name="uSex" value="0"/>女
 									</div>
 								</li>
-								
+
 							</ul>
 						</div>
 						<div class="create_button_area">
@@ -124,7 +136,7 @@
 					</div>
 			</form>
 
-			<form action="" method="post">
+			<form action="#" method="post" onsubmit=" return true ">
 
 				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 					<div class="new_customer">
@@ -134,13 +146,15 @@
 							<li>用户名<span>*</span></li>
 							<li>
 								<div class="email_address">
-									<input type="text" name="uname" class="email_test" />
+									<input type="text" name="uName" class="email_test"
+										placeholder="请输入用户名" />
 								</div>
 							</li>
 							<li>密码<span>*</span></li>
 							<li>
 								<div class="email_address">
-									<input type="password" name="upwd"  />
+									<input type="password" name="uPwd" class="email_test"
+										placeholder="请输入密码" />
 								</div>
 							</li>
 						</ul>
@@ -152,7 +166,6 @@
 				</div>
 			</form>
 		</div>
-	</div>
 	</div>
 	<!--End Register & login area -->
 
