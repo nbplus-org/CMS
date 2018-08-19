@@ -1,4 +1,4 @@
-package com.yc.shopping.biz.impl;
+package com.yc.shopping.biz.imp;
 
 import com.yc.shopping.biz.UserInterface;
 
