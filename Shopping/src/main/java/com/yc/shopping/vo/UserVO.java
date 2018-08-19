@@ -27,7 +27,7 @@ public class UserVO {
 	private String uIntegral;
 	
 	private Date uBirthday;
-
+	
 	public Integer getuId() {
 		return uId;
 	}

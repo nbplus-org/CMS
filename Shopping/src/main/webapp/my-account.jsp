@@ -55,6 +55,7 @@
 	<!--Start Header Top area -->
 
 
+<<<<<<< HEAD
 
 	<%@include file="header.jsp"%>
 
@@ -68,6 +69,8 @@
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="create_account">
 						<h2>登陆和注册</h2>
+=======
+		
 					</div>
 				</div>
 			</div>
