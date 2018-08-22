@@ -2,27 +2,28 @@ package com.yc.shopping.vo;
 
 /**
  * 评论表（ReviewTable）
+ * 
  * @author Administrator
  *
  */
 public class ReviewVO {
 
-	//评论编号
+	// 评论编号
 	private Integer reviewid;
-	
-	//服装编号------外
+
+	// 服装编号------外
 	private Integer clothesid;
-	
-	//用户编号------外
+
+	// 用户编号------外
 	private Integer uid;
-	
-	//匿名状态
+
+	// 匿名状态
 	private String state;
-	
-	//评论图片
+
+	// 评论图片
 	private String reviewpic;
-	
-	//评论文字
+
+	// 评论文字
 	private String reviewstr;
 
 	public Integer getReviewid() {
@@ -72,6 +73,5 @@ public class ReviewVO {
 	public void setReviewstr(String reviewstr) {
 		this.reviewstr = reviewstr;
 	}
-	
-	
+
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.yc.shopping.biz.UserInterface;
 import com.yc.shopping.dao.UserDao;
+import com.yc.shopping.filter.BizException;
 import com.yc.shopping.vo.UserVO;
 
 /**
@@ -58,6 +59,12 @@ public class UserImp implements UserInterface {
 	@Override
 	public UserVO selectUserByUphone(String uphone) {
 		return uDao.selectUserByUphone(uphone);
+	}
+
+	@Override
+	public UserVO checkByNP(String uname, String upwd) throws BizException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

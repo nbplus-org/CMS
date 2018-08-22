@@ -1,37 +1,32 @@
 package com.yc.shopping.vo;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
+ * 用户表（UserTable）
  * 
- * @author Computer-huangbiao
+ * @author Administrator
  *
  */
 public class UserVO {
+
+	private Integer uid;// 用户编号
+
+	private String uname;// 用户账号，（用户名）
 	
-	private Integer uid;
+	private String nickname;// 用户昵称（nickname）
+
+	private String upwd;// 用户密码（userpassword）
 	
-	private String uname;
+	private String usex;// 用户性别（usersex）
 	
-	/**
-	 * 昵称
-	 */
-	private String nickname;
+	private String uphone;// 用户电话（userphone）
 	
-	private String upwd;
+	private String uemail;// 用户邮箱（useremail）
 	
-	private byte usex;
-	
-	private String uphone;
-	
-	private String uemail;
-	
-	/**
-	 * 积分，默认为-1
-	 */
-	private Integer uintegral;
-	
-	private Date ubirthday;
+	private Integer uintegral;// 用户积分（默认为-1）
+
+	private Timestamp ubirthday;// 用户生日（或注册日期）
 
 	public Integer getUid() {
 		return uid;
@@ -65,11 +60,11 @@ public class UserVO {
 		this.upwd = upwd;
 	}
 
-	public byte getUsex() {
+	public String getUsex() {
 		return usex;
 	}
 
-	public void setUsex(byte usex) {
+	public void setUsex(String usex) {
 		this.usex = usex;
 	}
 
@@ -97,13 +92,12 @@ public class UserVO {
 		this.uintegral = uintegral;
 	}
 
-	public Date getUbirthday() {
+	public Timestamp getUbirthday() {
 		return ubirthday;
 	}
 
-	public void setUbirthday(Date ubirthday) {
+	public void setUbirthday(Timestamp ubirthday) {
 		this.ubirthday = ubirthday;
 	}
-	
-	
+
 }

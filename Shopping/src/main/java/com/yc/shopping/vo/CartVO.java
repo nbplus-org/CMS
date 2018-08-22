@@ -1,20 +1,18 @@
 package com.yc.shopping.vo;
 
 /**
+ * 购物车表（CartTable）
  * 
- * @author Computer-huangbiao
+ * @author Administrator
  *
  */
 public class CartVO {
 
-	private Integer cartid;
+	private Integer cartid;// 购物车编号
 
-	private Integer uid;
+	private Integer uid;// 用户编号----------外键
 
-	/**
-	 * 服装详情编号
-	 */
-	private Integer clodetailid;
+	private Integer clodetailid;// 服装详情编号-------外键
 
 	public Integer getCartid() {
 		return cartid;
@@ -39,5 +37,4 @@ public class CartVO {
 	public void setClodetailid(Integer clodetailid) {
 		this.clodetailid = clodetailid;
 	}
-
 }

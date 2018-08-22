@@ -1,26 +1,24 @@
 package com.yc.shopping.vo;
 
 /**
+ * 管理员（AdminTable）
  * 
- * @author Computer-huangbiao
+ * @author Administrator
  *
  */
 public class AdminVO {
 
-	private Integer aid;
+	private Integer aid;// 管理员编号
 
-	private String aname;
+	private String aname;// 管理员账号
 
-	private String apwd;
+	private String apwd;// 管理员密码
 
-	/**
-	 * 管理原真实姓名
-	 */
-	private String adminrelname;
+	private String adminrelname;// 管理员真实姓名（）
 
-	private String asex;
+	private String asex;// 管理员性别
 
-	private String aphone;
+	private String aphone;// 管理员电话
 
 	public Integer getAid() {
 		return aid;
@@ -69,6 +67,5 @@ public class AdminVO {
 	public void setAphone(String aphone) {
 		this.aphone = aphone;
 	}
-	
-	
+
 }

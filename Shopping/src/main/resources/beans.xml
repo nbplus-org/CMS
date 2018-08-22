@@ -58,7 +58,7 @@
 	</bean>
 	<!-- mapper 接口扫描bean，正确配置这个 bean 才能获取到 mybatis mapper -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.yc.shopping" />
+		<property name="basePackage" value="com.yc.shopping.dao" />
 	</bean>
 	
 	<!-- ======================以下是 spring 事务管理的相关配置======================= -->

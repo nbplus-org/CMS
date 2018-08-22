@@ -1,5 +1,10 @@
 package com.yc.shopping.biz;
 
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
+
+import com.yc.shopping.filter.BizException;
 import com.yc.shopping.vo.UserVO;
 
 /**
@@ -9,10 +14,12 @@ import com.yc.shopping.vo.UserVO;
  *
  */
 
+@Service
 public interface UserInterface {
 
 	/**
 	 * 用户注册
+	 * 
 	 * @author huang
 	 * @param user
 	 */
@@ -20,6 +27,7 @@ public interface UserInterface {
 
 	/**
 	 * 通过用户名查询用户
+	 * 
 	 * @author huang
 	 * @return
 	 */
@@ -27,14 +35,27 @@ public interface UserInterface {
 
 	/**
 	 * 通过邮箱查询用户
+	 * 
 	 * @author huang
 	 * @return
 	 */
-	
 	public UserVO selectUserByUemail(String uemail);
 
 	/**
+	 * 验证用户名密码是否正确，实现登录
+	 * 
+	 * @param uname
+	 * @param upwd
+	 * @return
+	 * @throws BizException
+	 * 
+	 * @author liu
+	 */
+	public UserVO checkByNP(String uname, String upwd) throws BizException;
+
+	/**
 	 * 通过电话号查询用户
+	 * 
 	 * @author huang
 	 * @return
 	 */

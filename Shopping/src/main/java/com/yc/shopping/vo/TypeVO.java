@@ -1,9 +1,14 @@
 package com.yc.shopping.vo;
 
 /**
+<<<<<<< HEAD
  * 服装类型表
  * 
  * @author wang
+=======
+ * 类型详情表（typeClothesTable）
+ * @author Administrator
+>>>>>>> branch 'master' of https://github.com/nbplus-org/CMS.git
  *
  */
 public class TypeVO {

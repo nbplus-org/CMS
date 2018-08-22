@@ -1,31 +1,32 @@
 package com.yc.shopping.vo;
 
 /**
+ * 服装表（clothesTable）
  * 
- * @author Computer-huangbiao
+ * @author Administrator
  *
  */
 public class ClothesVO {
 
-	private Integer clothesid;
-	
-	private Integer aid;
-	
-	private String clothesname;
+	private Integer clothesid;// 服装编号
 
-	private String clothestype;
-	
-	private String clothesbigtag;
-	
-	private String clothesbrand;
-	
-	private String brandpic;
-	
-	private String clothesintroduce;
-	
-	private String clothesorigprice;
-	
-	private String clothesprice;
+	private Integer aid;// 管理员编号----外键
+
+	private String clothesname;// 服装名称
+
+	private String clothestype;// 服装类型
+
+	private String clothesbigtag;// 服装大标签
+
+	private String clothesbrand;// 服装品牌
+
+	private String brandpic;// 品牌图片
+
+	private String clothesintroduce;// 服装简介
+
+	private Integer clothesorigprice;// 服装原价
+
+	private Integer clothesprice;// 服装现价
 
 	public Integer getClothesid() {
 		return clothesid;
@@ -91,24 +92,20 @@ public class ClothesVO {
 		this.clothesintroduce = clothesintroduce;
 	}
 
-	public String getClothesorigprice() {
+	public Integer getClothesorigprice() {
 		return clothesorigprice;
 	}
 
-	public void setClothesorigprice(String clothesorigprice) {
+	public void setClothesorigprice(Integer clothesorigprice) {
 		this.clothesorigprice = clothesorigprice;
 	}
 
-	public String getClothesprice() {
+	public Integer getClothesprice() {
 		return clothesprice;
 	}
 
-	public void setClothesprice(String clothesprice) {
+	public void setClothesprice(Integer clothesprice) {
 		this.clothesprice = clothesprice;
 	}
 
-	
-	
-	
-	
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html class="no-js" lang="en">
     <head>
@@ -7,7 +8,7 @@
         ============================================ --> 
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>主页 2 </title>
+        <title>万能服装店 </title>
         <meta name="description" content="">
 		<!-- Mobile specific metas --> 
         <meta name="viewport" content="width=device-width, initial-scale=1"> 
@@ -57,7 +58,7 @@
 					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 						<!--开始标志区 -->
 						<div class="logo logo_border"> 
-							<a href="index.html">
+							<a href="index.jsp">
 								<img src="img/logo/logo-home-2.png" alt="" />
 							</a>
 						</div>
@@ -71,16 +72,24 @@
 							<!--账户开始区域 -->
 							<div class="account_card_area account_cart_home2"> 
 								<ul id="account_nav">
-									<li><a class="list_cl" href="#"><i class="fa fa-key"></i>Account</a>
+									<li> 
+									<%if(request.getAttribute("userVo") != null) {%>
+ 									<a class="list_cl" href="#">
+									<i class="fa fa-key"></i></a>
+									 <i style="color:white">${userVo.uname}</i>
+									 <%} else { %>  
+									<a class="list_cl" href="#">
+									<i class="fa fa-key"></i>Account</a>
+									  <%} %>  
 										<div class="account_menu_list">
 											
 											<div class="account_single_item">
 												
 												<ul id="account_single_nav_3">
-													<li><a href="my-account.html">我的账户</a></li>
+													<li><a href="reglogin.jsp">我的账户</a></li>
 													<li><a href="#">我的购物车</a></li>
 													<li><a href="#">结账</a></li>
-													<li><a href="#">退出</a></li>
+													<li><a href="reglogin.jsp">退出</a></li>
 												</ul>
 											</div>
 										</div>
@@ -98,7 +107,7 @@
 												<p>1 x $222.00</p>
 											</div>
 											<div class="cart_shoptings">
-												<a href="checkout.html">结账</a>
+												<a href="checkout.jsps">结账</a>
 											</div>
 										</div>
 									</li>
