@@ -9,7 +9,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<spring.version>4.3.13.RELEASE</spring.version>
 	</properties>
-	
+
 	<dependencies>
 		<!-- Junit 测试框架依赖 -->
 		<dependency>
@@ -111,7 +111,7 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		
+
 		<!-- log4j 日志管理依赖 -->
 		<dependency>
 			<groupId>log4j</groupId>
@@ -130,9 +130,8 @@
 			<artifactId>javax.mail</artifactId>
 			<version>1.6.0</version>
 		</dependency>
-		
-		
 	</dependencies>
+
 
 	<groupId>com.yc</groupId>
 	<version>0.0.1-SNAPSHOT</version>

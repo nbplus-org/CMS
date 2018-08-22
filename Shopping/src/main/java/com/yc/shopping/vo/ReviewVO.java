@@ -8,55 +8,70 @@ package com.yc.shopping.vo;
 public class ReviewVO {
 
 	//评论编号
-	private Integer reviewId;
+	private Integer reviewid;
+	
 	//服装编号------外
-	private Integer clothesId;
+	private Integer clothesid;
+	
 	//用户编号------外
-	private Integer uId;
+	private Integer uid;
+	
 	//匿名状态
 	private String state;
+	
 	//评论图片
-	private String reviewPic;
+	private String reviewpic;
+	
 	//评论文字
-	private String reviewStr;
-	public Integer getReviewId() {
-		return reviewId;
+	private String reviewstr;
+
+	public Integer getReviewid() {
+		return reviewid;
 	}
-	public void setReviewId(Integer reviewId) {
-		this.reviewId = reviewId;
+
+	public void setReviewid(Integer reviewid) {
+		this.reviewid = reviewid;
 	}
-	public Integer getClothesId() {
-		return clothesId;
+
+	public Integer getClothesid() {
+		return clothesid;
 	}
-	public void setClothesId(Integer clothesId) {
-		this.clothesId = clothesId;
+
+	public void setClothesid(Integer clothesid) {
+		this.clothesid = clothesid;
 	}
-	public Integer getuId() {
-		return uId;
+
+	public Integer getUid() {
+		return uid;
 	}
-	public void setuId(Integer uId) {
-		this.uId = uId;
+
+	public void setUid(Integer uid) {
+		this.uid = uid;
 	}
+
 	public String getState() {
 		return state;
 	}
+
 	public void setState(String state) {
 		this.state = state;
 	}
-	public String getReviewPic() {
-		return reviewPic;
-	}
-	public void setReviewPic(String reviewPic) {
-		this.reviewPic = reviewPic;
-	}
-	public String getReviewStr() {
-		return reviewStr;
-	}
-	public void setReviewStr(String reviewStr) {
-		this.reviewStr = reviewStr;
-	}
-	
 
+	public String getReviewpic() {
+		return reviewpic;
+	}
+
+	public void setReviewpic(String reviewpic) {
+		this.reviewpic = reviewpic;
+	}
+
+	public String getReviewstr() {
+		return reviewstr;
+	}
+
+	public void setReviewstr(String reviewstr) {
+		this.reviewstr = reviewstr;
+	}
 	
 	
 }

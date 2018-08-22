@@ -47,14 +47,62 @@
 		<script type="text/javascript" src="easyui/jquery.min.js"></script>
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
         <script type="text/javascript">
+        
+        //账号失焦事件
+        function onid(){
+        	var str=$("#zid").val();
+        	var data={uname:str};
+			$.post("zid.do",data,function(data){
+				$("#sp1").html("");
+				$("#sp2").html("");
+				if(data=='1'){
+					$("#sp1").html("该用户未注册");
+				}else{
+					$("#sp2").html(data);
+				}
+					
+			});
+        }
+        
+        //发送邮箱点击事件
         function sendemail() {
-        	
         	var str=$("#email").val();
-        	var data={name:str};
+        	var str1=$("#zid").val();
+        	var data={email:str,uname:str1};
 			$.post("email.do",data,function(data){
-				alert(data);
+				$("#sp1").html("");
+				$("#sp3").html("");
+				if(data=='1'){
+					$("#sp1").html("该用户未注册");
+				}else if(data=='2'){
+					$("#sp3").html("请输入邮箱");
+				}else if(data=='3'){
+					$("#sp3").html("邮箱错误");
+				}else{
+					alert("发送成功");
+				}
 			});
 		}
+        
+ 
+        
+        
+        //正则表达式判断邮箱格式
+         function onemail(){
+        	var str=$("#email").val();
+        	judge(str);
+        	function judge(str){
+        		var reg=/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+        	    if(reg.test(str)){
+        	    	$("#sp3").html("");
+        	    }else{
+        	    	$("#sp3").html("邮箱格式错误");
+        	    }
+        	}
+ 
+        } 
+
+        
         
         </script>
         <style type="text/css">
@@ -94,11 +142,13 @@
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="create_account">
-							<h2>密码找回</h2>
+							<h2>身份验证</h2>
 						</div>
 					</div>
 				</div>
 				<div class="row">
+				
+				<form action="judgecode.do" method="post">
 					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 						<div class="">
 							
@@ -106,38 +156,39 @@
 						 		<li>账号<span>*</span></li>
 								<li>
 									<div class="email_address">
-										<input type="text" class="email_test"/>
+										<input type="text" class="email_test" id="zid" name="zid" onblur="onid()"/>
+										<span id="sp1">${msg1 }</span>
 									</div>
 								</li>
-								<li>绑定的邮箱<span>*</span></li>
+								<li>绑定的邮箱<span>*</span><span id="sp2"></span></li>
+								
 								<li>
 									<div class="email_address">
-										<input type="text" class="phone" id="email"/>
-										<button onclick="sendemail()">发送验证码</button>
+										<input type="text" value="" class="phone" id="email" onblur="onemail()"/>
+										<button onclick="sendemail()" type="button">发送验证码</button>
+										<span id="sp3"></span>
 									</div>
 								</li>
 								<li>验证码<span>*</span></li>
 								<li>
 									<div class="email_address">
-										<input type="text" class="email_test"/>
+										<input type="text" class="email_test" name="code"/>
+										<span id="sp4">${msg }</span>
 									</div>
 								</li>
-	
-								
 							</ul>
 						
 						</div>
 						<div class="">
 							<button type="submit" class="create_button">
-								邮箱找回
+								确定
 							</button>
 						</div>
+						
 					</div>
-					
+				</form>	
 					<!-- 登陆块已删 -->
-					
 	
-					
 				</div>
 			</div>
 		</div>

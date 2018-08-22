@@ -9,103 +9,101 @@ import java.util.Date;
  */
 public class UserVO {
 	
-	private Integer uId;
+	private Integer uid;
 	
-	private String uName;
+	private String uname;
 	
 	/**
 	 * 昵称
 	 */
-	private String nickName;
+	private String nickname;
 	
-	private String uPwd;
+	private String upwd;
 	
-	private byte uSex;
+	private byte usex;
 	
-	private String uPhone;
+	private String uphone;
 	
-	private String uEmail;
+	private String uemail;
 	
 	/**
 	 * 积分，默认为-1
 	 */
-	private String uIntegral;
+	private Integer uintegral;
 	
-	private Date uBirthday;
-	
-	public Integer getuId() {
-		return uId;
+	private Date ubirthday;
+
+	public Integer getUid() {
+		return uid;
 	}
 
-	public void setuId(Integer uId) {
-		this.uId = uId;
+	public void setUid(Integer uid) {
+		this.uid = uid;
 	}
 
-	public String getuName() {
-		return uName;
+	public String getUname() {
+		return uname;
 	}
 
-	public void setuName(String uName) {
-		this.uName = uName;
+	public void setUname(String uname) {
+		this.uname = uname;
 	}
 
-	public String getNickName() {
-		return nickName;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
-	public String getuPwd() {
-		return uPwd;
+	public String getUpwd() {
+		return upwd;
 	}
 
-	public void setuPwd(String uPwd) {
-		this.uPwd = uPwd;
+	public void setUpwd(String upwd) {
+		this.upwd = upwd;
 	}
 
-	public byte getuSex() {
-		return uSex;
+	public byte getUsex() {
+		return usex;
 	}
 
-	public void setuSex(byte uSex) {
-		this.uSex = uSex;
+	public void setUsex(byte usex) {
+		this.usex = usex;
 	}
 
-	public String getuPhone() {
-		return uPhone;
+	public String getUphone() {
+		return uphone;
 	}
 
-	public void setuPhone(String uPhone) {
-		this.uPhone = uPhone;
+	public void setUphone(String uphone) {
+		this.uphone = uphone;
 	}
 
-	public String getuEmail() {
-		return uEmail;
+	public String getUemail() {
+		return uemail;
 	}
 
-	public void setuEmail(String uEmail) {
-		this.uEmail = uEmail;
+	public void setUemail(String uemail) {
+		this.uemail = uemail;
 	}
 
-	public String getuIntegral() {
-		return uIntegral;
+	public Integer getUintegral() {
+		return uintegral;
 	}
 
-	public void setuIntegral(String uIntegral) {
-		this.uIntegral = uIntegral;
+	public void setUintegral(Integer uintegral) {
+		this.uintegral = uintegral;
 	}
 
-	public Date getuBirthday() {
-		return uBirthday;
+	public Date getUbirthday() {
+		return ubirthday;
 	}
 
-	public void setuBirthday(Date uBirthday) {
-		this.uBirthday = uBirthday;
+	public void setUbirthday(Date ubirthday) {
+		this.ubirthday = ubirthday;
 	}
-	
-	
 	
 	
 }

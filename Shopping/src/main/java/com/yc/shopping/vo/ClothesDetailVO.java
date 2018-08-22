@@ -1,53 +1,72 @@
 package com.yc.shopping.vo;
+
 /**
  * 
  * @author wang
  *
  */
-public class ClothesDetailVo {
-     private Integer clothesId;//服装编号
-     private Integer clothesDetailId;//服装详情编号
-     private String clothesColour;//服装颜色
-     private String clothesSize;//服装尺码
-     private Integer stockNum;//库存数量
-     private String  clothesPic;//服装图片
-	public Integer getClothesId() {
-		return clothesId;
+public class ClothesDetailVO {
+	
+	private Integer clothesid;// 服装编号
+	
+	private Integer clothesdetailid;// 服装详情编号
+	
+	private String clothescolour;// 服装颜色
+	
+	private String clothessize;// 服装尺码
+	
+	private Integer stocknum;// 库存数量
+	
+	private String clothespic;// 服装图片
+
+	public Integer getClothesid() {
+		return clothesid;
 	}
-	public void setClothesId(Integer clothesId) {
-		this.clothesId = clothesId;
+
+	public void setClothesid(Integer clothesid) {
+		this.clothesid = clothesid;
 	}
-	public Integer getClothesDetailId() {
-		return clothesDetailId;
+
+	public Integer getClothesdetailid() {
+		return clothesdetailid;
 	}
-	public void setClothesDetailId(Integer clothesDetailId) {
-		this.clothesDetailId = clothesDetailId;
+
+	public void setClothesdetailid(Integer clothesdetailid) {
+		this.clothesdetailid = clothesdetailid;
 	}
-	public String getClothesColour() {
-		return clothesColour;
+
+	public String getClothescolour() {
+		return clothescolour;
 	}
-	public void setClothesColour(String clothesColour) {
-		this.clothesColour = clothesColour;
+
+	public void setClothescolour(String clothescolour) {
+		this.clothescolour = clothescolour;
 	}
-	public String getClothesSize() {
-		return clothesSize;
+
+	public String getClothessize() {
+		return clothessize;
 	}
-	public void setClothesSize(String clothesSize) {
-		this.clothesSize = clothesSize;
+
+	public void setClothessize(String clothessize) {
+		this.clothessize = clothessize;
 	}
-	public Integer getStockNum() {
-		return stockNum;
+
+	public Integer getStocknum() {
+		return stocknum;
 	}
-	public void setStockNum(Integer stockNum) {
-		this.stockNum = stockNum;
+
+	public void setStocknum(Integer stocknum) {
+		this.stocknum = stocknum;
 	}
-	public String getClothesPic() {
-		return clothesPic;
+
+	public String getClothespic() {
+		return clothespic;
 	}
-	public void setClothesPic(String clothesPic) {
-		this.clothesPic = clothesPic;
+
+	public void setClothespic(String clothespic) {
+		this.clothespic = clothespic;
 	}
-     
-     
-     
+
+	
+
 }
