@@ -7,6 +7,7 @@ import java.util.Date;
  * @author wang
  *
  */
+
 public class OrderVO {
 
 	private Integer orderid;//订单编号
@@ -88,8 +89,7 @@ public class OrderVO {
 	public void setOrderstatus(String orderstatus) {
 		this.orderstatus = orderstatus;
 	}
-	
-	
+
 	
 	
 	

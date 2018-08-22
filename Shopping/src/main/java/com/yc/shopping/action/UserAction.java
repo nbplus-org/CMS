@@ -1,5 +1,6 @@
 package com.yc.shopping.action;
 
+
 import java.io.IOException;
 import java.util.Date;
 
@@ -144,5 +145,6 @@ public class UserAction {
 			response.getWriter().print("4");//新密码与确认新密码不匹配
 		}	
 	}
+
 
 }

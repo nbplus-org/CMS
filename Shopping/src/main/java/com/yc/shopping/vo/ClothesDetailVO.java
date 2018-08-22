@@ -4,6 +4,7 @@ package com.yc.shopping.vo;
  * @author wang
  *
  */
+
 public class ClothesDetailVO {
      private Integer clothesid;//服装编号
      
@@ -66,5 +67,6 @@ public class ClothesDetailVO {
 	}
      
 	
+
      
 }

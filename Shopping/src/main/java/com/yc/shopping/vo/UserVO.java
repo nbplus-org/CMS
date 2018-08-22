@@ -33,6 +33,10 @@ public class UserVO {
 	
 	private Date ubirthday;
 
+	
+	
+	
+	
 	public Integer getUid() {
 		return uid;
 	}
