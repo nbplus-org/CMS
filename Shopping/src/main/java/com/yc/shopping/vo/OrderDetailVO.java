@@ -57,5 +57,4 @@ public class OrderDetailVO {
 	public void setNum(Integer num) {
 		this.num = num;
 	}
-
 }

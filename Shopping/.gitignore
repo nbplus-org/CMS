@@ -1,2 +1,13 @@
 /target/
+<<<<<<< HEAD
 
+=======
+/.metadata/
+/.recommenders/
+/RemoteSystemsTempFiles/
+/Servers/*/*
+/Servers/.*
+/libraries
+*.jar
+/pom.xml/
+>>>>>>> branch 'master' of https://github.com/nbplus-org/CMS.git
