@@ -5,6 +5,7 @@ package com.yc.shopping.vo;
  *
  */
 
+
 public class OrderDetailVO {
       private Integer orderdetailid;//订单详情编号
       
@@ -58,5 +59,6 @@ public class OrderDetailVO {
       
       
 	
+
 
 }

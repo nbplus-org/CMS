@@ -8,6 +8,7 @@ import java.util.Date;
  *
  */
 
+
 public class OrderVO {
 
 	private Integer orderid;//订单编号
@@ -90,10 +91,6 @@ public class OrderVO {
 		this.orderstatus = orderstatus;
 	}
 
-	
-	
-	
-	
-	
+
 	
 }
