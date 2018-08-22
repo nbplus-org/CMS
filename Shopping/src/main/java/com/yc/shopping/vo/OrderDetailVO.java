@@ -1,5 +1,6 @@
 package com.yc.shopping.vo;
 
+
 /**
  * 订单详情表（orderDetailTable）
  * @author Administrator
@@ -48,5 +49,5 @@ public class OrderDetailVO {
 	public void setNum(Integer num) {
 		this.num = num;
 	}
-        
+
 }

@@ -1,5 +1,6 @@
 package com.yc.shopping.action;
 
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 

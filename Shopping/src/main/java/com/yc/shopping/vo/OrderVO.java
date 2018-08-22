@@ -1,5 +1,6 @@
 package com.yc.shopping.vo;
 
+
 import java.sql.Timestamp;
 
 /**
@@ -75,5 +76,4 @@ public class OrderVO {
 	public void setOrderstatus(String orderstatus) {
 		this.orderstatus = orderstatus;
 	}
-
 }

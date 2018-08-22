@@ -1,5 +1,6 @@
 package com.yc.shopping.vo;
 
+
 /**
  * 服装详情表（clothDetailTable）
  * @author Administrator
@@ -57,7 +58,5 @@ public class ClothesDetailVO {
 	public void setClothespic(String clothespic) {
 		this.clothespic = clothespic;
 	}
-	
-	
-	
+
 }
