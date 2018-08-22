@@ -335,7 +335,6 @@
 		<script src="js/plugins.js"></script>
 		<!-- main JS  -->
 		<script src="js/main.js"></script>
-=======
 </head>
 <body>
 	<!--[if lt IE 8]>
@@ -483,6 +482,5 @@
 	<script src="js/plugins.js"></script>
 	<!-- main JS  -->
 	<script src="js/main.js"></script>
->>>>>>> branch 'master' of https://github.com/nbplus-org/CMS.git
 </body>
 </html>
