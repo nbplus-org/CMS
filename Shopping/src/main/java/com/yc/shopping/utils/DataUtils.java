@@ -7,4 +7,5 @@ package com.yc.shopping.utils;
 public class DataUtils {
 	//验证码
      public static String code="";
+
 }

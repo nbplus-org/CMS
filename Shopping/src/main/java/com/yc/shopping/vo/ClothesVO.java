@@ -7,106 +7,109 @@ package com.yc.shopping.vo;
  */
 public class ClothesVO {
 
-	private Integer clothesId;
+	private Integer clothesid;
 	
-	private Integer aId;
+	private Integer aid;
 	
-	private String clothesName;
+	private String clothesname;
 
-	private String clothesType;
+	private String clothestype;
 	
-	private String clothesBigTag;
+	private String clothesbigtag;
 	
-	private String clothesBrand;
+	private String clothesbrand;
 	
-	private String brandPic;
+	private String brandpic;
 	
-	private String clothesIntroduce;
+	private String clothesintroduce;
 	
-	private String clothesOrigprice;
+	private String clothesorigprice;
 	
-	private String clothesPrice;
+	private String clothesprice;
 
-	public Integer getClothesId() {
-		return clothesId;
+	public Integer getClothesid() {
+		return clothesid;
 	}
 
-	public void setClothesId(Integer clothesId) {
-		this.clothesId = clothesId;
+	public void setClothesid(Integer clothesid) {
+		this.clothesid = clothesid;
 	}
 
-	public Integer getaId() {
-		return aId;
+	public Integer getAid() {
+		return aid;
 	}
 
-	public void setaId(Integer aId) {
-		this.aId = aId;
+	public void setAid(Integer aid) {
+		this.aid = aid;
 	}
 
-	public String getClothesName() {
-		return clothesName;
+	public String getClothesname() {
+		return clothesname;
 	}
 
-	public void setClothesName(String clothesName) {
-		this.clothesName = clothesName;
+	public void setClothesname(String clothesname) {
+		this.clothesname = clothesname;
 	}
 
-	public String getClothesType() {
-		return clothesType;
+	public String getClothestype() {
+		return clothestype;
 	}
 
-	public void setClothesType(String clothesType) {
-		this.clothesType = clothesType;
+	public void setClothestype(String clothestype) {
+		this.clothestype = clothestype;
 	}
 
-	public String getClothesBigTag() {
-		return clothesBigTag;
+	public String getClothesbigtag() {
+		return clothesbigtag;
 	}
 
-	public void setClothesBigTag(String clothesBigTag) {
-		this.clothesBigTag = clothesBigTag;
+	public void setClothesbigtag(String clothesbigtag) {
+		this.clothesbigtag = clothesbigtag;
 	}
 
-	public String getClothesBrand() {
-		return clothesBrand;
+	public String getClothesbrand() {
+		return clothesbrand;
 	}
 
-	public void setClothesBrand(String clothesBrand) {
-		this.clothesBrand = clothesBrand;
+	public void setClothesbrand(String clothesbrand) {
+		this.clothesbrand = clothesbrand;
 	}
 
-	public String getBrandPic() {
-		return brandPic;
+	public String getBrandpic() {
+		return brandpic;
 	}
 
-	public void setBrandPic(String brandPic) {
-		this.brandPic = brandPic;
+	public void setBrandpic(String brandpic) {
+		this.brandpic = brandpic;
 	}
 
-	public String getClothesIntroduce() {
-		return clothesIntroduce;
+	public String getClothesintroduce() {
+		return clothesintroduce;
 	}
 
-	public void setClothesIntroduce(String clothesIntroduce) {
-		this.clothesIntroduce = clothesIntroduce;
+	public void setClothesintroduce(String clothesintroduce) {
+		this.clothesintroduce = clothesintroduce;
 	}
 
-	public String getClothesOrigprice() {
-		return clothesOrigprice;
+	public String getClothesorigprice() {
+		return clothesorigprice;
 	}
 
-	public void setClothesOrigprice(String clothesOrigprice) {
-		this.clothesOrigprice = clothesOrigprice;
+	public void setClothesorigprice(String clothesorigprice) {
+		this.clothesorigprice = clothesorigprice;
 	}
 
-	public String getClothesPrice() {
-		return clothesPrice;
+	public String getClothesprice() {
+		return clothesprice;
 	}
 
-	public void setClothesPrice(String clothesPrice) {
-		this.clothesPrice = clothesPrice;
+	public void setClothesprice(String clothesprice) {
+		this.clothesprice = clothesprice;
 	}
 	
+	
+	
+
 	
 	
 }

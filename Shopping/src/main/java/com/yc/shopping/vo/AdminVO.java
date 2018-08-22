@@ -7,68 +7,69 @@ package com.yc.shopping.vo;
  */
 public class AdminVO {
 	
-	private Integer aId;
+	private Integer aid;
 	
-	private String aName;
+	private String aname;
 	
-	private String aPwd;
+	private String apwd;
 	
 	/**
 	 * 管理原真实姓名
 	 */
-	private String adminRelName;
+	private String adminrelname;
 	
-	private String aSex;
+	private String asex;
 	
-	private String aPhone;
+	private String aphone;
 
-	public Integer getaId() {
-		return aId;
+	public Integer getAid() {
+		return aid;
 	}
 
-	public void setaId(Integer aId) {
-		this.aId = aId;
+	public void setAid(Integer aid) {
+		this.aid = aid;
 	}
 
-	public String getaName() {
-		return aName;
+	public String getAname() {
+		return aname;
 	}
 
-	public void setaName(String aName) {
-		this.aName = aName;
+	public void setAname(String aname) {
+		this.aname = aname;
 	}
 
-	public String getaPwd() {
-		return aPwd;
+	public String getApwd() {
+		return apwd;
 	}
 
-	public void setaPwd(String aPwd) {
-		this.aPwd = aPwd;
+	public void setApwd(String apwd) {
+		this.apwd = apwd;
 	}
 
-	public String getAdminRelName() {
-		return adminRelName;
+	public String getAdminrelname() {
+		return adminrelname;
 	}
 
-	public void setAdminRelName(String adminRelName) {
-		this.adminRelName = adminRelName;
+	public void setAdminrelname(String adminrelname) {
+		this.adminrelname = adminrelname;
 	}
 
-	public String getaSex() {
-		return aSex;
+	public String getAsex() {
+		return asex;
 	}
 
-	public void setaSex(String aSex) {
-		this.aSex = aSex;
+	public void setAsex(String asex) {
+		this.asex = asex;
 	}
 
-	public String getaPhone() {
-		return aPhone;
+	public String getAphone() {
+		return aphone;
 	}
 
-	public void setaPhone(String aPhone) {
-		this.aPhone = aPhone;
+	public void setAphone(String aphone) {
+		this.aphone = aphone;
 	}
 	
+
 	
 }

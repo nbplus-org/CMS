@@ -9,53 +9,54 @@ import java.sql.Timestamp;
 public class SaleVO {
 
 	//销售编号
-	private Integer saleId;
+	private Integer saleid;
 	//服装编号-----外
-	private Integer clothesId;
+	private Integer clothesid;
 	//服装详情编号-----外
-	private Integer cloDetailId;
+	private Integer clodetailid;
 	//销售时间
-	private Timestamp saleDate;
+	private Timestamp saledate;
 	//销售数量
-	private Integer saleNum;
+	private Integer salenum;
 	//销售金额
-	private Integer salePrice;
-	public Integer getSaleId() {
-		return saleId;
+	private Integer saleprice;
+	public Integer getSaleid() {
+		return saleid;
 	}
-	public void setSaleId(Integer saleId) {
-		this.saleId = saleId;
+	public void setSaleid(Integer saleid) {
+		this.saleid = saleid;
 	}
-	public Integer getClothesId() {
-		return clothesId;
+	public Integer getClothesid() {
+		return clothesid;
 	}
-	public void setClothesId(Integer clothesId) {
-		this.clothesId = clothesId;
+	public void setClothesid(Integer clothesid) {
+		this.clothesid = clothesid;
 	}
-	public Integer getCloDetailId() {
-		return cloDetailId;
+	public Integer getClodetailid() {
+		return clodetailid;
 	}
-	public void setCloDetailId(Integer cloDetailId) {
-		this.cloDetailId = cloDetailId;
+	public void setClodetailid(Integer clodetailid) {
+		this.clodetailid = clodetailid;
 	}
-	public Timestamp getSaleDate() {
-		return saleDate;
+	public Timestamp getSaledate() {
+		return saledate;
 	}
-	public void setSaleDate(Timestamp saleDate) {
-		this.saleDate = saleDate;
+	public void setSaledate(Timestamp saledate) {
+		this.saledate = saledate;
 	}
-	public Integer getSaleNum() {
-		return saleNum;
+	public Integer getSalenum() {
+		return salenum;
 	}
-	public void setSaleNum(Integer saleNum) {
-		this.saleNum = saleNum;
+	public void setSalenum(Integer salenum) {
+		this.salenum = salenum;
 	}
-	public Integer getSalePrice() {
-		return salePrice;
+	public Integer getSaleprice() {
+		return saleprice;
 	}
-	public void setSalePrice(Integer salePrice) {
-		this.salePrice = salePrice;
+	public void setSaleprice(Integer saleprice) {
+		this.saleprice = saleprice;
 	}
+	
 	
 	
 }

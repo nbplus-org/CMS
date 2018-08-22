@@ -5,29 +5,36 @@ package com.yc.shopping.vo;
  *
  */
 public class TypeVO {
-    private Integer typeId;//  类型编号 
-    private String typeName;//类型名称
-    private Integer typeNum;//类型数量
-	public Integer getTypeId() {
-		return typeId;
+    private Integer typeid;//  类型编号 
+    
+    private String typename;//类型名称
+    
+    private Integer typenum;//类型数量
+
+	public Integer getTypeid() {
+		return typeid;
 	}
-	public void setTypeId(Integer typeId) {
-		this.typeId = typeId;
+
+	public void setTypeid(Integer typeid) {
+		this.typeid = typeid;
 	}
-	public String getTypeName() {
-		return typeName;
+
+	public String getTypename() {
+		return typename;
 	}
-	public void setTypeName(String typeName) {
-		this.typeName = typeName;
+
+	public void setTypename(String typename) {
+		this.typename = typename;
 	}
-	public Integer getTypeNum() {
-		return typeNum;
+
+	public Integer getTypenum() {
+		return typenum;
 	}
-	public void setTypeNum(Integer typeNum) {
-		this.typeNum = typeNum;
+
+	public void setTypenum(Integer typenum) {
+		this.typenum = typenum;
 	}
-	
-                              //对应的属性服装
+    
 	
 	
 	

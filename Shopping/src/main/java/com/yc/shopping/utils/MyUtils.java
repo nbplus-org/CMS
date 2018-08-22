@@ -29,7 +29,7 @@ public class MyUtils {
 		String code = sbf.toString();
 
 		DataUtils.code=code;		//存值
-		
+		System.out.println("验证码为"+code);
 		try {
 			//1、创建参数配置，用于连接邮件服务器的参数配置
 			Properties props=new Properties();		//参数配置

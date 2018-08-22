@@ -7,39 +7,39 @@ package com.yc.shopping.vo;
  */
 public class CartVO {
 	
-	private Integer cartId;
+	private Integer cartid;
 	
-	private Integer uId;
+	private Integer uid;
 	
 	/**
 	 * 服装详情编号
 	 */
-	private Integer cloDetailId ;
+	private Integer clodetailid ;
 
-	public Integer getCartId() {
-		return cartId;
+	public Integer getCartid() {
+		return cartid;
 	}
 
-	public void setCartId(Integer cartId) {
-		this.cartId = cartId;
+	public void setCartid(Integer cartid) {
+		this.cartid = cartid;
 	}
 
-	public Integer getuId() {
-		return uId;
+	public Integer getUid() {
+		return uid;
 	}
 
-	public void setuId(Integer uId) {
-		this.uId = uId;
+	public void setUid(Integer uid) {
+		this.uid = uid;
 	}
 
-	public Integer getCloDetailId() {
-		return cloDetailId;
+	public Integer getClodetailid() {
+		return clodetailid;
 	}
 
-	public void setCloDetailId(Integer cloDetailId) {
-		this.cloDetailId = cloDetailId;
+	public void setClodetailid(Integer clodetailid) {
+		this.clodetailid = clodetailid;
 	}
-	
+
 	
 	
 }
