@@ -1,7 +1,5 @@
 package com.yc.shopping.biz;
 
-import javax.annotation.Resource;
-
 import org.springframework.stereotype.Service;
 
 import com.yc.shopping.filter.BizException;
@@ -60,5 +58,25 @@ public interface UserInterface {
 	 * @return
 	 */
 	public UserVO selectUserByUphone(String uphone);
+
+	/**
+	 * 根据用户账号查邮箱
+	 * 
+	 * @param user
+	 * @return wang
+	 * @throws BizException
+	 */
+	public UserVO findEmailByName(UserVO user) throws BizException;
+
+	/**
+	 * 找回密码---根据账号修改密码 wang
+	 * 
+	 * @param zid
+	 *            账号
+	 * @param pwd
+	 *            修改的密码
+	 * @return
+	 */
+	public int modifyPwdByName(String zid, String pwd);
 
 }

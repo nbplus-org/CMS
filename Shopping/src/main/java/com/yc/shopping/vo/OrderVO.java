@@ -8,6 +8,7 @@ import java.util.Date;
  * @author wang
  *
  */
+
 public class OrderVO {
 
 	private Integer orderid;// 订单编号

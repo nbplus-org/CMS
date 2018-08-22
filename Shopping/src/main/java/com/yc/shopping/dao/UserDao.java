@@ -4,6 +4,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+//github.com/nbplus-org/CMS.git
 import org.springframework.stereotype.Repository;
 
 import com.yc.shopping.vo.UserVO;
@@ -68,4 +70,26 @@ public interface UserDao {
 	 */
 	@Select("select * from uservo where uname=#{uname} and upwd=#{upwd}")
 	UserVO loginByNP(@Param("uname") String uname, @Param("upwd") String upwd);
+	
+	/**
+	 * wang 根据用户名查邮箱---忘记密码
+	 * @param user
+	 * @return
+	 */
+	@Select("select uemail from uservo where uname=#{uname}")
+	UserVO selectEmailByName(UserVO user);
+
+	
+    /**
+	 * 找回密码---根据账号修改密码
+	 * wang
+	 * @param zid  账号
+	 * @param pwd  修改的密码
+	 * @return
+	 */
+	@Update("update  uservo  set upwd=#{pwd} where uname=#{uname}")
+    int updatePwdByName(@Param("uname")String zid,@Param("pwd")String pwd);
+	
+	
+	
 }

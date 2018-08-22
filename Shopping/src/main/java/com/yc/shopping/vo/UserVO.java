@@ -1,6 +1,7 @@
 package com.yc.shopping.vo;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * 用户表（UserTable）
@@ -10,20 +11,24 @@ import java.sql.Timestamp;
  */
 public class UserVO {
 
+	public void setUbirthday(Timestamp ubirthday) {
+		this.ubirthday = ubirthday;
+	}
+
 	private Integer uid;// 用户编号
 
 	private String uname;// 用户账号，（用户名）
-	
+
 	private String nickname;// 用户昵称（nickname）
 
 	private String upwd;// 用户密码（userpassword）
-	
+
 	private String usex;// 用户性别（usersex）
-	
+
 	private String uphone;// 用户电话（userphone）
-	
+
 	private String uemail;// 用户邮箱（useremail）
-	
+
 	private Integer uintegral;// 用户积分（默认为-1）
 
 	private Timestamp ubirthday;// 用户生日（或注册日期）
@@ -96,7 +101,7 @@ public class UserVO {
 		return ubirthday;
 	}
 
-	public void setUbirthday(Timestamp ubirthday) {
+	public void setUbirthday(Date date) {
 		this.ubirthday = ubirthday;
 	}
 

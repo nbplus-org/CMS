@@ -1,6 +1,7 @@
 /target/
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 /.metadata/
@@ -21,4 +22,6 @@
 /libraries
 *.jar
 /pom.xml/
+>>>>>>> branch 'master' of https://github.com/nbplus-org/CMS.git
+=======
 >>>>>>> branch 'master' of https://github.com/nbplus-org/CMS.git

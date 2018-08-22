@@ -75,5 +75,4 @@ public class SaleVO {
 	public void setSaleprice(Integer saleprice) {
 		this.saleprice = saleprice;
 	}
-
 }

@@ -7,7 +7,7 @@ package com.yc.shopping.vo;
  *
  */
 public class AdminVO {
-
+	
 	private Integer aid;// 管理员编号
 
 	private String aname;// 管理员账号
@@ -67,5 +67,4 @@ public class AdminVO {
 	public void setAphone(String aphone) {
 		this.aphone = aphone;
 	}
-
 }

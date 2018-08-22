@@ -7,7 +7,7 @@
         ============================================ -->   
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>forgetpwd</title>
+        <title>Account | Hope</title>
         <meta name="description" content="">
 		<!-- Mobile specific metas --> 
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -46,69 +46,7 @@
 		<!-- modernizr JS ============================================ -->
 		<script type="text/javascript" src="easyui/jquery.min.js"></script>
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-<<<<<<< HEAD
-        <script type="text/javascript">
-        
-        //账号失焦事件
-        function onid(){
-        	var str=$("#zid").val();
-        	var data={uname:str};
-			$.post("zid.do",data,function(data){
-				$("#sp1").html("");
-				$("#sp2").html("");
-				if(data=='1'){
-					$("#sp1").html("该用户未注册");
-				}else{
-					$("#sp2").html(data);
-				}
-					
-			});
-        }
-        
-        //发送邮箱点击事件
-        function sendemail() {
-        	var str=$("#email").val();
-        	var str1=$("#zid").val();
-        	var data={email:str,uname:str1};
-			$.post("email.do",data,function(data){
-				$("#sp1").html("");
-				$("#sp3").html("");
-				if(data=='1'){
-					$("#sp1").html("该用户未注册");
-				}else if(data=='2'){
-					$("#sp3").html("请输入邮箱");
-				}else if(data=='3'){
-					$("#sp3").html("邮箱错误");
-				}else{
-					alert("发送成功");
-				}
-			});
-		}
-        
- 
-        
-        
-        //正则表达式判断邮箱格式
-         function onemail(){
-        	var str=$("#email").val();
-        	judge(str);
-        	function judge(str){
-        		var reg=/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
-        	    if(reg.test(str)){
-        	    	$("#sp3").html("");
-        	    }else{
-        	    	$("#sp3").html("邮箱格式错误");
-        	    }
-        	}
- 
-        } 
-
-        
-        
-        </script>
-=======
        
->>>>>>> branch 'master' of https://github.com/nbplus-org/CMS.git
         <style type="text/css">
         .fangkuang{
          width: 300px;
@@ -116,13 +54,11 @@
          position: relative;
          left: 31.5%;
          top: 20%;
-         
-       
         }
         .phone{
         background: #f0f0f0;
 	    padding: 9px 10px;
-	    width: 200px;
+	    width: 300px;
 	    height: 30px
         }
         </style>        
@@ -146,13 +82,13 @@
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="create_account">
-							<h2>身份验证</h2>
+							<h2>密码重置</h2>
 						</div>
 					</div>
 				</div>
-				<div class="row">
 				
-				<form action="judgecode.do" method="post">
+				<form action="" method="post" id="form1">
+				<div class="row">
 					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 						<div class="">
 							
@@ -160,51 +96,35 @@
 						 		<li>账号<span>*</span></li>
 								<li>
 									<div class="email_address">
-<<<<<<< HEAD
-										<input type="text" class="email_test" id="zid" name="zid" onblur="onid()"/>
-=======
-										<input type="text" class="email_test" id="zid" name="zid" onblur="onid()" autocomplete="off"/>
->>>>>>> branch 'master' of https://github.com/nbplus-org/CMS.git
-										<span id="sp1">${msg1 }</span>
-									</div>
-								</li>
-								<li>绑定的邮箱<span>*</span><span id="sp2"></span></li>
-								
-								<li>
-									<div class="email_address">
-<<<<<<< HEAD
-										<input type="text" value="" class="phone" id="email" onblur="onemail()"/>
-=======
-										<input type="text" value="" class="phone" id="email" onblur="onemail()" autocomplete="off"/>
->>>>>>> branch 'master' of https://github.com/nbplus-org/CMS.git
-										<button onclick="sendemail()" type="button">发送验证码</button>
+										<input type="text" value="${zid }" disabled="disabled" class="email_test" id="zid" name="zid" autocomplete="off"/>
 										<span id="sp3"></span>
 									</div>
 								</li>
-								<li>验证码<span>*</span></li>
+								<li>新密码<span>*</span></li>
 								<li>
 									<div class="email_address">
-<<<<<<< HEAD
-										<input type="text" class="email_test" name="code"/>
-=======
-										<input type="text" class="email_test" name="code" autocomplete="off"/>
->>>>>>> branch 'master' of https://github.com/nbplus-org/CMS.git
-										<span id="sp4">${msg }</span>
+										<input type="password" value="" class="email_test" id="pwd" name="pwd" autocomplete="off"/>
+										<span id="sp1"></span>
+									</div>
+								</li>
+								<li>确认新密码<span>*</span></li>
+								<li>
+									<div class="email_address">
+										<input type="password" class="email_test" id="npwd" name="npwd" autocomplete="off"/>
+										<span id="sp2"></span>
 									</div>
 								</li>
 							</ul>
-						
 						</div>
 						<div class="">
-							<button type="submit" class="create_button">
-								确定
+							<button type="button" class="create_button" onclick="judgepwd()">
+								密码重置
 							</button>
 						</div>
-						
 					</div>
-				</form>	
+					
 					<!-- 登陆块已删 -->
-	
+                  </form>
 				</div>
 			</div>
 		</div>
@@ -250,58 +170,38 @@
 		<!-- main JS  -->
         <script src="js/main.js"></script>
          <script type="text/javascript">
-        //账号失焦事件
-        function onid(){
-        	var str=$("#zid").val();
-        	var data={uname:str};
-			$.post("zid.do",data,function(data){
-				$("#sp1").html("");
-				$("#sp2").html("");
-				if(data=='1'){
-					$("#sp1").html("该用户未注册");
-				}else{
-					$("#sp2").html(data);
-				}
-					
-			});
-        }
         
-        //发送邮箱点击事件
-        function sendemail() {
-        	var str=$("#email").val();
-        	var str1=$("#zid").val();
-        	var data={email:str,uname:str1};
-			$.post("email.do",data,function(data){
-				$("#sp1").html("");
-				$("#sp3").html("");
-				if(data=='1'){
-					$("#sp1").html("该用户未注册");
-				}else if(data=='2'){
-					$("#sp3").html("请输入邮箱");
-				}else if(data=='3'){
-					$("#sp3").html("邮箱错误");
-				}else{
-					alert("发送成功");
-					//prompt("发送成功");
-				}
-			});
-		}
-        
-        //正则表达式判断邮箱格式
-         function onemail(){
-        	var str=$("#email").val();
-        	judge(str);
-        	function judge(str){
-        		var reg=/^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
-        	    if(reg.test(str)){
-        	    	$("#sp3").html("");
-        	    }else{
-        	    	$("#sp3").html("邮箱格式错误");
-        	    }
+        //判断新旧密码是否一致   wang -----重置密码
+        function judgepwd(){
+        	var pwd=$("#pwd").val();
+        	var npwd=$("#npwd").val();
+        	var zid=$("#zid").val();
+        	$("#sp2").html("");	
+        	
+        	if(pwd==npwd){
+        		var data={npwd:npwd,zid:zid,pwd:pwd};
+    			$.post("resetpwd.do",data,function(data){
+    				if(data=='1'){
+    					alert("重置成功");
+        				window.location.href="reglogin.jsp"; 
+        				
+    				}else if(data=='2'){
+    					alert("重置失败,请联系管理员");
+        				window.location.href="forgetpwd.jsp"; 
+    					
+    				}else if(data=='3'){
+    					alert("身份失效");
+        				window.location.href="forgetpwd.jsp"; 
+    				}else{
+    					 $("#sp2").html("确认新密码与新密码不一致");	
+    				}
+    			});
+    			
+        	}else{
+        	   $("#sp2").html("确认新密码与新密码不一致");	
         	}
- 
-        } 
 
+        } 
         </script>
     </body>
 </html>

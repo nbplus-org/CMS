@@ -8,6 +8,18 @@ package com.yc.shopping.vo;
  */
 public class ClothesVO {
 
+	public Integer getClothesprice() {
+		return clothesprice;
+	}
+
+	public void setClothesprice(Integer clothesprice) {
+		this.clothesprice = clothesprice;
+	}
+
+	public void setClothesorigprice(Integer clothesorigprice) {
+		this.clothesorigprice = clothesorigprice;
+	}
+
 	private Integer clothesid;// 服装编号
 
 	private Integer aid;// 管理员编号----外键
@@ -94,18 +106,6 @@ public class ClothesVO {
 
 	public Integer getClothesorigprice() {
 		return clothesorigprice;
-	}
-
-	public void setClothesorigprice(Integer clothesorigprice) {
-		this.clothesorigprice = clothesorigprice;
-	}
-
-	public Integer getClothesprice() {
-		return clothesprice;
-	}
-
-	public void setClothesprice(Integer clothesprice) {
-		this.clothesprice = clothesprice;
 	}
 
 }

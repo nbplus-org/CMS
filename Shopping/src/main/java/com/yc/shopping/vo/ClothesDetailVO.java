@@ -2,8 +2,7 @@ package com.yc.shopping.vo;
 
 /**
  * 
- * @author wang
- *
+ *@author wang
  */
 public class ClothesDetailVO {
 
@@ -18,6 +17,7 @@ public class ClothesDetailVO {
 	private Integer stocknum;// 库存数量
 
 	private String clothespic;// 服装图片
+
 
 	public Integer getClothesid() {
 		return clothesid;

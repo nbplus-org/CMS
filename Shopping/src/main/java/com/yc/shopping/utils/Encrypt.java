@@ -5,36 +5,11 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * 加密工具类
- * md5加密出来的长度是32位
- * sha加密出来的长度是40位
+ * 加密工具类 md5加密出来的长度是32位 sha加密出来的长度是40位
  * 
  * @author liu
  */
 public class Encrypt {
-
-	/**
-	 * 测试:   彩虹表
-	 */
-	public static void main(String[] args) {
-		// md5加密测试
-		
-		System.out.println( md5("1628443167hb..") );
-		System.out.println( sha("1628443167hb..") );
-		System.out.println( e("1628443167hb..") );
-		/*String md5_1 =md5( md5("a"));
-		String md5_2 = md5("abc");
-		System.out.println(md5_1 + "\n" + md5_2);
-		String md5_3=md5("123");
-		System.out.println(md5_3);
-		String md5_4 =md5( md5("123"));
-		System.out.println(md5_4);
-		// sha加密测试
-		String sha_1 = sha("123456");
-		String sha_2 = sha("abc");
-		System.out.println(sha_1 + "\n" + sha_2);*/
-
-	}
 
 	/**
 	 * 加密
@@ -48,6 +23,7 @@ public class Encrypt {
 
 	/**
 	 * 二次加密，应该破解不了了吧？
+	 * 
 	 * @param inputText
 	 * @return
 	 */
@@ -57,6 +33,7 @@ public class Encrypt {
 
 	/**
 	 * md5加密(32位加密)
+	 * 
 	 * @param inputText
 	 * @return
 	 */
@@ -66,6 +43,7 @@ public class Encrypt {
 
 	/**
 	 * sha加密
+	 * 
 	 * @param inputText
 	 * @return
 	 */
