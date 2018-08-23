@@ -1,7 +1,5 @@
 package com.yc.shopping.biz;
 
-import org.springframework.stereotype.Service;
-
 import com.yc.shopping.filter.BizException;
 import com.yc.shopping.vo.UserVO;
 
@@ -12,7 +10,6 @@ import com.yc.shopping.vo.UserVO;
  *
  */
 
-@Service
 public interface UserInterface {
 
 	/**

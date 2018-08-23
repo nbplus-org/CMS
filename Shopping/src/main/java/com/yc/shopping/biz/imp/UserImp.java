@@ -64,8 +64,11 @@ public class UserImp implements UserInterface {
 	}
 
 	@Override
-	public UserVO checkByNP(String uname, String upwd) throws BizException {
-		// TODO Auto-generated method stub
+	public UserVO checkByNP(String uname,String upwd){
+		UserVO userVO1=uDao.loginByNP(uname,Encrypt.md5(upwd));
+		if(userVO1!=null){
+			return userVO1;
+		}
 		return null;
 	}
 	

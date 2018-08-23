@@ -27,6 +27,7 @@ import com.yc.shopping.vo.UserVO;
  */
 @Controller("UserAction")
 public class UserAction {
+	
 	@Resource(name = "UserImp")
 	private UserInterface uimp;
 
@@ -78,12 +79,11 @@ public class UserAction {
 	}
 
 	/**
-	 * wang 忘记密码邮件发送
+	 * huang 忘记密码邮件发送
 	 * @throws IOException 
 	 */
 	@RequestMapping("/semail.do")
 	public void emailSend(HttpServletResponse response, String name) {
-		MyUtils email = new MyUtils();
 		if (name == null || "".equals(name)) {
 			try {
 				response.getWriter().print("请输入邮箱");
@@ -143,8 +143,6 @@ public class UserAction {
 	 */
 	@RequestMapping(value = "/judgeuName.do", method = RequestMethod.POST)
 	public void judgeuName(HttpServletResponse response, String uname) {
-		System.out.println("======用户名==========================" + uname);
-		System.out.println("======用户名==========================" + uimp.selectUserByUname(uname));
 		if (uimp.selectUserByUname(uname) == null) {
 			// 数据库无该用户名,可创建
 			try {
@@ -169,7 +167,6 @@ public class UserAction {
 	@RequestMapping(value = "/judgeuEmail.do", method = RequestMethod.POST)
 	public void judgeuEmail(HttpServletResponse response, String uemail) {
 
-		System.out.println("======邮箱=======" + uimp.selectUserByUemail(uemail));
 		if (uimp.selectUserByUemail(uemail) == null) {
 			// 数据库无该邮箱,可创建
 			try {
