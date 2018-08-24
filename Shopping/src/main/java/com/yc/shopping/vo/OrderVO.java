@@ -16,16 +16,47 @@ public class OrderVO {
 	private Integer aid;// 管理员编号
 
 	private Integer uid;// 用户编号
+	
+	private String uname;//用户账号
 
+	private String uphone;//用户电话
+	
 	private String useraddress;// 用户地址
 
 	private Date ordertime;// 订单时间
 
 	private Date arrivaltime;// 到达时间
+	
+	private Double tranprice;//订单价格
+
+	public Double getTranprice() {
+		return tranprice;
+	}
+
+	public void setTranprice(Double tranprice) {
+		this.tranprice = tranprice;
+	}
 
 	private Integer ordernotes;// 订单备注
 
 	private String orderstatus;// 订单状态
+
+	
+	public String getUname() {
+		return uname;
+	}
+
+	public void setUname(String uname) {
+		this.uname = uname;
+	}
+
+	public String getUphone() {
+		return uphone;
+	}
+
+	public void setUphone(String uphone) {
+		this.uphone = uphone;
+	}
 
 	public Integer getOrderid() {
 		return orderid;
