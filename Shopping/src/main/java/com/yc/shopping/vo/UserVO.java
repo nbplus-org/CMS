@@ -2,6 +2,7 @@ package com.yc.shopping.vo;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 用户表（UserTable）
@@ -11,10 +12,7 @@ import java.util.Date;
  */
 public class UserVO {
 
-	public void setUbirthday(Timestamp ubirthday) {
-		this.ubirthday = ubirthday;
-	}
-
+	
 	private Integer uid;// 用户编号
 
 	private String uname;// 用户账号，（用户名）
@@ -32,6 +30,42 @@ public class UserVO {
 	private Integer uintegral;// 用户积分（默认为-1）
 
 	private Timestamp ubirthday;// 用户生日（或注册日期）
+
+	
+	private List<ClothesVO> clothesVo; //服装属性 wang--确认订单需要
+	
+	private List<ClothesDetailVO> clothesDetailVo;//服装详情wang--确认订单需要
+	
+	private List<CartVO> cartVo;//购物车属性wang--确认订单需要
+	
+	
+	public List<ClothesDetailVO> getClothesDetailVo() {
+		return clothesDetailVo;
+	}
+
+	public void setClothesDetailVo(List<ClothesDetailVO> clothesDetailVo) {
+		this.clothesDetailVo = clothesDetailVo;
+	}
+
+	public List<CartVO> getCartVo() {
+		return cartVo;
+	}
+
+	public void setCartVo(List<CartVO> cartVo) {
+		this.cartVo = cartVo;
+	}
+
+	public void setUbirthday(Timestamp ubirthday) {
+		this.ubirthday = ubirthday;
+	}
+
+	public List<ClothesVO> getClothesVo() {
+		return clothesVo;
+	}
+
+	public void setClothesVo(List<ClothesVO> clothesVo) {
+		this.clothesVo = clothesVo;
+	}
 
 	public Integer getUid() {
 		return uid;
@@ -105,4 +139,6 @@ public class UserVO {
 		this.ubirthday = ubirthday;
 	}
 
+	
+  
 }

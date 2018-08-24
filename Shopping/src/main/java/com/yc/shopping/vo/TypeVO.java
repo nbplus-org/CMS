@@ -14,7 +14,7 @@ public class TypeVO {
 
 	private String typename;// 类型名称
 
-	private Integer typenum;// 类型数量
+	
 
 	public Integer getTypeid() {
 		return typeid;
@@ -32,11 +32,5 @@ public class TypeVO {
 		this.typename = typename;
 	}
 
-	public Integer getTypenum() {
-		return typenum;
-	}
 
-	public void setTypenum(Integer typenum) {
-		this.typenum = typenum;
-	}
 }

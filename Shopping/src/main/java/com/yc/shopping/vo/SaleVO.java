@@ -26,7 +26,7 @@ public class SaleVO {
 	private Integer salenum;
 
 	// 销售金额
-	private Integer saleprice;
+	private Double saleprice;
 
 	public Integer getSaleid() {
 		return saleid;
@@ -68,11 +68,13 @@ public class SaleVO {
 		this.salenum = salenum;
 	}
 
-	public Integer getSaleprice() {
+	public Double getSaleprice() {
 		return saleprice;
 	}
 
-	public void setSaleprice(Integer saleprice) {
+	public void setSaleprice(Double saleprice) {
 		this.saleprice = saleprice;
 	}
+
+	
 }

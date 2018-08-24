@@ -14,8 +14,18 @@ public class CartVO {
 
 	private Integer clodetailid;// 服装详情编号-------外键
 
+	private Integer cnum;
+	
 	public Integer getCartid() {
 		return cartid;
+	}
+
+	public Integer getCnum() {
+		return cnum;
+	}
+
+	public void setCnum(Integer cnum) {
+		this.cnum = cnum;
 	}
 
 	public void setCartid(Integer cartid) {
@@ -37,4 +47,10 @@ public class CartVO {
 	public void setClodetailid(Integer clodetailid) {
 		this.clodetailid = clodetailid;
 	}
+
+	@Override
+	public String toString() {
+		return "CartVO [cartid=" + cartid + ", uid=" + uid + ", clodetailid=" + clodetailid + ", cnum=" + cnum + "]"+"\n";
+	}
+	
 }

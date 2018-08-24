@@ -1,5 +1,7 @@
 package com.yc.shopping.vo;
 
+import java.util.List;
+
 /**
  * 
  *@author wang
@@ -8,7 +10,7 @@ public class ClothesDetailVO {
 
 	private Integer clothesid;// 服装编号
 
-	private Integer clothesdetailid;// 服装详情编号
+	private Integer clodetailid;// 服装详情编号
 
 	private String clothescolour;// 服装颜色
 
@@ -19,6 +21,7 @@ public class ClothesDetailVO {
 	private String clothespic;// 服装图片
 
 
+
 	public Integer getClothesid() {
 		return clothesid;
 	}
@@ -27,13 +30,6 @@ public class ClothesDetailVO {
 		this.clothesid = clothesid;
 	}
 
-	public Integer getClothesdetailid() {
-		return clothesdetailid;
-	}
-
-	public void setClothesdetailid(Integer clothesdetailid) {
-		this.clothesdetailid = clothesdetailid;
-	}
 
 	public String getClothescolour() {
 		return clothescolour;
@@ -67,4 +63,20 @@ public class ClothesDetailVO {
 		this.clothespic = clothespic;
 	}
 
+	public Integer getClodetailid() {
+		return clodetailid;
+	}
+
+	public void setClodetailid(Integer clodetailid) {
+		this.clodetailid = clodetailid;
+	}
+
+	
+
+	
+
+	
+	
+	
+	
 }

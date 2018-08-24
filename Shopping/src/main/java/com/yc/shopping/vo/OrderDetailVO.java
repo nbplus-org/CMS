@@ -13,10 +13,11 @@ public class OrderDetailVO {
 
 	private Integer clodetailid;// 服装详情编号
 
-	private Integer tranpprice;// 交易单价
+	private Double tranpprice;// 交易单价
 
 	private Integer num;// 数量
 
+	
 	public Integer getOrderdetailid() {
 		return orderdetailid;
 	}
@@ -41,11 +42,12 @@ public class OrderDetailVO {
 		this.clodetailid = clodetailid;
 	}
 
-	public Integer getTranpprice() {
+
+	public Double getTranpprice() {
 		return tranpprice;
 	}
 
-	public void setTranpprice(Integer tranpprice) {
+	public void setTranpprice(Double tranpprice) {
 		this.tranpprice = tranpprice;
 	}
 

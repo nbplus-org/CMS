@@ -1,5 +1,7 @@
 package com.yc.shopping.vo;
 
+import java.util.List;
+
 /**
  * 服装表（clothesTable）
  * 
@@ -8,17 +10,7 @@ package com.yc.shopping.vo;
  */
 public class ClothesVO {
 
-	public Integer getClothesprice() {
-		return clothesprice;
-	}
 
-	public void setClothesprice(Integer clothesprice) {
-		this.clothesprice = clothesprice;
-	}
-
-	public void setClothesorigprice(Integer clothesorigprice) {
-		this.clothesorigprice = clothesorigprice;
-	}
 
 	private Integer clothesid;// 服装编号
 
@@ -36,9 +28,9 @@ public class ClothesVO {
 
 	private String clothesintroduce;// 服装简介
 
-	private Integer clothesorigprice;// 服装原价
+	private Double clothesorigprice;// 服装原价
 
-	private Integer clothesprice;// 服装现价
+	private Double clothesprice;// 服装现价
 
 	public Integer getClothesid() {
 		return clothesid;
@@ -104,8 +96,23 @@ public class ClothesVO {
 		this.clothesintroduce = clothesintroduce;
 	}
 
-	public Integer getClothesorigprice() {
+
+	public Double getClothesorigprice() {
 		return clothesorigprice;
 	}
+
+	public void setClothesorigprice(Double clothesorigprice) {
+		this.clothesorigprice = clothesorigprice;
+	}
+
+	public Double getClothesprice() {
+		return clothesprice;
+	}
+
+	public void setClothesprice(Double clothesprice) {
+		this.clothesprice = clothesprice;
+	}
+
+	
 
 }
