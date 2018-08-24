@@ -286,9 +286,11 @@ public class UserAction {
 		if (userVo != null) {
 			if (vcode.equalsIgnoreCase(vscode)) {
 				model.addAttribute("userVo", userVo);
+				request.getSession().setAttribute("UserVO", userVo);
 				return "index";
 			} else {
 				model.addAttribute("msgcode", "验证码错误!");
+
 				return "reglogin";
 			}
 		} else {
