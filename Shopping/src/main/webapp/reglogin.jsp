@@ -9,7 +9,7 @@
         ============================================ -->
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Account | Hope</title>
+<title>登陆注册</title>
 <meta name="description" content="">
 <!-- Mobile specific metas -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -58,31 +58,22 @@
 			name : str
 		};
 		$.post("semail.do", data, function(data) {
-			alert(data + "sss");
+			alert("邮件发送成功");
 		});
 	}
 
 	//注册时判断用户名是否已被注册
 	function judgeuname() {
-		//正则表达式判断名字
-
 		var str = $("#uName").val();
-		var reg = /^\s*$/g;
-		if (reg.test(str)) {
-			$("#nameSpan").html("用户名不能为空");
-			$("#nameSpan").css("color", "red");
-		} else {
-			$.post("judgeuName.do", {
-				uname : str
-			}, function(data) {
-				$("#nameSpan").html("");
-				if (data != "用户名可用") {
-					$("#nameSpan").html("");
-					$("#nameSpan").html("用户名已被注册");
-					$("#nameSpan").css("color", "red");
-				}
-			});
-		}
+		$("#nameSpan").html("");
+		$.post("judgeuName.do", {
+			uname : str
+		}, function(data) {
+			if (data != "用户名可用") {
+				$("#nameSpan").html("用户名已被注册");
+				$("#nameSpan").css("color", "red");
+			}
+		});
 	}
 
 	//注册时判断邮箱是否已被注册

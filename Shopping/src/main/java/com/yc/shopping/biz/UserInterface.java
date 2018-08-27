@@ -1,5 +1,7 @@
 package com.yc.shopping.biz;
 
+import java.util.List;
+
 import com.yc.shopping.filter.BizException;
 import com.yc.shopping.vo.UserVO;
 
@@ -26,7 +28,7 @@ public interface UserInterface {
 	 * @author huang
 	 * @return
 	 */
-	public UserVO selectUserByUname(String uname);
+	public List<UserVO> selectUserByUname(String uname);
 
 	/**
 	 * 通过邮箱查询用户
@@ -34,7 +36,7 @@ public interface UserInterface {
 	 * @author huang
 	 * @return
 	 */
-	public UserVO selectUserByUemail(String uemail);
+	public List<UserVO> selectUserByUemail(String uemail);
 
 	/**
 	 * 验证用户名密码是否正确，实现登录
@@ -75,5 +77,60 @@ public interface UserInterface {
 	 * @return
 	 */
 	public int modifyPwdByName(String zid, String pwd);
+	
+
+	/**
+	 * 查所有用户huang(后台)
+	 * 
+	 * @return
+	 */
+	public List<UserVO> selectAllUser(int page,int rows);
+
+	/**
+	 * 重置用户密码通过id huang(后台)
+	 * 
+	 * @param ids
+	 * @return
+	 */
+	public int resetPwd(Object ids,String pwd);
+	
+	/**
+	 * 通过关键字分页查用户 huang(后台)
+	 * @param keyWord 
+	 * @return
+	 */
+	public List<UserVO> commonSelect(String keyWord,int page,int rows);
+	
+	/**
+	 * 通过用户id查电话号 huang(后台)
+	 * @param uid
+	 * @return
+	 */
+	public String selectEmailByUid(Object uid);
+	
+	/**
+	 * 高级查询,通过输入的相关信息进行查询 huang(后台)
+	 * @param user
+	 * @param pageSize 
+	 * @param startPage 
+	 * @return
+	 */
+	public List<UserVO> topSelect(UserVO user, int startPage, int pageSize);
+	
+	/**
+	 * 分页查询需要，得到总用户数量 huang (后台)
+	 * @param user
+	 * @return
+	 */
+	public int selectCount();
+	
+	/**
+	 * 重写count方法，普通查询分页huang(后台)
+	 * @param name
+	 * @return
+	 */
+	public int selectCountCommon(String name);
+	
+	public int selectCountTop(UserVO user);
 
 }

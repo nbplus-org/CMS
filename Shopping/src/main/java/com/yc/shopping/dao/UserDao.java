@@ -1,5 +1,8 @@
 package com.yc.shopping.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
@@ -37,7 +40,7 @@ public interface UserDao {
 	 * @return
 	 */
 	@Select("select * from uservo where uname=#{uname}")
-	UserVO selectUserByUname(String uname);
+	List<UserVO> selectUserByUname(String uname);
 
 	/**
 	 * 通过邮箱查询用户
@@ -47,7 +50,7 @@ public interface UserDao {
 	 * @return
 	 */
 	@Select("select * from uservo where uemail=#{uemail}")
-	UserVO selectUserByUemail(String uemail);
+	List<UserVO> selectUserByUemail(String uemail);
 
 	/**
 	 * 通过手机号查询用户
@@ -70,26 +73,98 @@ public interface UserDao {
 	 */
 	@Select("select * from uservo where uname=#{uname} and upwd=#{upwd}")
 	UserVO loginByNP(@Param("uname") String uname, @Param("upwd") String upwd);
-	
+
 	/**
 	 * wang 根据用户名查邮箱---忘记密码
+	 * 
 	 * @param user
 	 * @return
 	 */
 	@Select("select uemail from uservo where uname=#{uname}")
 	UserVO selectEmailByName(UserVO user);
 
-	
-    /**
-	 * 找回密码---根据账号修改密码
-	 * wang
-	 * @param zid  账号
-	 * @param pwd  修改的密码
+	/**
+	 * 找回密码---根据账号修改密码 wang
+	 * 
+	 * @param zid
+	 *            账号
+	 * @param pwd
+	 *            修改的密码
 	 * @return
 	 */
 	@Update("update  uservo  set upwd=#{pwd} where uname=#{uname}")
-    int updatePwdByName(@Param("uname")String zid,@Param("pwd")String pwd);
-	
-	
-	
+	int updatePwdByName(@Param("uname") String zid, @Param("pwd") String pwd);
+
+	/**
+	 * 查所有用户 huang(后台)
+	 * 
+	 * @return
+	 */
+	@Select("select * from uservo limit #{page} ,#{rows}")
+	List<UserVO> selectAllUser(@Param("page") int page, @Param("rows") int rows);
+
+	/**
+	 * 重置用户密码通过id huang(后台)
+	 * 
+	 * @param uid
+	 * @return
+	 */
+	@Delete("update uservo set upwd = #{pwd}  where uid=#{uid}")
+	int resetPwd(@Param("uid") Object uid, @Param("pwd") String pwd);
+
+	/**
+	 * 输入关键字进行普通查询 huang（后台）
+	 * 
+	 * @param keyWord-关键字
+	 * @returnor uphone like %#{keyWord}% or uemail like %#{keyWord}% or usex
+	 *           like %#{keyWord}%
+	 */
+	@Select("select * from uservo where uname like CONCAT('%', #{keyWord},'%') limit #{startPage},#{pageSize}")
+	List<UserVO> commonSelect(@Param("keyWord") String keyWord, @Param("startPage") int startPage, @Param("pageSize") int pageSize);
+
+	/**
+	 * 查邮箱通过用户的id huang（后台）
+	 * 
+	 * @param uid
+	 * @return
+	 */
+	@Select("select uemail from uservo where uid=#{uid} ")
+	String selectEmailByUid(Object uid);
+
+	/**
+	 * 高级查询,通过输入的信息进行高级查询 huang（后台）
+	 * 
+	 * @param user
+	 * @return
+	 */
+	@Select("select * from uservo where uemail like CONCAT('%', #{user.uemail},'%') and "
+			+ "uphone like CONCAT('%', #{user.uphone},'%') and usex=#{user.usex} limit #{startPage},#{pageSize}")
+	List<UserVO> topSelect(@Param("user")UserVO user, @Param("startPage")int startPage, @Param("pageSize")int pageSize);
+
+	/**
+	 * 分页查询需要，得到总用户数量 huang (后台)
+	 * 
+	 * @param user
+	 * @return
+	 */
+	@Select("select count(*) from uservo")
+	int selectCount();
+
+	/**
+	 * 普通查询count huang（后台）
+	 * 
+	 * @param name
+	 * @return
+	 */
+	@Select("select count(*) from uservo where uname like CONCAT('%', #{name},'%') ")
+	int selectCountCommon(String name);
+
+	/**
+	 * 高级查询count huang（后台）
+	 * @param user
+	 * @return
+	 */
+	@Select("select count(*) from uservo where uemail like CONCAT('%', #{uemail},'%') and "
+			+ "uphone like CONCAT(CONCAT('%', #{uphone}),'%') and usex=#{usex}")
+	int selectCountTop(UserVO user);
 }
