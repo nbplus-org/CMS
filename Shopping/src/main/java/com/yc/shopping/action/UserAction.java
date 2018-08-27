@@ -266,13 +266,13 @@ public class UserAction {
 	}
 
 	/**
-	 * 
+	 * 登录
 	 * @param userVo
 	 * @param request
 	 * @param model
 	 * @return
 	 * @throws BizException
-	 *             liu
+	 *       liu
 	 */
 	@RequestMapping("/login.do")
 	public String login(UserVO userVo, HttpServletRequest request, Model model) throws BizException {
@@ -287,7 +287,7 @@ public class UserAction {
 			if (vcode.equalsIgnoreCase(vscode)) {
 				model.addAttribute("userVo", userVo);
 				request.getSession().setAttribute("UserVO", userVo);
-				return "index";
+				return "redirect:show.do";
 			} else {
 				model.addAttribute("msgcode", "验证码错误!");
 

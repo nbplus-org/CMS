@@ -14,8 +14,18 @@ public class OrderDetailVO {
 	private Integer clodetailid;// 服装详情编号
 
 	private Integer num;// 数量
-
+    
+	private ClothesDetailVO clothesDetailVo;//服装详情属性
 	
+	
+	public ClothesDetailVO getClothesDetailVo() {
+		return clothesDetailVo;
+	}
+
+	public void setClothesDetailVo(ClothesDetailVO clothesDetailVo) {
+		this.clothesDetailVo = clothesDetailVo;
+	}
+
 	public Integer getOrderdetailid() {
 		return orderdetailid;
 	}
@@ -47,5 +57,6 @@ public class OrderDetailVO {
 	public void setNum(Integer num) {
 		this.num = num;
 	}
+
       
 }

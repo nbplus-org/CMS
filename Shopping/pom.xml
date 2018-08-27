@@ -135,6 +135,13 @@
 		    <artifactId>javax.mail</artifactId>
 		    <version>1.6.0</version>
 		</dependency>
+		<!-- jsp jar -->
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.1</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 
