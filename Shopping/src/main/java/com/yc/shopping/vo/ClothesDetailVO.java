@@ -20,7 +20,18 @@ public class ClothesDetailVO {
 
 	private String clothespic;// 服装图片
 
+    private ClothesVO clothesVo;//对应的服装属性
+	
 
+    
+    
+	public ClothesVO getClothesVo() {
+		return clothesVo;
+	}
+
+	public void setClothesVo(ClothesVO clothesVo) {
+		this.clothesVo = clothesVo;
+	}
 
 	public Integer getClothesid() {
 		return clothesid;
@@ -71,10 +82,8 @@ public class ClothesDetailVO {
 		this.clodetailid = clodetailid;
 	}
 
-	
 
 	
-
 	
 	
 	

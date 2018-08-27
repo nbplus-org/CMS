@@ -46,6 +46,11 @@
 		<!-- modernizr JS ============================================ -->
 		<script type="text/javascript" src="easyui/jquery.min.js"></script>
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+        <!-- 密码强度css -->
+        <link rel="stylesheet" href="js/password/style.css">
+        <!-- 弹框css -->
+		<link rel="stylesheet" href="css/tankuang.min.css">
+        <link rel="stylesheet" href="css/tankuangAlertBox.css">
        
         <style type="text/css">
         .fangkuang{
@@ -102,9 +107,10 @@
 								</li>
 								<li>新密码<span>*</span></li>
 								<li>
-									<div class="email_address">
-										<input type="password" value="" class="email_test" id="pwd" name="pwd" autocomplete="off"/>
-										<span id="sp1"></span>
+									<div class="email_address page-wrap">
+										<input type="password" value="" class="email_test" id="pwd" name="pwd" autocomplete="off"/><span id="sp1"></span>
+										<div id="complexitywrap">
+		                                <div id="complexity">0%</div>
 									</div>
 								</li>
 								<li>确认新密码<span>*</span></li>
@@ -169,6 +175,12 @@
         <script src="js/plugins.js"></script>
 		<!-- main JS  -->
         <script src="js/main.js"></script>
+       <!-- 密码强度js -->
+       <script src="js/password/jquery.complexify.js"></script>
+	   <script src="js/password/jquery.placeholder.min.js"></script>
+	   <!-- 弹框js -->
+       <script src="js/tankuangAlertBox.min.js"></script>
+        
          <script type="text/javascript">
         
         //判断新旧密码是否一致   wang -----重置密码
@@ -176,14 +188,18 @@
         	var pwd=$("#pwd").val();
         	var npwd=$("#npwd").val();
         	var zid=$("#zid").val();
+        	$("#sp1").html("");	
         	$("#sp2").html("");	
-        	
-        	if(pwd==npwd){
+        	if(pwd==null||pwd==''){
+        	  $("#sp1").html("请输入新密码！");	
+        	}
+        	else if(pwd==npwd){
         		var data={npwd:npwd,zid:zid,pwd:pwd};
     			$.post("resetpwd.do",data,function(data){
     				if(data=='1'){
-    					alert("重置成功");
-        				window.location.href="reglogin.jsp"; 
+    					//alert("重置成功");
+    					showsetpwd();
+        				
         				
     				}else if(data=='2'){
     					alert("重置失败,请联系管理员");
@@ -202,6 +218,33 @@
         	}
 
         } 
+        
+        
+        
+        //密码强度
+        $(function(){
+			$('input[placeholder]').placeholder();
+			$("#pwd").complexify({}, function(valid, complexity){
+				if (!valid) {
+					$('#complexity').animate({'width':complexity + '%'}).removeClass('valid').addClass('invalid');
+				} else {
+					$('#complexity').animate({'width':complexity + '%'}).removeClass('invalid').addClass('valid');
+				}
+				$('#complexity').html(Math.round(complexity) + '%');
+			});
+		}); 
+        //重置成功提示
+        function showsetpwd() {
+            PostbirdAlertBox.alert({
+                'title': '提示',
+                'content': '重置成功',
+                'okBtn': '好的',
+                'contentColor': 'green',
+                'onConfirm': function () {
+                	window.location.href="reglogin.jsp"; 
+                }
+            });
+        }
         </script>
     </body>
 </html>

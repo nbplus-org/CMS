@@ -1,6 +1,7 @@
 package com.yc.shopping.vo;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 订单表
@@ -28,6 +29,31 @@ public class OrderVO {
 	private Date arrivaltime;// 到达时间
 	
 	private Double tranprice;//订单价格
+	
+	private String ordernotes;// 订单备注
+
+	private String orderstatus;// 订单状态
+
+	private List<OrderDetailVO> orderDetailVo;//订单详情属性
+	
+	private List<ClothesDetailVO> clothesDetailVo;//服装详情属性
+	
+	
+	public List<OrderDetailVO> getOrderDetailVo() {
+		return orderDetailVo;
+	}
+
+	public void setOrderDetailVo(List<OrderDetailVO> orderDetailVo) {
+		this.orderDetailVo = orderDetailVo;
+	}
+
+	public List<ClothesDetailVO> getClothesDetailVo() {
+		return clothesDetailVo;
+	}
+
+	public void setClothesDetailVo(List<ClothesDetailVO> clothesDetailVo) {
+		this.clothesDetailVo = clothesDetailVo;
+	}
 
 	public Double getTranprice() {
 		return tranprice;
@@ -37,11 +63,6 @@ public class OrderVO {
 		this.tranprice = tranprice;
 	}
 
-	private Integer ordernotes;// 订单备注
-
-	private String orderstatus;// 订单状态
-
-	
 	public String getUname() {
 		return uname;
 	}
@@ -106,11 +127,13 @@ public class OrderVO {
 		this.arrivaltime = arrivaltime;
 	}
 
-	public Integer getOrdernotes() {
+	
+
+	public String getOrdernotes() {
 		return ordernotes;
 	}
 
-	public void setOrdernotes(Integer ordernotes) {
+	public void setOrdernotes(String ordernotes) {
 		this.ordernotes = ordernotes;
 	}
 
@@ -121,5 +144,6 @@ public class OrderVO {
 	public void setOrderstatus(String orderstatus) {
 		this.orderstatus = orderstatus;
 	}
+
 
 }

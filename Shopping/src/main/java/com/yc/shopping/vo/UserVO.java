@@ -139,6 +139,7 @@ public class UserVO {
 		this.ubirthday = ubirthday;
 	}
 
+
 	
   
 }

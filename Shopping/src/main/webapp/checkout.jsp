@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html class="no-js" lang="en">
     <head>
@@ -44,7 +45,24 @@
 		<!-- Responsive css -->
         <link rel="stylesheet" href="css/responsive.css">
 		<!-- modernizr JS -->
+		<!-- 弹框css -->
+		<!-- <link rel="stylesheet" href="css/tankuang.min.css"> -->
+        <link rel="stylesheet" href="css/tankuangAlertBox.css">
+		
+		
+		
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+        <style type="text/css">
+        #sp1{
+           color: red;
+        
+        }
+        
+        
+        </style>
+        
+        
+        
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -62,6 +80,7 @@
 		<div class="checkout_accrodion_area">
 			<div class="container">
 				<div class="row">
+				<form action="" method="post">
 					<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
 						<div class="accordion" id="accordion2">
 					
@@ -81,12 +100,9 @@
 													<ul class="billing_in">
 														<li>名字<span>*</span></li>
 														<li>
-														<input type="text" id="billing:firstname" name="billing[firstname]" value="" title="First Name" maxlength="255" class="input-text required-entry"></li>
+														<input type="text" id="uname" name="uname" value="${user.uname }" title="First Name" maxlength="255" class="input-text required-entry"></li>
 														<li>电话<span>*</span></li>
-														<li><input type="text" id="billing:company" name="billing[company]" value="" title="Company" class="input-text "></li>
-														<li>邮箱<span>*</span></li>
-														<li><input type="text" name="billing[email]" id="billing:email" value="" title="Email Address" class="input-text validate-email required-entry"></li>
-														
+														<li><input type="text" id="uphone" name="uphone" value="${user.uphone }" title="Company" class="input-text "></li>
 														<div data-toggle="distpicker">
 														<li>省份<span>*</span></li>
 														<li>
@@ -106,8 +122,10 @@
 														</li>
 														</div>
 														<li>详细地址<span>*</span></li>
-														<li><input type="text" title="Street Address" name="billing[street][]" id="billing:street1" value="" class="input-text  required-entry"></li>
+														<li><input type="text" title="Street Address" name="detailedarea" id="detailedarea" value="" autocomplete="off" class="input-text  required-entry"></li>
 														
+														<li>备注<span></span></li>
+														<li><input type="text" title="Street Address" name="ordernotes" id="ordernotes" value="" autocomplete="off" class="input-text  required-entry"></li>
 													</ul>
 												</div>
 											</div>
@@ -130,7 +148,7 @@
 							<div class="panel accordion-group">
 								<div class="accordion-heading" id="headingFive">
 								  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-									<span>5</span>订单确认
+									<span>2</span>订单确认
 								  </a>
 								</div>
 								<div id="collapseFive" class="panel-collapse collapse" aria-labelledby="headingFive">
@@ -140,42 +158,39 @@
 												<div class="accordion_total_pricing">
 													<table id="product_details_price">
 														<tr>
-															<th>产品名</th>
-															<th>价格</th>
-															<th>数量</th>
+															<th>产品名-数量</th>
+															<th>颜色尺码</th>
+															<th>单价</th>
 															<th>总计</th>
 														</tr>
+														<c:forEach items="${list }" var="v" >
 														<tr>
-															<td><h2>Pellentesque hendrerit</h2></td>
-															<td>$800.00</td>
-															<td>1</td>
-															<td>$800.00</td>
+															<td><h2>${v.pname }x${v.num }</h2></td>
+															<td>${v.colour }-${v.size }码</td>
+															<td>￥${v.price }</td>
+															<td>￥${v.num*v.price}</td>
 														</tr>
-														<tr>
-															<td><h2>Vivamus eu imper</h2></td>
-															<td>$999.00</td>
-															<td>1</td>
-															<td>$999.00</td>
-														</tr>
+														</c:forEach>
 													</table>
 													<table id="product_details_rate">
 														<tr>
-															<td>Subtotal</td>
-															<td>$1,799.00</td>
+															<td>合计</td>
+															<td>￥${total }</td>
 														</tr>
 														<tr>
-															<td>Shipping & Handling (Flat Rate - Fixed)</td>
-															<td>$10.00</td>
+															<td>折扣</td>
+															<td>${f==0?"无折扣":f==95?"-5%":f==85?"-15%":f==75?"-25%":"-30%" }</td>
 														</tr>
 														<tr>
-															<th>Grand Total</th>
-															<th>$1,809.00</th>
+															<th>折后价</th>
+															<th id="price">￥${total*f*0.01 }</th>
 														</tr>
 													</table>
 												</div>
 												<div class="Continue_button continue_top place_order">
-													<h2>Forgot an Item? <a href="#">Forgot your password?</a></h2>
-													<button type="submit" title="Submit Review" class="button">下单</button>
+													 <a href="#">忘记密码?</a>
+													<button type="button" onclick="judge()" id="b1" title="Submit Review" class="button">下单</button>
+													<span id="sp1"></span>
 												</div>
 											</div>
 										</div>
@@ -184,6 +199,7 @@
 							</div>
 						</div>
 					</div>
+					</form>
 					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 						<div class="check_progress">
 							<h2>结账进度</h2>
@@ -242,5 +258,85 @@
         <script src="js/distpicker.data.js"></script>
         <script src="js/distpicker.js"></script>
         <script src="js/main.js"></script>
+        <!-- 弹框js -->
+        <script src="js/tankuangAlertBox.min.js"></script>
+
+        <script type="text/javascript">
+        
+        function judge(){
+            var detailarea=$("#detailedarea").val();
+            
+            $("#sp1").html("");
+        	if(detailarea.length==0){
+        		$("#sp1").html("请填写详细地址");
+        	}else{
+        		var data={};
+        		$.post("playOrder.do",data,function(data){
+        			if(data==1){
+        				$("#sp1").html("请先购买商品");
+        			}else{
+        				//tan();
+        				showPrompt()
+        			}
+        		});
+        	}  
+        	
+        }
+        //弹框
+        function showPrompt() {
+            PostbirdAlertBox.prompt({
+                'title': '请输入密码',
+                'okBtn': '确定',
+                onConfirm: function (data) {
+                //表单数据
+                var uname=$("#uname").val();
+                var uphone=$("#uphone").val();
+                var province=$("#province").val();
+                var city=$("#city").val();
+                var area=$("#area").val();
+                var detailarea=$("#detailedarea").val();
+                var ordernotes=$("#ordernotes").val();
+                
+                
+                //获取表格里的折后价
+                var tb = document.getElementById('product_details_rate');    // table 的 id
+                var rows = tb.rows;                           // 获取表格所有行
+                var price=rows[2].cells[1].innerHTML;
+                
+                
+                var pwd=data;   
+                var data1={pwd:pwd,uname:uname,uphone:uphone,province:province,
+                		   city:city,area:area,detailarea:detailarea,ordernotes:ordernotes,price:price};	
+                $.post("panduanPwd.do",data1,function(data1){
+                	if(data1==0){
+                		showAlert();//密码错误
+                	}else{
+                		//提示
+                		window.location.href="seeorder.do";  //密码正确，跳转页面
+                	}
+                });    
+	
+                },
+                
+            });
+        }
+        
+        //密码错误提示框
+        function showAlert() {
+        PostbirdAlertBox.alert({
+            'title': '提示',
+            'content': '密码错误',
+            'okBtn': '确定',
+            'contentColor': 'red',
+            'onConfirm': function () {
+                //console.log("回调触发后隐藏提示框");
+                //alert("回调触发后隐藏提示框");
+            }
+        });
+    }
+        
+   </script>
+        
+        
     </body>
 </html>

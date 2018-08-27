@@ -48,6 +48,9 @@
 <!-- modernizr JS ============================================ -->
 <script type="text/javascript" src="easyui/jquery.min.js"></script>
 <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+<!-- 自定义提示框css -->
+<link rel="stylesheet" href="js/advice/message.css">
+
 
 <style type="text/css">
 .fangkuang {
@@ -106,8 +109,8 @@
 									<li>绑定的邮箱<span>*</span><span id="sp2"></span></li>
 
 									<li>
-										<div class="email_address">
-											<input type="text" value="" class="phone" id="email"
+										<div class="email_address ">
+											<input type="text" value="" class="phone " id="email"
 												onblur="onemail()" autocomplete="off" />
 											<button onclick="sendemail()" type="button">发送验证码</button>
 											<span id="sp3"></span>
@@ -175,6 +178,9 @@
 	<script src="js/plugins.js"></script>
 	<!-- main JS  -->
 	<script src="js/main.js"></script>
+	<!-- 自定义弹框提示 -->
+	<script src="js/advice/message.min.js"></script>
+	
 	<script type="text/javascript">
 		//账号失焦事件
 		function onid() {
@@ -212,8 +218,9 @@
 				} else if (data == '3') {
 					$("#sp3").html("邮箱错误");
 				} else {
-					alert("发送成功");
+					//alert("发送成功");
 					//prompt("发送成功");
+					success();
 				}
 			});
 		}
@@ -232,6 +239,15 @@
 			}
 
 		}
+		
+		
+		
+		
+		//成功提示框
+		function success(){
+           $.message('发送成功');
+        }
+		
 	</script>
 </body>
 </html>
