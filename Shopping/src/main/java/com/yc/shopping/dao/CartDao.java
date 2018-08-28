@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.yc.shopping.vo.CartVO;
 import com.yc.shopping.vo.ClothesDetailVO;
@@ -48,6 +49,8 @@ public interface CartDao {
 	 * liu
 	 */
 	ClothesVO selectById(Integer clothesid);
+	
+	
 	
 	/**
 	 * 通过clothesid查询服装详情表（clothDetailTable）的clothespic

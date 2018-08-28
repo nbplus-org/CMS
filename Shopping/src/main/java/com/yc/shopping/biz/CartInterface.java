@@ -42,6 +42,8 @@ public interface CartInterface {
 	 */
 	public ClothesVO showById(Integer clothesid);
 	
+
+	
 	/**
 	 *  通过clothesid查询服装详情表（clothDetailTable）的clothespic
 	 * 在product.jsp页面展示出来

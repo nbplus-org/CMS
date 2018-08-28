@@ -184,10 +184,4 @@ public class CartImp implements CartInterface {
 		return cDao.findClothesId(clodetailid);
 	}
 
-	
-	
-
-
-
-
 }

@@ -190,7 +190,7 @@
 								<tr id="tr${status.count }" class="order_list">
 								    <td><div><input type="checkbox" class="selectBox" value="${c.cartid}"/></div></td>
 								    <td id="cartid${status.count }">${c.cartid}</td>
-									<td><a href="#"><img src="upload/${c.clothespic}" width="100px" height="100px" alt="" /></a></td>
+									<td><a href="seeByPic.do?cartid=${c.cartid}"><img src="upload/${c.clothespic}" width="100px" height="100px" alt="" /></a></td>
 									<td><a href="#">${c.clothesname}</a></td>
 									<td>${c.clothescolour }</td>
 									<td>${c.clothessize }</td>

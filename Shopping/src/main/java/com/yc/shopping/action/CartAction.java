@@ -49,7 +49,8 @@ public class CartAction {
     	model.addAttribute("clothes", list);
     	
     	model.addAttribute("clothesDetail",list.getClosthesDetailVo());
-    	model.addAttribute("fiestPic", list.getClosthesDetailVo().get(0).getClothespic());
+    	System.out.println(list.getClosthesDetailVo().get(0).getClothespic());
+    	
 		List<ReviewVO> list4=rBiz.selectById(clothesid);
 		if(list4!=null){
 			System.out.println("评论表有数值");
@@ -141,11 +142,15 @@ public class CartAction {
      * liu 
      */
     @RequestMapping("/showCart.do")
-    public String addCart(Model model,HttpServletRequest request){ 	
-    	List<Map<String, Object>> list=cBiz.findAll();
-    	System.out.println(list);
-    	model.addAttribute("list", list);
-    	return "cart";
+    public String addCart(Model model,HttpServletRequest request){ 
+    	UserVO userVo=(UserVO) request.getSession().getAttribute("UserVO");
+    	if(userVo!=null){
+        	List<Map<String, Object>> list=cBiz.findAll();
+        	System.out.println(list);
+        	model.addAttribute("list", list);
+        	return "cart";
+    	}
+            return "reglogin";
       } 
     
     /**
