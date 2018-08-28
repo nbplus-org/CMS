@@ -20,7 +20,7 @@ public class ClothesVO {
 
 	private String clothestype;// 服装类型
 
-	private String clothesbigtag;// 服装大标签
+	private String clothesbigtag;// 服装大标
 
 	private String clothesbrand;// 服装品牌
 
