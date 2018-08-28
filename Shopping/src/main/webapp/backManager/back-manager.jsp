@@ -133,36 +133,6 @@
 				document.getElementById("mainFrame").src = "xtsz/CustomManage.htm";
 				document.getElementById("dTitle").style.display = "none";
 			}
-			//        else if(id=="hr28")
-			//    {
-			//    document.getElementById("mainFrame").src="client/ClientIdea.html";
-			//    document.getElementById("dTitle").style.display="none";
-			//    }
-			//        else if(id=="hr29")
-			//    {
-			//    document.getElementById("mainFrame").src="#";
-			//    document.getElementById("dTitle").style.display="none";
-			//    }
-			//        else if(id=="hr30")
-			//    {
-			//    document.getElementById("mainFrame").src="client/ClientReceipt.html";
-			//    document.getElementById("dTitle").style.display="none";
-			//    }
-			//        else if(id=="hr31")
-			//    {
-			//    document.getElementById("mainFrame").src="client/ClientAudit.html";
-			//    document.getElementById("dTitle").style.display="none";
-			//    }
-			//        else if(id=="hr32")
-			//    {
-			//    document.getElementById("mainFrame").src="client/ClientManager.html";
-			//    document.getElementById("dTitle").style.display="none";
-			//    }
-			//     else if(id=="hr33")
-			//    {
-			//    document.getElementById("mainFrame").src="client/ClientLog.html";
-			//    document.getElementById("dTitle").style.display="none";
-			//    }
 			else if (id == "hr34") {
 				document.getElementById("mainFrame").src = "task/TaskResult.html";
 				document.getElementById("dTitle").style.display = "none";
@@ -206,12 +176,6 @@
 				document.getElementById("mainFrame").src = "product/ProductDetail.htm";
 				document.getElementById("dTitle").style.display = "none";
 			}
-			//     else if(id=="hr48")
-			//    {
-			//    document.getElementById("mainFrame").src="product/PurchaseView.htm";
-			//    document.getElementById("dTitle").style.display="none";
-			//    }
-
 			else if (id == "hr49") {
 				document.getElementById("mainFrame").src = "product/FavoritesView.htm";
 				document.getElementById("dTitle").style.display = "none";
@@ -219,16 +183,6 @@
 				document.getElementById("mainFrame").src = "product/ProductShowMange.htm";
 				document.getElementById("dTitle").style.display = "none";
 			}
-			//    else if(id=="hr43")
-			//    {
-			//    document.getElementById("mainFrame").src="product/ProductLine.html";
-			//    document.getElementById("dTitle").style.display="none";
-			//    }
-			//        else if(id=="hr46")
-			//    {
-			//    document.getElementById("mainFrame").src="product/productManage.html";
-			//    document.getElementById("dTitle").style.display="none";
-			//    }
 			else if (id == "hr497")//48
 			{
 				document.getElementById("mainFrame").src = "knowledge/Peixuzhiliao.htm";
@@ -324,7 +278,7 @@
 								onclick="changeIcon('HR')" target="mainFrame"
 								onmousedown="javascript:pr('xx1')"><span></span>
 									<p class="icon_01">用户管理</p> </a></li>
-							<li class="y_css" id="xx2"><a href="notice/NoticeClass.html"
+							<li class="y_css" id="xx2"><a href="clothes-manager.jsp"
 								onclick="changeIcon('Notice')" target="mainFrame"
 								onmousedown="javascript:pr('xx2')" onmouseover="show(2)"
 								onmouseout="hidden1(2)"><span></span>

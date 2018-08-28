@@ -38,8 +38,8 @@ public class OrderAction {
 	public String checkout(Model model ,HttpServletRequest request){
 		//假设用户
 		UserVO user= new UserVO();
-		user.setUname("wang123");
-		user.setUid(1);
+		user.setUname("黄彪");
+		user.setUid(3);
 //		user.setUname("qwe");
 //		user.setUid(2);
 		request.getSession().setAttribute("user", user);
@@ -164,8 +164,8 @@ public class OrderAction {
 		System.out.println("=====++");
 		//假设用户      查看订单请先登录
 		UserVO user= new UserVO();
-		user.setUname("wang123");
-		user.setUid(1);
+		user.setUname("黄彪");
+		user.setUid(3);
 //		user.setUname("qwe");
 //		user.setUid(2);
 		request.getSession().setAttribute("user", user);

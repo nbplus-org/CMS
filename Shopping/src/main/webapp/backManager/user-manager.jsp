@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>用户信息</title>
+<title>用户管理</title>
 <link rel="stylesheet" type="text/css" href="css/index.css">
 	<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
 	<script language="javascript" type="text/javascript">
@@ -71,8 +71,8 @@
 		<div class="mian_top_l"></div>
 		<div class="mian_top_c">
 			<ul>
-				<li><a href="user-messager.jsp">
-						<p>人员信息</p>
+				<li><a href="selectAllUser.do">
+						<p>用户管理</p>
 				</a></li>
 			</ul>
 		</div>
@@ -117,7 +117,7 @@
 						type="hidden" value="" />&nbsp;</td>
 					<td width="10%" class="mian_b_bg_lm"><span></span>用户编号</td>
 					<td width="10%" class="mian_b_bg_lm"><span></span>用户账号</td>
-					<td width="19%" class="mian_b_bg_lm"><span></span>密码</td>
+					<td width="17%" class="mian_b_bg_lm"><span></span>密码</td>
 					<td width="6%" class="mian_b_bg_lm"><span></span>性别</td>
 					<td width="10%" class="mian_b_bg_lm"><span></span>手机号</td>
 					<td width="12%" class="mian_b_bg_lm"><span></span>邮箱</td>
@@ -139,7 +139,11 @@
 						<td>${user.uemail }</td>
 						<td>${user.uintegral }</td>
 						<td>${user.ubirthday }</td>
-						<td class=""><a href="AddEmploylee.html">查看订单</a></td>
+						<td>
+						<div class="mian_b_icon_03">
+							<a href="AddProductView.html">查看订单</a>
+						</div>
+					</td>
 					</tr>
 				</c:forEach>
 			</table>
