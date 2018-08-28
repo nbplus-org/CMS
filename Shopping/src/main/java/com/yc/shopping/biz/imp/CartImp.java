@@ -184,4 +184,28 @@ public class CartImp implements CartInterface {
 		return cDao.findClothesId(clodetailid);
 	}
 
+	/**
+	 *  根据服装id查询颜色(去重)
+	 */
+	@Override
+	public List<ClothesDetailVO> findcolor(Integer clothesid) {
+		return cDao.findcolor(clothesid);
+	}
+
+	/**
+	 * 根据服装id查询尺码(去重)
+	 */
+	@Override
+	public List<ClothesDetailVO> findsize(Integer clothesid) {
+		return cDao.findsize(clothesid);
+	}
+
+	/**
+	 * 根据服装id查询照片(去重)
+	 */
+	@Override
+	public List<ClothesDetailVO> findclothespic(Integer clothesid) {
+		return cDao.findclothespic(clothesid);
+	}
+
 }

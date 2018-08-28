@@ -176,4 +176,28 @@ public interface CartDao {
 	 */
 	@Select("select *from clothdetailvo where clodetailid=#{clodetailid}")
 	ClothesDetailVO findClothesId(Integer clodetailid);
+	
+	/**
+	 * 根据服装id查询颜色(去重)
+	 * @param clothesid
+	 * @return
+	 */
+	@Select("select distinct clothescolour from clothdetailvo where  clothesid=#{clothesid}")
+	List<ClothesDetailVO> findcolor(Integer clothesid);
+	
+	/**
+	 * 根据服装id查询尺码(去重)
+	 * @param clothesid
+	 * @return
+	 */
+	@Select("select distinct clothessize from clothdetailvo where  clothesid=#{clothesid}")
+	List<ClothesDetailVO> findsize(Integer clothesid);
+	
+	/**
+	 * 根据服装id查询照片(去重)
+	 * @param clothesid
+	 * @return
+	 */
+	@Select("select distinct clothespic from clothdetailvo where clothesid=#{clothesid}")
+	List<ClothesDetailVO> findclothespic(Integer clothesid);
 }

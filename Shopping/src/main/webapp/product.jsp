@@ -46,6 +46,7 @@
 		<!-- modernizr JS -->
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
         
+        <script src="js/jquery-1.9.1.js"></script>
         <script type="text/javascript">
                 function ajax(){
                 	var str=$("#qty").val();
@@ -76,6 +77,14 @@
                 		alert("系统故障,请稍后再试");
                 	}
                 });
+                }
+                
+            
+                
+                function showPic(path)
+                {                
+                   document .getElementById ("bigPic").src=path;
+                   document .getElementById ("Pic").href=path;
                 }
            </script>    
     </head>
@@ -115,12 +124,12 @@
 				<div class="row">
 					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 						<div class="my_tabs">
-
+						 
 							<div class="tab-content tab_content_style">
 								<div id="tab1" class="tab-pane fade in active">
 
 									<div class="blog_tabs">
-										<a class="fancybox" href="upload/${p.clothespic }" data-fancybox-group="gallery" title="Lorem ipsum dolor sit amet"><img src="upload/a1.jpg" alt="" /></a>
+										<a class="fancybox" id="Pic" href="" data-fancybox-group="gallery"  title="Lorem ipsum dolor sit amet"><img src="upload/${clothespic[0].clothespic}" id="bigPic" alt="" /></a>
 									</div>
 			
 								</div>				
@@ -128,16 +137,16 @@
 							
 							<div class="blog_view_list">
 								<ul class="tab_style tab_bottom">
-						<c:forEach items="${clothesDetail}" var="p"> 
+                               <c:forEach items="${clothespic}" var="p"> 
 									<li class="active">
 										<div class="blog_single_carousel">
-										<a data-toggle="tab" href="#tab1"><img src="upload/${p.clothespic}" alt="" /></a>
+										<a data-toggle="tab" href="#tab1" ><img src="upload/${p.clothespic}" onclick="showPic(src)" id="smartPic"  alt="" /></a>
 										</div>
 									</li>
-								</c:forEach> 			
+							  </c:forEach> 	
 								</ul>
 							</div>
-					
+						 
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
@@ -178,8 +187,8 @@
 									<li>
 									<select id="color" name="color">
 										<option value="" id="color" name="color" selected="selected">-- Please Select --</option>
-										<c:forEach items="${clothesDetail}" var="o">
-										<option value="${o.clothescolour }">${o.clothescolour }</option>
+										<c:forEach items="${color}" var="o">
+										<option value="${o.clothescolour}">${o.clothescolour}</option>
 								        </c:forEach>
 									</select>
 									</li>
@@ -187,8 +196,8 @@
 									<li>
 									<select id="size" name="size">
 										<option value="" id="size" name="size" selected="selected">-- Please Select --</option>
-										<c:forEach items="${clothesDetail}" var="m">
-										<option value="${m.clothessize }">${m.clothessize }</option>
+										<c:forEach items="${size}" var="m">
+										<option value="${m.clothessize}">${m.clothessize }</option>
 										</c:forEach>
 									</select>
 									</li>

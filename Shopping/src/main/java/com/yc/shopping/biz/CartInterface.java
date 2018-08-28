@@ -155,4 +155,25 @@ public interface CartInterface {
 	 * @return
 	 */
 	public ClothesDetailVO findClothesId(Integer clodetailid);
+	
+	/**
+	 *  根据服装id查询颜色(去重)
+	 * @param clothesid
+	 * @return
+	 */
+	public 	List<ClothesDetailVO> findcolor(Integer clothesid);
+	
+	/**
+	 * 根据服装id查询尺码(去重)
+	 * @param clothesid
+	 * @return
+	 */
+	public List<ClothesDetailVO> findsize(Integer clothesid);
+	
+	/**
+	 * 根据服装id查询照片(去重)
+	 * @param clothesid
+	 * @return
+	 */
+	public List<ClothesDetailVO> findclothespic(Integer clothesid);
 }

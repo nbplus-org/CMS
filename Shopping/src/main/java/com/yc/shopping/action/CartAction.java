@@ -51,6 +51,14 @@ public class CartAction {
     	model.addAttribute("clothesDetail",list.getClosthesDetailVo());
     	System.out.println(list.getClosthesDetailVo().get(0).getClothespic());
     	
+    	List<ClothesDetailVO> color=cBiz.findcolor(clothesid);
+    	model.addAttribute("color", color);
+    	List<ClothesDetailVO> size=cBiz.findsize(clothesid);
+    	model.addAttribute("size", size);
+    	List<ClothesDetailVO> clothespic=cBiz.findclothespic(clothesid);
+    	model.addAttribute("clothespic", clothespic);
+    	System.out.println(clothespic);
+    			
 		List<ReviewVO> list4=rBiz.selectById(clothesid);
 		if(list4!=null){
 			System.out.println("评论表有数值");
@@ -267,6 +275,17 @@ public class CartAction {
     	ClothesDetailVO  clothDetailVO=cBiz.findClothesId(cartVO.getClodetailid());
     	ClothesVO list=cBiz.showById(clothDetailVO.getClothesid());
     	model.addAttribute("clothes", list);
+    	
+    	model.addAttribute("clothesDetail",list.getClosthesDetailVo());
+    	System.out.println(list.getClosthesDetailVo().get(0).getClothespic());
+    	
+    	List<ClothesDetailVO> color=cBiz.findcolor(clothDetailVO.getClothesid());
+    	model.addAttribute("color", color);
+    	List<ClothesDetailVO> size=cBiz.findsize(clothDetailVO.getClothesid());
+    	model.addAttribute("size", size);
+    	List<ClothesDetailVO> clothespic=cBiz.findclothespic(clothDetailVO.getClothesid());
+    	model.addAttribute("clothespic", clothespic);
+    	System.out.println(clothespic);
     	
 		List<ReviewVO> list4=rBiz.selectById(clothDetailVO.getClothesid());
 		if(list4!=null){
