@@ -183,7 +183,7 @@
 														</tr>
 														<tr>
 															<th>折后价</th>
-															<th id="price">￥${total*f*0.01 }</th>
+															<th id="price">￥${f==0?total:total*f*0.01 }</th>
 														</tr>
 													</table>
 												</div>
