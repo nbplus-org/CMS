@@ -333,7 +333,7 @@ public class UserAction {
 		model.addAttribute("currentPage", Integer.parseInt(page));
 		model.addAttribute("pageTimes", pageTimes);
 		model.addAttribute("allUser", allUser);
-		return "backManager/user-message";
+		return "backManager/user-manager";
 	}
 
 	/**
@@ -360,7 +360,7 @@ public class UserAction {
 			mypwd.sendMail(uimp.selectEmailByUid(ids[id]), pwd);
 		}
 
-		return "backManager/user-message";
+		return "backManager/user-manager";
 	}
 
 	/**
@@ -405,7 +405,7 @@ public class UserAction {
 		System.out.println("===============allUser==================" + allUser);
 		model.addAttribute("allUser", allUser);
 		System.out.println("===============model.addAttribute==================");
-		return "backManager/user-message";
+		return "backManager/user-manager";
 
 	}
 
@@ -457,7 +457,7 @@ public class UserAction {
 		model.addAttribute("pageTimes", pageTimes);
 		model.addAttribute("allUser", allUser);
 		System.out.println("====allUser.size()======="+allUser.size());
-		return "backManager/user-message";
+		return "backManager/user-manager";
 	}
 
 }
