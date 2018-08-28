@@ -1,23 +1,27 @@
 package com.yc.shopping.action;
 
-
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
+import java.util.Random;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.yc.shopping.biz.UserInterface;
 import com.yc.shopping.filter.BizException;
 import com.yc.shopping.utils.DataUtils;
 import com.yc.shopping.utils.Encrypt;
 import com.yc.shopping.utils.MyUtils;
+import com.yc.shopping.utils.MyUtilsPwd;
 import com.yc.shopping.vo.UserVO;
 
 /**
@@ -27,7 +31,7 @@ import com.yc.shopping.vo.UserVO;
  */
 @Controller("UserAction")
 public class UserAction {
-	
+
 	@Resource(name = "UserImp")
 	private UserInterface uimp;
 
@@ -49,7 +53,6 @@ public class UserAction {
 
 		user.setNickname(user.getUname());
 
-		System.out.println("===========user.getUsex()==================" + user.getUsex());
 		// 密码加密存入数据库
 		user.setUpwd(Encrypt.md5(user.getUpwd()));
 
@@ -80,7 +83,8 @@ public class UserAction {
 
 	/**
 	 * huang 忘记密码邮件发送
-	 * @throws IOException 
+	 * 
+	 * @throws IOException
 	 */
 	@RequestMapping("/semail.do")
 	public void emailSend(HttpServletResponse response, String name) {
@@ -94,25 +98,25 @@ public class UserAction {
 	}
 
 	@RequestMapping("email.do")
-	public void emailSend(HttpServletResponse response,  UserVO user,String email) throws IOException {
+	public void emailSend(HttpServletResponse response, UserVO user, String email) throws IOException {
 		MyUtils my = new MyUtils();
 		try {
-			UserVO u=uimp.findEmailByName(user);
-			if(email==null||"".equals(email)){
-				response.getWriter().print("2");//异常---请输入邮箱
-			}else{
-				//判断输入的邮箱和数据库的是否一致
-				if(email.equals(u.getUemail())){
-					//一致的话发送验证码
+			UserVO u = uimp.findEmailByName(user);
+			if (email == null || "".equals(email)) {
+				response.getWriter().print("2");// 异常---请输入邮箱
+			} else {
+				// 判断输入的邮箱和数据库的是否一致
+				if (email.equals(u.getUemail())) {
+					// 一致的话发送验证码
 					my.sendMail(u.getUemail());
-					response.getWriter().print("4");//发送验证码成功
-				}else{
-					response.getWriter().print("3");//异常---邮箱错误
+					response.getWriter().print("4");// 发送验证码成功
+				} else {
+					response.getWriter().print("3");// 异常---邮箱错误
 				}
-	
+
 			}
 		} catch (BizException e) {
-			response.getWriter().print("1");//异常该用户未注册
+			response.getWriter().print("1");// 异常该用户未注册
 		}
 	}
 
@@ -143,7 +147,8 @@ public class UserAction {
 	 */
 	@RequestMapping(value = "/judgeuName.do", method = RequestMethod.POST)
 	public void judgeuName(HttpServletResponse response, String uname) {
-		if (uimp.selectUserByUname(uname) == null) {
+		System.out.println("======uimp.selectUserByUname(uname)========" + uimp.selectUserByUname(uname).size());
+		if (uimp.selectUserByUname(uname).size() == 0) {
 			// 数据库无该用户名,可创建
 			try {
 				response.getWriter().print("用户名可用");
@@ -167,7 +172,7 @@ public class UserAction {
 	@RequestMapping(value = "/judgeuEmail.do", method = RequestMethod.POST)
 	public void judgeuEmail(HttpServletResponse response, String uemail) {
 
-		if (uimp.selectUserByUemail(uemail) == null) {
+		if (uimp.selectUserByUemail(uemail).size() == 0) {
 			// 数据库无该邮箱,可创建
 			try {
 				response.getWriter().print("邮箱可用");
@@ -237,7 +242,7 @@ public class UserAction {
 	/**
 	 * 判断电话号码是否已被注册 huang
 	 */
-	@RequestMapping(value="/judgeuPhone.do",method=RequestMethod.POST)
+	@RequestMapping(value = "/judgeuPhone.do", method = RequestMethod.POST)
 
 	public void judgeuPhone(HttpServletResponse response, String uphone) {
 		System.out.println("======手机号=======" + uphone);
@@ -266,13 +271,13 @@ public class UserAction {
 	}
 
 	/**
-	 * 
+	 * 登录
 	 * @param userVo
 	 * @param request
 	 * @param model
 	 * @return
 	 * @throws BizException
-	 *             liu
+	 *       liu
 	 */
 	@RequestMapping("/login.do")
 	public String login(UserVO userVo, HttpServletRequest request, Model model) throws BizException {
@@ -287,7 +292,7 @@ public class UserAction {
 			if (vcode.equalsIgnoreCase(vscode)) {
 				model.addAttribute("userVo", userVo);
 				request.getSession().setAttribute("UserVO", userVo);
-				return "index";
+				return "redirect:show.do";
 			} else {
 				model.addAttribute("msgcode", "验证码错误!");
 
@@ -297,6 +302,162 @@ public class UserAction {
 			model.addAttribute("msg", "用户名或密码错误!");
 			return "reglogin";
 		}
+	}
+
+	/**
+	 * 查所有用户huang
+	 * 
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/backManager/selectAllUser.do")
+	public String selectAllUser(Model model, @Param("page") String page) {
+		// 每条页面显示数据条数pageSize
+		int pageSize = 5;
+		// 初始化默认为第一页
+		if (page == null) {
+			page = "1";
+		}
+		// 从第几条开始
+		int startPage = (Integer.parseInt(page) - 1) * pageSize;
+		List<UserVO> allUser = uimp.selectAllUser(startPage, pageSize);
+
+		// 查询总页数
+		int count = uimp.selectCount();
+		int pageTimes;
+		if (count % pageSize == 0) {
+			pageTimes = count / pageSize;
+		} else {
+			pageTimes = count / pageSize + 1;
+		}
+		model.addAttribute("currentPage", Integer.parseInt(page));
+		model.addAttribute("pageTimes", pageTimes);
+		model.addAttribute("allUser", allUser);
+		return "backManager/user-message";
+	}
+
+	/**
+	 * 给某些用户重置密码-huang
+	 * 
+	 * @return
+	 */
+	@RequestMapping("/backManager/resetPwd.do")
+	public String deleteUser(@RequestParam("ids") Object[] ids, Model model, HttpServletResponse response) {
+
+		// 随机生成6位数的密码存入数据库并md5加密
+		Random r = new Random();
+		MyUtilsPwd mypwd = new MyUtilsPwd();
+
+		for (int id = 0; id < ids.length; id++) {
+			String pwd = "";
+			for (int i = 0; i < 6; i++) {
+				pwd += r.nextInt(10);
+			}
+			String md5Pwd = Encrypt.md5(pwd);
+			// 通过id重置密码
+			uimp.resetPwd(ids[id], md5Pwd);
+			// 发送邮件的密码不能是加密的
+			mypwd.sendMail(uimp.selectEmailByUid(ids[id]), pwd);
+		}
+
+		return "backManager/user-message";
+	}
+
+	/**
+	 * 普通查询用户（后台）huang
+	 * 
+	 * @param keyWord
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/backManager/commonSearch.do")
+	public String commonSearch(String keyWord, Model model, @Param("page") String page) {
+
+		// 每条页面显示数据条数pageSize
+		int pageSize = 5;
+		// 初始化默认为第一页
+		if (page == null) {
+			page = "1";
+		}
+		// 从第几条开始
+		int startPage = (Integer.parseInt(page) - 1) * pageSize;
+
+		List<UserVO> allUser = uimp.commonSelect(keyWord, startPage, pageSize);
+
+		// 查询总页数
+		int count = uimp.selectCountCommon(keyWord);
+		int pageTimes;
+		if (count % pageSize == 0) {
+			pageTimes = count / pageSize;
+		} else {
+			pageTimes = count / pageSize + 1;
+		}
+		model.addAttribute("currentPage", Integer.parseInt(page));
+		model.addAttribute("pageTimes", pageTimes);
+		model.addAttribute("allUser", allUser);
+
+		if ("男".equals(keyWord)) {
+			keyWord = "1";
+		} else if ("女".equals(keyWord)) {
+			keyWord = "0";
+		}
+		System.out.println("======keyWord=====" + keyWord);
+		System.out.println("===============allUser==================" + allUser);
+		model.addAttribute("allUser", allUser);
+		System.out.println("===============model.addAttribute==================");
+		return "backManager/user-message";
+
+	}
+
+	/**
+	 * 高级搜索（后台） huang
+	 * 
+	 * @param keyWord
+	 * @param model
+	 * @return var usexTop=$("#usexTop").val(); var
+	 *         unameTop=$("#unameTop").val(); var
+	 *         uemailTop=$("#uemailTop").val(); var
+	 *         uphoneTop=$("#uphoneTop").val();
+	 */
+	@RequestMapping(value = "/backManager/topSearch.do")
+	public String topSearch(UserVO user, Model model, @Param("page") String page) {
+
+		if ("女".equals(user.getUsex())) {
+			user.setUsex("0");
+		} else {
+			user.setUsex("1");
+		}
+		if (user.getUemail() == null || user.getUemail() == "") {
+			user.setUemail("@");
+		}
+		if (user.getUphone() == null || user.getUphone() == "") {
+			user.setUphone("1");
+		}
+
+		// 每条页面显示数据条数pageSize
+		int pageSize = 5;
+		// 初始化默认为第一页
+		if (page == null) {
+			page = "1";
+		}
+		// 从第几条开始
+		int startPage = (Integer.parseInt(page) - 1) * pageSize;
+
+		List<UserVO> allUser = uimp.topSelect(user, startPage, pageSize);
+
+		// 查询总页数
+		int count = uimp.selectCountTop(user);
+		int pageTimes;
+		if (count % pageSize == 0) {
+			pageTimes = count / pageSize;
+		} else {
+			pageTimes = count / pageSize + 1;
+		}
+		model.addAttribute("currentPage", Integer.parseInt(page));
+		model.addAttribute("pageTimes", pageTimes);
+		model.addAttribute("allUser", allUser);
+		System.out.println("====allUser.size()======="+allUser.size());
+		return "backManager/user-message";
 	}
 
 }

@@ -45,6 +45,39 @@
         <link rel="stylesheet" href="css/responsive.css">
 		<!-- modernizr JS -->
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+        
+        <script type="text/javascript">
+                function ajax(){
+                	var str=$("#qty").val();
+                	var color=$("#color").val();
+                	var size=$("#size").val();
+                	var clothesid=$("#clothesid").val();
+                	var data={
+                			qty:str,
+                			color:color,
+                			size:size,
+                	};
+                $.post("checkNum.do?clothesid="+clothesid,
+                	data,
+                	function(data){
+                	$("#check").html("");
+                	if(data==0){
+                		alert("成功添加到购物车");
+                	}else if(data==1){
+                		$("#check").html("请填写完整的信息");
+                		$("#check").css("color", "red");
+                	}else if(data==2){
+                		$("#check").html("此类型商品现已缺货,请选择其他商品");
+                		$("#check").css("color", "red");
+                	}else if(data==3){
+                		$("#check").html("您选择的商品库存不足");
+                		$("#check").css("color", "red");
+                	}else if(data==4){
+                		alert("系统故障,请稍后再试");
+                	}
+                });
+                }
+           </script>    
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -84,60 +117,30 @@
 						<div class="my_tabs">
 							<div class="tab-content tab_content_style">
 								<div id="tab1" class="tab-pane fade in active">
+								<c:forEach items="${fiestPic }" var="f">
 									<div class="blog_tabs">
-										<a class="fancybox" href="img/product/blog-big-1.jpg" data-fancybox-group="gallery" title="Lorem ipsum dolor sit amet"><img src="img/product/blog-big-1.jpg" alt="" /></a>
+										<a class="fancybox" href="upload/${fiestPic }" data-fancybox-group="gallery" title="Lorem ipsum dolor sit amet"><img src="upload/${fiestPic }" alt="" /></a>
 									</div>
-								</div>
-								<div id="tab2" class="tab-pane fade">
-									<div class="blog_tabs">
-										<a class="fancybox" href="img/product/blog-big-2.jpg" data-fancybox-group="gallery" title="Lorem ipsum dolor sit amet"><img src="img/product/blog-big-2.jpg" alt="" /></a>
-									</div>
-								</div>
-								<div id="tab3" class="tab-pane fade">
-									<div class="blog_tabs">
-										<a class="fancybox" href="img/product/blog-big-3.jpg" data-fancybox-group="gallery" title="Lorem ipsum dolor sit amet"><img src="img/product/blog-big-3.jpg" alt="" /></a>
-									</div>
-								</div>
-								<div id="tab4" class="tab-pane fade">
-									<div class="blog_tabs">
-										<a class="fancybox" href="img/product/blog-big-4.jpg" data-fancybox-group="gallery" title="Lorem ipsum dolor sit amet"><img src="img/product/blog-big-4.jpg" alt="" /></a>
-									</div>
-								</div>
-								<div id="tab5" class="tab-pane fade">
-									<div class="blog_tabs">
-										<a class="fancybox" href="img/product/blog-big-5.jpg" data-fancybox-group="gallery" title="Lorem ipsum dolor sit amet"><img src="img/product/blog-big-5.jpg" alt="" /></a>
-									</div>
-								</div>
+								</c:forEach>
+								</div>				
 							</div>
+							
 							<div class="blog_view_list">
 								<ul class="tab_style tab_bottom">
+								<c:forEach items="${clothesDetail}" var="p"> 
 									<li class="active">
 										<div class="blog_single_carousel">
-										<a data-toggle="tab" href="#tab1"><img src="img/product/blog-big-1.jpg" alt="" /></a>
+										<a data-toggle="tab" href="#tab1"><img src="upload/${p.clothespic}" alt="" /></a>
 										</div>
 									</li>
-									<li>
-										<div class="blog_single_carousel">
-										<a data-toggle="tab" href="#tab2"><img src="img/product/blog-big-2.jpg" alt="" /></a>
-										</div>
-									</li>
-									<li>
-										<div class="blog_single_carousel">
-										<a data-toggle="tab" href="#tab3"><img src="img/product/blog-big-3.jpg" alt="" /></a>
-										</div>
-									</li>
-									<li>
-										<div class="blog_single_carousel">
-										<a data-toggle="tab" href="#tab4"><img src="img/product/blog-big-4.jpg" alt="" /></a>
-										</div>
-									</li>
+								</c:forEach> 						
 								</ul>
 							</div>
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 						<div class="blog_product_details">
-							<h2 class="blog_heading"><a href="">Lorem ipsum dolor</a></h2>
+							<h2 class="blog_heading"><a href="">${clothes.clothesname}</a></h2>
 							<div class="product_rating">
 								<i class="fa fa-star"></i>
 								<i class="fa fa-star"></i>
@@ -151,8 +154,8 @@
 							</div>
 							<div class="pricing_rate">
 								<p class="stack">Availability:<span class="in-stock"> In stock</span></p>
-								<p class="rating_dollor rating_margin"><span class="rating_value_one dollor_size">$170.00</span> <span class="rating_value_two">$150.00</span></p>
-								<p class="blog_texts">Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus malesuada tincidunt. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer enim purus, posuere at ultricies eu, placerat a felis. Suspendisse aliquet urna pretium eros convallis interdum. Quisque in arcu id dui vulputate mollis eget non arcu. Aenean et nulla purus. Mauris vel tellus non nunc mattis lobortis.</p>
+								<p class="rating_dollor rating_margin"><span class="rating_value_one dollor_size">￥${clothes.clothesorigprice}</span> <span class="rating_value_two">￥${clothes.clothesprice}</span></p>
+								<p class="blog_texts">${clothes.clothesintroduce}</p>
 							</div>
 							<div class="product_blog_button ">
 								<div class="cart_blog_details blog_icon_border">
@@ -171,28 +174,31 @@
 								<ul id="options_selection">
 									<li><span class="star_color">*</span><span class="Product_color">color</span> <span class="required">*Required Fields</span></li>
 									<li>
-									<select>
-										<option value="" selected="selected">-- Please Select --</option>
-										<option value="">black +$2.00</option>
-										<option value="">blue +$1.00</option>
-										<option value="">yellow +$1.00</option>
+									<select id="color" name="color">
+										<option value="" id="color" name="color" selected="selected">-- Please Select --</option>
+										<c:forEach items="${clothesDetail}" var="o">
+										<option value="${o.clothescolour }">${o.clothescolour }</option>
+								        </c:forEach>
 									</select>
 									</li>
 									<li><span class="star_color">*</span><span class="Product_color">size</span></li>
 									<li>
-									<select>
-										<option value="" selected="selected">-- Please Select --</option>
-										<option value="">L +$2.00</option>
-										<option value="">M +$1.00</option>
+									<select id="size" name="size">
+										<option value="" id="size" name="size" selected="selected">-- Please Select --</option>
+										<c:forEach items="${clothesDetail}" var="m">
+										<option value="${m.clothessize }">${m.clothessize }</option>
+										</c:forEach>
 									</select>
 									</li>
 								</ul>
 							</div>
 							<div class="cart_blog_item">
-								<p class="rating_dollor rating_margin"><span class="rating_value_one dollor_size">$170.00</span> <span class="rating_value_two">$150.00</span></p>
+								<p class="rating_dollor rating_margin"><span class="rating_value_one dollor_size">￥${clothes.clothesorigprice}</span> <span class="rating_value_two">￥${clothes.clothesprice}</span></p>
 								<div class="add-to-cart">
-									<input type="text" title="Qty" value="1" class="qty"/>
-									<button type="button" title="Add to Cart"  class="cart_button"><span>Add to Cart</span></button>
+									<input type="text" title="Qty" name="qty" id="qty" class="qty"/>
+									<button type="button" title="Add to Cart" onclick="ajax()" class="cart_button"><span>Add to Cart</span></button>
+									<span id="check"></span> <input type="hidden" name="clothesid"
+										id="clothesid" value="${clothes.clothesid }" />
 								</div>
 							</div>
 						</div>
@@ -212,120 +218,68 @@
 									<a data-toggle="tab" href="#tab-1">产品描述</a>
 								</li>
 								<li>
-									<a data-toggle="tab" href="#tab-2">评论</a>
+									<a data-toggle="tab" href="#tab-2">产品标签</a>
 								</li>
 								<li>
-									<a data-toggle="tab" href="#tab-3">产品标签</a>
+									<a data-toggle="tab" href="#tab-3">评论</a>
 								</li>
 							</ul>
 							<div class="tab-content tab_content_style">
 								<div id="tab-1" class="tab-pane fade in active">
 									<div class="product_description">
-										<p>Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus malesuada tincidunt. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer enim purus, posuere at ultricies eu, placerat a felis. Suspendisse aliquet urna pretium eros convallis interdum. Quisque in arcu id dui vulputate mollis eget non arcu. Aenean et nulla purus. Mauris vel tellus non nunc mattis lobortis. </p>
+										<p>${clothes.clothesintroduce}</p>
 									</div>
 								</div>
-								<div id="tab-2" class="tab-pane fade">
+                                <div id="tab-2" class="tab-pane fade">
 									<div class="product_description">
-										<ul id="Motorola">
-											<li><a href="#">Motorola</a> Review by <span class="Motorola_cl">Motorola</span></li>
-											<li><span>质量</span> 
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-											</li>
-											<li><span>价格</span>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-											</li>
-											<li><span>价值</span>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-											</li>
-											<li>摩托罗拉（11/2/2015发布）</li>
-										</ul>
-										<div class="fieldsets">
-											<h3>正在浏览: <span>Lorem ipsum dolor</span></h3>
-											<h4>请做出你的评价?*</h4>
-											<div class="start_tab_pricing_area">
-												<fieldset>
-													<table class="star_pricing_tb">
-														<tr>
-															<th></th>
-															<th>1 星</th>
-															<th>2 星</th>
-															<th>3 星</th>
-															<th>4 星</th>
-															<th>5 星</th>
-														</tr>
-														<tr>
-															<td>质量</td>
-															<td><input type="radio" name="ratings[1]" value="1" class="radio"></td>
-															<td><input type="radio" name="ratings[1]" value="2" class="radio"></td>
-															<td><input type="radio" name="ratings[1]" value="3" class="radio"></td>
-															<td><input type="radio" name="ratings[1]" value="4" class="radio"></td>
-															<td><input type="radio" name="ratings[1]" value="5" class="radio"></td>
-														</tr>
-														<tr>
-															<td>价格</td>
-															<td><input type="radio" name="ratings[2]" value="6" class="radio"></td>
-															<td><input type="radio" name="ratings[2]" value="7" class="radio"></td>
-															<td><input type="radio" name="ratings[2]" value="8" class="radio"></td>
-															<td><input type="radio" name="ratings[2]" value="9" class="radio"></td>
-															<td><input type="radio" name="ratings[2]" value="10" class="radio"></td>
-														</tr>
-														<tr>
-															<td>价值</td>
-															<td><input type="radio" name="ratings[3]" value="11" class="radio"></td>
-															<td><input type="radio" name="ratings[3]" value="12" class="radio"></td>
-															<td><input type="radio" name="ratings[3]" value="13" class="radio"></td>
-															<td><input type="radio" name="ratings[3]" value="14" class="radio"></td>
-															<td><input type="radio" name="ratings[3]" value="15" class="radio"></td>
-														</tr>
-													</table>
-												</fieldset>
-											</div>
-											
-											<div class="rating_contact">
-												<ul id="review_contact">
-													<li>绰号<span>*</span></li>
-													<li><input type="text" name="nickname" class="input-text required-entry" value=""></li>
-													<li>总结你的评论<span>*</span></li>
-													<li><input type="text" name="nickname" class="input-text required-entry" value=""></li>
-													<li>评论<span>*</span></li>
-													<li><textarea name="detail" cols="5" rows="3" class="required-entry"></textarea></li>
-												</ul>
-											</div>
-											<div class="review_button">
-												<button type="submit" title="Submit Review" class="button">Submit Review</button>
-											</div>
+										<div class="product_tag_area">
+											<h2 style="FONT-SIZE: 20px">现有标签:</h2>
+											<ul id="product_tags">
+												<li><a style="color: blue" href="#">${clothes.clothestype }</a>
+													<span>(1)</span></li>
+												<li><a style="color: blue" href="#">${clothes.clothesbigtag }</a>
+													<span>(1)</span></li>
+												<li><a style="color: blue" href="#">${clothes.clothesbrand}</a>
+													<span>(1)</span></li>
+											</ul>
 										</div>
 									</div>
 								</div>
 								<div id="tab-3" class="tab-pane fade">
 									<div class="product_description">
-										<div class="product_tag_area">
-											<h2>Other people marked this product with these tags:</h2>
-											<ul id="product_tags">
-												<li><a href="#">fashion</a> <span>(1)</span></li>
-												<li><a href="#">Nunc</a> <span>(1)</span></li>
-												<li><a href="#">facilisis</a> <span>(1)</span></li>
-											</ul>
-											<div class="add_tags">
-												<h2>Add Your Tags:</h2>
-												<input type="text" name="nickname" class="input-text required-entry" value="">
+										<ul id="Motorola">
+											<li><a href="#">${clothes.clothesname }</a> 回顾 <span
+												class="Motorola_cl">${clothes.clothesname }</span></li>
+											<li><span>质量</span> <i class="fa fa-star"></i> <i
+												class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+												class="fa fa-star"></i> <i class="fa fa-star"></i></li>
+											<li><span>价格</span> <i class="fa fa-star"></i> <i
+												class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+												class="fa fa-star"></i> <i class="fa fa-star"></i></li>
+											<li><span>价值</span> <i class="fa fa-star"></i> <i
+												class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+												class="fa fa-star"></i> <i class="fa fa-star"></i></li>
+											<li>${clothes.clothesname }（11/2/2015发布）</li>
+										</ul>
+										<c:forEach items="${list4}" var="r">
+											<div class="product_tag_area">
+												<h2 style="Font-Size: 20px">${r.state}</h2>
+												<ul id="product_tags">
+													<li style="color: blue"><span>服装名称:${s.clothesname}</span></li>
+												</ul>
+												<div class="add_tags">
+													<h2>评论:</h2>
+												</div>
+												<div>
+													<p>${r.reviewstr }</p>
+												</div>
+												<div>
+													<a><img src="upload/${r.reviewpic}" width="200px"
+														height="200px" alt="" /></a>
+												</div>
 											</div>
-											<div class="review_button product_tag_add">
-												<button type="submit" title="Submit Review" class="button">Add Tags</button>
-											</div>
-										</div>
+											<hr>
+										</c:forEach>
 									</div>
 								</div>
 							</div>
@@ -334,6 +288,7 @@
 				</div>
 			</div>
 		</div>
+	
 		<!-- End Product details tabs area -->
 		<!-- Start upsell products area -->
 		<div class="upsell_products">

@@ -32,6 +32,19 @@ public class ClothesVO {
 
 	private Double clothesprice;// 服装现价
 
+	private List<ClothesDetailVO> closthesDetailVo;//服装详情属性
+	
+	
+	
+	
+	public List<ClothesDetailVO> getClosthesDetailVo() {
+		return closthesDetailVo;
+	}
+
+	public void setClosthesDetailVo(List<ClothesDetailVO> closthesDetailVo) {
+		this.closthesDetailVo = closthesDetailVo;
+	}
+
 	public Integer getClothesid() {
 		return clothesid;
 	}

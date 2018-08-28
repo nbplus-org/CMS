@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib uri="/WEB-INF/mytld.tld" prefix="mt" %>
   <!-- 顶部和菜单区域 -->  
   <!--Start Header Top area -->
 		<div class="header_area_top"> 
@@ -37,8 +38,8 @@
 										<div class="account_single_item">
 											
 											<ul id="account_single_nav_3">
-												<li><a href="">我的账户</a></li>
-												<li><a href="#">我的购物车</a></li>
+												<li><a href="reglogin.jsp">我的账户</a></li>
+												<li><a href="showCart.do">我的购物车</a></li>
 												<li><a href="#">结账</a></li>
 												<li><a href="#">退出</a></li>
 											</ul>
@@ -48,7 +49,7 @@
 										
 									</div>
 								</li>
-								<li><a href="cart.jsp"><i class="fa fa-shopping-cart"></i>购物车 <span class="cart_zero">2</span></a>
+								<li><a href="showCart.do"><i class="fa fa-shopping-cart"></i>购物车 <span class="cart_zero">2</span></a>
 									<div class="cart_down_area">
 										<div class="cart_single">
 											<a href="#"><img src="img/cart/cart-1.jpg" alt="" /></a>
@@ -81,7 +82,7 @@
 						<div class="main_menu">
 							<ul id="nav_menu" class="active_cl">
 							
-								<li><a href="index.jsp"><span class="Home">主页</span></a>
+								<li><a href="show.do"><span class="Home">主页</span></a>
 								</li>
 								
 								<li><a href="shop.jsp"><span class="Clothings">分类</span></a>
@@ -149,8 +150,8 @@
 								</li>
 								<li><a href="shop.jsp"><span class="Accessaries">帮助</span></a>
 									<div class="home_mega_menu">
-										<a href="about-us.jsp">我的账户</a>
-										<a href="contact.jsp">购物车</a>
+										<a href="reglogin.jsp">我的账户</a>
+										<a href="showCart.do">购物车</a>
 										<a href="cart.jsp">联系我们</a>
 										<a href="my-account.jsp">关于我们</a>
 									</div>
@@ -213,8 +214,8 @@
 										
 										<li><a href="about-us.jsp">帮助</a>
 											<ul>										
-												<li><a href="about-us.jsp">我的账户</a></li>
-												<li><a href="contact.jsp">购物车</a></li>
+												<li><a href="reglogin.jsp">我的账户</a></li>
+												<li><a href="showCart.do">购物车</a></li>
 												<li><a href="contact.jsp">关于我们</a></li>
 												<li><a href="contact.jsp">联系我们</a></li>
 											</ul>

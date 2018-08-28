@@ -45,6 +45,109 @@
         <link rel="stylesheet" href="css/responsive.css">
 		<!-- modernizr JS ============================================ -->
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+        
+                <script src="js/jquery-1.9.1.js"></script>
+        <script type="text/javascript">
+        function changeNum(sign,id){
+           var cartid="cartid"+id;
+           var num="num"+id;
+           var clothesprice="price"+id;
+           $.post("changeNum.do?num="+sign,
+        		   {
+        	       cartid:$("#"+cartid).html(),
+        	       cnum:$("#"+num).html(),
+        	       clothesprice:$("#"+clothesprice).html(),
+        		   },function(data){
+        			   var d=eval('('+data+')');
+        			   if(d.num==0){
+        				   $("#tr"+id).remove();
+        			   }else{
+        				   $("#"+num).html(d.num);
+        				   $("#pri"+id).html(d.totalprice);
+        			   }
+        			   queryNum();
+        		   });
+           }
+        
+        
+        function queryNum(){
+			var total_num=0;
+			var total_price=0;
+			$(".selectBox").each(function(){
+				if($(this).is(":checked")){
+					var num=parseInt($(this).parents(".order_list").find(".order_num").html()); 
+					var price=parseFloat($(this).parents(".order_list").find(".order_price").text());
+					total_num+=num;
+					total_price+=price;
+				}
+			});
+			$(".total_num").html(total_num);
+			$(".total_Aprice").html(total_price);
+        }
+        
+        $(function(){
+        var is;	
+		$("#selectAllBox").change(function() {
+			var flag = $(this).is(":checked");
+			if (flag) {
+				var idStr = [];
+				$(".selectBox").each(function() {
+					$(this).prop("checked", true);
+					idStr.push($(this).val() + ",");
+				});
+			} else {
+				$(".selectBox").each(function() {
+					$(this).removeAttr("checked", false);
+				});
+			}
+			is = idStr;
+			queryNum();
+		});
+
+    	$(".selectBox").change(function() {
+			var idStr = [];
+			$(".selectBox").each(function() {
+				if ($(this).is(":checked")) {
+					idStr.push($(this).val() + ",");
+				} else {
+					$("#selectAllBox").prop("checked", false);
+				}
+			});
+			var lengthSelected = $(".selectBox:checked").length;
+			var length = $(".selectBox").length;
+			if (lengthSelected == length) {
+				$("#selectAllBox").prop("checked", true);
+			}
+			is = idStr;
+			queryNum();
+		});
+    }); 
+        
+		function make() {
+			if (is == null || is.length <= 0 || is == "") {
+				alert("至少选择一件商品哦!");
+				return;
+			} else {
+				$("#makeOrder").attr("href",'CartToOrder.do?cartid='+is);
+			}
+		}
+		
+        function Delete(sign,id){
+        	var cartid="cartid"+id;
+        	$.post("deleteOne.do?num="+sign,
+        		{
+        		 cartid:$("#"+cartid).html(),
+        		}
+        		,function(data){
+        		var d=eval('('+data+')');
+        		if(d.end==null){
+        			$("#tr"+id).remove();
+        		}else{
+        			alert("删除失败");
+        		}
+        	});
+        }
+        </script>
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -67,32 +170,40 @@
 						<div class="shopping-cart-table">
 							<table class="cart_items">
 								<tr>
-									<th>删除</th>
+									<th height="22" width="100">
+								    <div align="CENTER">
+										<input type="checkbox" id="selectAllBox"onclick="checkAllBoxBlur()" />
+										<font color="#000000">全选</font>
+									</div>
+									</th>
+									<th height="22" width="120">购物车编号</th>
 									<th>样图</th>
-									<th>产品名字</th>
-									<th>编辑</th>
+									<th height="22" width="120">产品名字</th>
+									<th>颜色</th>
+									<th height="22" width="80">尺寸</th>
 									<th>单价</th>
-									<th>数量</th>
+									<th width="120">数量</th>
 									<th>小计</th>
+									<th>删除</th>
 								</tr>
-								<tr>
-									<td><a href="#"><img src="img/arrow/btn_trash.gif" alt="" /></a></td>
-									<td><a href="#"><img src="img/product/shop-cart-1.jpg" alt="" /></a></td>
-									<td><a href="#">Pellentesque hendrerit</a></td>
-									<td><a href="#">Edit</a></td>
-									<td>$800.00</td>
-									<td><input name="cart[390][qty]" value="1" size="4" title="Qty" class="input-text qty" maxlength="12"></td>
-									<td>$800.00</td>
+							<c:forEach items="${list}" var="c" varStatus="status">
+								<tr id="tr${status.count }" class="order_list">
+								    <td><div><input type="checkbox" class="selectBox" value="${c.cartid}"/></div></td>
+								    <td id="cartid${status.count }">${c.cartid}</td>
+									<td><a href="#"><img src="upload/${c.clothespic}" width="100px" height="100px" alt="" /></a></td>
+									<td><a href="#">${c.clothesname}</a></td>
+									<td>${c.clothescolour }</td>
+									<td>${c.clothessize }</td>
+									<td>$<strong id="price${status.count }">${c.clothesprice }</strong></td>
+									<td><a href="javascript:void(0);" onclick="changeNum('reduce',${status.count})"
+									style="color: blue">-</a> <span class="order_num" id="num${status.count }">${c.cnum}</span>
+									<a href="javascript:void(0);" onclick="changeNum('add',${status.count})"
+							        style="color: blue">+</a> 
+							        </td>
+									<td >$<strong class="order_price" id="pri${status.count }">${c.clothesprice*c.cnum }</strong></td>
+									<td><a href="#"><img src="img/arrow/btn_trash.gif" onclick="Delete('delete',${status.count})" alt="" /></a></td> 
 								</tr>
-								<tr>
-									<td><a href="#"><img src="img/arrow/btn_trash.gif" alt="" /></a></td>
-									<td><a href="#"><img src="img/product/shop-cart-1.jpg" alt="" /></a></td>
-									<td><a href="#">Pellentesque hendrerit</a></td>
-									<td><a href="#">Edit</a></td>
-									<td>$800.00</td>
-									<td><input name="cart[390][qty]" value="1" size="4" title="Qty" class="input-text qty" maxlength="12"></td>
-									<td>$800.00</td>
-								</tr>
+							</c:forEach> 
 							</table>
 						</div>
 					</div>
@@ -101,13 +212,13 @@
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="shopping_cart_main">
 							<div class="shopping_button">
-								<button type="button" title="shop"  class="continue_shopping">继续购物</button>
+								<a href="show.do"><button type="button" title="shop"  class="continue_shopping">继续购物</button></a>
 							</div>
 							<div class="shopping_button">
-								<button type="button" title="shop"  class="continue_shopping">清空购物车</button>
+								<a href="deleteAll.do"><button type="button" title="shop"  class="continue_shopping">清空购物车</button></a>
 							</div>
 							<div class="shopping_button">
-								<button type="button" title="shop"  class="continue_shopping">更新购物车</button>
+								<a href="showCart.do"><button type="button" title="shop"  class="continue_shopping">更新购物车</button></a>
 							</div>
 						</div>
 					</div>
@@ -120,69 +231,26 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-						<div class="shopping_details_des">
-							<h2>估计运费</h2>
-							<h3>进入目的地获得运输和税收.</h3>
-							<div class="shopping_form">
-								<h4>国家<span>*</span></h4>
-								<select name="country_id" id="country" class="validate-select" title="Country">
-									<option value="AF">Afghanistan</option>
-									<option value="AX">脜land Islands</option>
-									<option value="AL">Albania</option>
-									<option value="DZ">Algeria</option>
-								</select>
-								
-								<h4>国家省</h4>
-								<select id="region_id" name="region_id" title="State/Province" class="required-entry validate-select">
-									<option value="">Please select region, state or province</option>
-									<option value="1">Alabama</option>
-									<option value="2">Alaska</option>
-									<option value="3">American Samoa</option>
-									<option value="4">Arizona</option>
-									<option value="5">Arkansas</option>
-									<option value="6">Armed Forces Africa</option>
-									<option value="7">Armed Forces Americas</option>
-									<option value="8">Armed Forces Canada</option>
-									<option value="9">Armed Forces Europe</option>
-									<option value="10">Armed Forces Middle East</option>
-									<option value="11">Armed Forces Pacific</option>
-								</select>
-								<h4>邮政编码</h4>
-								<input class="input-text validate-postcode" type="text" name="estimate_postcode" value="">
-								<div class="review_button product_tag_add">
-									<button type="submit" title="Submit Review" class="button">得到报价</button>
-								</div>
-							</div>
-						</div>
+						
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-						<div class="shopping_details_des">
-							<h2>贴现码</h2>
-							<h3>输入优惠券代码，如果你有一个.</h3>
-							<div class="shopping_form">
-								<input class="input-text validate-postcode" type="text" name="estimate_postcode" value="">
-								<div class="review_button product_tag_add">
-									<button type="submit" title="Submit Review" class="button">使用优惠卷</button>
-								</div>
-							</div>
-						</div>
+
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 						<div class="total_price">
 							<table class="total_rate">
 								<tr>
-									<td>小计</td>
-									<td>$800.00</td>
+									<td>已选商品</td>
+									<td><strong class="total_num">0</strong>件</td>
 								</tr>
 								<tr>
-									<th>Grand Total</th>
-									<th>$800.00</th>
+									<th>总&nbsp;价</th>
+									<th>$<strong class="total_Aprice">0</strong></th>
 								</tr>
 							</table>
 						</div>
 						<div class="check_out_simble review_button ">
-							<button type="submit" title="Submit Review" class="button">结账</button>
-							<h2><a href="">多地址结账</a></h2>
+							<button type="submit" title="Submit Review" onclick="make()" id="makeOrder" class="button">结账</button>
 						</div>
 					</div>
 				</div>

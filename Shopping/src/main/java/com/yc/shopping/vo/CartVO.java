@@ -14,7 +14,7 @@ public class CartVO {
 
 	private Integer clodetailid;// 服装详情编号-------外键
 
-	private Integer cnum;
+	private Integer cnum;//数量
 	
 	public Integer getCartid() {
 		return cartid;
