@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>无标题页</title>
+<title>进货</title>
 <link rel="stylesheet" type="text/css" href="css/index.css" />
 <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
 
@@ -18,25 +18,7 @@
 		<div class="mian_top_c">
 			<ul>
 				<li><a href="LineManage.htm">
-						<p>产品系列管理</p>
-				</a></li>
-				<li><a href="StyleView.htm">
-						<p>产品风格管理</p>
-				</a></li>
-				<li><a href="SpecificationView.htm">
-						<p>产品规格管理</p>
-				</a></li>
-				<li><a href="productManage.html">
-						<p>产品管理</p>
-				</a></li>
-				<li><a href="ProductDetail.htm">
-						<p>产品查看</p>
-				</a></li>
-				<li><a href="FavoritesView.htm">
-						<p>个人收藏夹查看</p>
-				</a></li>
-				<li><a href="ProductShowMange.htm">
-						<p>产品展示管理</p>
+						<p>进货</p>
 				</a></li>
 			</ul>
 		</div>
