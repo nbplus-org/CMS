@@ -122,13 +122,6 @@ public class UserImp implements UserInterface {
 		return uDao.resetPwd(uid, pwd);
 	}
 
-	/**
-	 * 通过关键字分页查询用户 huang
-	 */
-	@Override
-	public List<UserVO> commonSelect(String keyWord,int startPage,int pageSize) {
-		return uDao.commonSelect(keyWord, startPage, pageSize);
-	}
 
 	/**
 	 * 通过用户id查电话号 huang(后台)
@@ -163,13 +156,6 @@ public class UserImp implements UserInterface {
 		return uDao.selectCount();
 	}
 
-	/**
-	 * 普通用户分页查询 huang(后台)
-	 */
-	@Override
-	public int selectCountCommon(String name) {
-		return uDao.selectCountCommon(name);
-	}
 
 	/**
 	 * 高级搜索用户分页查询 huang(后台)

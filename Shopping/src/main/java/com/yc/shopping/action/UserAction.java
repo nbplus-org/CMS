@@ -369,7 +369,7 @@ public class UserAction {
 	 * @param keyWord
 	 * @param model
 	 * @return
-	 */
+	 *//*
 	@RequestMapping(value = "/backManager/commonSearch.do")
 	public String commonSearch(String keyWord, Model model, @Param("page") String page) {
 
@@ -408,7 +408,7 @@ public class UserAction {
 		return "backManager/user-manager";
 
 	}
-
+*/
 	/**
 	 * 高级搜索（后台） huang
 	 * 
@@ -424,14 +424,10 @@ public class UserAction {
 
 		if ("女".equals(user.getUsex())) {
 			user.setUsex("0");
-		} else {
+		} else if("男".equals(user.getUsex())){
 			user.setUsex("1");
-		}
-		if (user.getUemail() == null || user.getUemail() == "") {
-			user.setUemail("@");
-		}
-		if (user.getUphone() == null || user.getUphone() == "") {
-			user.setUphone("1");
+		}else{
+			user.setUsex("");
 		}
 
 		// 每条页面显示数据条数pageSize

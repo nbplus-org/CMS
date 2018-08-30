@@ -16,7 +16,7 @@
 
 	<!-- spring 包扫描 -->
 	<context:component-scan base-package="com.yc.shopping" />
-	
+
 	<!-- ======================以下是 spring mvc 相关配置======================= -->
 	<!-- spring mvc 用于处理静态资源 -->
 	<mvc:default-servlet-handler />
@@ -33,18 +33,20 @@
 	<!-- spring mvc 文件上传的解析器 -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="maxUploadSize" value="100000" />
+		<property name="maxUploadSize" value="1000000" />
 	</bean>
-	
+
 	<!-- ======================以下是 mybatis 集成 spring 的相关配置======================= -->
 	<!-- spring 数据源 -->
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-	    <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-	    <property name="url" value="jdbc:mysql://CMS-PC/shopping?useUnicode=true&amp;characterEncoding=UTF-8"/>
-	    <property name="username" value="root"/>
-	    <property name="password" value="a"/>
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://CMS-PC/shopping?useUnicode=true&amp;characterEncoding=UTF-8" />
+		<property name="username" value="root" />
+		<property name="password" value="a" />
 	</bean>
-	<!-- mybatis 会话工厂 -->	
+	<!-- mybatis 会话工厂 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<!-- 引用 spring 数据源 -->
 		<property name="dataSource" ref="dataSource"></property>
@@ -60,28 +62,30 @@
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.yc.shopping.dao" />
 	</bean>
-	
+
 	<!-- ======================以下是 spring 事务管理的相关配置======================= -->
 	<!-- spring 事务管理器 -->
-	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-	    <property name="dataSource" ref="dataSource"/>
+	<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
+
 	<!-- spring 事务 advice（增强） 的管理者设置为transactionManager -->
-    <tx:advice id="txAdvice" transaction-manager="txManager">
-        <tx:attributes>
-        	<!-- get开头与find开头的方法，配置为只读事务 -->
-            <tx:method name="get*" read-only="true"/>
-            <tx:method name="find*" read-only="true"/>
-            <!-- 除以上两类（查询）方法，其他方法都开启普通事务 -->
-            <tx:method name="*"/>
-        </tx:attributes>
-    </tx:advice>
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<!-- get开头与find开头的方法，配置为只读事务 -->
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="find*" read-only="true" />
+			<!-- 除以上两类（查询）方法，其他方法都开启普通事务 -->
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
 
 	<!-- spring 事务切面配置 -->
-    <aop:config>
-        <aop:pointcut id="txPc" expression="execution(* com.yc.**.biz.*.*(..))"/>
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPc"/>
-    </aop:config>
+	<aop:config>
+		<aop:pointcut id="txPc" expression="execution(* com.yc.**.biz.*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPc" />
+	</aop:config>
+
 
 </beans>

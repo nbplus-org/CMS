@@ -46,11 +46,12 @@
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
+				<!-- <a href="ProductImage.htm"
+							style="text-decoration: underline;">查看产品图库</a> -->
 					<td>&nbsp;</td>
 					<td valign="top">服装服装标签：</td>
 					<td><input type="text" class="input_01" name="textfield"
-						id="text1">&nbsp;&nbsp;&nbsp;图片：<a href="ProductImage.htm"
-							style="text-decoration: underline;">查看产品图库</a></td>
+						id="text1"/>&nbsp;&nbsp;&nbsp;图片：<input type="file" id="file"/></td>
 					<td rowspan="10"><img src="images\jj_03.jpg"></td>
 					<td>&nbsp;</td>
 				</tr>
