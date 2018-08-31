@@ -38,8 +38,6 @@ public class UserAction {
 
 	@Resource(name = "UserImp")
 	private UserInterface uimp;
-	
-
 
 	/**
 	 * 注册用户
@@ -182,6 +180,8 @@ public class UserAction {
 			// 数据库无该邮箱,可创建
 			try {
 				response.getWriter().print("邮箱可用");
+				MyUtils sendemail = new MyUtils();
+				sendemail.sendMail(uemail);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -278,12 +278,13 @@ public class UserAction {
 
 	/**
 	 * 登录
+	 * 
 	 * @param userVo
 	 * @param request
 	 * @param model
 	 * @return
 	 * @throws BizException
-	 *       liu
+	 *             liu
 	 */
 	@RequestMapping("/login.do")
 	public String login(UserVO userVo, HttpServletRequest request, Model model) throws BizException {
@@ -376,45 +377,33 @@ public class UserAction {
 	 * @param model
 	 * @return
 	 *//*
-	@RequestMapping(value = "/backManager/commonSearch.do")
-	public String commonSearch(String keyWord, Model model, @Param("page") String page) {
-
-		// 每条页面显示数据条数pageSize
-		int pageSize = 5;
-		// 初始化默认为第一页
-		if (page == null) {
-			page = "1";
-		}
-		// 从第几条开始
-		int startPage = (Integer.parseInt(page) - 1) * pageSize;
-
-		List<UserVO> allUser = uimp.commonSelect(keyWord, startPage, pageSize);
-
-		// 查询总页数
-		int count = uimp.selectCountCommon(keyWord);
-		int pageTimes;
-		if (count % pageSize == 0) {
-			pageTimes = count / pageSize;
-		} else {
-			pageTimes = count / pageSize + 1;
-		}
-		model.addAttribute("currentPage", Integer.parseInt(page));
-		model.addAttribute("pageTimes", pageTimes);
-		model.addAttribute("allUser", allUser);
-
-		if ("男".equals(keyWord)) {
-			keyWord = "1";
-		} else if ("女".equals(keyWord)) {
-			keyWord = "0";
-		}
-		System.out.println("======keyWord=====" + keyWord);
-		System.out.println("===============allUser==================" + allUser);
-		model.addAttribute("allUser", allUser);
-		System.out.println("===============model.addAttribute==================");
-		return "backManager/user-manager";
-
-	}
-*/
+		 * @RequestMapping(value = "/backManager/commonSearch.do") public String
+		 * commonSearch(String keyWord, Model model, @Param("page") String page)
+		 * {
+		 * 
+		 * // 每条页面显示数据条数pageSize int pageSize = 5; // 初始化默认为第一页 if (page ==
+		 * null) { page = "1"; } // 从第几条开始 int startPage =
+		 * (Integer.parseInt(page) - 1) * pageSize;
+		 * 
+		 * List<UserVO> allUser = uimp.commonSelect(keyWord, startPage,
+		 * pageSize);
+		 * 
+		 * // 查询总页数 int count = uimp.selectCountCommon(keyWord); int pageTimes;
+		 * if (count % pageSize == 0) { pageTimes = count / pageSize; } else {
+		 * pageTimes = count / pageSize + 1; } model.addAttribute("currentPage",
+		 * Integer.parseInt(page)); model.addAttribute("pageTimes", pageTimes);
+		 * model.addAttribute("allUser", allUser);
+		 * 
+		 * if ("男".equals(keyWord)) { keyWord = "1"; } else if
+		 * ("女".equals(keyWord)) { keyWord = "0"; }
+		 * System.out.println("======keyWord=====" + keyWord);
+		 * System.out.println("===============allUser==================" +
+		 * allUser); model.addAttribute("allUser", allUser); System.out.println(
+		 * "===============model.addAttribute=================="); return
+		 * "backManager/user-manager";
+		 * 
+		 * }
+		 */
 	/**
 	 * 高级搜索（后台） huang
 	 * 
@@ -430,9 +419,9 @@ public class UserAction {
 
 		if ("女".equals(user.getUsex())) {
 			user.setUsex("0");
-		} else if("男".equals(user.getUsex())){
+		} else if ("男".equals(user.getUsex())) {
 			user.setUsex("1");
-		}else{
+		} else {
 			user.setUsex("");
 		}
 
@@ -458,7 +447,7 @@ public class UserAction {
 		model.addAttribute("currentPage", Integer.parseInt(page));
 		model.addAttribute("pageTimes", pageTimes);
 		model.addAttribute("allUser", allUser);
-		System.out.println("====allUser.size()======="+allUser.size());
+		System.out.println("====allUser.size()=======" + allUser.size());
 		return "backManager/user-manager";
 	}
 
