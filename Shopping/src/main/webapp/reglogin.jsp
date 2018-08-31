@@ -51,16 +51,6 @@
 <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 <script type="text/javascript" src="easyui/jquery.min.js"></script>
 <script type="text/javascript">
-	//发送邮箱
-	function sendemail() {
-		var str = $("#uEmail").val();
-		var data = {
-			name : str
-		};
-		$.post("semail.do", data, function(data) {
-			alert("邮件发送成功");
-		});
-	}
 
 	//注册时判断用户名是否已被注册
 	function judgeuname() {
@@ -92,6 +82,8 @@
 				if (data != "邮箱可用") {
 					emailSpan.html("邮箱已被注册");
 					emailSpan.css("color", "red");
+				}else{
+					alert("发送成功");
 				}
 			});
 		}
@@ -226,7 +218,7 @@
 										<input type="text" id="uEmail" name="uemail"
 											style="background: #f0f0f0;" placeholder="请输入邮箱"
 											onblur="judgeuemail()" autocomplete="off" />
-										<button onclick="sendemail()" type="button">发送验证码</button>
+										<button onclick="judgeuemail()" type="button">发送验证码</button>
 										<span id="emailSpan"></span>
 									</div>
 								</li>
