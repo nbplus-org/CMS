@@ -201,8 +201,13 @@ public class ClothesImp implements ClothesInterface {
 	 * @return
 	 */
 	@Override
-	public ClothesVO modify(int clothesid) {
-		return cDao.modify(clothesid);
+	public ClothesVO modifyOfSelect(int clothesid) {
+		return cDao.modifyOfSelect(clothesid);
+	}
+
+	@Override
+	public int modifyClothes(ClothesVO clothes) {
+		return cDao.modifyClothes(clothes);
 	}
 	
 }

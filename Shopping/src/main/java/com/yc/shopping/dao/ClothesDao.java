@@ -197,17 +197,23 @@ public interface ClothesDao {
 	int selectCountByCondition(ClothesVO clothes);
 
 	/**
-	 * 修改服装信息 huang(后台) 通过服装id得到服装信息
+	 * 修改服装之查询服装信息 huang(后台) 通过服装id得到服装信息
 	 * 
 	 * @param clothesid
 	 * @return
 	 */
 	@Select("select * from clothesvo where clothesid=#{clothesid}")
-	ClothesVO modify(int clothesid);
+	ClothesVO modifyOfSelect(int clothesid);
 
-	@Update("update clothesvo set aid =#{clothesid} and clothesname=#{clothes.clothesname} and clothestype=#{clothes.clothestype} "
-			+ "and clothesbigtag=#{clothes.clothesbigtag} and clothesbrand=#{clothes.clothesbrand} and brandpic=#{clothes.brandpic} "
-			+ "and clothesintroduce=#{clothes.clothesintroduce} and clothesorigprice=#{clothes.clothesorigprice} "
-			+ "and clothesprice=#{clothes.clothesprice}")
-	int modifyClothes(@Param("clothesid") int clothesid, @Param("clothes") ClothesVO clothes);
+	/**
+	 * 修改服装信息之 修改服装信息s
+	 * @param clothesid
+	 * @param clothes
+	 * @return
+	 */
+	@Update("update clothesvo set aid =#{clothes.clothesid} , clothesname=#{clothes.clothesname} , clothestype=#{clothes.clothestype} "
+			+ ", clothesbigtag=#{clothes.clothesbigtag} , clothesbrand=#{clothes.clothesbrand} , brandpic=#{clothes.brandpic} "
+			+ ", clothesintroduce=#{clothes.clothesintroduce} , clothesorigprice=#{clothes.clothesorigprice} "
+			+ ", clothesprice=#{clothes.clothesprice} where clothesid=#{clothes.clothesid}")
+	int modifyClothes(@Param("clothes") ClothesVO clothes);
 }

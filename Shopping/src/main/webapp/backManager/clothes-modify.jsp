@@ -8,16 +8,24 @@
 <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
 
 <script language="javascript" type="text/javascript">
-	function getPicDir(){
-		var value=$("#file").val();
-		var picDir= value.substring( value.lastIndexOf("\\")+1 );
-		alert("value="+picDir);
-		$("#showPic").attr('src',"../upload/"+picDir);
-		
+	function getPicDir() {
+		var value = $("#file").val();
+		var picDir = value.substring(value.lastIndexOf("\\") + 1);
+		//$("#showPic").attr('src', "../upload/" + picDir);
+	}
+
+	function come() {
+<%String success = request.getParameter("success");
+			String failure = request.getParameter("failure");
+			if (success != null) {%>
+	alert(success);
+<%} else if (failure != null) {%>
+	alert(failure);
+<%}%>
 	}
 </script>
 </head>
-<body class="mian_bj">
+<body class="mian_bj" onload="come()">
 	<div class="mian_top_01">
 		<div class="mian_top_r"></div>
 		<div class="mian_top_l"></div>
@@ -46,8 +54,9 @@
 						<td width="30%"><input type="text" class="input_01"
 							name="clothesname" id="textfield"
 							value="${clothesMsg.clothesname }" /></td>
-						<td>图片：<input class="input_01" type="file" name="file" id="file"
-							onchange="getPicDir()" accept="image/png, image/jpeg, image/gif, image/jpg" /></td>
+						<td>图片：<input class="input_01" type="file" name="file"
+							id="file" onchange="getPicDir()"
+							accept="image/png, image/jpeg, image/gif, image/jpg" /></td>
 						<td width="40%">&nbsp;</td>
 						<td>&nbsp;</td>
 					</tr>

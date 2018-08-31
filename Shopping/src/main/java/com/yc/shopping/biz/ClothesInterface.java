@@ -160,10 +160,11 @@ public interface ClothesInterface {
 	
 	//=============================================
 	/**
-	 * 修改服装信息 huang(后台)
 	 * 通过服装id得到服装信息
 	 * @param clothesid
 	 * @return
 	 */
-	ClothesVO modify(int clothesid);
+	ClothesVO modifyOfSelect(int clothesid);
+	
+	int modifyClothes(ClothesVO clothes);
 }
