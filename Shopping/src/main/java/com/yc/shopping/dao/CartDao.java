@@ -200,4 +200,11 @@ public interface CartDao {
 	 */
 	@Select("select distinct clothespic from clothdetailvo where clothesid=#{clothesid}")
 	List<ClothesDetailVO> findclothespic(Integer clothesid);
+	
+	/**
+	 * 根据用户id 查询购物车数量
+	 * @return
+	 */
+	@Select("select count(*) from cartvo where uid=#{uid}")
+	long cartCount(Integer uid);
 }

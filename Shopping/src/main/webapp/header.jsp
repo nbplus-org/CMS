@@ -32,7 +32,7 @@
 						<!--Start Header Right Cart area -->
 						<div class="account_card_area"> 
 							<ul id="account_nav">
-								<li><a href="#"><i class="fa fa-key"></i>个人中心</a>
+								<li><a><i class="fa fa-key"></i>个人中心</a>
 									<div class="account_menu_list">
 										
 										<div class="account_single_item">
@@ -41,7 +41,7 @@
 												<li><a href="reglogin.jsp">我的账户</a></li>
 												<li><a href="showCart.do">我的购物车</a></li>
 												<li><a href="#">结账</a></li>
-												<li><a href="#">退出</a></li>
+												<li><a href="reglogin.jsp">退出</a></li>
 											</ul>
 											
 											
@@ -49,21 +49,28 @@
 										
 									</div>
 								</li>
-								<li><a href="showCart.do"><i class="fa fa-shopping-cart"></i>购物车 <span class="cart_zero">2</span></a>
+								<%if(request.getSession().getAttribute("UserVO") != null && session.getAttribute("cartcount")!=null) {%>
+								<li><a href="showCart.do"><i class="fa fa-shopping-cart"></i>购物车 <span class="cart_zero cart_zero1">${cartcount }</span></a>
+										<%} else { %> 
+								<li><a href="showCart.do"><i class="fa fa-shopping-cart"></i>购物车 <span class="cart_zero"></span></a>
+										<%} %>  
 									<div class="cart_down_area">
+									<%if(request.getSession().getAttribute("UserVO") != null && session.getAttribute("cart")!=null) {%>
+										  <c:forEach items="${cart }" var="cart"> 
 										<div class="cart_single">
-											<a href="#"><img src="img/cart/cart-1.jpg" alt="" /></a>
-											<h2><a href="#">Pellentesque hendrerit</a> <a href="#"><span><i class="fa fa-trash"></i></span></a></h2>
-											<p>1 x $222.00</p>
+											<a href="check.do?clothesid=${cart.clothesid}"><img src="upload/${cart.clothespic }" width="50px" height="50px" alt="" /></a>
+											<h2><a href="check.do?clothesid=${cart.clothesid}">${cart.clothesname}</a> <a href="trash.do?cartid=${cart.cartid}"><span><i class="fa fa-trash"></i></span></a></h2>
+											<p>${cart.cnum } x $${cart.clothesprice }</p>
 										</div>
-										<div class="cart_single">
-											<a href="#"><img src="img/cart/cart-2.jpg" alt="" /></a>
-											<h2><a href="#">Pellentesque hendrerit</a> <a href="#"><span><i class="fa fa-trash"></i></span></a></h2>
-											<p>1 x $222.00</p>
-										</div>
+                                         </c:forEach> 
 										<div class="cart_shoptings">
 											<a href="checkout.jsp">结账</a>
 										</div>
+										<%} else { %>  
+										    <div class="cart_shoptings">
+												<a href="#">结账</a>
+											</div>
+										 <%} %> 
 									</div>
 								</li>
 							</ul>
@@ -85,68 +92,44 @@
 								<li><a href="show.do"><span class="Home">主页</span></a>
 								</li>
 								
-								<li><a href="shop.jsp"><span class="Clothings">分类</span></a>
+								<li><a><span class="Clothings">分类</span></a>
 									<!--Start Mega Menu area -->
 									<div class="mega_menu_list"> 
 										<div class="single_megamenu">
-											<h2>李宁</h2>
-											<div class="items_list">
-												<a href="shop.jsp"><i class="fa fa-angle-right"></i>Devenport</a>
-												<a href="shop.jsp"><i class="fa fa-angle-right"></i>Door Bazar</a>
-												<a href="shop.jsp"><i class="fa fa-angle-right"></i>Digital Software</a>
-												<a href="shop.jsp"><i class="fa fa-angle-right"></i>Dental Care</a>
-											</div>
-										</div>
-										<div class="single_megamenu">
-											<h2>安踏</h2>
-											<div class="items_list">
-												<a href="shop.jsp"><i class="fa fa-angle-right"></i>Devenport</a>
-												<a href="shop.jsp"><i class="fa fa-angle-right"></i>Door Bazar</a>
-												<a href="shop.jsp"><i class="fa fa-angle-right"></i>Digital Software</a>
-												<a href="shop.jsp"><i class="fa fa-angle-right"></i>Dental Care</a>
-											</div>
-										</div>
-									
-									
+										<%if(session.getAttribute("clothesbigtag")!=null){%>
+											  <c:forEach items="${clothesbigtag }" var="tag">  
+													<h2><i class="fa fa-angle-right"></i><a href="showShop.do?op=tag&clothesbigtag=${tag.clothesbigtag }">${tag.clothesbigtag}</a></h2>
+											 </c:forEach> 
+										<%}%>
+										</div>								
 									</div> 
 									<!--End Mega Menu area -->
 								</li>
-								<li><a href="shop.jsp"><span class="Lookbook">品牌</span></a>
+								<li><a><span class="Lookbook">品牌</span></a>
 									<!--Start Mega Menu area -->
-									<div class="look_mega_menu"> 
-										<div class="look_single">
-											<h3>Davenport</h3>
-											<div class="items_list_lk">
-												<a href="shop.jsp"><i class="fa fa-angle-right"></i>Gold Ring</a>
-												<a href="shop.jsp"><i class="fa fa-angle-right"></i>Games & Software</a>
-											</div>
-										</div>
-										<div class="look_single">
-											<h3>Digital Software</h3>
-											<div class="items_list_lk">
-												<a href="shop.jsp"><i class="fa fa-angle-right"></i>Air conditioner</a>
-												<a href="shop.jsp"><i class="fa fa-angle-right"></i>Animals & Nature</a>
-											</div>
-										</div>
-										<div class="look_single">
-											<h3>Dental care</h3>
-											<div class="items_list_lk">
-												<a href="shop.jsp"><i class="fa fa-angle-right"></i>Apparel</a>
-												<a href="shop.jsp"><i class="fa fa-angle-right"></i>Armoires</a>
-											</div>
-										</div>
-										
+									<div class="mega_menu_list menu_home2_list" id="list"> 
+										<div class="single_megamenu">
+										<%if(session.getAttribute("clothesbrand")!=null){%>
+											 <c:forEach items="${clothesbrand }" var="brand"> 
+											    <h2><i class="fa fa-angle-right"></i><a href="showShop.do?op=brand&clothesbrand=${brand.clothesbrand}">${brand.clothesbrand}</a></h2>				
+											 </c:forEach> 
+										<%}%>
+										</div>										
 									</div> 
 									<!--End Mega Menu area -->
 								</li>
-								<li><a href="blog-left-sidebar.jsp"><span class="Footwear">类型</span></a>
-									<div class="home_mega_menu">
-										<a href="blog-left-sidebar.jsp">Blog Left Sidebar</a>
-										<a href="blog-right-sidebar.jsp">Blog Right Sidebar </a>
-										<a href="single-blog.jsp">Single Blog </a>
+								<li><a><span class="Footwear">类型</span></a>
+									<div class="mega_menu_list menu_home2_list" id="list">
+									<div class="single_megamenu">
+									<%if(session.getAttribute("clothestype")!=null){%>
+										 <c:forEach items="${clothestype }" var="type"> 
+											<h2><i class="fa fa-angle-right"></i><a href="showShop.do?op=type&clothestype=${type.clothestype}">${type.clothestype}</a></h2>				
+										 </c:forEach> 
+									<%}%>
+									</div>
 									</div>
 								</li>
-								<li><a href="shop.jsp"><span class="Sales">全部商品</span></a>
+								<li><a href="showShop.do?op=shop"><span class="Sales">全部商品</span></a>
 								</li>
 								<li><a href="shop.jsp"><span class="Accessaries">帮助</span></a>
 									<div class="home_mega_menu">
@@ -170,48 +153,49 @@
 							<div class="mobile-menu">
 								<nav id="dropdown">
 									<ul>
-										<li><a href="http://bootexperts.com/html/hope-preview/hope/index.jsp">主页</a>
+										<li><a href="show.do">主页</a>
 										</li>
-										
-										<li><a href="shop.jsp">分类</a>
-											<ul>										
-												<li><a href="shop.jsp">Learning</a>
-													<ul>										
-														<li><a href="shop.jsp">Devenport</a></li>
-														<li><a href="shop.jsp">Door Bazar</a></li>
-														<li><a href="shop.jsp">Digital Software</a></li>
-														<li><a href="shop.jsp">Dental Care</a></li>
-													</ul>
-												</li>
-												<li><a href="shop.jsp">Lighting</a>
-													<ul>										
-														<li><a href="shop.jsp">Devenport</a></li>
-														<li><a href="shop.jsp">Door Bazar</a></li>
-														<li><a href="shop.jsp">Digital Software</a></li>
-														<li><a href="shop.jsp">Dental Care</a></li>
-													</ul>
-												</li>
-												<li><a href="shop.jsp">Living Room</a></li>
-												<li><a href="shop.jsp">Lamp</a></li>
-											</ul>
-										</li>
-										<li><a href="shop.jsp">品牌</a>
+									
+									
+										<li><a>分类</a>																														
+											<%if(session.getAttribute("clothesbigtag")!=null){%>
 											<ul>
-												<li><a href="shop.jsp">Gold Ring</a></li>
-												<li><a href="shop.jsp">Games & Software</a></li>
-											</ul>
+											  <c:forEach items="${clothesbigtag }" var="tag">  
+		                                            <li><a href="showShop.do?op=tag&clothesbigtag=${tag.clothesbigtag }">${tag.clothesbigtag}</a>
+										     </c:forEach> 
+										    </ul>
+										   <%}%>
 										</li>
-										<li><a href="#">类型</a>
-											<ul>
-												<li><a href="single-blog.jsp">Single Blog</a></li>
-											</ul>
-										</li>
-										
-										<li><a href="shop.jsp">全部商品</a>
+                                  
+								   	
+										<li><a >品牌</a>
 											
+										<%if(session.getAttribute("clothesbrand")!=null){%>
+										<ul>	
+											 <c:forEach items="${clothesbrand }" var="brand"> 
+											 	<li><a href="showShop.do?op=brand&clothesbrand=${brand.clothesbrand}">${brand.clothesbrand}</a></li>
+											 </c:forEach> 
+										</ul>
+										<%}%>
 											
 										</li>
-										
+								  
+								 
+										<li><a>类型</a>	
+									<%if(session.getAttribute("clothestype")!=null){%>
+									<ul>
+										 <c:forEach items="${clothestype }" var="type"> 
+										 	<li><a href="showShop.do?op=type&clothestype=${type.clothestype}">${type.clothestype}</a></li>
+										 </c:forEach> 
+									</ul>
+									<%}%>										
+										</li>
+								 	
+								
+										<li><a href="showShop.do?op=shop">全部商品</a>	
+										</li>
+								  
+								  			
 										<li><a href="about-us.jsp">帮助</a>
 											<ul>										
 												<li><a href="reglogin.jsp">我的账户</a></li>
@@ -220,7 +204,7 @@
 												<li><a href="contact.jsp">联系我们</a></li>
 											</ul>
 										</li>
-									</ul>
+								</ul>
 								</nav>
 							</div>					
 						</div>

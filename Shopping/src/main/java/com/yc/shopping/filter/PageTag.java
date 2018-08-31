@@ -24,10 +24,11 @@ public class PageTag extends TagSupport{
 		if(total>0 && rows>0){
 			allPage=(int) (total%rows==0 ? total/rows : total/rows+1);
 		}
-		int pages=0;     //当前页数
+		
 		if(total<=0 || rows<=0 ||  allPage<=0){
 			return SKIP_BODY;
 		}
+		int pages=0;     //当前页数
 		String pageName=null;
 		
 		while(pages<allPage){

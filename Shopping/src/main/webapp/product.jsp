@@ -84,7 +84,7 @@
                 function showPic(path)
                 {                
                    document .getElementById ("bigPic").src=path;
-                   document .getElementById ("Pic").href=path;
+                  /*  document .getElementById ("Pic").href=path;  */
                 }
            </script>    
     </head>
@@ -129,7 +129,7 @@
 								<div id="tab1" class="tab-pane fade in active">
 
 									<div class="blog_tabs">
-										<a class="fancybox" id="Pic" href="" data-fancybox-group="gallery"  title="Lorem ipsum dolor sit amet"><img src="upload/${clothespic[0].clothespic}" id="bigPic" alt="" /></a>
+										<a  id="Pic"  data-fancybox-group="gallery"  title="Lorem ipsum dolor sit amet"><img src="upload/${clothespic[0].clothespic}" id="bigPic" alt="" /></a>
 									</div>
 			
 								</div>				
@@ -154,10 +154,10 @@
 							<h2 class="blog_heading"><a href="">${clothes.clothesname}</a></h2>
 							<div class="product_rating">
 								<i class="fa fa-star"></i>
+ 								<i class="fa fa-star"></i>
 								<i class="fa fa-star"></i>
 								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
+								<i class="fa fa-star"></i> 
 							</div>
 							<div class="product_rating">
 								<a href="#">1 Review(s) <span>I</span></a>
@@ -276,7 +276,7 @@
 											<div class="product_tag_area">
 												<h2 style="Font-Size: 20px">${r.state}</h2>
 												<ul id="product_tags">
-													<li style="color: blue"><span>服装名称:${s.clothesname}</span></li>
+													<li style="color: blue"><span>服装名称:${clothes.clothesname}</span></li>
 												</ul>
 												<div class="add_tags">
 													<h2>评论:</h2>
@@ -290,7 +290,7 @@
 												</div>
 											</div>
 											<hr>
-										</c:forEach>
+										</c:forEach> 
 									</div>
 								</div>
 							</div>

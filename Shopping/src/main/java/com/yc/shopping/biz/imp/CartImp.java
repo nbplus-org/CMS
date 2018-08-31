@@ -208,4 +208,12 @@ public class CartImp implements CartInterface {
 		return cDao.findclothespic(clothesid);
 	}
 
+	/**
+	 * 根据用户id 查询购物车数量
+	 */
+	@Override
+	public long cartCount(Integer uid) {
+		return cDao.cartCount(uid);
+	}
+
 }

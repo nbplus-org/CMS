@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.taglibs.standard.lang.jstl.test.beans.PublicBean1;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +44,7 @@ public class CartAction {
 	 * liu 
 	 */
     @RequestMapping("/check.do")
-	public String check(Integer clothesid,Model model){
+	public String check(Integer clothesid,Model model,HttpServletRequest request){
     	System.out.println("服装id"+clothesid);
     	ClothesVO list=cBiz.showById(clothesid);
     	model.addAttribute("clothes", list);
@@ -63,6 +64,7 @@ public class CartAction {
 		if(list4!=null){
 			System.out.println("评论表有数值");
 			model.addAttribute("list4", list4);
+			request.getSession().setAttribute("list4", list4);
 		}
 		return "product";	
     }
@@ -305,5 +307,21 @@ public class CartAction {
     	System.out.println(cartid);
     	return "order";
     }
+    
+    /**
+     * 主页购物车显示  删除按钮
+     * @param cartid
+     * @return
+     */
+    @RequestMapping("/trash.do")
+    public String trash(Integer cartid){
+    	System.out.println("====="+cartid);
+    	int result=cBiz.deleteOne(cartid);
+    	if(result>0){
+    		System.out.println("删除成功");
+    	}
+    	return "redirect:show.do";
     }
+    
+ }
 

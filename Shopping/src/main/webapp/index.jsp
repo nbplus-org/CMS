@@ -47,6 +47,30 @@
         <link rel="stylesheet" href="css/responsive.css">
 		<!-- modernizr JS -->
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+        
+        <script src="js/jquery-1.9.1.js"></script>
+        <script type="text/javascript">
+ /*        $(function () {
+        	$("#list").hide();
+            $("#menu").mouseover(function () {
+            	$.post("showHeader.do?",
+            			data,
+            			function(data){  
+            		 
+            	});
+            	$("#list").show();
+            }, function () {
+                $("#list").hide();
+            })
+            // 鼠标移动到list的div上的时候list div不会被隐藏
+            $("#list").hover(function () {
+                $("#list").show();
+            }, function () {
+                $("#list").hide();
+            })
+        }); */
+        
+        </script>
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -95,23 +119,31 @@
 											</div>
 										</div>
 									</li>
-									<li><a class="list_cl" href="showCart.do"><i class="fa fa-shopping-cart"></i>购物车 <span class="cart_zero cart_zero1">2</span></a>
+									<%if(request.getSession().getAttribute("UserVO") != null) {%>
+									<li><a class="list_cl" href="showCart.do"><i class="fa fa-shopping-cart"></i>购物车 <span class="cart_zero cart_zero1">${cartcount }</span></a>
+										<%} else { %> 
+										<li><a class="list_cl" href="showCart.do"><i class="fa fa-shopping-cart"></i>购物车 <span></span></a>
+										<%} %>  
 										<div class="cart_down_area">
+										<%if(request.getSession().getAttribute("UserVO") != null) {%>
+										 <c:forEach items="${cart }" var="cart">
 											<div class="cart_single">
-												<a href="#"><img src="img/cart/cart-1.jpg" alt="" /></a>
-												<h2><a href="#">Pellentesque hendrerit</a> <a href="#"><span><i class="fa fa-trash"></i></span></a></h2>
-												<p>1 x $222.00</p>
+												<a href="check.do?clothesid=${cart.clothesid}"><img src="upload/${cart.clothespic }" width="50px" height="50px" alt="" /></a>
+												<h2><a href="check.do?clothesid=${cart.clothesid}">${cart.clothesname}</a> <a href="trash.do?cartid=${cart.cartid}"><span><i class="fa fa-trash"></i></span></a></h2>
+												<p>${cart.cnum } x $${cart.clothesprice }</p>
 											</div>
-											<div class="cart_single">
-												<a href="#"><img src="img/cart/cart-2.jpg" alt="" /></a>
-												<h2><a href="#">Pellentesque hendrerit</a> <a href="#"><span><i class="fa fa-trash"></i></span></a></h2>
-												<p>1 x $222.00</p>
-											</div>
+											</c:forEach>
 											<div class="cart_shoptings">
 												<a href="checkout.jsp">结账</a>
 											</div>
+										<%} else { %>  
+										    <div class="cart_shoptings">
+												<a href="#">结账</a>
+											</div>
+										 <%} %> 
 										</div>
 									</li>
+									
 								</ul>
 							</div> 
 							<!--结束 账户 区域 -->
@@ -121,77 +153,49 @@
 								<!--主菜单开始区域 -->
 								<div class="main_menu main_menu_tb">
 									<ul id="nav_menu" class="active_cl nav_manu_lf">
-										<li><a class="home2_size" href="index.html"><span class="Home">主页</span></a>
+										<li><a class="home2_size" href="show.do"><span class="Home" >主页</span></a>
 										</li>
 										
-										<li><a class="home2_size" href="shop.html"><span class="Clothings">分类</span></a>
+										<li><a class="home2_size"><span class="Clothings" id="menu">分类</span></a>
 										    <!-- 下面div是购物的分类 -->
-											<div class="mega_menu_list menu_home2_list">
-											
-												<div class="single_megamenu">
-													<h2><a href="shop.html">阿迪</a></h2>
-													<div class="items_list">
-														<a href="shop.html"><i class="fa fa-angle-right"></i>Devenport</a>
-														<a href="shop.html"><i class="fa fa-angle-right"></i>Door Bazar</a>
-														<a href="shop.html"><i class="fa fa-angle-right"></i>Digital Software</a>
-														<a href="shop.html"><i class="fa fa-angle-right"></i>Dental Care</a>
-													</div>
-												</div>
-												
-											
-												<div class="single_megamenu">
-													<h2><a href="shop.html">Lamp</a></h2>
-													<div class="items_list">
-														<a href="shop.html"><i class="fa fa-angle-right"></i>Devenport</a>
-														<a href="shop.html"><i class="fa fa-angle-right"></i>Door Bazar</a>
-														<a href="shop.html"><i class="fa fa-angle-right"></i>Digital Software</a>
-														<a href="shop.html"><i class="fa fa-angle-right"></i>Dental Care</a>
-													</div>
-												</div>
-												
+											<div class="mega_menu_list menu_home2_list" id="list">									
+												<div class="single_megamenu" >
+												 <c:forEach items="${clothesbigtag }" var="tag"> 
+													<h2><i class="fa fa-angle-right"></i><a href="showShop.do?op=tag&clothesbigtag=${tag.clothesbigtag }">${tag.clothesbigtag}</a></h2>
+												</c:forEach>
+												</div>											
 											</div>
 										</li>
-										<li><a class="home2_size" href="shop.html"><span class="Lookbook">品牌</span></a>
-											<div class="look_mega_menu menu_home2_look menu_home2_looktr">
-												<div class="look_single">
-													<h3>阿迪达斯</h3>
-													<div class="items_list_lk">
-														<a href="shop.html"><i class="fa fa-angle-right"></i>Gold Ring</a>
-														<a href="shop.html"><i class="fa fa-angle-right"></i>Games & Software</a>
-													</div>
-												</div>
-												<div class="look_single">
-													<h3>数字软件</h3>
-													<div class="items_list_lk">
-														<a href="shop.html"><i class="fa fa-angle-right"></i>Air conditioner</a>
-														<a href="shop.html"><i class="fa fa-angle-right"></i>Animals & Nature</a>
-													</div>
-												</div>
-												<div class="look_single">
-													<h3>Dental care</h3>
-													<div class="items_list_lk">
-														<a href="shop.html"><i class="fa fa-angle-right"></i>Apparel</a>
-														<a href="shop.html"><i class="fa fa-angle-right"></i>Armoires</a>
-													</div>
-												</div>
-												
+										<li><a class="home2_size"><span class="Clothings" id="menu">品牌</span></a>
+											<div class="mega_menu_list menu_home2_list" id="list">
+												<div class="single_megamenu">
+												<c:forEach items="${clothesbrand }" var="brand">
+													<h2><i class="fa fa-angle-right"></i><a href="showShop.do?op=brand&clothesbrand=${brand.clothesbrand}">${brand.clothesbrand}</a></h2>				
+												</c:forEach>
+												</div>																		
 											</div>
 										</li>
 										
 										
-										<li><a class="home2_size" href="blog.html"><span class="Footwear">类型</span></a>
-											
+										<li><a class="home2_size"><span class="Footwear">类型</span></a>
+											<div class="mega_menu_list menu_home2_list" id="list">
+												<div class="single_megamenu">
+												<c:forEach items="${clothestype }" var="type">
+													<h2><i class="fa fa-angle-right"></i><a href="showShop.do?op=type&clothestype=${type.clothestype}">${type.clothestype}</a></h2>				
+												</c:forEach>
+												</div>																		
+											</div>
 										</li>
 										
 										
-										<li><a class="home2_size" href="shop.html"><span class="Sales">全部商品</span></a>
+										<li><a class="home2_size" href="showShop.do?op=shop"><span class="Sales">全部商品</span></a>
 										</li>
-										<li><a class="home2_size" href="shop.html"><span class="Accessaries">帮助</span></a>
+										<li><a class="home2_size"><span class="Accessaries">帮助</span></a>
 											<div class="home_mega_menu menu_home2_looktr">
-											    <a href="cart.html">我的账户</a>
-											    <a href="cart.html">购物车</a>
-												<a href="about-us.html">关于我们</a>
-												<a href="contact.html">联系我们</a>
+											    <a href="reglogin.jsp">我的账户</a>
+											    <a href="showCart.do">购物车</a>
+												<a href="about-us.jsp">关于我们</a>
+												<a href="contact.jsp">联系我们</a>
 												
 											</div>
 										</li>
@@ -228,46 +232,42 @@
 										<li><a href="http://bootexperts.com/html/hope-preview/hope/index-1.html">主页</a>
 										</li>
 										
-										<li><a href="shop.html">分类</a>
-											<ul>										
-												<li><a href="shop.html">Learning</a>
-													<ul>										
-														<li><a href="shop.html">Devenport</a></li>
-														<li><a href="shop.html">Door Bazar</a></li>
-														<li><a href="shop.html">Digital Software</a></li>
-														<li><a href="shop.html">Dental Care</a></li>
-													</ul>
-												</li>
-												<li><a href="shop.html">Lighting</a>
-													<ul>										
-														<li><a href="shop.html">Devenport</a></li>
-														<li><a href="shop.html">Door Bazar</a></li>
-														<li><a href="shop.html">Digital Software</a></li>
-														<li><a href="shop.html">Dental Care</a></li>
-													</ul>
-												</li>
-												<li><a href="shop.html">Living Room</a></li>
-												<li><a href="shop.html">Lamp</a></li>
-											</ul>
-										</li>
-										<li><a href="shop.html">品牌</a>
+										<li><a>分类</a>
+										   <%if(session.getAttribute("clothesbigtag")!=null){%>
 											<ul>
-												<li><a href="shop.html">Gold Ring</a></li>
-												<li><a href="shop.html">Games & Software</a></li>
-											</ul>
+											  <c:forEach items="${clothesbigtag }" var="tag">  
+		                                            <li><a href="showShop.do?op=tag&clothesbigtag=${tag.clothesbigtag }">${tag.clothesbigtag}</a>
+										     </c:forEach> 
+										    </ul>
+										   <%}%>
 										</li>
-										<li><a href="blog.html">类型</a>
-											<ul>
-												<li><a href="single-blog.html">Single Blog</a></li>
-											</ul>
+										<li><a>品牌</a>
+										<%if(session.getAttribute("clothesbrand")!=null){%>
+										<ul>	
+											 <c:forEach items="${clothesbrand }" var="brand"> 
+											 	<li><a href="showShop.do?op=brand&clothesbrand=${brand.clothesbrand}">${brand.clothesbrand}</a></li>
+											 </c:forEach> 
+										</ul>
+										<%}%>
 										</li>
-										<li><a href="shop.html">全部商品</a>
+										<li><a>类型</a>
+									<%if(session.getAttribute("clothestype")!=null){%>
+									<ul>
+										 <c:forEach items="${clothestype }" var="type"> 
+										 	<li><a href="showShop.do?op=type&clothestype=${type.clothestype}">${type.clothestype}</a></li>
+										 </c:forEach> 
+									</ul>
+									<%}%>	
+									</li>
+										<li><a href="showShop.do?op=shop">全部商品</a>
 											
 										</li>
-										<li><a href="about-us.html">帮助</a>
+										<li><a href="about-us.jsp">帮助</a>
 											<ul>										
-												<li><a href="about-us.html">关于我们</a></li>
-												<li><a href="contact.html">联系我们</a></li>
+												<li><a href="reglogin.jsp">我的账户</a></li>
+												<li><a href="showCart.do">购物车</a></li>
+												<li><a href="contact.jsp">关于我们</a></li>
+												<li><a href="contact.jsp">联系我们</a></li>
 											</ul>
 										</li>
 									</ul>
@@ -427,8 +427,8 @@
 							<div class="single_product">
 								<a href="check.do?clothesid=${s.clothesid}" target="main"><img src="upload/${s.clothespic}" alt="" /></a>
 								<div class="product_details">
-									<h2>${s.clothesVo.clothesname}</h2>
-									<p><span class="regular_price">￥${s.clothesVo.clothesorigprice }</span> <span class="popular_price">￥${s.clothesVo.clothesprice }</span></p>
+									<h2>${s.clothesname}</h2>
+									<p><span class="regular_price">￥${s.clothesorigprice }</span> <span class="popular_price">￥${s.clothesprice }</span></p>
 								</div>
 								<div class="product_detail">
 									<div class="star_icon">
@@ -443,7 +443,7 @@
 											<a href="check.do?clothesid=${s.clothesid}" target="blank">添加购物车</a>
 										</div>
 										<div class="cart_details">
-											<a href="#" target="expand"><i class="fa fa-expand"></i></a>
+											<a href="check.do?clothesid=${s.clothesid}" target="expand"><i class="fa fa-expand"></i></a>
 										</div>
 										<div class="cart_details">
 											<a href="#" target="heart"><i class="fa fa-heart-o"></i></a>
@@ -462,15 +462,16 @@
 				<div class="row" align="center">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						      <p style="color: black; font-size: 14px; font-family: 宋体">
-					          <a href="show.do?page=${pages-1}&rows=8"
-						      style="color: black; font-size: 14px; font-family: 宋体">上一页</a>		
-					          <mt:page href="show.do" total="${total }" rows="8" />
-					          <a href="show.do?page=${pages+1}&rows=8"
+						      	<a href="show.do?page=${pages-1}&rows=8"
+						      style="color: black; font-size: 14px; font-family: 宋体">上一页</a>	
+						      <mt:page href="show.do" total="${total }" rows="8" />
+						       	<a href="show.do?page=${pages+1}&rows=8"
 						      style="color:black; font-size: 14px; font-family: 宋体">下一页</a>
 					          <font style="font-weight: bold;color:black; font-size: 14px; font-family: 宋体">${pages}</font>/
 					          <font style="font-weight: bold;color: black; font-size: 14px; font-family: 宋体">${allPage }</font>
 					          <font style="color: black; font-size: 14px; font-family: 宋体">共
 					          <font style="font-weight: bold;color:black">${total }</font>条纪录</font>
+
                           </p>
 					</div>
 				</div>
