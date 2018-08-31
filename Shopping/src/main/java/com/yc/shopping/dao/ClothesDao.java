@@ -217,11 +217,6 @@ public interface ClothesDao {
 			+ ", clothesintroduce=#{clothes.clothesintroduce} , clothesorigprice=#{clothes.clothesorigprice} "
 			+ ", clothesprice=#{clothes.clothesprice} where clothesid=#{clothes.clothesid}")
 	int modifyClothes(@Param("clothes") ClothesVO clothes);
-	@Update("update clothesvo set aid =#{clothesid} and clothesname=#{clothes.clothesname} and clothestype=#{clothes.clothestype} "
-			+ "and clothesbigtag=#{clothes.clothesbigtag} and clothesbrand=#{clothes.clothesbrand} and brandpic=#{clothes.brandpic} "
-			+ "and clothesintroduce=#{clothes.clothesintroduce} and clothesorigprice=#{clothes.clothesorigprice} "
-			+ "and clothesprice=#{clothes.clothesprice}")
-	int modifyClothes(@Param("clothesid") int clothesid, @Param("clothes") ClothesVO clothes);
 	
 	@Select("select distinct brandpic from clothesvo")
 	List<ClothesVO> showbrandpic();
