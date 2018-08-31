@@ -11,6 +11,7 @@ import com.yc.shopping.biz.ClothesInterface;
 import com.yc.shopping.dao.ClothesDao;
 import com.yc.shopping.vo.ClothesDetailVO;
 import com.yc.shopping.vo.ClothesVO;
+import com.yc.shopping.vo.TypeVO;
 
 @Service("ClothesImp")
 public class ClothesImp implements ClothesInterface {
@@ -55,8 +56,8 @@ public class ClothesImp implements ClothesInterface {
 	 * 查询服装类型
 	 */
 	@Override
-	public List<ClothesVO> showClothestype() {
-		return cDao.showClothestype();
+	public List<TypeVO> showtypename() {
+		return cDao.showtypename();
 	}
 
 	/**
@@ -152,10 +153,10 @@ public class ClothesImp implements ClothesInterface {
 	 * 根据类型  关联查询
 	 */
 	@Override
-	public List<Map<String, Object>> searchBytype(String clothestype, Integer pages, Integer rows) {
+	public List<Map<String, Object>> searchBytype(String typename, Integer pages, Integer rows) {
 		//计算分页参数  偏移量
 		int offset=(pages-1)*rows;
-		return cDao.searchBytype(clothestype, offset, rows);
+		return cDao.searchBytype(typename, offset, rows);
 	}
 
 	/**
@@ -209,5 +210,23 @@ public class ClothesImp implements ClothesInterface {
 	public int modifyClothes(ClothesVO clothes) {
 		return cDao.modifyClothes(clothes);
 	}
+
+	@Override
+	public List<ClothesVO> showbrandpic() {
+		return cDao.showbrandpic();
+	}
+
+	@Override
+	public List<Map<String, Object>> searchBybrandpic(String brandpic, Integer pages, Integer rows) {
+		//计算分页参数  偏移量
+		int offset=(pages-1)*rows;
+		return cDao.searchBybrandpic(brandpic, offset, rows);
+	}
+
+	@Override
+	public long countBybrandpic(String brandpic) {
+		return cDao.countBybrandpic(brandpic);
+	}
+
 	
 }

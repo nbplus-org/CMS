@@ -50,25 +50,6 @@
         
         <script src="js/jquery-1.9.1.js"></script>
         <script type="text/javascript">
- /*        $(function () {
-        	$("#list").hide();
-            $("#menu").mouseover(function () {
-            	$.post("showHeader.do?",
-            			data,
-            			function(data){  
-            		 
-            	});
-            	$("#list").show();
-            }, function () {
-                $("#list").hide();
-            })
-            // 鼠标移动到list的div上的时候list div不会被隐藏
-            $("#list").hover(function () {
-                $("#list").show();
-            }, function () {
-                $("#list").hide();
-            })
-        }); */
         
         </script>
     </head>
@@ -83,7 +64,7 @@
 					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 						<!--开始标志区 -->
 						<div class="logo logo_border"> 
-							<a href="index.jsp">
+							<a href="showShop.do?op=shop">
 								<img src="img/logo/logo-home-2.png" alt="" />
 							</a>
 						</div>
@@ -106,10 +87,8 @@
 									<a class="list_cl" href="#">
 									<i class="fa fa-key"></i>Account</a>
 									  <%} %>  
-										<div class="account_menu_list">
-											
-											<div class="account_single_item">
-												
+										<div class="account_menu_list">											
+											<div class="account_single_item">											
 												<ul id="account_single_nav_3">
 													<li><a href="reglogin.jsp">我的账户</a></li>
 													<li><a href="showCart.do">我的购物车</a></li>
@@ -180,8 +159,8 @@
 										<li><a class="home2_size"><span class="Footwear">类型</span></a>
 											<div class="mega_menu_list menu_home2_list" id="list">
 												<div class="single_megamenu">
-												<c:forEach items="${clothestype }" var="type">
-													<h2><i class="fa fa-angle-right"></i><a href="showShop.do?op=type&clothestype=${type.clothestype}">${type.clothestype}</a></h2>				
+												<c:forEach items="${typename }" var="type">
+													<h2><i class="fa fa-angle-right"></i><a href="showShop.do?op=type&clothestype=${type.typename}">${type.typename}</a></h2>				
 												</c:forEach>
 												</div>																		
 											</div>
@@ -207,9 +186,9 @@
 								<!--搜索开始区域-->
 								<div class="search_box_hopme2">
 									<form action="#" name="myForm">
-										<div class="search_box seach_box_home2_area">
+										<div class="search_box seach_box_home2_area">										
 											<input name="Name" id="itp" class="input_text" type="text" value="输入你想要的"/>
-											<button type="submit" class="btn-search">
+											<button type="button" class="btn-search" onclick="ajax()">
 												<i class="fa fa-search"></i>
 											</button>
 										</div>
@@ -251,10 +230,10 @@
 										<%}%>
 										</li>
 										<li><a>类型</a>
-									<%if(session.getAttribute("clothestype")!=null){%>
+									<%if(session.getAttribute("typename")!=null){%>
 									<ul>
-										 <c:forEach items="${clothestype }" var="type"> 
-										 	<li><a href="showShop.do?op=type&clothestype=${type.clothestype}">${type.clothestype}</a></li>
+										 <c:forEach items="${typename }" var="type"> 
+										 	<li><a href="showShop.do?op=type&clothestype=${type.typename}">${type.typename}</a></li>
 										 </c:forEach> 
 									</ul>
 									<%}%>	

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.yc.shopping.vo.ClothesDetailVO;
 import com.yc.shopping.vo.ClothesVO;
+import com.yc.shopping.vo.TypeVO;
 
 @Repository("ClothesDao")
 public interface ClothesDao {
@@ -52,8 +53,8 @@ public interface ClothesDao {
 	 * 查询服装类型
 	 * @return
 	 */
-	@Select("select distinct clothestype from clothesvo")
-	List<ClothesVO> showClothestype();
+	@Select("select distinct typename from typevo")
+	List<TypeVO> showtypename();
 	
 	/**
 	 * 根据价格   关联查询
@@ -151,16 +152,16 @@ public interface ClothesDao {
 	 * @param rows
 	 * @return
 	 */
-	@Select("select * from clothesvo a,clothdetailvo b where a.clothesid=b.clothesid AND clothestype=#{clothestype} GROUP BY clothesname order by clothesname LIMIT #{pages},#{rows}")
-	List<Map<String, Object>> searchBytype(@Param("clothestype")String clothestype,@Param("pages")Integer pages,@Param("rows")Integer rows);
+	@Select("select * from clothesvo a,clothdetailvo b where a.clothesid=b.clothesid AND clothestype like concat('%',#{typename},'%') GROUP BY clothesname order by clothesname LIMIT #{pages},#{rows}")
+	List<Map<String, Object>> searchBytype(@Param("typename")String typename,@Param("pages")Integer pages,@Param("rows")Integer rows);
 	
 	/**
 	 * 根据类型   查询条数
 	 * @param clothestype
 	 * @return
 	 */
-	@Select("select count(*) from clothesvo where clothestype=#{clothestype}")
-	long countBytype(String clothestype);
+	@Select("select count(*) from clothesvo where clothestype like concat('%',#{typename},'%')")
+	long countBytype(String typename);
 
 	// ==================================================================================
 
@@ -216,4 +217,24 @@ public interface ClothesDao {
 			+ ", clothesintroduce=#{clothes.clothesintroduce} , clothesorigprice=#{clothes.clothesorigprice} "
 			+ ", clothesprice=#{clothes.clothesprice} where clothesid=#{clothes.clothesid}")
 	int modifyClothes(@Param("clothes") ClothesVO clothes);
+	@Update("update clothesvo set aid =#{clothesid} and clothesname=#{clothes.clothesname} and clothestype=#{clothes.clothestype} "
+			+ "and clothesbigtag=#{clothes.clothesbigtag} and clothesbrand=#{clothes.clothesbrand} and brandpic=#{clothes.brandpic} "
+			+ "and clothesintroduce=#{clothes.clothesintroduce} and clothesorigprice=#{clothes.clothesorigprice} "
+			+ "and clothesprice=#{clothes.clothesprice}")
+	int modifyClothes(@Param("clothesid") int clothesid, @Param("clothes") ClothesVO clothes);
+	
+	@Select("select distinct brandpic from clothesvo")
+	List<ClothesVO> showbrandpic();
+	
+	@Select("select * from clothesvo a,clothdetailvo b where a.clothesid=b.clothesid AND brandpic=#{brandpic} GROUP BY clothesname order by clothesname LIMIT #{pages},#{rows}")
+	List<Map<String, Object>> searchBybrandpic(@Param("brandpic")String brandpic,@Param("pages")Integer pages,@Param("rows")Integer rows);
+	
+	@Select("select count(*) from clothesvo where brandpic=#{brandpic}")
+	long countBybrandpic(String brandpic);
+	
+	@Select("select * from clothesvo where clothesname like CONCAT('%',#{clothesname},'%')"
+			+ " or clothesbrand like CONCAT('%',#{clothesbrand},'%') or clothesbigtag like CONCAT('%','#{clothesbigtag}','%') or" 
+            + "clothestype like CONCAT('%',#{clothestype},'%') GROUP BY clothesname LIMIT #{pages},#{rows}")
+	List<Map<String, Object>> selectByClothes(@Param("clothesname") String clothesname, @Param("pages") int pages,
+			@Param("rows") int rows);
 }

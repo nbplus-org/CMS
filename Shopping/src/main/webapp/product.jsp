@@ -65,16 +65,19 @@
                 	if(data==0){
                 		alert("成功添加到购物车");
                 	}else if(data==1){
-                		$("#check").html("请填写完整的信息");
+                		$("#check").html("请填写完整的信息!");
                 		$("#check").css("color", "red");
                 	}else if(data==2){
-                		$("#check").html("此类型商品现已缺货,请选择其他商品");
+                		$("#check").html("此类型商品现已缺货,请选择其他商品!");
                 		$("#check").css("color", "red");
                 	}else if(data==3){
-                		$("#check").html("您选择的商品库存不足");
+                		$("#check").html("您选择的商品库存不足!");
                 		$("#check").css("color", "red");
                 	}else if(data==4){
-                		alert("系统故障,请稍后再试");
+                		alert("系统故障,请稍后再试!");
+                	}else if(data==5){
+                		$("#check").html("请先登录!")              
+                		$("#check").css("color", "red");
                 	}
                 });
                 }
@@ -207,7 +210,7 @@
 								<p class="rating_dollor rating_margin"><span class="rating_value_one dollor_size">￥${clothes.clothesorigprice}</span> <span class="rating_value_two">￥${clothes.clothesprice}</span></p>
 								<div class="add-to-cart">
 									<input type="text" title="Qty" name="qty" id="qty" class="qty"/>
-									<button type="button" title="Add to Cart" onclick="ajax()" class="cart_button"><span>Add to Cart</span></button>
+									<button type="button" title="Add to Cart" onclick="ajax()" id="buy" class="cart_button"><span>Add to Cart</span></button>
 									<span id="check"></span> <input type="hidden" name="clothesid"
 										id="clothesid" value="${clothes.clothesid }" />
 								</div>
