@@ -68,8 +68,8 @@
   
 
      function fayoujian(){
-	 var emailSpan= $("#emailSpan").val();  
-	 if(emailSpan==''){
+	 var emailSpan= $("#emailSpan").text();  
+	 if(emailSpan.length==0){
 		 var email=$("#uEmail").val();
 		 var data={email:email}
 		 $.post("fayoujian.do",data,function(data){
