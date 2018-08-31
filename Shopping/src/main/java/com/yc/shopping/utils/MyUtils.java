@@ -13,9 +13,9 @@ import javax.mail.internet.MimeMessage;
 
 public class MyUtils {
 	//设置谁发邮件	注意，不能用qq邮箱	ssl链接
-	public static  String myEmailAccount = "zp1455665803@163.com";
+	public static  String myEmailAccount = "15570921217@163.com";
 	//这不是登录密码，是授权密码
-	public static  String myEmailPassword = "zp1455665803";
+	public static  String myEmailPassword = "1628443167hb";
 	public static  String myEmailSMTPHost = "smtp.163.com";
 	//邮件内容收件人邮箱
 	public void sendMail(String receiveMail){
