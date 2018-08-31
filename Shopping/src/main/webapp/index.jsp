@@ -159,8 +159,8 @@
 										<li><a class="home2_size"><span class="Footwear">类型</span></a>
 											<div class="mega_menu_list menu_home2_list" id="list">
 												<div class="single_megamenu">
-												<c:forEach items="${clothestype }" var="type">
-													<h2><i class="fa fa-angle-right"></i><a href="showShop.do?op=type&clothestype=${type.clothestype}">${type.clothestype}</a></h2>				
+												<c:forEach items="${typename }" var="type">
+													<h2><i class="fa fa-angle-right"></i><a href="showShop.do?op=type&clothestype=${type.typename}">${type.typename}</a></h2>				
 												</c:forEach>
 												</div>																		
 											</div>
@@ -230,10 +230,10 @@
 										<%}%>
 										</li>
 										<li><a>类型</a>
-									<%if(session.getAttribute("clothestype")!=null){%>
+									<%if(session.getAttribute("typename")!=null){%>
 									<ul>
-										 <c:forEach items="${clothestype }" var="type"> 
-										 	<li><a href="showShop.do?op=type&clothestype=${type.clothestype}">${type.clothestype}</a></li>
+										 <c:forEach items="${typename }" var="type"> 
+										 	<li><a href="showShop.do?op=type&clothestype=${type.typename}">${type.typename}</a></li>
 										 </c:forEach> 
 									</ul>
 									<%}%>	

@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.yc.shopping.vo.ClothesDetailVO;
 import com.yc.shopping.vo.ClothesVO;
+import com.yc.shopping.vo.TypeVO;
 
 
 public interface ClothesInterface {
@@ -45,7 +46,7 @@ public interface ClothesInterface {
 	 * 查询服装类型
 	 * @return
 	 */
-	public List<ClothesVO> showClothestype();
+	public List<TypeVO> showtypename();
 	/**
 	 *  根据价格   关联查询
 	 * @param lower
@@ -127,14 +128,14 @@ public interface ClothesInterface {
 	 * @param rows
 	 * @return
 	 */
-	public List<Map<String, Object>> searchBytype(String clothestype,Integer pages,Integer rows);
+	public List<Map<String, Object>> searchBytype(String typename,Integer pages,Integer rows);
 
 	/**
 	 * 根据类型   查询条数
 	 * @param clothestype
 	 * @return
 	 */
-    public long countBytype(String clothestype);
+    public long countBytype(String typename);
 
 	//==============================================================
 	

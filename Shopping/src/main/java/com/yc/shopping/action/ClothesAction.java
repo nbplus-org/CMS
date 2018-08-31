@@ -23,6 +23,7 @@ import com.yc.shopping.biz.CartInterface;
 import com.yc.shopping.biz.ClothesInterface;
 import com.yc.shopping.vo.ClothesDetailVO;
 import com.yc.shopping.vo.ClothesVO;
+import com.yc.shopping.vo.TypeVO;
 import com.yc.shopping.vo.UserVO;
 
 @Controller("ClothesAction")
@@ -84,9 +85,9 @@ public class ClothesAction {
 		 List<ClothesVO> clothesbrand=cBiz.showClothesbrand();
 		 model.addAttribute("clothesbrand", clothesbrand);
 		 session.setAttribute("clothesbrand", clothesbrand);
-		 List<ClothesVO> clothestype=cBiz.showClothestype();
-		 model.addAttribute("clothestype", clothestype);
-		 session.setAttribute("clothestype", clothestype);
+		 List<TypeVO> typename=cBiz.showtypename();
+		 model.addAttribute("typename", typename);
+		 session.setAttribute("typename", typename);
 		 List<ClothesVO> brandpic=cBiz.showbrandpic();
 		 model.addAttribute("brandpic", brandpic);
 		 session.setAttribute("brandpic", brandpic);
