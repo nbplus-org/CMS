@@ -12,6 +12,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -115,16 +116,6 @@ public class ClothesAction {
 	 */
 	@RequestMapping("/backManager/conditionSelectClothes.do")
 	public String conditionSelectClothes(ClothesVO clothes, @Param("page") String page, Model model) {
-		System.out.println(
-				"================clothes.getClothesname()============================" + clothes.getClothesname());
-		System.out.println(
-				"================clothes.getClothesbigtag()============================" + clothes.getClothesbigtag());
-		System.out.println(
-				"================clothes.getClothesbrand()============================" + clothes.getClothesbrand());
-		System.out.println(
-				"================clothes.getClothestype()============================" + clothes.getClothestype());
-		System.out.println("=====================page=================" + page);
-
 		if (clothes.getClothesname() == null) {
 			clothes.setClothesname("");
 		}
@@ -145,8 +136,6 @@ public class ClothesAction {
 		}
 		// 从第几条开始
 		int startPage = (Integer.parseInt(page) - 1) * pageSize;
-		System.out.println("=====================startPage=================" + startPage);
-		System.out.println("=====================pageSize=================" + pageSize);
 		List<ClothesVO> allClothes = cBiz.selectClothesByCondition(clothes, startPage, pageSize);
 
 		// 查询总页数
@@ -185,41 +174,23 @@ public class ClothesAction {
 	 * @throws IllegalStateException
 	 * @throws IOException
 	 */
-	@RequestMapping("/backManager/springUpload.do")
-	public String springUpload(HttpServletRequest request,  Model model,@Param("clothedid") String clothesid,@Param("aid") String aid,
-			ClothesVO clothes) throws IllegalStateException, IOException {
-		
-		System.out.println("=============aid============="+aid);
-		clothes.setAid( Integer.parseInt(aid) );
-		
-		// 将当前上下文初始化给 CommonsMutipartResolver （多部分解析器）
-		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(
-				request.getSession().getServletContext());
-		
-		// 检查form中是否有enctype="multipart/form-data"
-		if (multipartResolver.isMultipart(request)) {
-			
-			// 将request变成多部分request
-			MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
-			
-			// 获取multiRequest 中所有的文件名
-			Iterator iter = multiRequest.getFileNames();
-			System.out.println("============================================"+"进来了");	
-			while (iter.hasNext()) {
-				
-				// 一次遍历所有文件
-				MultipartFile file = multiRequest.getFile(iter.next().toString());
-				System.out.println("=============================file.getName()==============="+file.getName());	
-				if (file != null) {
-					String path = "/upload" + file.getOriginalFilename();
-					// 上传
-					file.transferTo(new File(path));
-				}
-			}
+	@RequestMapping(value="/backManager/springUpload.do",method=RequestMethod.POST)
+	public String springUpload(HttpServletRequest request, Model model, @Param("clothedid") String clothesid,
+			@Param("aid") String aid, ClothesVO clothes, @Param("file") MultipartFile file)
+			throws IllegalStateException, IOException {
+
+		System.out.println("=============aid=============" + aid);
+		/*clothes.setAid(Integer.parseInt(aid));*/
+		// 一次遍历所有文件
+		if (!file.isEmpty()) {
+			String filename = file.getOriginalFilename();
+			System.out.println("=======图片名================" + filename);
+			File f = new File("F:/git/CMS/CMS/Shopping/src/main/webapp/upload/" + filename);
+			// 上传
+			file.transferTo(f);
+			f.mkdir();
 		}
 
-		// 上传后可以修改数据库
-
-		return "backManager/clothes-manager";
+		return "backManager/back-manager";
 	}
 }

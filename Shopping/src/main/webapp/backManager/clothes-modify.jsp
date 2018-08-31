@@ -8,9 +8,12 @@
 <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
 
 <script language="javascript" type="text/javascript">
-	function getPicDir(var value){
-		alert("value="+value);
-		$("#showPic").src=value;
+	function getPicDir(){
+		var value=$("#file").val();
+		var picDir= value.substring( value.lastIndexOf("\\")+1 );
+		alert("value="+picDir);
+		$("#showPic").attr('src',"../upload/"+picDir);
+		
 	}
 </script>
 </head>
@@ -27,7 +30,8 @@
 		</div>
 		<div class="mian_b">
 			<!-- ==================================form提交修改信息 -->
-			<form action="springUpload.do?clothesid=${clothesMsg.clothesid }&aid=${admin.aid }"
+			<form
+				action="springUpload.do?clothesid=${clothesMsg.clothesid }&aid=${admin.aid }"
 				enctype="multipart/form-data" method="post">
 
 				<table width="100%" border="0" cellpadding="0" cellspacing="0"
@@ -42,9 +46,8 @@
 						<td width="30%"><input type="text" class="input_01"
 							name="clothesname" id="textfield"
 							value="${clothesMsg.clothesname }" /></td>
-						<td>图片：<input class="input_01" type="file" name="brandpic"
-							id="file" accept="image/png, image/jpeg, image/gif, image/jpg"
-							onclick="getPicDir()" /></td>
+						<td>图片：<input class="input_01" type="file" name="file" id="file"
+							onchange="getPicDir()" accept="image/png, image/jpeg, image/gif, image/jpg" /></td>
 						<td width="40%">&nbsp;</td>
 						<td>&nbsp;</td>
 					</tr>
@@ -103,8 +106,8 @@
 						<td>&nbsp;</td>
 						<td>
 							<div align="center">
-								<input type="submit" value="提交修改" />
-								<input type="button" onclick="javascript:history.go(-1)" value="取消返回"/>
+								<input type="submit" value="提交修改" /> <input type="button"
+									onclick="javascript:history.go(-1)" value="取消返回" />
 							</div>
 						</td>
 						<td></td>
