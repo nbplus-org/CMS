@@ -49,18 +49,19 @@
 
 		//一般查询
 		function commonSearch() {
-			var val = $("#sousuo").val();
+			var val = $("#username").val();
 			var href = "commonSearch.do?keyWord=" + val;
 			window.location.href = href;
 		}
 
 		//高级查询
 		function topSearch() {
+			var nameTop = $("#username").val();
 			var usexTop = $("#usexTop").val();
 			var uemailTop = $("#uemailTop").val();
 			var uphoneTop = $("#uphoneTop").val();
 			var href = "topSearch.do?usex=" + usexTop + "&uemail=" + uemailTop
-					+ "&uphone=" + uphoneTop;
+					+ "&uphone=" + uphoneTop+"&uname="+nameTop;
 			window.location.href = href;
 		}
 	</script>
@@ -83,47 +84,42 @@
 					style="height: 35px; width: 70px; font-size: 12px; float: left; margin: 5px; margin-top: 10px; margin-left: 15px;">密码重置</button>
 
 				<p class="mian_b1_sousuo">
-					<input id="sousuo" type="text" placeholder="请输入用户账号" />
+					<input id="username" type="text" placeholder="账号" />
 				</p>
-				<a onclick="commonSearch()" title="搜索">
+					<select id="usexTop" class="mian_b1_sousuo">
+						<option>性别</option>
+						<option>男</option>
+						<option>女</option>
+					</select>
+					<p class="mian_b1_sousuo">
+					<input id="uemailTop" type="text" placeholder="邮箱" class="input_03" />
+				</p>
+				<p class="mian_b1_sousuo">
+					<input id="uphoneTop" type="text" placeholder="手机" class="input_03" />
+				</p>
+
+				<a onclick="topSearch()" title="搜索">
 					<p class="mian_b1_a3"></p>
 				</a>
-				<p class="mian_b1_a9">
+
+				<!-- <p class="mian_b1_a9">
 					<a href="#" onclick="click1('search')">高级搜索>></a>
-				</p>
+				</p> -->
 
 			</div>
 			<table width="100%" border="0" cellpadding="0" cellspacing="0"
 				class="mian_b_bg" align="center">
-				<tr id="search" style="display: none;">
-					<td colspan="8"
-						style="height: 35px; background-color: #DBDBDB; margin-left: 20px">
-						<select id="usexTop">
-							<option>性别</option>
-							<option>男</option>
-							<option>女</option>
-					</select>&nbsp;<input id="uemailTop" type="text" placeholder="邮箱"
-						class="input_03" />&nbsp;<input id="uphoneTop" type="text"
-						placeholder="手机" class="input_03" />&nbsp;
-					</td>
-					<td colspan="3" style="height: 35px; background-color: #DBDBDB;">
-						<a onclick="topSearch()" title="高级搜索">
-							<p class="mian_b1_a8" onclick="click('search')"></p>
-					</a>
-					</td>
-				</tr>
 				<tr>
 					<td width="3%" class="mian_b_bg_lm"><input name=""
 						type="hidden" value="" />&nbsp;</td>
-					<td width="10%" class="mian_b_bg_lm"><span></span>用户编号</td>
-					<td width="10%" class="mian_b_bg_lm"><span></span>用户账号</td>
-					<td width="17%" class="mian_b_bg_lm"><span></span>密码</td>
-					<td width="6%" class="mian_b_bg_lm"><span></span>性别</td>
+					<td width="12%" class="mian_b_bg_lm"><span></span>用户编号</td>
+					<td width="12%" class="mian_b_bg_lm"><span></span>用户账号</td>
+					<td width="19%" class="mian_b_bg_lm"><span></span>密码</td>
+					<td width="8%" class="mian_b_bg_lm"><span></span>性别</td>
 					<td width="10%" class="mian_b_bg_lm"><span></span>手机号</td>
 					<td width="12%" class="mian_b_bg_lm"><span></span>邮箱</td>
 					<td width="10%" class="mian_b_bg_lm"><span></span>购物积分</td>
-					<td width="12%" class="mian_b_bg_lm"><span></span>生日</td>
-					<td width="10%" class="mian_b_bg_lm"><span></span>操作</td>
+					<td width="14%" class="mian_b_bg_lm"><span></span>生日</td>
 				</tr>
 
 				<!-- jstl将查询的用户循环输出 -->
@@ -139,11 +135,6 @@
 						<td>${user.uemail }</td>
 						<td>${user.uintegral }</td>
 						<td>${user.ubirthday }</td>
-						<td>
-						<div class="mian_b_icon_03">
-							<a href="AddProductView.html">查看订单</a>
-						</div>
-					</td>
 					</tr>
 				</c:forEach>
 			</table>

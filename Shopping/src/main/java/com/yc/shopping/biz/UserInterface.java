@@ -94,12 +94,6 @@ public interface UserInterface {
 	 */
 	public int resetPwd(Object ids,String pwd);
 	
-	/**
-	 * 通过关键字分页查用户 huang(后台)
-	 * @param keyWord 
-	 * @return
-	 */
-	public List<UserVO> commonSelect(String keyWord,int page,int rows);
 	
 	/**
 	 * 通过用户id查电话号 huang(后台)
@@ -123,13 +117,6 @@ public interface UserInterface {
 	 * @return
 	 */
 	public int selectCount();
-	
-	/**
-	 * 重写count方法，普通查询分页huang(后台)
-	 * @param name
-	 * @return
-	 */
-	public int selectCountCommon(String name);
 	
 	public int selectCountTop(UserVO user);
 

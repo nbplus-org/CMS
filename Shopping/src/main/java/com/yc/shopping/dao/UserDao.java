@@ -113,16 +113,6 @@ public interface UserDao {
 	int resetPwd(@Param("uid") Object uid, @Param("pwd") String pwd);
 
 	/**
-	 * 输入关键字进行普通查询 huang（后台）
-	 * 
-	 * @param keyWord-关键字
-	 * @returnor uphone like %#{keyWord}% or uemail like %#{keyWord}% or usex
-	 *           like %#{keyWord}%
-	 */
-	@Select("select * from uservo where uname like CONCAT('%', #{keyWord},'%') limit #{startPage},#{pageSize}")
-	List<UserVO> commonSelect(@Param("keyWord") String keyWord, @Param("startPage") int startPage, @Param("pageSize") int pageSize);
-
-	/**
 	 * 查邮箱通过用户的id huang（后台）
 	 * 
 	 * @param uid
@@ -138,8 +128,10 @@ public interface UserDao {
 	 * @return
 	 */
 	@Select("select * from uservo where uemail like CONCAT('%', #{user.uemail},'%') and "
-			+ "uphone like CONCAT('%', #{user.uphone},'%') and usex=#{user.usex} limit #{startPage},#{pageSize}")
-	List<UserVO> topSelect(@Param("user")UserVO user, @Param("startPage")int startPage, @Param("pageSize")int pageSize);
+			+ "uphone like CONCAT('%', #{user.uphone},'%') and uname like CONCAT('%',#{user.uname},'%') and "
+			+ "usex like CONCAT('%', #{user.usex},'%') limit #{startPage},#{pageSize}")
+	List<UserVO> topSelect(@Param("user") UserVO user, @Param("startPage") int startPage,
+			@Param("pageSize") int pageSize);
 
 	/**
 	 * 分页查询需要，得到总用户数量 huang (后台)
@@ -151,20 +143,13 @@ public interface UserDao {
 	int selectCount();
 
 	/**
-	 * 普通查询count huang（后台）
-	 * 
-	 * @param name
-	 * @return
-	 */
-	@Select("select count(*) from uservo where uname like CONCAT('%', #{name},'%') ")
-	int selectCountCommon(String name);
-
-	/**
 	 * 高级查询count huang（后台）
+	 * 
 	 * @param user
 	 * @return
 	 */
 	@Select("select count(*) from uservo where uemail like CONCAT('%', #{uemail},'%') and "
-			+ "uphone like CONCAT(CONCAT('%', #{uphone}),'%') and usex=#{usex}")
+			+ "uphone like CONCAT(CONCAT('%', #{uphone}),'%') and usex like CONCAT('%', #{usex},'%') and"
+			+ " uname like CONCAT('%',#{uname},'%')")
 	int selectCountTop(UserVO user);
 }
