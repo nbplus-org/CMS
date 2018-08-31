@@ -176,4 +176,11 @@ public interface CartInterface {
 	 * @return
 	 */
 	public List<ClothesDetailVO> findclothespic(Integer clothesid);
+	
+	/**
+	 *  根据用户id 查询购物车数量
+	 * @param uid
+	 * @return
+	 */
+	public long cartCount(Integer uid);
 }

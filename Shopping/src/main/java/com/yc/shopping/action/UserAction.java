@@ -3,6 +3,7 @@ package com.yc.shopping.action;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.annotation.Resource;
@@ -16,12 +17,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.yc.shopping.biz.CartInterface;
+import com.yc.shopping.biz.ClothesInterface;
 import com.yc.shopping.biz.UserInterface;
 import com.yc.shopping.filter.BizException;
 import com.yc.shopping.utils.DataUtils;
 import com.yc.shopping.utils.Encrypt;
 import com.yc.shopping.utils.MyUtils;
 import com.yc.shopping.utils.MyUtilsPwd;
+import com.yc.shopping.vo.ClothesVO;
 import com.yc.shopping.vo.UserVO;
 
 /**
@@ -34,6 +38,8 @@ public class UserAction {
 
 	@Resource(name = "UserImp")
 	private UserInterface uimp;
+	
+
 
 	/**
 	 * 注册用户
