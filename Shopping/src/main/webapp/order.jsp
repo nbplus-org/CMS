@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
@@ -63,6 +64,9 @@ text-decoration:none;  /*超链接无下划线*/
 .aui-well-item-fr{
     color: red;
 }
+.pinglun{
+color: red;
+}
 </style>
 
 </style>
@@ -120,10 +124,14 @@ text-decoration:none;  /*超链接无下划线*/
 									<h3>订单号:${v.orderid }</h3>
 								</div>
 								<div class="aui-well-item-bd">
-									<h3>下单时间:${v.ordertime }</h3>
+									<h3>下单时间:
+									<fmt:formatDate value="${v.ordertime }" pattern="yyyy年MM月dd日"/>
+									</h3>
 								</div>
 								<div class="aui-well-item-bd">
-									<h3>预计送达:${v.arrivaltime }</h3>
+									<h3>预计送达:
+									<fmt:formatDate value="${v.arrivaltime }" pattern="yyyy年MM月dd日" /> 
+									</h3>
 								</div>
 							    <p>收货人:${v.uname }</p>&nbsp;&nbsp;&nbsp;
 							    <p>电话:${v.uphone }</p>&nbsp;&nbsp;&nbsp;
@@ -148,6 +156,10 @@ text-decoration:none;  /*超链接无下划线*/
 									<div class="">
 										<p>地址 :${v.useraddress }</p>
 									</div>
+									&nbsp;&nbsp;
+									<div class="">
+									<p  id="${o.orderdetailid}" onclick="pinglun(this)" class="pinglun">${v.orderstatus==2&&o.reviewstatus==0?'未评论':v.orderstatus==2&&o.reviewstatus==1?'已评论':'' }</p> 
+									</div>
 								</a>
 							</div>
 							</c:forEach>
@@ -157,13 +169,12 @@ text-decoration:none;  /*超链接无下划线*/
 								</p>
 							</a>
 							<div class="aui-mail-button">
-								<a  id="${v.orderid }" onclick="operation(this)">${v.orderstatus==0?'取消订单':v.orderstatus==1?'确认收货':v.orderstatus==2?'评价晒单':'删除订单' }</a> 
+								<a  id="${v.orderid }" onclick="operation(this)">${v.orderstatus==0?'取消订单':v.orderstatus==1?'确认收货':'删除订单' }</a> 
 							</div>
 						</div>
 						<div class="divHeight"></div>
 					</c:forEach>
-					
-						
+					<mt:page href="ResfoodServlet?op=query" total="${total}" rows="4"/></p>
 					</div>
 					
 					
@@ -177,10 +188,14 @@ text-decoration:none;  /*超链接无下划线*/
 									<h3>订单号:${v.orderid }</h3>
 								</div>
 								<div class="aui-well-item-bd">
-									<h3>下单时间:${v.ordertime }</h3>
+									<h3>下单时间:
+									<fmt:formatDate value="${v.ordertime }" pattern="yyyy年MM月dd日"/>
+									</h3>
 								</div>
 								<div class="aui-well-item-bd">
-									<h3>预计送达:${v.arrivaltime }</h3>
+									<h3>预计送达:
+									<fmt:formatDate value="${v.arrivaltime }" pattern="yyyy年MM月dd日" /> 
+									</h3>
 								</div>
 							    <p>收货人:${v.uname }</p>&nbsp;&nbsp;&nbsp;
 							    <p>电话:${v.uphone }</p>&nbsp;&nbsp;&nbsp;
@@ -205,6 +220,10 @@ text-decoration:none;  /*超链接无下划线*/
 									<div class="">
 										<p>地址 :${v.useraddress }</p>
 									</div>
+									&nbsp;&nbsp;
+									<div class="">
+									<p  id="${o.orderdetailid}" onclick="pinglun(this)" class="pinglun">${v.orderstatus==2&&o.reviewstatus==0?'未评论':v.orderstatus==2&&o.reviewstatus==1?'已评论':'' }</p>
+									</div>
 								</a>
 							</div>
 							</c:forEach>
@@ -214,7 +233,7 @@ text-decoration:none;  /*超链接无下划线*/
 								</p>
 							</a>
 							<div class="aui-mail-button">
-								<a  id="${v.orderid }" onclick="operation(this)">${v.orderstatus==0?'取消订单':v.orderstatus==1?'确认收货':v.orderstatus==2?'评价晒单':'删除订单' }</a> 
+								<a  id="${v.orderid }" onclick="operation(this)">${v.orderstatus==0?'取消订单':v.orderstatus==1?'确认收货':'删除订单' }</a> 
 							</div>
 						</div>
 						<div class="divHeight"></div>
@@ -233,10 +252,14 @@ text-decoration:none;  /*超链接无下划线*/
 									<h3>订单号:${v.orderid }</h3>
 								</div>
 								<div class="aui-well-item-bd">
-									<h3>下单时间:${v.ordertime }</h3>
+									<h3>下单时间:
+									<fmt:formatDate value="${v.ordertime }" pattern="yyyy年MM月dd日"/>
+									</h3>
 								</div>
 								<div class="aui-well-item-bd">
-									<h3>预计送达:${v.arrivaltime }</h3>
+									<h3>预计送达:
+									<fmt:formatDate value="${v.arrivaltime }" pattern="yyyy年MM月dd日" /> 
+									</h3>
 								</div>
 							    <p>收货人:${v.uname }</p>&nbsp;&nbsp;&nbsp;
 							    <p>电话:${v.uphone }</p>&nbsp;&nbsp;&nbsp;
@@ -261,6 +284,10 @@ text-decoration:none;  /*超链接无下划线*/
 									<div class="">
 										<p>地址 :${v.useraddress }</p>
 									</div>
+									&nbsp;&nbsp;
+									<div class="">
+									<p  id="${o.orderdetailid}" onclick="pinglun(this)" class="pinglun">${v.orderstatus==2&&o.reviewstatus==0?'未评论':v.orderstatus==2&&o.reviewstatus==1?'已评论':'' }</p>
+									</div>
 								</a>
 							</div>
 							</c:forEach>
@@ -270,7 +297,7 @@ text-decoration:none;  /*超链接无下划线*/
 								</p>
 							</a>
 							<div class="aui-mail-button">
-								<a  id="${v.orderid }" onclick="operation(this)">${v.orderstatus==0?'取消订单':v.orderstatus==1?'确认收货':v.orderstatus==2?'评价晒单':'删除订单' }</a> 
+								<a  id="${v.orderid }" onclick="operation(this)">${v.orderstatus==0?'取消订单':v.orderstatus==1?'确认收货':'删除订单' }</a> 
 							</div>
 						</div>
 						<div class="divHeight"></div>
@@ -283,17 +310,21 @@ text-decoration:none;  /*超链接无下划线*/
 					
 					<!-- 待评价 -->
 					<div class="tab-panel-item">
-							    <c:forEach items="${order2 }" var="v" >
+						<c:forEach items="${order4 }" var="v" >
 						<div class="tab-item">
 							<a id="aa" class="aui-well-item aui-well-item-clear">
 								<div class="aui-well-item-bd">
 									<h3>订单号:${v.orderid }</h3>
 								</div>
 								<div class="aui-well-item-bd">
-									<h3>下单时间:${v.ordertime }</h3>
+									<h3>下单时间:
+									<fmt:formatDate value="${v.ordertime }" pattern="yyyy年MM月dd日"/>
+									</h3>
 								</div>
 								<div class="aui-well-item-bd">
-									<h3>预计送达:${v.arrivaltime }</h3>
+									<h3>预计送达:
+									<fmt:formatDate value="${v.arrivaltime }" pattern="yyyy年MM月dd日" /> 
+									</h3>
 								</div>
 							    <p>收货人:${v.uname }</p>&nbsp;&nbsp;&nbsp;
 							    <p>电话:${v.uphone }</p>&nbsp;&nbsp;&nbsp;
@@ -317,6 +348,10 @@ text-decoration:none;  /*超链接无下划线*/
 									
 									<div class="">
 										<p>地址 :${v.useraddress }</p>
+									</div>
+									&nbsp;&nbsp;
+									<div class="">
+									<p  id="${o.orderdetailid}" onclick="pinglun(this)" class="pinglun">${v.orderstatus==2&&o.reviewstatus==0?'未评论':v.orderstatus==2&&o.reviewstatus==1?'已评论':'' }</p>
 									</div>
 								</a>
 							</div>
@@ -327,28 +362,32 @@ text-decoration:none;  /*超链接无下划线*/
 								</p>
 							</a>
 							<div class="aui-mail-button">
-								<a  id="${v.orderid }" onclick="operation(this)">${v.orderstatus==0?'取消订单':v.orderstatus==1?'确认收货':v.orderstatus==2?'评价晒单':'删除订单' }</a> 
+								<a  id="${v.orderid }" onclick="operation(this)">${v.orderstatus==0?'取消订单':v.orderstatus==1?'确认收货':'删除订单' }</a>  
 							</div>
 						</div>
 						<div class="divHeight"></div>
-					</c:forEach>
+					</c:forEach> 
 					
 					
 					</div>
 					
 					<!-- 已完成-->
 					<div class="tab-panel-item">
-							    <c:forEach items="${order3 }" var="v" >
+							    <c:forEach items="${order2 }" var="v" >
 						<div class="tab-item">
 							<a id="aa" class="aui-well-item aui-well-item-clear">
 								<div class="aui-well-item-bd">
 									<h3>订单号:${v.orderid }</h3>
 								</div>
 								<div class="aui-well-item-bd">
-									<h3>下单时间:${v.ordertime }</h3>
+									<h3>下单时间:
+									<fmt:formatDate value="${v.ordertime }" pattern="yyyy年MM月dd日"/>
+									</h3>
 								</div>
 								<div class="aui-well-item-bd">
-									<h3>预计送达:${v.arrivaltime }</h3>
+									<h3>预计送达:
+									<fmt:formatDate value="${v.arrivaltime }" pattern="yyyy年MM月dd日" /> 
+									</h3>
 								</div>
 							    <p>收货人:${v.uname }</p>&nbsp;&nbsp;&nbsp;
 							    <p>电话:${v.uphone }</p>&nbsp;&nbsp;&nbsp;
@@ -372,6 +411,11 @@ text-decoration:none;  /*超链接无下划线*/
 									
 									<div class="">
 										<p>地址 :${v.useraddress }</p>
+										
+									</div>
+									&nbsp;&nbsp;
+									<div class="">
+									<p  id="${o.orderdetailid}" onclick="pinglun(this)" class="pinglun">${v.orderstatus==2&&o.reviewstatus==0?'未评论':v.orderstatus==2&&o.reviewstatus==1?'已评论':'' }</p>
 									</div>
 								</a>
 							</div>
@@ -383,7 +427,7 @@ text-decoration:none;  /*超链接无下划线*/
 							</a>
 							<div class="aui-mail-button">
 							    
-								<a  id="${v.orderid }" onclick="operation(this)">${v.orderstatus==0?'取消订单':v.orderstatus==1?'确认收货':v.orderstatus==2?'评价晒单':'删除订单' }</a> 
+								<a  id="${v.orderid }" onclick="operation(this)">${v.orderstatus==0?'取消订单':v.orderstatus==1?'确认收货':'删除订单' }</a>  
 							</div>
 						</div>
 						<div class="divHeight"></div>
@@ -474,11 +518,9 @@ text-decoration:none;  /*超链接无下划线*/
             }else if(a=='确认收货'){
             	 orderstatus='1';
             	 showConfirm(obj,orderstatus);
-            }else if(a=='评价晒单'){
-            	 orderstatus='2';
             }else if(a=='删除订单'){
-            	  orderstatus='3';
-            	 showConfirm(obj,orderstatus);
+            	  orderstatus='2';
+            	  showConfirm(obj,orderstatus);
             }
              
              
@@ -538,10 +580,25 @@ text-decoration:none;  /*超链接无下划线*/
         $.message('操作成功');
      }
      
-     
+     ///////////////-----平论代码
+     function pinglun(obj){
+    	 var p=$(obj).text();
+    	 var orderdetailid=obj.id;
+    	 if(p=='未评论'){
+    		 window.location.href="review.do?orderdetailid="+orderdetailid;
+    	 }
+    	 
+     }
      
     
     
+     
+     
+     
+     
+     
+     
+     
     
     </script>
     

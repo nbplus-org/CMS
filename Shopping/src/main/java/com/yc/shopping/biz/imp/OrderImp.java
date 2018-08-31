@@ -1,9 +1,11 @@
 package com.yc.shopping.biz.imp;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.junit.Test;
 import org.springframework.stereotype.Service;
 
 import com.yc.shopping.biz.OrderInterface;
@@ -12,6 +14,7 @@ import com.yc.shopping.dao.UserDao;
 import com.yc.shopping.filter.BizException;
 import com.yc.shopping.utils.Encrypt;
 import com.yc.shopping.vo.OrderVO;
+import com.yc.shopping.vo.ReviewVO;
 import com.yc.shopping.vo.UserVO;
 
 
@@ -34,15 +37,11 @@ public class OrderImp implements OrderInterface{
 	 * @return
 	 * @throws BizException 
 	 */
-	public UserVO findCartByUser(UserVO userVo) throws BizException {
-		UserVO u=orderDao.selectCartByUser(userVo);
-		///?????//?
-		if(u.getClothesDetailVo().get(0)==null ){
-			System.out.println("=");
-			throw new BizException("请先购买商品");
-			
-		}
-		return u;
+   
+	public List<Map<String,Object>> findCartByUser(int[] arry) throws BizException {
+		
+		return orderDao.selectCartByUser( arry);
+		
 	}
 
 	/**
@@ -107,12 +106,12 @@ public class OrderImp implements OrderInterface{
      * @param userVo
      * @return
      */
-	public void addOrderDetailVo(UserVO userVo,int orderid) {
+	public void addOrderDetailVo(List<Map<String,Object>> list,int orderid) {
 		
-		for(int i=0;i<userVo.getClothesDetailVo().size();i++){
+		for(int i=0;i<list.size();i++){
 			
-			orderDao.insertToOrderDetailVo(orderid, userVo.getClothesDetailVo().get(i).getClodetailid(),
-					userVo.getCartVo().get(i).getCnum());
+			orderDao.insertToOrderDetailVo(orderid, (Integer)list.get(i).get("clodetailid"),
+					(Integer)list.get(i).get("cnum"));
 		}
 		
 	}
@@ -121,7 +120,12 @@ public class OrderImp implements OrderInterface{
      * wang查看订单
      * @return
      */
-	public List<OrderVO> findOrder(UserVO userVo) {
+	/*public List<OrderVO> findOrder(UserVO userVo,int pages,int rows) {
+		
+		int offset=(pages-1)*rows;
+		return orderDao.selectUserOrder(userVo ,offset,rows);
+	}*/
+    public List<OrderVO> findOrder(UserVO userVo) {
 		
 		return orderDao.selectUserOrder(userVo);
 	}
@@ -150,6 +154,42 @@ public class OrderImp implements OrderInterface{
 	@Override
 	public int changeOrderStatus(OrderVO orderVo) {
 		return orderDao.updateOrderStatus(orderVo);
+	}
+	
+	 /**
+		 * wang 查看未评价的订单
+		 * @param userVo
+		 * @return
+		 */
+	@Override
+	public List<OrderVO> findOrderdaipingjia(UserVO userVo) {
+		return orderDao.selectOrderdaipingjia(userVo);
+	}
+
+	/**
+	 * wang根据订单详情标号查服装编号
+	 * @return
+	 */
+	@Override
+	public Map<String, Object> findClothByClodetail(String orderdetailid) {
+		return orderDao.selectClothByClodetail(orderdetailid);
+	}
+	/**
+	 * wang 插入评论
+	 * @return
+	 */
+	@Override
+	public int addReviewVO(ReviewVO reviewVo) {
+		return orderDao.insertReviewVO(reviewVo);
+	}
+	
+	/**
+	 * wang 添加评论表后，修改订单详情状态
+	 * @return
+	 */
+	@Override
+	public int changeOrderDetailVO(String orderdetailid) {
+		return orderDao.updateOrderDetailVO(orderdetailid);
 	}
 	
 	
