@@ -49,8 +49,45 @@
 <link rel="stylesheet" href="css/responsive.css">
 <!-- modernizr JS ============================================ -->
 <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+
+<!-- 自定义提示框css -->
+<link rel="stylesheet" href="js/advice/message.css">
 <script type="text/javascript" src="easyui/jquery.min.js"></script>
 <script type="text/javascript">
+       //成功提示框
+     function success(){
+      $.message('发送成功');
+     }
+
+     function fail(){
+         $.message({
+             message:'发送失败',
+             type:'error'
+         });
+     }
+  
+
+     function fayoujian(){
+	 var emailSpan= $("#emailSpan").val();  
+	 if(emailSpan==''){
+		 var email=$("#uEmail").val();
+		 var data={email:email}
+		 $.post("fayoujian.do",data,function(data){
+			 if(data=='1'){
+				 success();
+			 }else if(data=='2'){
+				 fail();
+			 }else if(data=='0'){
+				 $("#emailSpan").html("请输入邮箱");
+			 }
+			 
+			 
+		 });
+	 }
+	
+	
+    }
+
 
 	//注册时判断用户名是否已被注册
 	function judgeuname() {
@@ -69,7 +106,7 @@
 	//注册时判断邮箱是否已被注册
 	function judgeuemail() {
 		var str = $("#uEmail").val();
-		var reg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+		var reg =  /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
 		var emailSpan = $("#emailSpan");
 		if (reg.test(str) == false) {
 			emailSpan.html("邮箱格式不正确，请输入正确的邮箱");
@@ -82,8 +119,6 @@
 				if (data != "邮箱可用") {
 					emailSpan.html("邮箱已被注册");
 					emailSpan.css("color", "red");
-				}else{
-					alert("发送成功");
 				}
 			});
 		}
@@ -151,6 +186,48 @@
 			return false;
 		}
 	}
+	
+	
+	function zhuce(){
+			 if(onsub()==true){
+				  var uname=$("#uName").val();
+				  var upwd=$("#uPwd").val();
+				  var uphone=$("#uPhone").val();
+				  var uemail=$("#uEmail").val();
+				  var code=$("#code").val();
+				  var usex = $("input[name='usex']:checked").val();
+				  var data={uname:uname,upwd:upwd,uphone:uphone,uemail:uemail,code:code ,usex:usex };
+				  $.post("regist.do",data,function(data){
+					 if(data=='0'){
+						alert("请完善信息");
+					 }else if(data=='1'){
+						 alert("注册成功,去登陆");
+						 window.location.href="reglogin.jsp"; 
+					 }else if(data=='2'){
+						 alert("注册失败");
+					 }
+					  
+				  });
+				  
+				  
+			  }
+			 
+			  
+		  
+	}
+	 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </script>
 
 </head>
@@ -180,7 +257,7 @@
 				</div>
 			</div>
 
-			<form action="regist.do" method="post" onsubmit="return onsub()">
+			<form id="form1">
 				<div class="row">
 					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 						<div class="new_customer">
@@ -191,7 +268,7 @@
 									<div class="email_address">
 										<input type="text" class="email_test" name="uname" id="uName"
 											placeholder="请输入用户名 / 账号" onblur="judgeuname()"
-											autocomplete="off" /> <span id="nameSpan"></span>
+											autocomplete="off" value="${user.uname }" /> <span id="nameSpan"></span>
 									</div>
 								</li>
 								<li>密码<span>*</span></li>
@@ -208,7 +285,7 @@
 									<div class="email_address">
 										<input type="text" class="email_test" name="uphone"
 											id="uPhone" placeholder="请输入手机号" onblur="judgeuphone()"
-											autocomplete="off" /> <span id="phoneSpan"></span>
+											autocomplete="off" value="${user.uphone }"/> <span id="phoneSpan"></span>
 									</div>
 								</li>
 
@@ -217,8 +294,8 @@
 									<div class="email_address">
 										<input type="text" id="uEmail" name="uemail"
 											style="background: #f0f0f0;" placeholder="请输入邮箱"
-											onblur="judgeuemail()" autocomplete="off" />
-										<button onclick="judgeuemail()" type="button">发送验证码</button>
+											onblur="judgeuemail()" autocomplete="off" value="${user.uemail }"/>
+										<button onclick="fayoujian()" type="button">发送验证码</button>
 										<span id="emailSpan"></span>
 									</div>
 								</li>
@@ -234,7 +311,7 @@
 
 								<li>
 									<div class="email_address">
-										<input type="radio" checked="checked" name="usex" value="1" />男
+										<input type="radio" checked="checked" name="usex" value="1"  />男
 										<input id="woman" type="radio" name="usex" value="0" />女
 									</div>
 								</li>
@@ -242,7 +319,7 @@
 							</ul>
 						</div>
 						<div class="create_button_area">
-							<button type="submit" class="create_button">注册</button>
+							<button type="button" class="create_button" onclick="zhuce()">注册</button>
 						</div>
 					</div>
 			</form>
@@ -334,6 +411,8 @@
 		<script src="js/plugins.js"></script>
 		<!-- main JS  -->
 		<script src="js/main.js"></script>
+			<!-- 自定义弹框提示 -->
+   	<script src="js/advice/message.min.js"></script>
 	</div>
 </body>
 </head>

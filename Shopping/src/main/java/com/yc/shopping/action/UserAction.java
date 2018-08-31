@@ -48,22 +48,85 @@ public class UserAction {
 	 * @return
 	 */
 
-	@RequestMapping(value = "/regist.do", method = RequestMethod.POST)
-	public String registerUser(UserVO user, Model model) {
+	@RequestMapping(value = "/regist.do"/*, method = RequestMethod.POST*/)
+	public void registerUser(UserVO user,String code, Model model,HttpServletResponse response) {
+         
+		if(user.getUname()==null || "".equals(user.getUname()) ||
+		   user.getUpwd()==null  || "".equals(user.getUpwd())  ||	
+		   user.getUphone()==null ||"".equals(user.getUphone()) ||
+		   user.getUemail()==null ||"".equals(user.getUemail()) ||
+		   code==null || "".equals(code)
+				){
+			try {
+				response.getWriter().print("0");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		}else{
+			// 得到当前时间
+			user.setUbirthday(new Date());
+			user.setNickname(user.getUname());
 
-		// 得到当前时间
-		user.setUbirthday(new Date());
-		user.setNickname(user.getUname());
+			user.setNickname(user.getUname());
 
-		user.setNickname(user.getUname());
+			// 密码加密存入数据库
+			user.setUpwd(Encrypt.md5(user.getUpwd()));
 
-		// 密码加密存入数据库
-		user.setUpwd(Encrypt.md5(user.getUpwd()));
-
-		uimp.registerUser(user);
-
-		return "shop";
+			int u=uimp.registerUser(user);
+			if(u>0){
+				try {
+					response.getWriter().print("1");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+			}else{
+				try {
+					response.getWriter().print("2");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+			}
+			
+            
+		}
+		
+		
+	
 	}
+	
+	/**
+	 * huang发邮件 注册
+	 */
+	@RequestMapping("fayoujian.do")
+	public void fayoujian (String email, HttpServletResponse response){
+		
+		MyUtils sendemail = new MyUtils();
+		if(email!=null || !"".equals(email)){
+			sendemail.sendMail(email);
+			try {
+				response.getWriter().print("1");//邮箱发送成功
+			} catch (IOException e) {
+				try {
+					response.getWriter().print("2");
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+		}else{
+			try {
+				response.getWriter().print("0");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}//请填写邮箱
+			
+		}
+		
+	}
+	
+	
 
 	/**
 	 * wang 根据用户账号查找邮箱
@@ -129,7 +192,7 @@ public class UserAction {
 	 */
 	@RequestMapping(value = "/judgeCode.do", method = RequestMethod.POST)
 	public void judgeCode(HttpServletResponse response, String name) {
-		System.out.println("=========验证码===============" + DataUtils.code);
+		System.out.println("=========判断验证码是否正确 huang===============" + DataUtils.code);
 		if (DataUtils.code.equals(name)) {
 			// 验证码正确
 			try {
@@ -180,8 +243,7 @@ public class UserAction {
 			// 数据库无该邮箱,可创建
 			try {
 				response.getWriter().print("邮箱可用");
-				MyUtils sendemail = new MyUtils();
-				sendemail.sendMail(uemail);
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
