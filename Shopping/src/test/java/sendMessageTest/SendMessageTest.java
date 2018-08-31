@@ -21,15 +21,10 @@ public class SendMessageTest {
 	private OrderDao odao;
     @Test
 	public void test(){
-		UserVO userVo=new UserVO();
-		userVo.setUname("wang123");
-	    UserVO u=odao.selectCartByUser(userVo);
-    	System.out.println(u.getUphone()+"="+u.getUintegral()+"="+u.getUname());
-    	
-    	System.out.println(u.getClothesDetailVo());
-    	
-    	System.out.println(u.getCartVo());
-    	System.out.println(u.getClothesVo());
+		
+		int[] a={3,4};
+	   
+    System.out.println(odao.selectCartByUser(a));
     	
     	
 	}

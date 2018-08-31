@@ -130,13 +130,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="row">
-											<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-												<div class="Continue_button">
-													<button type="submit" title="Submit Review" class="button">Continue</button>
-												</div>
-											</div>
-										</div>
+										
 								  </div>
 								</div>
 							</div>
@@ -156,6 +150,7 @@
 										<div class="row">
 											<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 												<div class="accordion_total_pricing">
+									<!-- 村数组 --><%--  <input id="arry" type="hidden" value="${arry }"> --%>
 													<table id="product_details_price">
 														<tr>
 															<th>产品名-数量</th>
@@ -165,10 +160,10 @@
 														</tr>
 														<c:forEach items="${list }" var="v" >
 														<tr>
-															<td><h2>${v.pname }x${v.num }</h2></td>
-															<td>${v.colour }-${v.size }码</td>
-															<td>￥${v.price }</td>
-															<td>￥${v.num*v.price}</td>
+															<td><h2>${v.clothesname }x${v.cnum }</h2></td>
+															<td>${v.clothescolour }-${v.clothessize }码</td>
+															<td>￥${v.clothesprice }</td>
+															<td>￥${v.cnum*v.clothesprice}</td>
 														</tr>
 														</c:forEach>
 													</table>
@@ -188,7 +183,7 @@
 													</table>
 												</div>
 												<div class="Continue_button continue_top place_order">
-													 <a href="#">忘记密码?</a>
+													 <a href="forgetpwd.jsp">忘记密码?</a>
 													<button type="button" onclick="judge()" id="b1" title="Submit Review" class="button">下单</button>
 													<span id="sp1"></span>
 												</div>
@@ -200,17 +195,7 @@
 						</div>
 					</div>
 					</form>
-					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-						<div class="check_progress">
-							<h2>结账进度</h2>
-							<ul id="progress_btn">
-								<li><i class="fa fa-minus"></i>Billing Address</li>
-								<li><i class="fa fa-minus"></i>Shipping Address</li>
-								<li><i class="fa fa-minus"></i>Shipping Method</li>
-								<li><i class="fa fa-minus"></i>Payment Method</li>
-							</ul>
-						</div>
-					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -265,19 +250,17 @@
         
         function judge(){
             var detailarea=$("#detailedarea").val();
-            
+           
             $("#sp1").html("");
         	if(detailarea.length==0){
         		$("#sp1").html("请填写详细地址");
         	}else{
         		var data={};
         		$.post("playOrder.do",data,function(data){
-        			if(data==1){
-        				$("#sp1").html("请先购买商品");
-        			}else{
+        			    
         				//tan();
-        				showPrompt()
-        			}
+        				showPrompt();
+        			
         		});
         	}  
         	
@@ -296,6 +279,7 @@
                 var area=$("#area").val();
                 var detailarea=$("#detailedarea").val();
                 var ordernotes=$("#ordernotes").val();
+                //获取数组的值
                 
                 
                 //获取表格里的折后价
@@ -306,7 +290,8 @@
                 
                 var pwd=data;   
                 var data1={pwd:pwd,uname:uname,uphone:uphone,province:province,
-                		   city:city,area:area,detailarea:detailarea,ordernotes:ordernotes,price:price};	
+                		   city:city,area:area,detailarea:detailarea,ordernotes:ordernotes,price:price
+                		   };	
                 $.post("panduanPwd.do",data1,function(data1){
                 	if(data1==0){
                 		showAlert();//密码错误

@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
 import com.yc.shopping.vo.OrderVO;
+import com.yc.shopping.vo.ReviewVO;
 import com.yc.shopping.vo.UserVO;
 
 /**
@@ -28,6 +29,8 @@ public interface OrderDao {
 	 * @return
 	 */
 	UserVO selectCartByUser(UserVO userVo);
+
+	List<Map<String, Object>> selectCartByUser(int[] arry);
 
 	/**
 	 * 查该用户的积分进行折扣 wang
@@ -52,16 +55,26 @@ public interface OrderDao {
 	 * 
 	 * @return
 	 */
-	@Insert("INSERT into OrderDetailvo (orderid,clodetailid,num) VALUES(#{orderid},#{clodetailid},#{num})")
+	@Insert("INSERT into OrderDetailvo (orderid,clodetailid,reviewstatus,num) VALUES(#{orderid},#{clodetailid},'0',#{num})")
 	int insertToOrderDetailVo(@Param("orderid") int orderid, @Param("clodetailid") int clodetailid,
 			@Param("num") int num);
 
-	/**
+	/*
 	 * wang查看订单
 	 * 
 	 * @return
 	 */
+	// List<OrderVO> selectUserOrder(UserVO userVo,int offset,int rows);
 	List<OrderVO> selectUserOrder(UserVO userVo);
+
+	/**
+	 * wang查看全部订单总数--分页总数
+	 * 
+	 * @param userVo
+	 * @return
+	 */
+	@Select("select count(*) cnt from Ordervo where uid=#{uid} and orderstatus!=4")
+	List<Map<String, Object>> selectAllOderTotal(UserVO userVo);
 
 	/**
 	 * wang 查带状态的订单
@@ -70,6 +83,17 @@ public interface OrderDao {
 	 * @return
 	 */
 	List<OrderVO> selectOrderByStatus0(@Param("uid") Integer uid, @Param("orderstatus") String status);
+
+	/**
+	 * wang 查看未评价的订单
+	 * 
+	 * @param userVo
+	 * @return
+	 */
+	// @Select("select * from Ordervo a LEFT JOIN OrderDetailvo b "
+	// + "on a.orderid=b.orderid where uid=#{uid} and orderstatus=2 AND
+	// reviewstatus='0' ORDER BY ordertime DESC ")
+	List<OrderVO> selectOrderdaipingjia(UserVO userVo);
 
 	/**
 	 * wang操作订单状态
@@ -91,40 +115,68 @@ public interface OrderDao {
 	 * 
 	 * @return
 	 */
-	@Select("select * from ordervo where orderstatus =#{orderstatus} "
-			+ "limit #{startPage}, #{pageSize}")
+	@Select("select * from ordervo where orderstatus =#{orderstatus} " + "limit #{startPage}, #{pageSize}")
 	List<OrderVO> selectAllOrderBystatus(@Param("orderstatus") String orderstatus, @Param("startPage") int startPage,
 			@Param("pageSize") int pageSize);
+
 	@Select("select count(*) from ordervo where orderstatus =#{orderstatus} ")
 	int selectOrderCount(@Param("orderstatus") String orderstatus);
-	
+
 	/**
 	 * 后台查询所有订单带状态status!=4 分页 huang（后台）
 	 * 
 	 * @return
 	 */
 	@Select("select * from ordervo where orderstatus !=#{orderstatus} "
-			+ "order by ordertime desc limit #{startPage}, #{pageSize} " )
+			+ "order by ordertime desc limit #{startPage}, #{pageSize} ")
 	List<OrderVO> selectAllOrder(@Param("orderstatus") String orderstatus, @Param("startPage") int startPage,
 			@Param("pageSize") int pageSize);
+
 	@Select("select count(*) from ordervo where orderstatus !=#{orderstatus} ")
 	int selectAllOrderCount(@Param("orderstatus") String orderstatus);
-	
+
+	/*
+	 * wang根据订单详情标号查服装编号--评价
+	 * 
+	 * @return
+	 */
+	@Select("SELECT c.clothesid from OrderDetailvo a LEFT JOIN ClothDetailvo b"
+			+ " on a.clodetailid=b.clodetailid LEFT JOIN clothesvo c "
+			+ "ON b.clothesid=c.clothesid WHERE orderdetailid=#{orderdetailid}")
+	Map<String, Object> selectClothByClodetail(String orderdetailid);
+
 	/**
-	 * 后台查询订单对应的订单详情 huang
-	 * 通过orderid订单号
+	 * wang 插入评论
+	 * 
+	 * @return
+	 */
+	@Insert("INSERT INTO Reviewvo VALUES(null,#{clothesid},#{uid},#{state},null,#{reviewstar},#{reviewstr})")
+	int insertReviewVO(ReviewVO reviewVo);
+
+	/**
+	 * wang 添加评论表后，修改订单详情状态
+	 * 
+	 * @return
+	 */
+	@Update("UPDATE OrderDetailvo set reviewstatus='1' WHERE orderdetailid=#{orderdetailid}")
+	int updateOrderDetailVO(String orderdetailid);
+
+	/**
+	 * 后台查询订单对应的订单详情 huang 通过orderid订单号
+	 * 
 	 * @return
 	 */
 	@Select("select * from ordervo o,orderdetailvo od,clothdetailvo cd,clothesvo c where "
 			+ "o.orderid =od.orderid and od.clodetailid=cd.clodetailid and cd.clothesid=c.clothesid and o.orderid=#{orderid}")
 	List<Map<String, Object>> selectOrderDetailvo(int orderid);
-	
+
 	/**
-	 * 修改status状态值  ,修改时会注入管理员信息，一般用于发货 huang(后台)
+	 * 修改status状态值 ,修改时会注入管理员信息，一般用于发货 huang(后台)
+	 * 
 	 * @param orderid
 	 * @return
 	 */
-	@Update( "update ordervo set orderstatus = '1' ,aid= where orderid=#{orderid}" )
-	int updateStatus(@Param("orderid")int orderid,@Param("aid")int aid);
-	
+	@Update("update ordervo set orderstatus = '1' ,aid= where orderid=#{orderid}")
+	int updateStatus(@Param("orderid") int orderid, @Param("aid") int aid);
+
 }
