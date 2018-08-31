@@ -210,4 +210,14 @@ public interface ClothesDao {
 			+ "and clothesintroduce=#{clothes.clothesintroduce} and clothesorigprice=#{clothes.clothesorigprice} "
 			+ "and clothesprice=#{clothes.clothesprice}")
 	int modifyClothes(@Param("clothesid") int clothesid, @Param("clothes") ClothesVO clothes);
+	
+	@Select("select distinct brandpic from clothesvo")
+	List<ClothesVO> showbrandpic();
+	
+	@Select("select * from clothesvo a,clothdetailvo b where a.clothesid=b.clothesid AND brandpic=#{brandpic} GROUP BY clothesname order by clothesname LIMIT #{pages},#{rows}")
+	List<Map<String, Object>> searchBybrandpic(@Param("brandpic")String brandpic,@Param("pages")Integer pages,@Param("rows")Integer rows);
+	
+	@Select("select count(*) from clothesvo where brandpic=#{brandpic}")
+	long countBybrandpic(String brandpic);
+	
 }

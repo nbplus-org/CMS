@@ -87,6 +87,9 @@ public class ClothesAction {
 		 List<ClothesVO> clothestype=cBiz.showClothestype();
 		 model.addAttribute("clothestype", clothestype);
 		 session.setAttribute("clothestype", clothestype);
+		 List<ClothesVO> brandpic=cBiz.showbrandpic();
+		 model.addAttribute("brandpic", brandpic);
+		 session.setAttribute("brandpic", brandpic);
 		 
     	List<Map<String, Object>> cart=ctBiz.findAll();
     	System.out.println(cart);
@@ -117,7 +120,7 @@ public class ClothesAction {
 	 * @return liu
 	 */
 	@RequestMapping("/showShop.do")
-	public String showShop(String clothestype,String clothesbrand,String clothesbigtag,String clothescolour,String op,String price,ClothesVO clothesVO, Model model, HttpServletRequest request) {
+	public String showShop(String brandpic,String clothestype,String clothesbrand,String clothesbigtag,String clothescolour,String op,String price,ClothesVO clothesVO, Model model, HttpServletRequest request) {
 		int pages;
 		int rows;
 		String page = request.getParameter("page");
@@ -226,20 +229,40 @@ public class ClothesAction {
 		}else if("color".equals(op)){
 			System.out.println("============" + clothescolour);
             request.getSession().setAttribute("clothescolour", clothescolour);
-			long total = cBiz.countByColor(clothescolour);
-			model.addAttribute("total", total);
-			// 求总页数 放到model.addAttribute里面
-			int allPage = (int) (total % rows == 0 ? total / rows : total / rows + 1);
-			model.addAttribute("allPage", allPage);
-			// 当前页数
-			if (pages < 1) {
-				pages = 1;
-			} else if (pages > allPage - 1) {
-				pages = allPage;
-			}
-			model.addAttribute("pages", pages);
-			List<Map<String, Object>> list = cBiz.searchByColor(clothescolour, pages, rows);
-			model.addAttribute("show", list);
+            if(request.getSession().getAttribute("clothescolour")==null){
+    			long total = cBiz.countByColor(clothescolour);
+    			model.addAttribute("total", total);
+    			// 求总页数 放到model.addAttribute里面
+    			int allPage = (int) (total % rows == 0 ? total / rows : total / rows + 1);
+    			model.addAttribute("allPage", allPage);
+    			// 当前页数
+    			if (pages < 1) {
+    				pages = 1;
+    			} else if (pages > allPage - 1) {
+    				pages = allPage;
+    			}
+    			model.addAttribute("pages", pages);
+    			List<Map<String, Object>> list = cBiz.searchByColor(clothescolour, pages, rows);
+    			model.addAttribute("show", list);
+            }else{
+            	String mycolor=(String) request.getSession().getAttribute("clothescolour");
+            	System.out.println("=====aaa====="+mycolor);
+    			long total = cBiz.countByColor(mycolor);
+    			model.addAttribute("total", total);
+    			// 求总页数 放到model.addAttribute里面
+    			int allPage = (int) (total % rows == 0 ? total / rows : total / rows + 1);
+    			model.addAttribute("allPage", allPage);
+    			// 当前页数
+    			if (pages < 1) {
+    				pages = 1;
+    			} else if (pages > allPage - 1) {
+    				pages = allPage;
+    			}
+    			model.addAttribute("pages", pages);
+    			List<Map<String, Object>> list = cBiz.searchByColor(mycolor, pages, rows);
+    			model.addAttribute("show", list);
+            }
+
 		}else if("tag".equals(op)){
 			System.out.println("============" + clothesbigtag);
 
@@ -288,6 +311,22 @@ public class ClothesAction {
 			}
 			model.addAttribute("pages", pages);
 			List<Map<String, Object>>  list=cBiz.searchBytype(clothestype, pages, rows);
+			model.addAttribute("show", list);
+		}else if("brandpic".equals(op)){
+			System.out.println("========="+brandpic);
+			long total=cBiz.countBybrandpic(brandpic);
+			model.addAttribute("total", total);
+			// 求总页数 放到model.addAttribute里面
+			int allPage = (int) (total % rows == 0 ? total / rows : total / rows + 1);
+			model.addAttribute("allPage", allPage);
+			// 当前页数
+			if (pages < 1) {
+				pages = 1;
+			} else if (pages > allPage - 1) {
+				pages = allPage;
+			}
+			model.addAttribute("pages", pages);
+			List<Map<String, Object>>  list=cBiz.searchBybrandpic(brandpic, pages, rows);
 			model.addAttribute("show", list);
 		}
 		List<ClothesDetailVO> color = cBiz.findcolor();
@@ -421,4 +460,10 @@ public class ClothesAction {
 
 		return "backManager/back-manager";
 	}
+	
+//	@RequestMapping("/Search.do")
+//	public String Search(){
+//		
+//		return "shop";
+//	}
 }

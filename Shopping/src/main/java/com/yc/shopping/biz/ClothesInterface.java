@@ -3,6 +3,8 @@ package com.yc.shopping.biz;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.yc.shopping.vo.ClothesDetailVO;
 import com.yc.shopping.vo.ClothesVO;
 
@@ -166,4 +168,11 @@ public interface ClothesInterface {
 	 * @return
 	 */
 	ClothesVO modify(int clothesid);
+	
+	public List<ClothesVO> showbrandpic();
+	
+	public List<Map<String, Object>> searchBybrandpic(String brandpic,Integer pages,Integer rows);
+	
+	public long countBybrandpic(String brandpic);
+
 }

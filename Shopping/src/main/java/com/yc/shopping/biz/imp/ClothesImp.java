@@ -204,5 +204,22 @@ public class ClothesImp implements ClothesInterface {
 	public ClothesVO modify(int clothesid) {
 		return cDao.modify(clothesid);
 	}
+
+	@Override
+	public List<ClothesVO> showbrandpic() {
+		return cDao.showbrandpic();
+	}
+
+	@Override
+	public List<Map<String, Object>> searchBybrandpic(String brandpic, Integer pages, Integer rows) {
+		//计算分页参数  偏移量
+		int offset=(pages-1)*rows;
+		return cDao.searchBybrandpic(brandpic, offset, rows);
+	}
+
+	@Override
+	public long countBybrandpic(String brandpic) {
+		return cDao.countBybrandpic(brandpic);
+	}
 	
 }

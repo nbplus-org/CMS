@@ -50,25 +50,6 @@
         
         <script src="js/jquery-1.9.1.js"></script>
         <script type="text/javascript">
- /*        $(function () {
-        	$("#list").hide();
-            $("#menu").mouseover(function () {
-            	$.post("showHeader.do?",
-            			data,
-            			function(data){  
-            		 
-            	});
-            	$("#list").show();
-            }, function () {
-                $("#list").hide();
-            })
-            // 鼠标移动到list的div上的时候list div不会被隐藏
-            $("#list").hover(function () {
-                $("#list").show();
-            }, function () {
-                $("#list").hide();
-            })
-        }); */
         
         </script>
     </head>
@@ -106,10 +87,8 @@
 									<a class="list_cl" href="#">
 									<i class="fa fa-key"></i>Account</a>
 									  <%} %>  
-										<div class="account_menu_list">
-											
-											<div class="account_single_item">
-												
+										<div class="account_menu_list">											
+											<div class="account_single_item">											
 												<ul id="account_single_nav_3">
 													<li><a href="reglogin.jsp">我的账户</a></li>
 													<li><a href="showCart.do">我的购物车</a></li>
@@ -207,9 +186,9 @@
 								<!--搜索开始区域-->
 								<div class="search_box_hopme2">
 									<form action="#" name="myForm">
-										<div class="search_box seach_box_home2_area">
+										<div class="search_box seach_box_home2_area">										
 											<input name="Name" id="itp" class="input_text" type="text" value="输入你想要的"/>
-											<button type="submit" class="btn-search">
+											<button type="button" class="btn-search" onclick="ajax()">
 												<i class="fa fa-search"></i>
 											</button>
 										</div>
