@@ -22,7 +22,7 @@
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 						<!--Start Logo area -->
 						<div class="logo"> 
-							<a href="index.jsp">
+							<a href="showShop.do?op=shop">
 								<img src="img/logo/logo.png" alt="" />
 							</a>
 						</div> 
@@ -52,7 +52,7 @@
 								<%if(request.getSession().getAttribute("UserVO") != null && session.getAttribute("cartcount")!=null) {%>
 								<li><a href="showCart.do"><i class="fa fa-shopping-cart"></i>购物车 <span class="cart_zero cart_zero1">${cartcount }</span></a>
 										<%} else { %> 
-								<li><a href="showCart.do"><i class="fa fa-shopping-cart"></i>购物车 <span class="cart_zero"></span></a>
+								<li><a href="showCart.do"><i class="fa fa-shopping-cart"></i>购物车 <span ></span></a>
 										<%} %>  
 									<div class="cart_down_area">
 									<%if(request.getSession().getAttribute("UserVO") != null && session.getAttribute("cart")!=null) {%>

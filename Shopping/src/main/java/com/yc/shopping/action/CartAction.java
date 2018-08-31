@@ -95,28 +95,38 @@ public class CartAction {
             				UserVO userVo=(UserVO) request.getSession().getAttribute("UserVO");
                 			System.out.println("=====****====="+userVo);
                 			CartVO cartVO=cBiz.selectClodetailid(clothDetailVO.getClodetailid());
-                			if(cartVO==null){
-                				System.out.println("购物车表没有重复的商品");
-                			int in=cBiz.Insert(userVo.getUid(), clothDetailVO.getClodetailid(), qty);
-                			if(in>0){
-                				System.out.println("已添加到购物车");
-                				try {
-            						response.getWriter().print(0);
-            					} catch (IOException e) {
-            						e.printStackTrace();
-            					}  			
-                			}else{
-                				System.out.println("系统故障,请稍后再试");
-                				try {
-									response.getWriter().print(4);
-								} catch (IOException e) {
-									e.printStackTrace();
-								}
-                			} 
+                			if(userVo!=null){
+                    			if(cartVO==null){
+                    				System.out.println("购物车表没有重复的商品");
+                    			int in=cBiz.Insert(userVo.getUid(), clothDetailVO.getClodetailid(), qty);
+                    			if(in>0){
+                    				System.out.println("已添加到购物车");
+                    				try {
+                						response.getWriter().print(0);
+                					} catch (IOException e) {
+                						e.printStackTrace();
+                					}  			
+                    			}else{
+                    				System.out.println("系统故障,请稍后再试");
+                    				try {
+    									response.getWriter().print(4);
+    								} catch (IOException e) {
+    									e.printStackTrace();
+    								}
+                    			} 
+                    		}else{
+                    			System.out.println("购物车表有重复的商品,已经叠加");
+                    			cBiz.updateCartCnum(cartVO.getCnum(),qty,clothDetailVO.getClodetailid());
+                    		}
                 		}else{
-                			System.out.println("购物车表有重复的商品,已经叠加");
-                			cBiz.updateCartCnum(cartVO.getCnum(),qty,clothDetailVO.getClodetailid());
+                			System.out.println("用户未登录");
+                			try {
+								response.getWriter().println(5);
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
                 		}
+
             	   }else{
             		   System.out.println("您选择的商品库存不足,请选择其他商品或降低购物量");
         			   try {
@@ -322,6 +332,5 @@ public class CartAction {
     	}
     	return "redirect:show.do";
     }
-    
  }
 

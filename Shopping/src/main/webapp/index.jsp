@@ -83,7 +83,7 @@
 					<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
 						<!--开始标志区 -->
 						<div class="logo logo_border"> 
-							<a href="index.jsp">
+							<a href="showShop.do?op=shop">
 								<img src="img/logo/logo-home-2.png" alt="" />
 							</a>
 						</div>

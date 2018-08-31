@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yc.shopping.dao.OrderDao">
 
-	<resultMap type="com.yc.shopping.vo.UserVO" id="myOrder">
+	<!-- <resultMap type="com.yc.shopping.vo.UserVO" id="myOrder">
 
 		<id property="uid" column="uid" />
 		<collection property="clothesDetailVo" column="uid"
@@ -22,7 +22,7 @@
 	</resultMap>
 
 
-	<!-- 根据用户账号查购物车的信息 -->
+	根据用户账号查购物车的信息
 	<select id="selectCartByUser" resultMap="myOrder">
 		select * from uservo WHERE uname=#{uname}
 	</select>
@@ -57,7 +57,23 @@
 		LEFT JOIN Clothesvo d ON
 		d.clothesid=c.clothesid
 		where a.uid=#{uid}
-	</select>
+	</select> -->
+
+   <select id="selectCartByUser" resultType="java.util.Map">
+      
+     SELECT * 
+     from Cartvo a LEFT JOIN ClothDetailvo b
+     on a.clodetailid=b.clodetailid LEFT JOIN Clothesvo c
+     on b.clothesid=c.clothesid
+     WHERE 
+     <foreach collection="array" item="id" 
+            open="cartid=" close=" " separator="or">
+            #{id}
+     </foreach>
+   
+   </select>
+
+
 
 	<!-- 查订单 -->
 
@@ -91,7 +107,8 @@
 
 	<!-- 查用户全部订单 -->
 	<select id="selectUserOrder" resultMap="myorder">
-		select * from Ordervo where uid=#{uid} and orderstatus!=4 <!-- ORDER BY ordertime DESC -->
+		select * from Ordervo where uid=#{uid} and orderstatus!=4  ORDER BY ordertime DESC 
+		<!-- LIMIT #{offset},#{rows} -->
 	</select>
 	<!-- 查用户订单详情 2表关联 -->
 	<select id="selectOrderDetail" resultMap="OrderDetailVO">
@@ -113,7 +130,7 @@
 		where clothesid=#{clothesid}
 	</select>
 
-	<!-- 查 有状态值的订单0待发货 1待收货 2待评价 3已完成 -->
+	<!-- 查 有状态值的订单0待发货 1待收货 2已完成   待评价？ -->
 
 	<resultMap type="com.yc.shopping.vo.OrderVO" id="Status0">
 		<result property="orderid" column="orderid" />
@@ -123,9 +140,29 @@
 	</resultMap>
 
 	<select id="selectOrderByStatus0" resultMap="Status0">
-		select * from Ordervo where uid=#{uid} and orderstatus=#{orderstatus} <!-- ORDER BY ordertime DESC -->
+		select * from Ordervo where uid=#{uid} and orderstatus=#{orderstatus}  ORDER BY ordertime DESC 
 	</select>
-
+	
+    <!-- 查看待评价订单 -->
+    
+    <resultMap type="com.yc.shopping.vo.OrderVO" id="Status1">
+		<result property="orderid" column="orderid" />
+		<collection property="orderDetailVo" column="orderid"
+			fetchType="lazy" select="selectOrderDetailweipingjia">
+		</collection>
+	</resultMap>
+    <select id="selectOrderdaipingjia" resultMap="Status1">
+         select * from Ordervo where uid=#{uid} and orderstatus=2  ORDER BY ordertime DESC 
+    </select>
+    <select id="selectOrderDetailweipingjia" resultMap="OrderDetailVO">
+        select a.* from OrderDetailvo a LEFT JOIN
+		ClothDetailvo b ON a.clodetailid=b.clodetailid
+		where orderid=#{orderid} and reviewstatus='0'
+    </select> 
+    
+    
+    
+    
 
 	<!-- 修改订单状态 -->
 	<update id="updateOrderStatus">
@@ -138,24 +175,25 @@
 				orderstatus=2,
 			</if>
 			<if test="orderstatus ==2">
-				orderstatus=3,
-			</if>
-			<if test="orderstatus ==3">
 				orderstatus=4,
 			</if>
 			<if test="orderstatus ==-1">
 				orderstatus=4,
 			</if>
-			<if test="orderstatus ==''">
+			<!-- <if test="orderstatus ==''">
 				orderstatus=4,
-			</if>
+			</if> -->
 		</set>
 		where orderid=#{orderid}
 	</update>
 
-
-
-
+    <!-- 评论 -->
+    <!-- 根据服装详情查服装 -->
+   <!--  <select id="selectClothByClodetail">
+      select * from  ClothDetailvo  
+    
+    </select> -->
+    
 
 
 

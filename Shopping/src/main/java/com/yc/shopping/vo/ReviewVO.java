@@ -25,6 +25,17 @@ public class ReviewVO {
 
 	// 评论文字
 	private String reviewstr;
+    //评论星级
+	private String reviewstar;
+	
+	
+	public String getReviewstar() {
+		return reviewstar;
+	}
+
+	public void setReviewstar(String reviewstar) {
+		this.reviewstar = reviewstar;
+	}
 
 	public Integer getReviewid() {
 		return reviewid;

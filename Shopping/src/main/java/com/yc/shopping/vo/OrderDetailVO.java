@@ -14,10 +14,23 @@ public class OrderDetailVO {
 	private Integer clodetailid;// 服装详情编号
 
 	private Integer num;// 数量
+	
+	private String reviewstatus;//评论状态
     
 	private ClothesDetailVO clothesDetailVo;//服装详情属性
 	
 	
+	
+	
+	
+	public String getReviewstatus() {
+		return reviewstatus;
+	}
+
+	public void setReviewstatus(String reviewstatus) {
+		this.reviewstatus = reviewstatus;
+	}
+
 	public ClothesDetailVO getClothesDetailVo() {
 		return clothesDetailVo;
 	}
