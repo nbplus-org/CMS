@@ -32,14 +32,54 @@ public class OrderAction {
 
 	@Resource(name = "OrderImp")
 	private OrderInterface orderimp;
-
+    
 	/**
-	 * 跳到结账界面---填写信息确认订单
+	 * wang 判断库存足不足，不足不能下单。
+	 * @throws BizException 
+	 * @throws IOException 
+	 */
+	@RequestMapping("pandunStackNum.do")
+	public void pandunStackNum(HttpServletResponse response, int[] arry,HttpServletRequest request) throws 
+	BizException, IOException{
+		
+		UserVO u = (UserVO) request.getSession().getAttribute("UserVO");
+		//说明是购物车买部分上品
+		if(arry!=null){
+			List<Map<String, Object>> list = orderimp.findCartByUser(arry);// 查服装
+			for(int i=0;i<list.size();i++){
+				if((int)list.get(i).get("cnum")>(int)list.get(i).get("stocknum")){
+					//库存不足
+					response.getWriter().print((String)list.get(i).get("clothesname"));	
+					System.out.println((String)list.get(i).get("clothesname")+"库存不足");
+				}
+			}
+			response.getWriter().print("0");
+		}else{
+			List<Map<String, Object>> list = orderimp.findCartByUserAll(u);
+			for(int i=0;i<list.size();i++){
+				if((int)list.get(i).get("cnum")>(int)list.get(i).get("stocknum")){
+					//库存不足
+					response.getWriter().print((String)list.get(i).get("clothesname"));	
+					
+				}
+			}
+			response.getWriter().print("0");
+		}
+		
+		
+		
+
+	}
+	
+
+	
+	
+	/**
+	 * 跳到结账界面---填写信息确认订单---部分结算wang
 	 * 
 	 * @return
 	 */
 	@RequestMapping("checkout.do")
-
 	public String checkout(Model model, HttpServletRequest request, int[] arry) {
 
 		UserVO u = (UserVO) request.getSession().getAttribute("UserVO");
@@ -64,9 +104,7 @@ public class OrderAction {
 			model.addAttribute("f", f);// 存用户折扣
 			model.addAttribute("total", total);// 存合计
 			model.addAttribute("f", f);// 存用户折扣
-			request.getSession().setAttribute("arry", arry);
-			;// 存数组
-			System.out.println("存入会话的数组" + request.getSession().getAttribute("arry"));
+			request.getSession().setAttribute("arry", arry);// 存数组
 			return "checkout";
 		} catch (BizException e) {
 			System.out.println("请先购买商品");
@@ -75,6 +113,51 @@ public class OrderAction {
 
 	}
 
+	
+	/**
+	 * 跳到结账界面---填写信息确认订单---全部结算购物车wang*******
+	 * 
+	 * @return
+	 */
+	@RequestMapping("checkoutAll.do")
+	public String checkoutAll(Model model, HttpServletRequest request) {
+
+		UserVO u = (UserVO) request.getSession().getAttribute("UserVO");
+		model.addAttribute("user", u);// 展示用户基本信息
+		int f = orderimp.findUserUintegral(u);// 折扣
+		try {
+
+			List<Map<String, Object>> list = orderimp.findCartByUserAll(u);// 查服装
+			double total = 0;
+			for (int i = 0; i < list.size(); i++) {
+				Integer cnum = (Integer) list.get(i).get("cnum");
+				double price = (double) list.get(i).get("clothesprice");
+				double tprice = cnum * price;
+				total += tprice;
+			}
+
+			model.addAttribute("list", list);// 存服装
+			model.addAttribute("f", f);// 存用户折扣
+			model.addAttribute("total", total);// 存合计
+			model.addAttribute("f", f);// 存用户折扣
+			return "checkout";
+		} catch (BizException e) {
+			System.out.println("请先购买商品");
+			return "cart";
+		}
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * wang 下单按钮控制，验证用户密码 先判断有无地址，再判断有无商品， 在验证安全
 	 * 
@@ -122,8 +205,27 @@ public class OrderAction {
 			// OrderVO order=new OrderVO();//订单对象
 			int orderid = orderimp.addOrderVo(order);// 插入订单表
 			int[] arry = (int[]) request.getSession().getAttribute("arry");
-			List<Map<String, Object>> list = orderimp.findCartByUser(arry);
-			orderimp.addOrderDetailVo(list, orderid);// 插入订单详情表
+			//如果数组为空说明是全部购物
+			List<Map<String, Object>> list=null;
+			if(arry!=null){
+				 list= orderimp.findCartByUser(arry);
+				 orderimp.addOrderDetailVo(list, orderid);// 插入订单详情表
+				 //修改库存数量
+				 for(int i=0;i<list.size();i++){
+					 orderimp.changeStokNum((int)list.get(i).get("cnum"),(int)list.get(i).get("clodetailid"));
+				 }
+				 orderimp.removeCart(arry);//清空购物车
+				 
+			}else{
+				 list = orderimp.findCartByUserAll(user);
+				 orderimp.addOrderDetailVo(list, orderid);// 插入订单详情表
+				 //修改库存数量
+				 for(int i=0;i<list.size();i++){
+				 orderimp.changeStokNum((int)list.get(i).get("cnum"),(int)list.get(i).get("clodetailid"));
+				 }
+				 orderimp.removeCartAll();//清空购物车
+			}
+			
 			response.getWriter().print("1");// 密码正确
 		}
 
@@ -237,14 +339,24 @@ public class OrderAction {
 	}
 
 	/**
-	 * @throws IOException
-	 *             >>>>>>> branch 'master' of
-	 *             https://github.com/nbplus-org/CMS.git
+	 * 订单操作
+	 * 取消订单库存返回
+	 * 确认收货      加入销售表
+	 *        
 	 */
 
 	@RequestMapping("orderOperation.do")
 	public void orderOperation(OrderVO orderVo, HttpServletResponse response) throws IOException {
 		System.out.println("订单号：" + orderVo.getOrderid() + "状态:" + orderVo.getOrderstatus());
+		//取消的订单库存返回
+		if(orderVo.getOrderstatus().equals("0")){
+		List<Map<String, Object>> list=orderimp.findOrderDetailByOrderID(orderVo.getOrderid());
+		    for(int i=0;i<list.size();i++){
+		    	orderimp.changeAddStokNum((int)list.get(i).get("num"), (int)list.get(i).get("clodetailid"));
+		    	
+	        	}	
+		}
+		//确认收货存销售表
 		int result = orderimp.changeOrderStatus(orderVo);
 		if (result > 0) {
 			response.getWriter().print(1);// 成功

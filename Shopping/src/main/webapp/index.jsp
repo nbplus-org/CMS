@@ -107,13 +107,13 @@
 										<%if(request.getSession().getAttribute("UserVO") != null) {%>
 										 <c:forEach items="${cart }" var="cart">
 											<div class="cart_single">
-												<a href="check.do?clothesid=${cart.clothesid}"><img src="upload/${cart.clothespic }" width="50px" height="50px" alt="" /></a>
+												<a href="check.do?clothesid=${cart.clothesid}"><img src="${cart.clothespic }" width="50px" height="50px" alt="" /></a>
 												<h2><a href="check.do?clothesid=${cart.clothesid}">${cart.clothesname}</a> <a href="trash.do?cartid=${cart.cartid}"><span><i class="fa fa-trash"></i></span></a></h2>
 												<p>${cart.cnum } x $${cart.clothesprice }</p>
 											</div>
 											</c:forEach>
 											<div class="cart_shoptings">
-												<a href="checkout.jsp">结账</a>
+												<a href="checkoutAll.do">结账</a>
 											</div>
 										<%} else { %>  
 										    <div class="cart_shoptings">
@@ -404,7 +404,7 @@
 					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 						<div class="product_list">
 							<div class="single_product">
-								<a href="check.do?clothesid=${s.clothesid}" target="main"><img src="upload/${s.clothespic}" alt="" /></a>
+								<a href="check.do?clothesid=${s.clothesid}" target="main"><img src="${s.clothespic}" alt="" /></a>
 								<div class="product_details">
 									<h2>${s.clothesname}</h2>
 									<p><span class="regular_price">￥${s.clothesorigprice }</span> <span class="popular_price">￥${s.clothesprice }</span></p>

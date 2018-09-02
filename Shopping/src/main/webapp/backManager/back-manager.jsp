@@ -293,7 +293,7 @@
 									<p class="icon_02">订单管理</p>
 							</a></li>
 							<li class="y_css" id="xx5"><a
-								href="client/OrderManager.html" onclick="changeIcon('Order')"
+								href="pie-simple.jsp" onclick="changeIcon('Order')"
 								target="mainFrame" onmousedown="javascript:pr('xx5')"
 								onmouseover="show(5)" onmouseout="hidden1(5)"><span></span>
 									<p class="icon_05">报表管理</p> </a></li>

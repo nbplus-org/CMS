@@ -97,13 +97,14 @@
 				var idStr = [];
 				$(".selectBox").each(function() {
 					$(this).prop("checked", true);
-					idStr.push($(this).val() + ",");
+					idStr.push($(this).val());
 				});
 			} else {
 				$(".selectBox").each(function() {
 					$(this).removeAttr("checked", false);
 				});
 			}
+			
 			is = idStr;
 			queryNum();
 		});
@@ -122,7 +123,6 @@
 			if (lengthSelected == length) {
 				$("#selectAllBox").prop("checked", true);
 			}
-			
 			is = idStr;
 			queryNum();
 		});
@@ -133,9 +133,24 @@
 				info();
 				return;
 			} else {
-				//$("#makeOrder").attr("href",'checkout.do?arry='+is);
-				window.location.href="checkout.do?arry="+is; 
-				//alert("可以购买");
+				//判断库存
+				$.ajax({
+					  url: "pandunStackNum.do",
+					  type: "GET",
+					  data: {
+					    "arry": is,
+					  },
+					  traditional: true,//这里设置为true
+					  success: function(data) {
+						  if(data!='0'){
+								alert(data+"库存不足");
+							}else{
+								window.location.href="checkout.do?arry="+is; 
+							}
+					  }
+					});
+				
+				
 			}
 		} 
 		
@@ -193,20 +208,11 @@
 								<th>小计</th>
 								<th>删除</th>
 							</tr>
-							<c:forEach items="${list}" var="c" varStatus="status">
+						<c:forEach items="${list}" var="c" varStatus="status">
 								<tr id="tr${status.count }" class="order_list">
-<<<<<<< HEAD
 								    <td><div><input type="checkbox" class="selectBox" value="${c.cartid}"/></div></td>
 								    <td id="cartid${status.count }">${c.cartid}</td>
 									<td><a href="seeByPic.do?cartid=${c.cartid}"><img src="upload/${c.clothespic}" width="100px" height="100px" alt="" /></a></td>
-=======
-									<td><div>
-											<input type="checkbox" class="selectBox" value="${c.cartid}" />
-										</div></td>
-									<td id="cartid${status.count }">${c.cartid}</td>
-									<td><a href="#"><img src="upload/${c.clothespic}"
-											width="100px" height="100px" alt="" /></a></td>
->>>>>>> branch 'master' of https://github.com/nbplus-org/CMS.git
 									<td><a href="#">${c.clothesname}</a></td>
 									<td>${c.clothescolour }</td>
 									<td>${c.clothessize }</td>

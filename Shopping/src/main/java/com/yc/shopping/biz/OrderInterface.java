@@ -3,6 +3,9 @@ package com.yc.shopping.biz;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.yc.shopping.filter.BizException;
@@ -19,20 +22,20 @@ import com.yc.shopping.vo.UserVO;
 public interface OrderInterface {
 
 	/**
-	 * wang 结算购物车，----确认订单功能
+	 * wang 结算部分购物车，----确认订单功能
 	 * 
 	 * @return
 	 * @throws BizException
 	 */
 	List<Map<String, Object>> findCartByUser(int[] arry) throws BizException;
 
+	
 	/**
-	 * wang 结算购物车，----确认订单功能
-	 * 
+	 * wang 结算全部购物车
 	 * @return
-	 * @throws BizException
 	 */
-	UserVO findCartByUser(UserVO userVo) throws BizException;
+	List<Map<String,Object>>  findCartByUserAll(UserVO userVo)throws BizException;
+	
 
 	/**
 	 * 查该用户的积分进行折扣 wang
@@ -163,5 +166,36 @@ public interface OrderInterface {
 	 * @return
 	 */
 	int changeOrderDetailVO(String orderdetailid);
+	
+	
+	/**
+	 * 删除购物车里下单的服装--部分下单
+	 * @return
+	 */
+	int removeCart(int[] arry);
+	/**
+	 * 删除购物车里下单的服装--全部下单
+	 * @return
+	 */
+	int removeCartAll();
+	
+	
+	/**
+	 * wang 下单减少库存数
+	 * @return
+	 */
+	int changeStokNum(int cnum,int clodetailid);
+	
+	/**
+	 * wang 根据订单号查订单详情--确认收货增加库存
+	 */
+	List<Map<String,Object>> findOrderDetailByOrderID(int orderid);
+	
+	/**
+	 * wang取消订单返还库存
+	 * @return
+	 */
+	int changeAddStokNum(int cnum,int clodetailid);
+	
 
 }
