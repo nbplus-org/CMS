@@ -3,6 +3,7 @@ package com.yc.shopping.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
@@ -24,13 +25,26 @@ import com.yc.shopping.vo.UserVO;
 public interface OrderDao {
 
 	/**
-	 * wang 结算购物车，----确认订单功能
+	 * wang 结算部分购物车，----确认订单功能
 	 * 
 	 * @return
 	 */
-	UserVO selectCartByUser(UserVO userVo);
-
 	List<Map<String, Object>> selectCartByUser(int[] arry);
+	
+	
+	/**wang
+	 * 结算全部购物车
+	 * @return
+	 */
+	@Select("select * from Uservo a left join"
+			+ " Cartvo b on a.uid=b.uid LEFT JOIN "
+			+ "ClothDetailvo c on b.clodetailid=c.clodetailid "
+			+ "LEFT JOIN Clothesvo d ON d.clothesid=c.clothesid where a.uid=#{uid}")
+	List<Map<String,Object>> selectCartByUserAll(UserVO userVo);
+	
+	
+
+	
 
 	/**
 	 * 查该用户的积分进行折扣 wang
@@ -178,5 +192,44 @@ public interface OrderDao {
 	 */
 	@Update("update ordervo set orderstatus = '1' ,aid= where orderid=#{orderid}")
 	int updateStatus(@Param("orderid") int orderid, @Param("aid") int aid);
-
+	
+	/**
+	 * 删除购物车里下单的服装--部分下单
+	 * @return
+	 */
+	int deleteCart(int[] arry);
+	/**
+	 * 删除购物车里下单的服装--全部下单
+	 * @return
+	 */
+	@Delete("DELETE from cartvo")
+	int deleteCartAll();
+	
+	/**
+	 * wang 下单减少库存数
+	 * @return
+	 */
+	@Update("UPDATE clothdetailvo set stocknum=stocknum-#{cnum} WHERE clodetailid=#{clodetailid}")
+	int updateStokNum(@Param("cnum")int cnum,@Param("clodetailid")int clodetailid);
+	
+    
+	/**
+	 * wang 根据订单号查订单详情--确认收货增加库存
+	 */
+	@Select("SELECT * from orderdetailvo where orderid=#{orderid}")
+	List<Map<String,Object>> sellectOrderDetailByOrderID(int orderid);
+	
+	/**
+	 * wang取消订单返还库存
+	 * @return
+	 */
+	@Update("UPDATE clothdetailvo set stocknum=stocknum+#{cnum} WHERE clodetailid=#{clodetailid}")
+	int updateAddStokNum(@Param("cnum")int cnum,@Param("clodetailid")int clodetailid);
+	/**
+	 * wang 确认收货加入销售表
+	 * @param orderid
+	 * @return
+	 */
+	@Insert("insert into salevo VALUES(null,#{orderid})")
+    int insertSaleVO(int orderid);	
 }

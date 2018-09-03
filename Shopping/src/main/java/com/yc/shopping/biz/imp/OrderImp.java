@@ -37,17 +37,6 @@ public class OrderImp implements OrderInterface {
 	 * @return
 	 * @throws BizException
 	 */
-	public UserVO findCartByUser(UserVO userVo) throws BizException {
-		UserVO u = orderDao.selectCartByUser(userVo);
-		/// ?????//?
-		if (u.getClothesDetailVo().get(0) == null) {
-			System.out.println("=");
-			throw new BizException("请先购买商品");
-
-		}
-		return u;
-	}
-
 	public List<Map<String, Object>> findCartByUser(int[] arry) throws BizException {
 
 		return orderDao.selectCartByUser(arry);
@@ -272,6 +261,64 @@ public class OrderImp implements OrderInterface {
 	public int changeOrderStatusHB(OrderVO orderVo) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	/**
+	 * wang 结算全部购物车
+	 * @return
+	 */
+	@Override
+	public List<Map<String, Object>> findCartByUserAll(UserVO userVo) throws BizException{
+		return orderDao.selectCartByUserAll(userVo);
+	}
+	/**
+	 * 删除购物车里下单的服装--部分下单
+	 * @return
+	 */
+	@Override
+	public int removeCart(int[] arry) {
+		return orderDao.deleteCart(arry);
+	}
+	/**
+	 * 删除购物车里下单的服装--全部下单
+	 * @return
+	 */
+	@Override
+	public int removeCartAll() {
+		return orderDao.deleteCartAll();
+	}
+	
+	/**
+	 * wang 下单减少库存数
+	 * @return
+	 */
+	@Override
+	public int changeStokNum(int cnum, int clodetailid) {
+		return orderDao.updateStokNum(cnum, clodetailid);
+	}
+	/**
+	 * wang 根据订单号查订单详情--确认收货增加库存
+	 */
+	@Override
+	public List<Map<String, Object>> findOrderDetailByOrderID(int orderid) {
+		return orderDao.sellectOrderDetailByOrderID(orderid);
+	}
+	/**
+	 * wang取消订单返还库存
+	 * @return
+	 */
+	@Override
+	public int changeAddStokNum(int cnum, int clodetailid) {
+		return orderDao.updateAddStokNum(cnum, clodetailid);
+	}
+	/**
+	 * wang 确认收货加入销售表
+	 * @param orderid
+	 * @return
+	 */
+	@Override
+	public int addSaleVO(int orderid) {
+		return orderDao.insertSaleVO(orderid);
 	}
 
 }

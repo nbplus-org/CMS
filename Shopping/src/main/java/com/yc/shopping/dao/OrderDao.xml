@@ -58,7 +58,14 @@
 		d.clothesid=c.clothesid
 		where a.uid=#{uid}
 	</select> -->
-
+   
+   
+   
+   
+   
+   
+   
+   <!-- 结算部分购物车 -->
    <select id="selectCartByUser" resultType="java.util.Map">
       
      SELECT * 
@@ -187,14 +194,16 @@
 		where orderid=#{orderid}
 	</update>
 
-    <!-- 评论 -->
-    <!-- 根据服装详情查服装 -->
-   <!--  <select id="selectClothByClodetail">
-      select * from  ClothDetailvo  
+    <!-- 下单后删除购物车记录      部分下单   -->
+    <delete id="deleteCart">
     
-    </select> -->
+     DELETE from cartvo where cartid in
+     <foreach collection="array" item="id" 
+            open="(" close=")" separator=",">
+            #{id}
+     </foreach>
+    </delete>
     
-
 
 
 

@@ -536,8 +536,8 @@ color: red;
     	 }else if(orderstatus==1){
     		 str='确认货物已收到';
     	 }else if(orderstatus==2){
-    		 
-    	 }else if(orderstatus=='' || orderstatus==-1 || orderstatus==3){
+    		 str='确认删除该订单';
+    	 }else if(orderstatus=='' || orderstatus==-1 ){
     		 str='确认删除该订单';
     	 }
     	 
