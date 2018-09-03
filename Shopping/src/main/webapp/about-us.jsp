@@ -66,11 +66,11 @@
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="breadcrumb-single blog_top_area">
 							<ul id="breadcrumbs">
-								<li><a href=""><i class="fa fa-home"></i>Home</a></li>
+								<li><a href="show.do"><i class="fa fa-home"></i>主页</a></li>
 								<li><span>Ι</span></li>
 								<li>Page</li>
 								<li><span>Ι</span></li>
-								<li>About Us</li>
+								<li>关于我们</li>
 							</ul>
 						</div>
 					</div>

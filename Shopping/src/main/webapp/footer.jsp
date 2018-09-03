@@ -23,9 +23,8 @@
 							<div class="help_support">
 								<h2>关于我们</h2>
 								<ul class="footer_menu">
-									<li><a href="#">联系我们</a></li>
-									<li><a href="#">我们公司</a></li>
-									<li><a href="#">团队信息</a></li>
+									<li><a href="contact.jsp">联系我们</a></li>
+									<li><a href="about-us.jsp">我们公司</a></li>
 									
 								</ul>
 							</div>
@@ -45,8 +44,8 @@
 								<h2>帮助</h2>
 								<ul class="footer_menu">
 									
-									<li><a href="#">注册</a></li>
-									<li><a href="#">登陆</a></li>
+									<li><a href="reglogin.jsp">注册</a></li>
+									<li><a href="reglogin.jsp">登陆</a></li>
 									<li><a href="#">我的购物车</a></li>
 									<li><a href="#">我的账户</a></li>
 									
@@ -57,8 +56,8 @@
 							<div class="help_support help_border">
 								<h2>帮助信息</h2>
 								<p>我们公司: <span>衡阳市 <br />中国湖南省</span></p>
-								<p>电话: <span>(+1)866-540-3229</span></p>
-								<p>邮箱: <span>admin@bootexperts.com</span></p>
+								<p>电话: <span>199-0841-2046</span></p>
+								<p>邮箱: <span>1428383239@qq.com</span></p>
 							</div>
 						</div>
 					</div>
