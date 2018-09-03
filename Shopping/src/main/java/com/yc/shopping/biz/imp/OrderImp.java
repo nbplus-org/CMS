@@ -311,5 +311,14 @@ public class OrderImp implements OrderInterface {
 	public int changeAddStokNum(int cnum, int clodetailid) {
 		return orderDao.updateAddStokNum(cnum, clodetailid);
 	}
+	/**
+	 * wang 确认收货加入销售表
+	 * @param orderid
+	 * @return
+	 */
+	@Override
+	public int addSaleVO(int orderid) {
+		return orderDao.insertSaleVO(orderid);
+	}
 
 }

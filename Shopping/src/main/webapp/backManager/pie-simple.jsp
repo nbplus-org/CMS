@@ -44,16 +44,29 @@
 	</div>
 	
 	
-	<div id="container" style="height: 100%">
-	</div>
+<div id="formdiv" style="height:5%">
+   <form action="piesale.do" method="post">
+   <input name="type" value="pie" type="hidden">
+   
+          年度<select name="year" style="height:25px">
+          <c:forEach begin="2013" end="2017" var="y">
+          <option value="${y }" ${param.year==y?"selected":"" }>${y }年</option>
+   
+          </c:forEach>
+          </select>
+     
+   <input type="submit" value="统计" style="height: 25px">
+   </form>
+
+</div>
+<div id="container" style="height: 95%"> </div>
 <script type="text/javascript" src="js/echarts.min.js"></script>
 <script type="text/javascript">
 var dom = document.getElementById("container");
 var myChart = echarts.init(dom);
 option = {
     title : {
-        text: '某站点用户访问来源',
-        subtext: '纯属虚构',
+        text: '每年度每个月的各类服装销售数量统计饼图', 
         x:'center'
     },
     tooltip : {
@@ -63,24 +76,18 @@ option = {
     legend: {
         orient: 'vertical',
         left: 'left',
-        data: ['直接访问','邮件营销','联盟广告','视频广告','搜索引擎']
+        data: ${nameList}
     },
     series : [
         {
             name: '访问来源',
             type: 'pie',
-            data:[
-                {value:335, name:'直接访问'},
-                {value:310, name:'邮件营销'},
-                {value:234, name:'联盟广告'},
-                {value:135, name:'视频广告'},
-                {value:1548, name:'搜索引擎'}
-            ]
+            data:${valueList.toString().replaceAll("=",":")}
         }
     ]
 };
 myChart.setOption(option, true);
-       </script>
+</script>
 </body>
 </html>
 <script src="/common.js"></script>

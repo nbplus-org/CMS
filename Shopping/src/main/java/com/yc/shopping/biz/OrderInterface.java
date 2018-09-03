@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -196,6 +197,13 @@ public interface OrderInterface {
 	 * @return
 	 */
 	int changeAddStokNum(int cnum,int clodetailid);
+	
+	/**
+	 * wang 确认收货加入销售表
+	 * @param orderid
+	 * @return
+	 */
+    int addSaleVO(int orderid);	
 	
 
 }

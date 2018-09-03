@@ -225,6 +225,11 @@ public interface OrderDao {
 	 */
 	@Update("UPDATE clothdetailvo set stocknum=stocknum+#{cnum} WHERE clodetailid=#{clodetailid}")
 	int updateAddStokNum(@Param("cnum")int cnum,@Param("clodetailid")int clodetailid);
-	
-	
+	/**
+	 * wang 确认收货加入销售表
+	 * @param orderid
+	 * @return
+	 */
+	@Insert("insert into salevo VALUES(null,#{orderid})")
+    int insertSaleVO(int orderid);	
 }

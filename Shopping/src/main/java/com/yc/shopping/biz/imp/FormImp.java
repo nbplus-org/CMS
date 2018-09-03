@@ -29,4 +29,21 @@ public class FormImp implements FormInterface{
 		return formdao.saleClothesNum();
 	}
 
+	/**
+	 * wang#库存剩余量折线图
+	 * @return
+	 */
+	@Override
+	public List<Map<String, Object>> findStockNum() {
+		return formdao.StockNum();
+	}
+	/**
+     * wang #每年度各个月的销售额统计柱状图
+     * @return
+     */
+	@Override
+	public List<Map<String, Object>> monthSale() {
+		return formdao.monthSale();
+	}
+
 }

@@ -44,25 +44,48 @@
 	</div>
 	
 		
-<div id="container" style="height: 100%"></div>
-	<script type="text/javascript" src="js/echarts.min.js"></script>
-	<script type="text/javascript">
+<div id="formdiv" style="height:5%">
+   <form action="monthsale.do" method="post">
+   <input name="type" value="bar" type="hidden">
+   
+          年度<select name="year" style="height:25px">
+          <c:forEach begin="2013" end="2017" var="y">
+          <option value="${y }" ${param.year==y?"selected":"" }>${y }年</option>
+   
+          </c:forEach>
+          </select>
+     
+   <input type="submit" value="统计" style="height: 25px">
+   </form>
+
+</div>
+<div id="container" style="height: 95%"> </div>
+<script type="text/javascript" src="js/echarts.min.js"></script>
+<script type="text/javascript">
 var dom = document.getElementById("container");
 var myChart = echarts.init(dom);
 option = {
+	title : {
+	    text: '每年度各个月的销售额统计柱状图',
+	    subtext: 'x月份，y轴销售额',
+	    x:'center'
+	    },
     xAxis: {
         type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        data: ${valueList}
     },
     yAxis: {
         type: 'value'
     },
     series: [{
-        data: [120, 200, 150, 80, 70, 110, 130],
+        data: ${nameList},
         type: 'bar'
     }]
 };
 myChart.setOption(option, true);
-       </script>
+
+
+</script>
+
 </body>
 </html>
