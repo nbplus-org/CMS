@@ -13,7 +13,7 @@
 						<c:forEach items="${brandpic }" var="brandpic">
 							<div class="col-lg-2" style="margin-left:120px;">
 								<div class="single_branding" >	
-									 	<a href="showShop.do?op=brandpic&brandpic=${brandpic.brandpic}"><img src="upload/${brandpic.brandpic}" width="100px" height="100px" alt="" /></a>									 
+									 	<a href="showShop.do?op=brandpic&brandpic=${brandpic.brandpic}"><img src="${brandpic.brandpic}" width="100px" height="100px" alt="" /></a>									 
 								</div>
 							</div>
 					   </c:forEach> 

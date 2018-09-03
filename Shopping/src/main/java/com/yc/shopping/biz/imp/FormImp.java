@@ -25,8 +25,8 @@ public class FormImp implements FormInterface{
 	 * @return
 	 */
 	@Override
-	public List<Map<String, Object>> findSaleClothesNum() {
-		return formdao.saleClothesNum();
+	public List<Map<String, Object>> findSaleClothesNum(String date) {
+		return formdao.saleClothesNum(date);
 	}
 
 	/**
@@ -42,8 +42,8 @@ public class FormImp implements FormInterface{
      * @return
      */
 	@Override
-	public List<Map<String, Object>> monthSale() {
-		return formdao.monthSale();
+	public List<Map<String, Object>> monthSale(String date) {
+		return formdao.monthSale(date);
 	}
 
 }

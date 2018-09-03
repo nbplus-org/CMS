@@ -326,7 +326,7 @@
 												<p>${r.reviewstr }</p>
 											</div>
 											<div>
-												<a><img src="upload/${r.reviewpic}" width="200px"
+												<a><img src="${r.reviewpic}" width="200px"
 													height="200px" alt="" /></a>
 											</div>
 										</div>

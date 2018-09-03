@@ -48,12 +48,22 @@
    <form action="piesale.do" method="post">
    <input name="type" value="pie" type="hidden">
    
-          年度<select name="year" style="height:25px">
-          <c:forEach begin="2013" end="2017" var="y">
+           年度<select name="year" style="height:25px">
+          <c:forEach begin="2013" end="2018" var="y">
           <option value="${y }" ${param.year==y?"selected":"" }>${y }年</option>
    
           </c:forEach>
           </select>
+       月份：<select name="month" style="height:25px">
+          <c:forEach begin="1" end="12" var="m">
+          <c:set var='zero' value='0'></c:set>
+          <c:set var='mn' value='${zero.concat(m) }'></c:set>
+          <c:set var='mn' value='${mn.substring(mn.length()-2) }'></c:set>
+          
+          <option value='${mn }' ${param.month==mn?"selected":"" }>${mn }月</option>
+          </c:forEach>
+
+   </select>
      
    <input type="submit" value="统计" style="height: 25px">
    </form>

@@ -96,12 +96,10 @@
 								<li>
 									<%
 										if (request.getSession().getAttribute("UserVO") != null) {
-									%> <a
-									class="list_cl" href="#"> <i class="fa fa-key"></i></a> <i
+									%> <a class="list_cl" href="#"> <i class="fa fa-key"></i></a> <i
 									style="color: white">${UserVO.uname}</i> <%
  	} else {
- %> <a
-									class="list_cl" href="reglogin.jsp"> <i class="fa fa-key"></i>请登录!
+ %> <a class="list_cl" href="reglogin.jsp"> <i class="fa fa-key"></i>请登录
 								</a> <%
  	}
  %>
@@ -140,7 +138,7 @@
 													<a href="trash.do?cartid=${cart.cartid}"><span><i
 															class="fa fa-trash"></i></span></a>
 												</h2>
-												<p>${cart.cnum }x $${cart.clothesprice }</p>
+												<p>${cart.cnum }x$${cart.clothesprice }</p>
 											</div>
 										</c:forEach>
 										<div class="cart_shoptings">
@@ -185,12 +183,16 @@
 											id="menu">品牌</span></a>
 										<div class="mega_menu_list menu_home2_list" id="list">
 											<div class="single_megamenu">
-												<c:forEach items="${clothesbrand }" var="brand">
-													<h2>
-														<i class="fa fa-angle-right"></i><a
-															href="showShop.do?op=brand&clothesbrand=${brand.clothesbrand}">${brand.clothesbrand}</a>
-													</h2>
+												<c:forEach items="${clothesbrand }" var="brand"
+													varStatus="status">
+													<c:if test="${status.index<5 }">
+														<h2>
+															<i class="fa fa-angle-right"></i><a
+																href="showShop.do?op=brand&clothesbrand=${brand.clothesbrand}">${brand.clothesbrand}</a>
+														</h2>
+													</c:if>
 												</c:forEach>
+												<h2><span>......</span></h2>
 											</div>
 										</div></li>
 

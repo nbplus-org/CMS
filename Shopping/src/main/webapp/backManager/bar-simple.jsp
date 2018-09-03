@@ -49,12 +49,11 @@
    <input name="type" value="bar" type="hidden">
    
           年度<select name="year" style="height:25px">
-          <c:forEach begin="2013" end="2017" var="y">
+          <c:forEach begin="2013" end="2018" var="y">
           <option value="${y }" ${param.year==y?"selected":"" }>${y }年</option>
    
           </c:forEach>
           </select>
-     
    <input type="submit" value="统计" style="height: 25px">
    </form>
 

@@ -141,7 +141,7 @@ color: red;
 							<div class="aui-mail-product">
 								<a href="javascript:;" class="aui-mail-product-item">
 									<div class="aui-mail-product-item-hd">
-										<img src="upload/${o.clothesDetailVo.clothespic }" alt="">
+										<img src="${o.clothesDetailVo.clothespic }" alt="">
 									</div>
 									<div class="aui-mail-product-item-bd">
 										<p>商品名:${o.clothesDetailVo.clothesVo.clothesname }
@@ -205,7 +205,7 @@ color: red;
 							<div class="aui-mail-product">
 								<a href="javascript:;" class="aui-mail-product-item">
 									<div class="aui-mail-product-item-hd">
-										<img src="upload/${o.clothesDetailVo.clothespic }" alt="">
+										<img src="${o.clothesDetailVo.clothespic }" alt="">
 									</div>
 									<div class="aui-mail-product-item-bd">
 										<p>商品名:${o.clothesDetailVo.clothesVo.clothesname }
@@ -269,7 +269,7 @@ color: red;
 							<div class="aui-mail-product">
 								<a href="javascript:;" class="aui-mail-product-item">
 									<div class="aui-mail-product-item-hd">
-										<img src="upload/${o.clothesDetailVo.clothespic }" alt="">
+										<img src="${o.clothesDetailVo.clothespic }" alt="">
 									</div>
 									<div class="aui-mail-product-item-bd">
 										<p>商品名:${o.clothesDetailVo.clothesVo.clothesname }
@@ -334,7 +334,7 @@ color: red;
 							<div class="aui-mail-product">
 								<a href="javascript:;" class="aui-mail-product-item">
 									<div class="aui-mail-product-item-hd">
-										<img src="upload/${o.clothesDetailVo.clothespic }" alt="">
+										<img src="${o.clothesDetailVo.clothespic }" alt="">
 									</div>
 									<div class="aui-mail-product-item-bd">
 										<p>商品名:${o.clothesDetailVo.clothesVo.clothesname }
@@ -397,7 +397,7 @@ color: red;
 							<div class="aui-mail-product">
 								<a href="javascript:;" class="aui-mail-product-item">
 									<div class="aui-mail-product-item-hd">
-										<img src="upload/${o.clothesDetailVo.clothespic }" alt="">
+										<img src="${o.clothesDetailVo.clothespic }" alt="">
 									</div>
 									<div class="aui-mail-product-item-bd">
 										<p>商品名:${o.clothesDetailVo.clothesVo.clothesname }
