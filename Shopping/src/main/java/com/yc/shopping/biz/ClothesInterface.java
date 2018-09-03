@@ -269,5 +269,13 @@ public interface ClothesInterface {
 	 * @return
 	 */
 	public int updateStocknum(Integer stocknum, Integer clodetailid); 
+	
+	public ClothesVO selectByClothesName(String clothesname);
+	
+	public List<ClothesDetailVO> selectByclothescolour(String clothescolour,Integer clothesid);
+	
+	public ClothesDetailVO selectByclothessize(String clothessize,Integer clothesid,String clothescolour);
+	
+	public int updatenum(Integer stocknum,Integer clothesid,String clothescolour,String clothessize);
 
 }

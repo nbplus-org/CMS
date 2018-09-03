@@ -320,7 +320,25 @@ public class ClothesImp implements ClothesInterface {
 		return cDao.updateStocknum(stocknum, clodetailid);
 	}
 
+	@Override
+	public ClothesVO selectByClothesName(String clothesname) {
+		return cDao.selectByClothesName(clothesname);
+	}
 
+	@Override
+	public List<ClothesDetailVO> selectByclothescolour(String clothescolour,Integer clothesid) {
+		return cDao.selectByclothescolour(clothescolour,clothesid);
+	}
+
+	@Override
+	public ClothesDetailVO selectByclothessize(String clothessize,Integer clothesid,String clothescolour) {
+		return cDao.selectByclothessize(clothessize,clothesid,clothescolour);
+	}
+
+	@Override
+	public int updatenum(Integer stocknum, Integer clothesid, String clothescolour, String clothessize) {
+		return cDao.updatenum(stocknum, clothesid, clothescolour, clothessize);
+	}
 
 	
 }

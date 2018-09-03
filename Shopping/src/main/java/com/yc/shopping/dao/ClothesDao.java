@@ -346,4 +346,15 @@ public interface ClothesDao {
 	 */
 	@Update("update clothdetailvo set stocknum=stocknum+#{stocknum} where clodetailid=#{clodetailid}")
 	int updateStocknum(@Param("stocknum") Integer stocknum,@Param("clodetailid") Integer clodetailid);
+	
+	@Select("select * from clothesvo where clothesname=#{clothesname}")
+	ClothesVO selectByClothesName(String clothesname);
+	
+	@Select("select * from clothdetailvo where clothescolour=#{clothescolour} and clothesid=#{clothesid}")
+	List<ClothesDetailVO> selectByclothescolour(@Param("clothescolour") String clothescolour,@Param("clothesid") Integer clothesid);
+	@Select("select * from clothdetailvo where clothessize=#{clothessize} and clothesid=#{clothesid} and clothescolour=#{clothescolour}")
+	ClothesDetailVO selectByclothessize(@Param("clothessize") String clothessize,@Param("clothesid") Integer clothesid,@Param("clothescolour") String clothescolour);
+	
+	@Update("update clothdetailvo set stocknum=stocknum+#{stocknum} where clothesid=#{clothesid} and clothescolour=#{clothescolour} and clothessize=#{clothessize}")
+	int updatenum(@Param("stocknum") Integer stocknum,@Param("clothesid") Integer clothesid,@Param("clothescolour") String clothescolour,@Param("clothessize") String clothessize);
 }
