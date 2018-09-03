@@ -49,9 +49,6 @@
 <link rel="stylesheet" href="css/responsive.css">
 <!-- modernizr JS -->
 <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-<!-- 弹框css -->
-<!--  <link rel="stylesheet" href="css/tankuang.min.css">  -->
-<link rel="stylesheet" href="css/tankuangAlertBox.css">
 
 <script src="js/jquery-1.9.1.js"></script>
 <script type="text/javascript">
@@ -72,17 +69,6 @@
 </script>
 </head>
 <body>
-
-	<!--服装分类选择开始  -->
-	<%
-		if (request.getSession().getAttribute("clothesbigtag") == null) {
-	%>
-	<script type="text/javascript">
-		window.location.href = "show.do";
-	</script>
-	<%
-		}
-	%>
 	<!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -102,19 +88,23 @@
 				<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
 					<div class="home2_contact_info">
 						<div class="contact_info_text">
-							<p>联系我们: (555) 732-253-8714, (555) 732-253-8715</p>
+							<p>联系我们:15570921217</p>
 						</div>
 						<!--账户开始区域 -->
 						<div class="account_card_area account_cart_home2">
 							<ul id="account_nav">
-								<li><c:if test="${sessionScope.UserVO!=null }">
-										<a class="list_cl" href="#"> <i class="fa fa-key"></i></a>
-										<i style="color: white">${sessionScope.UserVO.uname}</i>
-									</c:if> <c:if test="${sessionScope.UserVO==null }">
-										<a class="list_cl" href="reglogin.jsp"> <i
-											class="fa fa-key"></i>请登录
-										</a>
-									</c:if>
+								<li>
+									<%
+										if (request.getSession().getAttribute("UserVO") != null) {
+									%> <a
+									class="list_cl" href="#"> <i class="fa fa-key"></i></a> <i
+									style="color: white">${UserVO.uname}</i> <%
+ 	} else {
+ %> <a
+									class="list_cl" href="reglogin.jsp"> <i class="fa fa-key"></i>请登录!
+								</a> <%
+ 	}
+ %>
 									<div class="account_menu_list">
 										<div class="account_single_item">
 											<ul id="account_single_nav_3">
@@ -123,20 +113,25 @@
 												<li><a href="outLog.do">退出登陆</a></li>
 											</ul>
 										</div>
-									</div></li>
-								<c:if test="${sessionScope.UserVO!=null }">
-									<li><a class="list_cl" href="showCart.do"><i
-											class="fa fa-shopping-cart"></i>购物车 <span
-											class="cart_zero cart_zero1">${sessionScope.cartcount }</span></a></li>
-								</c:if>
-								<c:if test="${sessionScope.UserVO==null }">
-									<li><a class="list_cl" onclick="goLogin()"><i
-											class="fa fa-shopping-cart"></i>购物车 <span></span></a>
-								</c:if>
-
-								<div class="cart_down_area">
-									<c:if test="${sessionScope.UserVO!=null }">
-										<c:forEach items="${sessionScope.cart }" var="cart">
+									</div>
+								</li>
+								<%
+									if (request.getSession().getAttribute("UserVO") != null) {
+								%>
+								<li><a class="list_cl" href="showCart.do"><i
+										class="fa fa-shopping-cart"></i>购物车 <span
+										class="cart_zero cart_zero1">${cartcount }</span></a> <%
+ 	} else {
+ %>
+								<li><a class="list_cl" onclick="goLogin()"><i
+										class="fa fa-shopping-cart"></i>购物车 <span></span></a> <%
+ 	}
+ %>
+									<div class="cart_down_area">
+										<%
+											if (request.getSession().getAttribute("UserVO") != null) {
+										%>
+										<c:forEach items="${cart }" var="cart">
 											<div class="cart_single">
 												<a href="check.do?clothesid=${cart.clothesid}"><img
 													src="${cart.clothespic }" width="50px" height="50px" alt="" /></a>
@@ -145,11 +140,23 @@
 													<a href="trash.do?cartid=${cart.cartid}"><span><i
 															class="fa fa-trash"></i></span></a>
 												</h2>
-												<p>${cart.cnum }x$${cart.clothesprice}</p>
+												<p>${cart.cnum }x $${cart.clothesprice }</p>
 											</div>
 										</c:forEach>
-									</c:if>
-								</div>
+										<div class="cart_shoptings">
+											<a href="checkoutAll.do">结账</a>
+										</div>
+										<%
+											} else {
+										%>
+										<div class="cart_shoptings">
+											<a href="#">结账</a>
+										</div>
+										<%
+											}
+										%>
+									</div></li>
+
 							</ul>
 						</div>
 						<!--结束 账户 区域 -->
@@ -178,54 +185,36 @@
 											id="menu">品牌</span></a>
 										<div class="mega_menu_list menu_home2_list" id="list">
 											<div class="single_megamenu">
-												<c:forEach items="${clothesbrand}" var="brand"
-													varStatus="num">
-													<c:if test="${num.index<5 }">
-														<div class="single_megamenu">
-															<!-- 大标签的循环输出 -->
-															<h2>
-																<a href="shop.html">${brand.clothesbrand }</a>
-															</h2>
-														</div>
-													</c:if>
+												<c:forEach items="${clothesbrand }" var="brand">
+													<h2>
+														<i class="fa fa-angle-right"></i><a
+															href="showShop.do?op=brand&clothesbrand=${brand.clothesbrand}">${brand.clothesbrand}</a>
+													</h2>
 												</c:forEach>
-
-												<h2 align="left">......</h2>
 											</div>
 										</div></li>
 
 
-									<li><a class="home2_size"><span class="Footwear">款式</span></a>
+									<li><a class="home2_size"><span class="Footwear">类型</span></a>
 										<div class="mega_menu_list menu_home2_list" id="list">
 											<div class="single_megamenu">
-												<c:forEach items="${typename}" var="typename">
-
-													<div class="single_megamenu">
-														<!-- 大标签的循环输出 -->
-														<h2>
-															<a href="shop.html">${typename.typename }</a>&nbsp;&nbsp;&nbsp;
-														</h2>
-
-													</div>
+												<c:forEach items="${typename }" var="type">
+													<h2>
+														<i class="fa fa-angle-right"></i><a
+															href="showShop.do?op=type&clothestype=${type.typename}">${type.typename}</a>
+													</h2>
 												</c:forEach>
 											</div>
 										</div></li>
 
 
-									<li><a href="shop.jsp"><span class="Accessaries">帮助</span></a>
-										<div class="home_mega_menu">
-											<c:if test="${UserVO!=null }">
-												<a href="index.jsp">我的账户</a>
-											</c:if>
-											<c:if test="${UserVO=null }">
-												<a onclick="goLogin">我的账户</a>
-											</c:if>
-											<c:if test="${UserVO!=null }">
-												<a href="showCart.do">购物车</a>
-											</c:if>
-											<c:if test="${UserVO==null }">
-												<a onclick="goLogin()">购物车</a>
-											</c:if>
+									<li><a class="home2_size" href="showShop.do?op=shop"><span
+											class="Sales">全部商品</span></a></li>
+									<li><a class="home2_size"><span class="Accessaries">帮助</span></a>
+										<div class="home_mega_menu menu_home2_looktr">
+											<a href="reglogin.jsp">我的账户</a> <a href="showCart.do">购物车</a>
+											<a href="about-us.jsp">关于我们</a> <a href="contact.jsp">联系我们</a>
+
 										</div></li>
 								</ul>
 							</div>
@@ -262,27 +251,39 @@
 										href="http://bootexperts.com/html/hope-preview/hope/index-1.html">主页</a>
 									</li>
 
-									<li><a>分类</a>
+									<li><a>分类</a> <%
+ 	if (session.getAttribute("clothesbigtag") != null) {
+ %>
 										<ul>
 											<c:forEach items="${clothesbigtag }" var="tag">
 												<li><a
 													href="showShop.do?op=tag&clothesbigtag=${tag.clothesbigtag }">${tag.clothesbigtag}</a>
 											</c:forEach>
-										</ul></li>
-									<li><a>品牌</a>
+										</ul> <%
+ 	}
+ %></li>
+									<li><a>品牌</a> <%
+ 	if (session.getAttribute("clothesbrand") != null) {
+ %>
 										<ul>
 											<c:forEach items="${clothesbrand }" var="brand">
 												<li><a
 													href="showShop.do?op=brand&clothesbrand=${brand.clothesbrand}">${brand.clothesbrand}</a></li>
 											</c:forEach>
-										</ul></li>
-									<li><a>类型</a>
+										</ul> <%
+ 	}
+ %></li>
+									<li><a>类型</a> <%
+ 	if (session.getAttribute("typename") != null) {
+ %>
 										<ul>
 											<c:forEach items="${typename }" var="type">
 												<li><a
 													href="showShop.do?op=type&clothestype=${type.typename}">${type.typename}</a></li>
 											</c:forEach>
-										</ul></li>
+										</ul> <%
+ 	}
+ %></li>
 									<li><a href="showShop.do?op=shop">全部商品</a></li>
 									<li><a href="about-us.jsp">帮助</a>
 										<ul>
@@ -698,7 +699,5 @@
 	<script src="js/plugins.js"></script>
 	<!-- main JS  -->
 	<script src="js/main.js"></script>
-	<!-- 弹框js -->
-	<script src="js/tankuangAlertBox.min.js"></script>
 </body>
 </html>

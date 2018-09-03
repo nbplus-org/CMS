@@ -17,11 +17,7 @@
 
 	}
 </script> -->
-<!-- <script type="text/javascript">
-		$(function() {
-			window.location.href = "show.do";
-		})
-	</script> -->
+
 <div class="header_area_top">
 	<div class="container">
 		<div class="row">
@@ -51,36 +47,43 @@
 				<!--Start Header Right Cart area -->
 				<div class="account_card_area">
 					<ul id="account_nav">
-
-						<li><c:if test="${sessionScope.UserVO!=null }">
-								<a><i class="fa fa-key"></i>${sessionScope.UserVO.uname }</a>
-							</c:if> <c:if test="${sessionScope.UserVO==null }">
-								<a href="reglogin.jsp"><i class="fa fa-key"></i>请登陆</a>
-							</c:if>
+					<li>
+							<%
+								if (request.getSession().getAttribute("UserVO") != null) {
+							%> <li><a><i class="fa fa-key"></i>${sessionScope.UserVO.uname }</a> <%
+							 	} else {
+							 %> <li><a href="reglogin.jsp"><i class="fa fa-key"></i>请登陆</a> <%
+							 	}
+							 %>
 							<div class="account_menu_list">
+
 								<div class="account_single_item">
+
 									<ul id="account_single_nav_3">
 										<li><a href="showCart.do">我的购物车</a></li>
 										<li><a href="seeorder.do">我的订单</a></li>
 										<li><a href="outLog.do">退出登陆</a></li>
 									</ul>
-								</div>
-							</div></li>
-						<c:if test="${sessionScope.UserVO!=null && sessionScope.cartcount!=null}">
-							<li><a href="showCart.do"><i class="fa fa-shopping-cart"></i>购物车
-									<span class="cart_zero cart_zero1">${cartcount }</span></a></li>
-						</c:if>
-						<c:if test="${sessionScope.UserVO!=null && sessionScope.cartcount==null}">
-							<li><a href="showCart.do"><i class="fa fa-shopping-cart"></i>购物车
-									<span class="cart_zero cart_zero1">0</span></a></li>
-						</c:if>
-						<c:if test="${sessionScope.UserVO==null }">
-							<li><a href="showCart.do"><i class="fa fa-shopping-cart"></i>购物车
-									<span></span></a></li>
-						</c:if>
-						<div class="cart_down_area">
 
-							<c:if test="${sessionScope.UserVO!=null }">
+
+								</div>
+
+							</div></li>
+						<%
+							if (request.getSession().getAttribute("UserVO") != null && session.getAttribute("cartcount") != null) {
+						%>
+						<li><a href="showCart.do"><i class="fa fa-shopping-cart"></i>购物车
+								<span class="cart_zero cart_zero1">${cartcount }</span></a> <%
+ 	} else {
+ %>
+						<li><a href="showCart.do"><i class="fa fa-shopping-cart"></i>购物车
+								<span></span></a> <%
+ 	}
+ %>
+							<div class="cart_down_area">
+								<%
+									if (request.getSession().getAttribute("UserVO") != null && session.getAttribute("cart") != null) {
+								%>
 								<c:forEach items="${cart }" var="cart">
 									<div class="cart_single">
 										<a href="check.do?clothesid=${cart.clothesid}"><img
@@ -97,8 +100,16 @@
 								<div class="cart_shoptings">
 									<a href="checkout.jsp">结账</a>
 								</div>
-							</c:if>
-						</div>
+								<%
+									} else {
+								%>
+								<div class="cart_shoptings">
+									<a href="#">结账</a>
+								</div>
+								<%
+									}
+								%>
+							</div></li>
 					</ul>
 				</div>
 				<!--End Header Right Cart area -->
@@ -108,24 +119,15 @@
 </div>
 <!--End Header Top area -->
 <!--Start Main Menu area -->
-
-<!--服装分类选择开始  -->
-<%
-	if (request.getSession().getAttribute("clothesbigtag") == null) {
-%>
-<script type="text/javascript">
-	window.location.href = "show.do";
-</script>
-<%
-	}
-%>
-
 <div class="header_botttom_area">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
+
+
 				<div class="main_menu">
 					<ul id="nav_menu" class="active_cl">
+
 						<li><a href="show.do"><span class="Home">主页</span></a></li>
 						<!--=======大标签开始循环============ -->
 						<li><a><span class="Clothings">分类</span></a>
@@ -154,6 +156,7 @@
 										</div>
 									</c:if>
 								</c:forEach>
+
 								<h2 align="left">......</h2>
 							</div></li>
 
@@ -183,20 +186,21 @@
 									</div>
 								</c:forEach>
 							</div></li>
+						<%-- <%
+										if (session.getAttribute("typename") != null) {
+									%>
+									<c:forEach items="${typename }" var="type">
+										<h2>
+											<i class="fa fa-angle-right"></i><a
+												href="showShop.do?op=type&clothestype=${type.typename}">${type.typename}</a>
+										</h2>
+									</c:forEach>
+									<%
+										}
+									%> --%>
 						<li><a href="shop.jsp"><span class="Accessaries">帮助</span></a>
 							<div class="home_mega_menu">
-								<c:if test="${UserVO!=null }">
-									<a href="index.jsp">我的账户</a>
-								</c:if>
-								<c:if test="${UserVO=null }">
-									<a onclick="goLogin">我的账户</a>
-								</c:if>
-								<c:if test="${UserVO!=null }">
-									<a href="showCart.do">购物车</a>
-								</c:if>
-								<c:if test="${UserVO==null }">
-									<a onclick="goLogin()">购物车</a>
-								</c:if>
+								<a href="reglogin.jsp">我的账户</a> <a href="showCart.do">购物车</a>
 							</div></li>
 					</ul>
 				</div>
