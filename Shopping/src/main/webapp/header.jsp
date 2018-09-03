@@ -17,7 +17,11 @@
 
 	}
 </script> -->
-
+<!-- <script type="text/javascript">
+		$(function() {
+			window.location.href = "show.do";
+		})
+	</script> -->
 <div class="header_area_top">
 	<div class="container">
 		<div class="row">
@@ -47,16 +51,21 @@
 				<!--Start Header Right Cart area -->
 				<div class="account_card_area">
 					<ul id="account_nav">
-						<li><a><i class="fa fa-key"></i>个人中心</a>
+
+						<li><c:if test="${sessionScope.UserVO!=null }">
+								<a><i class="fa fa-key"></i>${sessionScope.UserVO.uname }</a>
+							</c:if> <c:if test="${sessionScope.UserVO==null }">
+								<a href="reglogin.jsp"><i class="fa fa-key"></i>请登陆</a>
+							</c:if>
+
 							<div class="account_menu_list">
 
 								<div class="account_single_item">
 
 									<ul id="account_single_nav_3">
-										<li><a href="reglogin.jsp">我的账户</a></li>
 										<li><a href="showCart.do">我的购物车</a></li>
-										<li><a href="#">结账</a></li>
-										<li><a href="reglogin.jsp">退出</a></li>
+										<li><a href="seeorder.do">我的订单</a></li>
+										<li><a href="outLog.do">退出登陆</a></li>
 									</ul>
 
 
@@ -113,24 +122,24 @@
 </div>
 <!--End Header Top area -->
 <!--Start Main Menu area -->
+
+<!--服装分类选择开始  -->
+<%
+	if (request.getSession().getAttribute("clothesbigtag") == null) {
+%>
+<script type="text/javascript">
+	window.location.href = "show.do";
+</script>
+<%
+	}
+%>
+
 <div class="header_botttom_area">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-
-				<!--服装分类选择开始  -->
-				<%
-					if (request.getSession().getAttribute("clothesbigtag") == null) {
-				%>
-				<script type="text/javascript">
-					window.location.href = "show.do";
-				</script>
-				<%
-					}
-				%>
 				<div class="main_menu">
 					<ul id="nav_menu" class="active_cl">
-
 						<li><a href="show.do"><span class="Home">主页</span></a></li>
 						<!--=======大标签开始循环============ -->
 						<li><a><span class="Clothings">分类</span></a>
@@ -159,7 +168,6 @@
 										</div>
 									</c:if>
 								</c:forEach>
-
 								<h2 align="left">......</h2>
 							</div></li>
 
@@ -189,21 +197,20 @@
 									</div>
 								</c:forEach>
 							</div></li>
-						<%-- <%
-										if (session.getAttribute("typename") != null) {
-									%>
-									<c:forEach items="${typename }" var="type">
-										<h2>
-											<i class="fa fa-angle-right"></i><a
-												href="showShop.do?op=type&clothestype=${type.typename}">${type.typename}</a>
-										</h2>
-									</c:forEach>
-									<%
-										}
-									%> --%>
 						<li><a href="shop.jsp"><span class="Accessaries">帮助</span></a>
 							<div class="home_mega_menu">
-								<a href="reglogin.jsp">我的账户</a> <a href="showCart.do">购物车</a>
+								<c:if test="${UserVO!=null }">
+									<a href="index.jsp">我的账户</a>
+								</c:if>
+								<c:if test="${UserVO=null }">
+									<a onclick="goLogin">我的账户</a>
+								</c:if>
+								<c:if test="${UserVO!=null }">
+									<a href="showCart.do">购物车</a>
+								</c:if>
+								<c:if test="${UserVO==null }">
+									<a onclick="goLogin()">购物车</a>
+								</c:if>
 							</div></li>
 					</ul>
 				</div>

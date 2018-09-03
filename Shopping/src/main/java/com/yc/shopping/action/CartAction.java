@@ -130,7 +130,7 @@ public class CartAction {
             	   }else{
             		   System.out.println("您选择的商品库存不足,请选择其他商品或降低购物量");
         			   try {
-        				response.getWriter().print(3);
+        				response.getWriter().print(0);
         			} catch (IOException e) {
         				e.printStackTrace();
         			}
@@ -138,7 +138,7 @@ public class CartAction {
         	}else{
         		System.out.println("此类型商品现已缺货,请选择其他商品");
         		try {
-    				response.getWriter().print(2);
+    				response.getWriter().print(0);
     			} catch (IOException e) {
     				e.printStackTrace();
     			}

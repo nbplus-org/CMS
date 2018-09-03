@@ -93,18 +93,39 @@ public class ClothesAction {
 		 
     	List<Map<String, Object>> cart=ctBiz.findAll();
     	System.out.println(cart);
-    	model.addAttribute("cart", cart);
+    	//model.addAttribute("cart", cart);
     	session.setAttribute("cart", cart);
     	
     	UserVO userVo=(UserVO) request.getSession().getAttribute("UserVO");
     	if(userVo!=null){
         	long cartcount=ctBiz.cartCount(userVo.getUid());
-        	model.addAttribute("cartcount", cartcount);
+        	//model.addAttribute("cartcount", cartcount);
         	session.setAttribute("cartcount", cartcount);
+        	System.out.println("show.do   userVo"+userVo.getUname());
     	}
+    	
 		return "index";
 	}
-
+	
+	/**
+	 *购物车的新增或订单后的减少 都需及时查询到准确的数值，以便右上角购物车数量及信息的及时获取 
+	 *huang
+	 * @param model
+	 * @param session
+	 */
+	@RequestMapping("/showCarAgain.do")
+	public void showCarAgain( Model model,HttpSession session){
+		List<Map<String, Object>> cart=ctBiz.findAll();
+    	System.out.println(cart);
+    	session.setAttribute("cart", cart);
+    	
+    	UserVO userVo=(UserVO) session.getAttribute("UserVO");
+    	if(userVo!=null){
+        	long cartcount=ctBiz.cartCount(userVo.getUid());
+        	session.setAttribute("cartcount", cartcount);
+    	}
+	}
+	
 	/**
 	 * 头部按钮及shopjsp页面按钮查询
 	 * 

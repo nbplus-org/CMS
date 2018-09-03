@@ -70,13 +70,13 @@
 				<tr>
 					<td width="3%" class="mian_b_bg_lm"><input name=""
 						type="hidden" value="">&nbsp;&nbsp; </td>
-					<td width="4%" class="mian_b_bg_lm"><span></span>订单号</td>
+					<td width="8%" class="mian_b_bg_lm"><span></span>订单号</td>
 					<td width="8%" class="mian_b_bg_lm"><span></span>下单人</td>
 					<td width="6%" class="mian_b_bg_lm"><span></span>联系电话</td>
 					<td width="18%" class="mian_b_bg_lm"><span></span>收货地址</td>
 					<td width="10%" class="mian_b_bg_lm"><span></span>下单时间</td>
 					<td width="6%" class="mian_b_bg_lm"><span></span>交易金额</td>
-					<td width="16%" class="mian_b_bg_lm"><span></span>备注</td>
+					<td width="14%" class="mian_b_bg_lm"><span></span>备注</td>
 					<td class="mian_b_bg_lm"><span></span>操作</td>
 				</tr>
 

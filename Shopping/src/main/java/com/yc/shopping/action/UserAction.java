@@ -40,6 +40,16 @@ public class UserAction {
 	private UserInterface uimp;
 
 	/**
+	 * 退出登录，注销，使会话失效
+	 * @return
+	 */
+	@RequestMapping("/outLog.do")
+	public String outLog(HttpServletRequest request){
+		request.getSession().invalidate();
+		return "index";
+	}
+	
+	/**
 	 * 注册用户
 	 * 
 	 * @author Computer-huangbiao
