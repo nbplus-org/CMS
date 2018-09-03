@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.yc.shopping.biz.CartInterface;
@@ -496,9 +498,175 @@ public class ClothesAction {
 		return "backManager/clothes-modify";
 	}
 	
-//	@RequestMapping("/Search.do")
-//	public String Search(){
-//		
-//		return "shop";
-//	}
+	/**
+	 * 新增服装
+	 * @param file1
+	 * @param file2
+	 * @param typeVO
+	 * @param clothessize
+	 * @param clothescolour
+	 * @param clothestype
+	 * @param request
+	 * @param response
+	 * @param clothesVO
+	 * @param clothesDetailVO
+	 * @param model
+	 * @return
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 */
+	@RequestMapping(value = "/backManager/clothesInsert.do", method = RequestMethod.POST)
+	public String clothesInsert(TypeVO typeVO,String clothessize,String clothestype,
+			HttpServletRequest request,HttpServletResponse response,ClothesVO clothesVO,ClothesDetailVO clothesDetailVO,Model model) throws IllegalStateException, IOException{
+
+		if(!"".equals(clothestype)){
+//			if(!file1.isEmpty() && !file2.isEmpty()){
+//	            //保存文件
+//	        	String filename1=file1.getOriginalFilename();
+//	        	File f1=new java.io.File("d:/"+filename1);
+//	        	file1.transferTo(f1);
+//	        	
+//	        	String filename2=file2.getOriginalFilename();
+//	        	File f2=new java.io.File("d:/"+filename2);
+//	        	file2.transferTo(f2);
+//	        	
+//	        	System.out.println(filename1+filename2);
+			
+			int insert=cBiz.insertToClothes(clothesVO);
+			if(insert>0){
+				System.out.println("修改成功");
+			}else{
+				System.out.println("修改失败");
+			}
+	        Integer clothesid=clothesVO.getClothesid();
+			System.out.println(clothesVO.getClothesid());
+			
+			String[] types=clothestype.split("[,;:，、；]");
+			for(String type:types){
+				TypeVO aa=cBiz.selectBytype(type);
+				if(aa==null){
+					typeVO=new TypeVO();
+					typeVO.setTypename(type);
+					cBiz.InsertToTypevo(typeVO);
+				}
+				TypeVO bb=cBiz.selectBytype(type);
+				System.out.println(bb.getTypeid());
+				cBiz.insertTotypeclothesvo(bb.getTypeid(), clothesVO.getClothesid());
+			}
+			if(!"".equals(clothessize)){
+				String[] sizes=clothessize.split("[,;:，、；]");
+					for(String size:sizes){
+						clothesDetailVO.setClothesid(clothesid);
+						clothesDetailVO.setClothessize(size);
+						int result=cBiz.insertToClothdetail(clothesDetailVO);
+						if(result>0){
+							System.out.println("服装详情插入成功");
+						}
+					}
+				
+//			  }	
+			}		
+		}else{
+			int insert=cBiz.insertToClothes(clothesVO);
+			System.out.println("依旧插入数据");
+		}
+		return "backManager/clothes-manager";
+	}
+	
+	/**
+	 * 展示现有服装
+	 * @param model
+	 * @param page
+	 * @return
+	 */
+	@RequestMapping("/backManager/clothesAll.do")
+     public String clothesAll(Model model, @Param("page") String page){
+		// 每条页面显示数据条数pageSize
+		int pageSize = 8;
+		// 初始化默认为第一页
+		if (page == null) {
+			page = "1";
+		}
+		// 从第几条开始
+		int startPage = (Integer.parseInt(page) - 1) * pageSize;
+
+		List<ClothesVO> allClothes = cBiz.selectAllClothes(startPage, pageSize);
+
+		// 查询总页数
+		int count = cBiz.selectAllCount();
+		int pageTimes;
+		if (count % pageSize == 0) {
+			pageTimes = count / pageSize;
+		} else {
+			pageTimes = count / pageSize + 1;
+		}
+		model.addAttribute("currentPage", Integer.parseInt(page));
+		model.addAttribute("pageTimes", pageTimes);
+		model.addAttribute("allClothes", allClothes);
+		return "backManager/clothes-information";
+     } 
+	
+	/**
+	 * 展示对应服装详情
+	 * @param clothesid
+	 * @param model
+	 * @param page
+	 * @return
+	 */
+	@RequestMapping("/backManager/clothesSchedule.do")
+	public String  clothesSchedule(Integer clothesid,Model model, @Param("page") String page){
+		// 每条页面显示数据条数pageSize
+		int pageSize = 4;
+		// 初始化默认为第一页
+		if (page == null) {
+			page = "1";
+		}
+		// 从第几条开始
+		int startPage = (Integer.parseInt(page) - 1) * pageSize;
+		List<Map<String, Object>> list=cBiz.selectClothesAndDetail(clothesid, startPage, pageSize);
+		// 查询总页数
+		int count=cBiz.selectCount(clothesid);
+		int pageTimes;
+		if (count % pageSize == 0) {
+			pageTimes = count / pageSize;
+		} else {
+			pageTimes = count / pageSize + 1;
+		}
+		model.addAttribute("clothesid", clothesid);
+		model.addAttribute("currentPage", Integer.parseInt(page));
+		model.addAttribute("pageTimes", pageTimes);
+		model.addAttribute("allClothes", list);
+		return "backManager/clothes-schedule";
+	}
+	
+	/**
+	 * 增加库存按钮  跳转页面
+	 * @param clodetailid
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/backManager/addNum.do")
+	public String addNum(Integer clodetailid,Model model){
+		model.addAttribute("clodetailid", clodetailid);
+
+		return "backManager/clothes-addnum";
+	}
+	
+	/**
+	 * 增加库存
+	 * @param model
+	 * @param clodetailid
+	 * @param stocknum
+	 * @return
+	 */
+	@RequestMapping(value = "/backManager/addStocknum.do", method = RequestMethod.POST)
+	public String addStocknum(Model model,Integer clodetailid,Integer stocknum){
+		int result=cBiz.updateStocknum(stocknum, clodetailid);
+		if(result>0){
+			System.out.println("修改成功");
+		}else{
+			System.out.println("修改失败");
+		}
+		return "backManager/clothes-manager";
+	}
 }

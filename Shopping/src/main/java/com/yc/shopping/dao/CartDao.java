@@ -207,4 +207,14 @@ public interface CartDao {
 	 */
 	@Select("select count(*) from cartvo where uid=#{uid}")
 	long cartCount(Integer uid);
+	
+	/**
+	 * 购买商品   库存扣除购买数
+	 * @param stocknum
+	 * @param qty
+	 * @param clodetailid
+	 * @return
+	 */
+	@Update("update clothdetailvo set stocknum=#{stocknum}-#{qty} where clodetailid=#{clodetailid}")
+	int updatestocknum(@Param("stocknum") Integer stocknum,@Param("qty") Integer qty,@Param("clodetailid") Integer clodetailid);
 }

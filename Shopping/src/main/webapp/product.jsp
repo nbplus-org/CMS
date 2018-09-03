@@ -80,7 +80,6 @@
 						window.location.href = "product.jsp";
 					}
 				});
-				
 
 				//alert("成功添加到购物车");
 			} else if (data == 1) {

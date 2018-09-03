@@ -16,6 +16,7 @@ public class TypeVO {
 
 	
 
+
 	public Integer getTypeid() {
 		return typeid;
 	}

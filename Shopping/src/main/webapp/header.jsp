@@ -57,36 +57,30 @@
 							</c:if> <c:if test="${sessionScope.UserVO==null }">
 								<a href="reglogin.jsp"><i class="fa fa-key"></i>请登陆</a>
 							</c:if>
-
 							<div class="account_menu_list">
-
 								<div class="account_single_item">
-
 									<ul id="account_single_nav_3">
 										<li><a href="showCart.do">我的购物车</a></li>
 										<li><a href="seeorder.do">我的订单</a></li>
 										<li><a href="outLog.do">退出登陆</a></li>
 									</ul>
-
-
 								</div>
-
 							</div></li>
-						<%
-							if (request.getSession().getAttribute("UserVO") != null && session.getAttribute("cartcount") != null) {
-						%>
-						<li><a href="showCart.do"><i class="fa fa-shopping-cart"></i>购物车
-								<span class="cart_zero cart_zero1">${cartcount }</span></a> <%
- 	} else {
- %>
-						<li><a href="showCart.do"><i class="fa fa-shopping-cart"></i>购物车
-								<span></span></a> <%
- 	}
- %>
-							<div class="cart_down_area">
-								<%
-									if (request.getSession().getAttribute("UserVO") != null && session.getAttribute("cart") != null) {
-								%>
+						<c:if test="${sessionScope.UserVO!=null && sessionScope.cartcount!=null}">
+							<li><a href="showCart.do"><i class="fa fa-shopping-cart"></i>购物车
+									<span class="cart_zero cart_zero1">${cartcount }</span></a></li>
+						</c:if>
+						<c:if test="${sessionScope.UserVO!=null && sessionScope.cartcount==null}">
+							<li><a href="showCart.do"><i class="fa fa-shopping-cart"></i>购物车
+									<span class="cart_zero cart_zero1">0</span></a></li>
+						</c:if>
+						<c:if test="${sessionScope.UserVO==null }">
+							<li><a href="showCart.do"><i class="fa fa-shopping-cart"></i>购物车
+									<span></span></a></li>
+						</c:if>
+						<div class="cart_down_area">
+
+							<c:if test="${sessionScope.UserVO!=null }">
 								<c:forEach items="${cart }" var="cart">
 									<div class="cart_single">
 										<a href="check.do?clothesid=${cart.clothesid}"><img
@@ -103,16 +97,8 @@
 								<div class="cart_shoptings">
 									<a href="checkout.jsp">结账</a>
 								</div>
-								<%
-									} else {
-								%>
-								<div class="cart_shoptings">
-									<a href="#">结账</a>
-								</div>
-								<%
-									}
-								%>
-							</div></li>
+							</c:if>
+						</div>
 					</ul>
 				</div>
 				<!--End Header Right Cart area -->
