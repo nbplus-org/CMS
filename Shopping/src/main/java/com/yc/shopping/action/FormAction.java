@@ -1,8 +1,14 @@
 package com.yc.shopping.action;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.yc.shopping.biz.FormInterface;
 import com.yc.shopping.biz.OrderInterface;
@@ -16,5 +22,66 @@ public class FormAction {
 	
 	@Resource(name = "FormImp")
 	private FormInterface formImp;
+	
+	//柱状图
+	@RequestMapping("/backManager/monthsale.do")
+	public String BarSale(String year,String month,HttpServletRequest request){
+		
+	    List<Map<String, Object>> list=formImp.monthSale();
+	    List<String> nameList=new ArrayList<String>();
+		List<String> valueList=new ArrayList<String>();
+		for(Map<String,Object>m:list){
+			nameList.add(m.get("value").toString());
+			String svalue=m.get("name").toString();
+			valueList.add(svalue);
+		}
+		System.out.println(nameList);
+		System.out.println(valueList);
+		request.setAttribute("nameList", nameList);
+		request.setAttribute("valueList", valueList);
+
+		return "backManager/bar-simple";
+	}
+	
+	//库存折线图
+	@RequestMapping("/backManager/lineStockNum.do")
+	public String lineStockNum(HttpServletRequest request){
+		 List<Map<String, Object>> list=formImp.findStockNum();
+		    List<String> nameList=new ArrayList<String>();
+			List<String> valueList=new ArrayList<String>();
+			for(Map<String,Object>m:list){
+				
+				nameList.add(m.get("value").toString());
+				String svalue=m.get("name").toString();
+				valueList.add(svalue);
+				
+			}
+			System.out.println(nameList);
+			System.out.println(valueList);
+			request.setAttribute("nameList", nameList);
+			request.setAttribute("valueList", valueList);
+		
+		return "backManager/line-simple";
+	}
+	
+	//每一年每一月的各类服装销量统计
+	@RequestMapping("/backManager/piesale.do")
+	public String pieSale(String year,String month,HttpServletRequest request){
+		List<Map<String, Object>> list=formImp.findSaleClothesNum();
+	    List<String> nameList=new ArrayList<String>();
+	    List<Map<String,Object>> valueList=list;
+		for(Map<String,Object>m:list){
+			
+			nameList.add(m.get("name").toString());
+			
+		}
+		System.out.println(nameList);
+		System.out.println(valueList);
+		request.setAttribute("nameList", nameList);
+		request.setAttribute("valueList", valueList);
+		return "backManager/pie-simple";
+	}
+	
+	
 
 }

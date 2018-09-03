@@ -44,25 +44,39 @@
 	</div>
 	
 		
-<div id="container" style="height: 100%"></div>
-	<script type="text/javascript" src="js/echarts.min.js"></script>
-	<script type="text/javascript">
+<div id="formdiv" style="height:5%">
+   <form action="lineStockNum.do" method="post">
+   <input name="type" value="line" type="hidden">
+   <input type="submit" value="库存统计" style="height: 25px">
+   </form>
+
+</div>
+<div id="container" style="height: 95%"> </div>
+<script type="text/javascript" src="js/echarts.min.js"></script>
+<script type="text/javascript">
 var dom = document.getElementById("container");
 var myChart = echarts.init(dom);
 option = {
+	title : {
+	   text: '各类服装库存剩余量',
+	   subtext: 'x轴服装编号，y轴库存量',
+	    x:'center'
+	  },	
+	
     xAxis: {
         type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        data: ${valueList}
     },
     yAxis: {
         type: 'value'
     },
     series: [{
-        data: [364615256, 400827700, 359922428, 348408848, 392135484, 346606050, 369941458, 414088906, 373155800, 363993362, 408021124, 371341368],
+        data: ${nameList},
         type: 'line'
     }]
 };
 myChart.setOption(option, true);
-  </script>
+
+</script>
 </body>
 </html>

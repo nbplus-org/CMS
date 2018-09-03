@@ -357,6 +357,10 @@ public class OrderAction {
 	        	}	
 		}
 		//确认收货存销售表
+		if(orderVo.getOrderstatus().equals("1")){
+			orderimp.addSaleVO(orderVo.getOrderid());
+		}
+		
 		int result = orderimp.changeOrderStatus(orderVo);
 		if (result > 0) {
 			response.getWriter().print(1);// 成功
