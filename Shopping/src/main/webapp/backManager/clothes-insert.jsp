@@ -8,10 +8,46 @@
 <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
 
 <script language="javascript" type="text/javascript">
-	
+/* function ajax(){
+	var clothesname=$("#clothesname").html();
+	var clothesbrand=$("#clothesbrand").html();
+	var clothesbigtag=$("#clothesbigtag").html();
+	var brandpic=$("#file").val();
+	var clothestype=$("#clothestype").html();
+	var clothesintroduce=$("#clothesintroduce").html();
+	var clothessize=$("#clothessize").html();
+	var clothescolour=$("#clothescolour").html();
+	var stocknum=$("#stocknum").html();
+	var clothesorigprice=$("#clothesorigprice").html;
+	var clothesprice=$("#clothesprice").html();
+	data={
+			clothesname:clothesname,
+			clothesbrand:clothesbrand,
+			clothesbigtag:clothesbigtag,
+		 	brandpic:brandpic, 
+	        clothestype:clothestype,
+	        clothesintroduce:clothesintroduce,
+	        clothessize:clothessize,
+	        clothescolour:clothescolour,
+	        stocknum:stocknum,
+	        clothesorigprice:clothesorigprice,
+	        clothesprice:clothesprice,
+	};
+	$.post("clothesInsert.do",
+			data,
+			function(data){
+		    if(data==0){
+		    	alert("成功添加");
+		    }else{
+		    	alert("失败添加");
+		    }
+	});
+} */
+
+
 </script>
 </head>
-<body class="mian_bj">
+<body class="mian_bj" onload="come()">
 	<div class="mian_top_01">
 		<div class="mian_top_r"></div>
 		<div class="mian_top_l"></div>
@@ -23,6 +59,9 @@
 			</ul>
 		</div>
 		<div class="mian_b">
+		 	<form
+				action="clothesInsert.do"
+				enctype="multipart/form-data" method="post"> 
 			<table width="100%" border="0" cellpadding="0" cellspacing="0"
 				class="mian_b_bg_xz">
 				<tr>
@@ -33,7 +72,7 @@
 					<td>&nbsp;</td>
 					<td width="10%" valign="top">服装名称：</td>
 					<td width="30%"><input type="text" class="input_01"
-						name="textfield" id="textfield"></td>
+						name="clothesname" id="textfield" /></td>
 					<td width="40%">&nbsp;</td>
 					<td>&nbsp;</td>
 				</tr>
@@ -41,7 +80,7 @@
 					<td>&nbsp;</td>
 					<td valign="top">服装品牌：</td>
 					<td width="30%"><input type="text" class="input_01"
-						name="textfield" id="textfield"></td>
+						name="clothesbrand" id="textfield" /></td>
 					<td width="40%">&nbsp;</td>
 					<td>&nbsp;</td>
 				</tr>
@@ -49,26 +88,31 @@
 				<!-- <a href="ProductImage.htm"
 							style="text-decoration: underline;">查看产品图库</a> -->
 					<td>&nbsp;</td>
-					<td valign="top">服装服装标签：</td>
-					<td><input type="text" class="input_01" name="textfield"
-						id="text1"/>&nbsp;&nbsp;&nbsp;图片：<input type="file" id="file"/></td>
-					<td rowspan="10"><img src="images\jj_03.jpg"></td>
+					<td valign="top">服装标签：</td>
+					<td><select name="clothesbigtag">
+							<option>男装
+							<option>女装
+					</select></td>
+					<td name="brandpic" id="brandpic">品牌图片：<input type="file" name="file1" id="file1"
+					 accept="image/png, image/jpeg, image/gif, image/jpg"/></td>
+					<td rowspan="10" valign="top" ><img  src="images\jj_03.jpg" width="100px" height="100px"></td>
 					<td>&nbsp;</td>
+				</tr>
+				<tr>
+				
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
 					<td valign="top">服装类型：</td>
-					<td><select>
-							<option>家具
-								<option>饰品
-					</select></td>
+					<td><input type="text" class="input_01" name="clothestype"
+						id="text1"/></td>
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
 					<td valign="top">描述：</td>
 					<td width="30%"><input type="text" class="input_01"
-						name="textfield" id="textfield"></td>
+						name="clothesintroduce" id="textfield" /></td>
 					<td width="40%">&nbsp;</td>
 					<td>&nbsp;</td>
 				</tr>
@@ -76,43 +120,40 @@
 				<tr>
 					<td>&nbsp;</td>
 					<td valign="top">尺码：</td>
-					<td><select>
-							<option>S</option>
-								<option>M</option>
-									<option>L</option>
-										<option>XL</option>
-											<option>XXL</option>
-												<option>XXXL</option>
-					</select></td>
+					<td><input type="text" class="input_01" name="clothessize"
+						id="text1"/></td>
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
 					<td valign="top">颜色：</td>
 					<td width="30%"><input type="text" class="input_01"
-						name="textfield" id="textfield"></td>
+						name="clothescolour" id="textfield" /></td>
 					<td width="40%">&nbsp;</td>
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
 					<td valign="top">数量：</td>
-					<td><input type="text" class="input_01" name="textfield"
-						id="text2"></td>
+					<td><input type="text" class="input_01" name="stocknum"
+						id="text2" /></td>
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
 					<td valign="top">进货单价：</td>
-					<td><input type="text" class="input_01" name="textfield"
-						id="text3"></td>
+					<td><input type="text" class="input_01" name="clothesorigprice"
+						id="text3" /></td>
+					<td name="clothespic" id="clothespic">服装图片：<input type="file" name="file2" id="file2"
+					 accept="image/png, image/jpeg, image/gif, image/jpg"/></td>
+					<td rowspan="10" valign="top" ><img  src="images\jj_03.jpg" width="100px" height="100px"></td>		
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
 					<td valign="top">销售单价：</td>
-					<td><input type="text" class="input_01" name="textfield"
-						id="text3"></td>
+					<td><input type="text" class="input_01" name="clothesprice"
+						id="text3" /></td>
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
@@ -126,16 +167,15 @@
 					<td>&nbsp;</td>
 					<td>
 						<div align="center">
-							<a href="productManage.html"> <img src="images\bnt_03.gif"
-								style="margin-right: 10px;" width="80" height="22"></a><img
-								src="images\bnt_05.gif" alt="" width="80" height="22"
-								onclick="javascript:history.go(-1);">
+							<input type="submit" value="提交修改" /> <input type="button"
+									onclick="javascript:history.go(-1)" value="取消返回" />
 						</div>
 					</td>
 					<td></td>
 					<td>&nbsp;</td>
 				</tr>
 			</table>
+	 	</form> 
 		</div>
 	</div>
 </body>

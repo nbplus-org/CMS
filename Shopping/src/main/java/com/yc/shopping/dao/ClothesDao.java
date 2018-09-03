@@ -3,6 +3,8 @@ package com.yc.shopping.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -218,18 +220,130 @@ public interface ClothesDao {
 			+ ", clothesprice=#{clothes.clothesprice} where clothesid=#{clothes.clothesid}")
 	int modifyClothes(@Param("clothes") ClothesVO clothes);
 	
+	/**
+	 * 查询品牌图片
+	 * @return
+	 */
 	@Select("select distinct brandpic from clothesvo")
 	List<ClothesVO> showbrandpic();
 	
+	/**
+	 * 根据品牌图片   关联查询
+	 * @param brandpic
+	 * @param pages
+	 * @param rows
+	 * @return
+	 */
 	@Select("select * from clothesvo a,clothdetailvo b where a.clothesid=b.clothesid AND brandpic=#{brandpic} GROUP BY clothesname order by clothesname LIMIT #{pages},#{rows}")
 	List<Map<String, Object>> searchBybrandpic(@Param("brandpic")String brandpic,@Param("pages")Integer pages,@Param("rows")Integer rows);
 	
+	/**
+	 * 根据品牌图片查询数量
+	 * @param brandpic
+	 * @return
+	 */
 	@Select("select count(*) from clothesvo where brandpic=#{brandpic}")
 	long countBybrandpic(String brandpic);
 	
+    /**
+     * 模糊查询
+     * @param clothesname
+     * @param clothesbrand
+     * @param clothesbigtag
+     * @param clothestype
+     * @param pages
+     * @param rows
+     * @return
+     */
 	@Select("select * from clothesvo where clothesname like CONCAT('%',#{clothesname},'%')"
 			+ " or clothesbrand like CONCAT('%',#{clothesbrand},'%') or clothesbigtag like CONCAT('%','#{clothesbigtag}','%') or" 
             + "clothestype like CONCAT('%',#{clothestype},'%') GROUP BY clothesname LIMIT #{pages},#{rows}")
-	List<Map<String, Object>> selectByClothes(@Param("clothesname") String clothesname, @Param("pages") int pages,
+	List<Map<String, Object>> selectByClothes(@Param("clothesname") String clothesname,@Param("clothesbrand") String clothesbrand,
+			@Param("clothesbigtag") String clothesbigtag,@Param("clothestype") String clothestype, @Param("pages") int pages,
 			@Param("rows") int rows);
+	
+	
+	/**
+	 * 模糊查询的数量
+	 * @param clothesname
+	 * @param clothesbrand
+	 * @param clothesbigtag
+	 * @param clothestype
+	 * @return
+	 */
+	@Select("select count(*) from clothesvo where clothesname like CONCAT('%',#{clothesname},'%')"
+			+ "or clothesbrand like CONCAT('%',#{clothesbrand},'%') or clothesbigtag like CONCAT('%','#{clothesbigtag}','%') or"
+			+ "clothestype like CONCAT('%',#{clothestype},'%')")
+	long countByClothes(@Param("clothesname") String clothesname,@Param("clothesbrand") String clothesbrand,
+			@Param("clothesbigtag") String clothesbigtag,@Param("clothestype") String clothestype);
+	
+	/**
+	 * 新增服装表
+	 * @param clothesVO
+	 * @return
+	 */
+	@Insert("insert into clothesvo(aid,clothesname,clothestype,clothesbigtag,clothesbrand,brandpic,clothesintroduce,clothesorigprice,clothesprice)"
+			+ "values(1,#{clothesname},#{clothestype},#{clothesbigtag},#{clothesbrand},#{brandpic},#{clothesintroduce},#{clothesorigprice},#{clothesprice})")
+	@Options(useGeneratedKeys = true, keyColumn = "clothesid", keyProperty = "clothesid")
+	int insertToClothes(ClothesVO clothesVO);
+	/**
+	 * 根据类型名称查询TypeVO表已存在
+	 * @param typename
+	 * @return
+	 */
+	@Select("select * from typevo where typename=#{typename}")
+	TypeVO selectBytype(String typename);
+	/**
+	 * 新增typevo表
+	 * @param typeVO
+	 * @return
+	 */
+	@Insert("insert into typevo(typename) values(#{typename})")
+	int InsertToTypevo(TypeVO typeVO);
+	
+	
+	/**
+	 * 新增typeclothesvo表
+	 * @param typeid
+	 * @param clothesid
+	 * @return
+	 */
+	@Insert("insert into typeclothesvo(typeid,clothesid) values(#{typeid},#{clothesid})")
+	int insertTotypeclothesvo(@Param("typeid")Integer typeid,@Param("clothesid")Integer clothesid);
+	
+	/**
+	 * 新增服装详情表
+	 * @param clothesDetailVO
+	 * @return
+	 */
+	@Insert("insert into clothdetailvo(clothesid,clothescolour,clothessize,stocknum,clothespic)"
+			+ "values(#{clothesid},#{clothescolour},#{clothessize},#{stocknum},#{clothespic})")
+	@Options(useGeneratedKeys = true, keyColumn = "clodetailid", keyProperty = "clodetailid")
+	int insertToClothdetail(ClothesDetailVO clothesDetailVO);
+	/**
+	 * 服装表，服装详情表关联查询
+	 * @param clothesid
+	 * @param pages
+	 * @param rows
+	 * @return
+	 */
+	@Select("select * from clothesvo a,clothdetailvo b where a.clothesid=b.clothesid and a.clothesid=#{clothesid} LIMIT #{pages},#{rows}")
+	List<Map<String, Object>> selectClothesAndDetail(@Param("clothesid") int clothesid,@Param("pages") int pages,@Param("rows") int rows);
+	
+	/**
+	 * 根据服装id 查询数量
+	 * @param clothesid
+	 * @return
+	 */
+	@Select("select count(*) from clothdetailvo where clothesid=#{clothesid}")
+	int selectCount(int clothesid);
+	
+	/**
+	 * 修改库存
+	 * @param stocknum
+	 * @param clodetailid
+	 * @return
+	 */
+	@Update("update clothdetailvo set stocknum=stocknum+#{stocknum} where clodetailid=#{clodetailid}")
+	int updateStocknum(@Param("stocknum") Integer stocknum,@Param("clodetailid") Integer clodetailid);
 }

@@ -101,11 +101,15 @@ public class CartAction {
                     			int in=cBiz.Insert(userVo.getUid(), clothDetailVO.getClodetailid(), qty);
                     			if(in>0){
                     				System.out.println("已添加到购物车");
-                    				try {
-                						response.getWriter().print(0);
-                					} catch (IOException e) {
-                						e.printStackTrace();
-                					}  			
+                    				int updatestocknum=cBiz.updatestocknum(list.getStocknum(), qty, clothDetailVO.getClodetailid());
+                    				if(updatestocknum>0){
+                    					System.out.println("库存已改变");
+                        				try {
+                    						response.getWriter().print(0);
+                    					} catch (IOException e) {
+                    						e.printStackTrace();
+                    					}  
+                    				}		
                     			}else{
                     				System.out.println("系统故障,请稍后再试");
                     				try {

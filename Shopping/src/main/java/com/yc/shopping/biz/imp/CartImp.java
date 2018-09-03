@@ -215,5 +215,13 @@ public class CartImp implements CartInterface {
 	public long cartCount(Integer uid) {
 		return cDao.cartCount(uid);
 	}
+	
+	/**
+	 * 购买商品   库存扣除购买数
+	 */
+	@Override
+	public int updatestocknum(Integer stocknum, Integer qty, Integer clodetailid) {
+		return cDao.updatestocknum(stocknum, qty, clodetailid);
+	}
 
 }

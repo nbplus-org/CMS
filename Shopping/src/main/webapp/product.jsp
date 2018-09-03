@@ -64,6 +64,7 @@
                 	$("#check").html("");
                 	if(data==0){
                 		alert("成功添加到购物车");
+                		window.location.href="show.do"; 
                 	}else if(data==1){
                 		$("#check").html("请填写完整的信息!");
                 		$("#check").css("color", "red");

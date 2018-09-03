@@ -170,11 +170,104 @@ public interface ClothesInterface {
 	ClothesVO modifyOfSelect(int clothesid);
 	
 	int modifyClothes(ClothesVO clothes);
-	
+	/**
+	 * 查询品牌图片
+	 * @return
+	 */
 	public List<ClothesVO> showbrandpic();
-	
+	/**
+	 * 根据品牌图片   关联查询
+	 * @param brandpic
+	 * @param pages
+	 * @param rows
+	 * @return
+	 */
 	public List<Map<String, Object>> searchBybrandpic(String brandpic,Integer pages,Integer rows);
-	
+	/**
+	 * 根据品牌图片查询数量
+	 * @param brandpic
+	 * @return
+	 */
 	public long countBybrandpic(String brandpic);
+	
+	/**
+	 * 模糊查询
+	 * @param clothesname
+	 * @param clothesbrand
+	 * @param clothesbigtag
+	 * @param clothestype
+	 * @param pages
+	 * @param rows
+	 * @return
+	 */
+	public List<Map<String, Object>> selectByClothes(String clothesname,String clothesbrand,String clothesbigtag,String clothestype,Integer pages,Integer rows);
+
+	/**
+	 * 模糊查询的数量
+	 * @param clothesname
+	 * @param clothesbrand
+	 * @param clothesbigtag
+	 * @param clothestype
+	 * @return
+	 */
+	public long countByClothes(String clothesname,String clothesbrand,String clothesbigtag,String clothestype);
+	/**
+	 * 新增服装表
+	 * @param clothesVO
+	 * @return
+	 */
+	public int insertToClothes(ClothesVO clothesVO);
+	/**
+	 * 根据类型名称查询TypeVO表已存在
+	 * @param typename
+	 * @return
+	 */
+	public TypeVO selectBytype(String typename);
+	
+	/**
+	 * 
+	 * 新增typevo表
+	 * @param typeVO
+	 * @return
+	 */
+	public int InsertToTypevo(TypeVO typeVO);
+	
+	/**
+	 * 新增typeclothesvo表
+	 * @param typeid
+	 * @param clothesid
+	 * @return
+	 */
+	public int insertTotypeclothesvo(Integer typeid,Integer clothesid);
+	/**
+	 *  新增服装详情表
+	 * @param clothesDetailVO
+	 * @return
+	 */
+	public int insertToClothdetail(ClothesDetailVO clothesDetailVO);
+	
+	/**
+	 * 服装表，服装详情表关联查询
+	 * @param clothesid
+	 * @param pages
+	 * @param rows
+	 * @return
+	 */
+	public List<Map<String, Object>> selectClothesAndDetail(int clothesid,int pages,int rows);
+	
+	/**
+	 * 根据服装id 查询数量
+	 * @param clothesid
+	 * @return
+	 */
+	public int selectCount(int clothesid);
+	
+	/**
+	 * 修改库存
+	 * @param stocknum
+	 * @param clodetailid
+	 * @return
+	 */
+	public int updateStocknum(Integer stocknum, Integer clodetailid); 
 
 }

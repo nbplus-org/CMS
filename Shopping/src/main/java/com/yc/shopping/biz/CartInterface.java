@@ -183,4 +183,12 @@ public interface CartInterface {
 	 * @return
 	 */
 	public long cartCount(Integer uid);
+	/**
+	 * 购买商品   库存扣除购买数
+	 * @param stocknum
+	 * @param qty
+	 * @param clodetailid
+	 * @return
+	 */
+	public int updatestocknum(Integer stocknum,Integer qty,Integer clodetailid);
 }

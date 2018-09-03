@@ -211,11 +211,17 @@ public class ClothesImp implements ClothesInterface {
 		return cDao.modifyClothes(clothes);
 	}
 
+	/**
+	 * 查询品牌图片
+	 */
 	@Override
 	public List<ClothesVO> showbrandpic() {
 		return cDao.showbrandpic();
 	}
 
+	/**
+	 * 根据品牌图片   关联查询
+	 */
 	@Override
 	public List<Map<String, Object>> searchBybrandpic(String brandpic, Integer pages, Integer rows) {
 		//计算分页参数  偏移量
@@ -223,10 +229,98 @@ public class ClothesImp implements ClothesInterface {
 		return cDao.searchBybrandpic(brandpic, offset, rows);
 	}
 
+	/**
+	 * 根据品牌图片查询数量
+	 */
 	@Override
 	public long countBybrandpic(String brandpic) {
 		return cDao.countBybrandpic(brandpic);
 	}
+	
+	/**
+	 * 模糊查询
+	 */
+	@Override
+	public List<Map<String, Object>> selectByClothes(String clothesname, String clothesbrand, String clothesbigtag,
+			String clothestype, Integer pages, Integer rows) {
+		return cDao.selectByClothes(clothesname, clothesbrand, clothesbigtag, clothestype, pages, rows);
+	}
+
+	/**
+	 * 模糊查询的数量
+	 */
+	@Override
+	public long countByClothes(String clothesname, String clothesbrand, String clothesbigtag, String clothestype) {
+		return cDao.countByClothes(clothesname, clothesbrand, clothesbigtag, clothestype);
+	}
+
+	/**
+	 * 新增服装表
+	 */
+	@Override
+	public int insertToClothes(ClothesVO clothesVO) {
+		return cDao.insertToClothes(clothesVO);
+		
+	}
+
+	/**
+	 * 根据类型名称查询TypeVO表已存在
+	 */
+	@Override
+	public TypeVO selectBytype(String typename) {
+		return cDao.selectBytype(typename);
+	}
+
+	/**
+	 * 
+	 * 新增typevo表
+	 */
+	@Override
+	public int InsertToTypevo(TypeVO typeVO) {
+		return cDao.InsertToTypevo(typeVO);
+	}
+
+	/**
+	 * 新增typeclothesvo表
+	 */
+	@Override
+	public int insertTotypeclothesvo(Integer typeid, Integer clothesid) {
+		return cDao.insertTotypeclothesvo(typeid, clothesid);
+	}
+
+	/**
+	 *  新增服装详情表
+	 */
+	@Override
+	public int insertToClothdetail(ClothesDetailVO clothesDetailVO) {
+		return cDao.insertToClothdetail(clothesDetailVO);
+	}
+
+	/**
+	 * 服装表，服装详情表关联查询
+	 */
+	@Override
+	public List<Map<String, Object>> selectClothesAndDetail(int clothesid,int pages, int rows) {
+		return cDao.selectClothesAndDetail(clothesid,pages, rows);
+	}
+
+	/**
+	 * 根据服装id 查询数量
+	 */
+	@Override
+	public int selectCount(int clothesid) {
+		return cDao.selectCount(clothesid);
+	}
+
+	/**
+	 * 修改库存
+	 */
+	@Override
+	public int updateStocknum(Integer stocknum,Integer clodetailid) {
+		return cDao.updateStocknum(stocknum, clodetailid);
+	}
+
+
 
 	
 }
