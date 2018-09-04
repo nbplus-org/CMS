@@ -182,7 +182,7 @@
 										<div class="single_megamenu">
 											<!-- 大标签的循环输出 -->
 											<h2>
-												<a href="shop.html">${typename.typename }</a>&nbsp;&nbsp;&nbsp;
+												<a href="showShop.do?op=type&clothestype=${typename.typename }">${typename.typename }</a>&nbsp;&nbsp;&nbsp;
 											</h2>
 										</div>
 									</c:if>
@@ -206,7 +206,7 @@
 
 								<a href="seeorder.do">我的订单</a> 
 								<a href="showCart.do">购物车</a>
-                                <a href="about-us.jsp">关于我们我们</a>
+                                <a href="about-us.jsp">关于我们</a>
 								<a href="contact.jsp">联系我们</a>
 							</div></li>
 					</ul>

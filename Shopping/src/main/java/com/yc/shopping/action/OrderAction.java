@@ -248,7 +248,9 @@ public class OrderAction {
 		 */
 		// 从会话获取用户
 		UserVO user = (UserVO) request.getSession().getAttribute("UserVO");
-
+		if(user==null){
+			return "reglogin";
+		}else{
 		// 如果订单为空？
 		// List<OrderVO> o = orderimp.findOrder(user, pages, rows);
 		List<OrderVO> o = orderimp.findOrder(user);
@@ -273,6 +275,7 @@ public class OrderAction {
 		model.addAttribute("order2", o2);// 已完成订单
 		model.addAttribute("order4", o4);// 待评价
 		return "order";
+		}
 	}
 
 	/**

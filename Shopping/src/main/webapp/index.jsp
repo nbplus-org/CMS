@@ -55,6 +55,31 @@
 
 <script src="js/jquery-1.9.1.js"></script>
 <!-- <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script> -->
+        <style type="text/css">
+.icoFontlist:hover
+    {
+        width: 225px;
+        font-size: 12px;
+        border: 0px solid #ddd;
+        overflow: hidden;
+        text-align: left;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color:blue;
+        text-decoration:underline;
+        cursor:pointer; 
+    }
+.icoFontlist{
+        width: 225px;
+        font-size: 12px;
+        border: 0px solid #ddd;
+        color:#5f5f5f;
+        overflow: hidden;
+        text-align: left;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+        </style>
 <script type="text/javascript">
 	function goLogin() {
 		PostbirdAlertBox.confirm({
@@ -246,10 +271,8 @@
 											class="Sales">全部商品</span></a></li>
 									<li><a class="home2_size"><span class="Accessaries">帮助</span></a>
 										<div class="home_mega_menu menu_home2_looktr">
-<<<<<<< HEAD
-=======
+
 											<a href="seeorder.do">我的订单</a> <a href="showCart.do">购物车</a>
->>>>>>> branch 'master' of https://github.com/nbplus-org/CMS.git
 											<a href="about-us.jsp">关于我们</a> <a href="contact.jsp">联系我们</a>
 
 										</div></li>
@@ -507,7 +530,7 @@
 							<a href="check.do?clothesid=${s.clothesid}" target="main"><img
 								src="${s.clothespic}" alt="" /></a>
 							<div class="product_details">
-								<h2>${s.clothesname}</h2>
+								<h2 class="icoFontlist">${s.clothesname}</h2>
 								<p>
 									<span class="regular_price">￥${s.clothesorigprice }</span> <span
 										class="popular_price">￥${s.clothesprice }</span>
@@ -581,9 +604,11 @@
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+				<a href="contact.jsp">
 					<div class="Social_list">
 						<h2 align="center">联系我们</h2>
 					</div>
+				</a>
 				</div>
 			</div>
 		</div>

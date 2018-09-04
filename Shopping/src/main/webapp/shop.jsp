@@ -47,6 +47,34 @@
         <link rel="stylesheet" href="css/responsive.css">
 		<!-- modernizr JS  -->
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+        <style type="text/css">
+.icoFontlist:hover
+    {
+        width: 225px;
+        font-size: 12px;
+        border: 0px solid #ddd;
+        overflow: hidden;
+        text-align: left;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color:blue;
+        text-decoration:underline;
+        cursor:pointer; 
+    }
+.icoFontlist{
+        width: 225px;
+        font-size: 12px;
+        border: 0px solid #ddd;
+        color:#5f5f5f;
+        overflow: hidden;
+        text-align: left;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+        </style>
+        
+        
+        
         
          <script src="js/jquery-1.9.1.js"></script>
          <script type="text/javascript">
@@ -293,7 +321,6 @@
 								<div id="tab1" class="tab-pane fade in active">
 							 <c:forEach items="${show }" var="s" varStatus="vs">
 				             <%-- <c:if test="${vs.index%3==0 }">
->>>>>>> branch 'master' of https://github.com/nbplus-org/CMS.git
 									<div class="row">
 							 </c:if> --%>
 										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
@@ -301,7 +328,7 @@
 												<div class="single_product repomsive_768">
 													<a href="check.do?clothesid=${s.clothesid}" target="main"><img src="${s.brandpic}" alt="" /></a>
 													<div class="product_details">
-														<h2>${s.clothesname}</h2>
+														<h2 class="icoFontlist" title="${s.clothesname}">${s.clothesname}</h2>
 														<p><span class="regular_price">￥${s.clothesorigprice }</span> <span class="popular_price">￥${s.clothesprice }</span></p>
 													</div>
 													<div class="product_detail">
