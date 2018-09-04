@@ -87,7 +87,7 @@
 								<c:forEach items="${cart }" var="cart">
 									<div class="cart_single">
 										<a href="check.do?clothesid=${cart.clothesid}"><img
-											src="upload/${cart.clothespic }" width="50px" height="50px"
+											src="${cart.clothespic }" width="50px" height="50px"
 											alt="" /></a>
 										<h2>
 											<a href="check.do?clothesid=${cart.clothesid}">${cart.clothesname}</a>

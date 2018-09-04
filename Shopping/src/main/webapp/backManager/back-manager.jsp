@@ -280,7 +280,7 @@
 								onmousedown="javascript:pr('xx2')" onmouseover="show(2)"
 								onmouseout="hidden1(2)"><span></span>
 									<p class="icon_10">服装管理</p> </a></li>
-							<li class="y_css" id="xx4"><a href="task/Schedule.html"
+							<li class="y_css" id="xx4"><a href="clothesAll.do"
 								onclick="changeIcon('Task')" target="mainFrame"
 								onmousedown="javascript:pr('xx4')" onmouseover="show(4)"
 								onmouseout="hidden1(4)"><span></span>

@@ -84,15 +84,16 @@
 				<div class="row">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 						<div class="about_hope_text">
-							<h1>WELCOME TO <strong>HOPE</strong></h1>
-							<p>Lorem ipsum scelerisque molestie id molestie magna ante etiam sollicitudin tempus consectetur conubia, urna eros nunc curabitur viverra rutrum tortor luctus torquent mollis est dictum euismod</p>
+							<h1>欢迎来到 <strong>希望</strong></h1>
+							<p>本店新开张，诚信经营，只赚信誉不赚钱，谢谢.</p>
+							<p>本店商品均属正品，假一罚十信誉保证。 欢迎广大顾客前来放心选购，我们将竭诚为您服务!</p>
 							<ul id="about_hope_details">
-								<li><i class="fa fa-angle-right"></i> We love products that work perfectly and look beautiful.</li>
-								<li><i class="fa fa-angle-right"></i> We create base on a deeply analysis of your project.</li>
-								<li><i class="fa fa-angle-right"></i> We are create design with really high quality standards.</li>
+								<li><i class="fa fa-angle-right"></i> 我们喜欢功能完美且外观漂亮的产品.</li>
+								<li><i class="fa fa-angle-right"></i> 我们根据您对项目的深入分析创建基础.</li>
+								<li><i class="fa fa-angle-right"></i> 我们创造的设计具有非常高的质量标准.</li>
 							</ul>
 							<div class="about_read_more">
-								<a href="#">Learn More</a>
+								<a href="show.do">深层次了解</a>
 							</div>
 						</div>
 					</div>
@@ -111,8 +112,8 @@
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="about_skills">
-							<h2>OUR <strong> SKILL</strong></h2>
-							<p>Our skill is really high quality and standard for build your project.</p>
+							<h2>我们的 <strong> 技能</strong></h2>
+							<p>我们的技能是建立您的项目的高质量和标准.</p>
 						</div>
 					</div>
 				</div>
@@ -122,7 +123,7 @@
 						<div class="single-skill-about">
 							<div class="progress-circular">
 								  <input type="text" class="knob" value="0" data-rel="50" data-linecap="round" data-width="175" data-bgcolor="#F5F5F5" data-fgcolor="#ff343b" data-thickness=".04" data-readonly="true" disabled>
-								  <h4 class="progress-h4">Marketing</h4>					
+								  <h4 class="progress-h4">营销</h4>					
 							</div>						
 						</div>						
 					</div>
@@ -132,7 +133,7 @@
 						<div class="single-skill-about">
 							<div class="progress-circular">
 								  <input type="text" class="knob" value="0" data-rel="65" data-linecap="round" data-width="175" data-bgcolor="#F5F5F5" data-fgcolor="#ff343b" data-thickness=".04" data-readonly="true" disabled>
-								  <h4 class="progress-h4">Product Quality</h4>					
+								  <h4 class="progress-h4">产品质量</h4>					
 							</div>						
 						</div>						
 					</div>
@@ -142,7 +143,7 @@
 						<div class="single-skill-about">
 							<div class="progress-circular">
 								  <input type="text" class="knob" value="0" data-rel="85" data-linecap="round" data-width="175" data-bgcolor="#F5F5F5" data-fgcolor="#ff343b" data-thickness=".04" data-readonly="true" disabled>
-								  <h4 class="progress-h4">Production Speed</h4>					
+								  <h4 class="progress-h4">生产速度</h4>					
 							</div>						
 						</div>						
 					</div>
@@ -152,7 +153,7 @@
 						<div class="single-skill-about">
 							<div class="progress-circular">
 								  <input type="text" class="knob" value="0" data-rel="90" data-linecap="round" data-width="175" data-bgcolor="#F5F5F5" data-fgcolor="#ff343b" data-thickness=".04" data-readonly="true" disabled>
-								  <h4 class="progress-h4">Product Accuracy</h4>					
+								  <h4 class="progress-h4">产品精度</h4>					
 							</div>						
 						</div>						
 					</div>
@@ -161,90 +162,7 @@
 			</div>
 		</div>
 		<!--End skill area -->
-		<!--Start Creative Member area -->
-		<div class="creative_member_area">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<div class="creative_member_text">
-							 <h2>OUR CREATIVE <strong> MEMBER</strong></h2>
-							 <p>Our skill is really high quality and standard for build your project.</p>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-						<div class="single_creative_member">
-							<div class="creative_author">
-								<img src="img/author/m14.jpg" alt="" />
-							</div>
-							<div class="member_info">
-								<span class="member_name">Havier Macherano</span>
-								<span class="member_role">Developer</span>
-							</div>
-							<div class="member_icons">
-								<a href="#"><i class="fa fa-facebook"></i></a>
-								<a href="#"><i class="fa fa-twitter"></i></a>
-								<a href="#"><i class="fa fa-google-plus"></i></a>
-								<svg xml:space="preserve" enable-background="new 0 0 52 52" viewBox="0 0 52 52" height="52px" width="52px" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1"><path d="M51.673,0H0v51.5c0.244-5.359,3.805-10.412,7.752-13.003l36.169-23.74c4.264-2.799,7.761-8.663,7.752-14.297V0L51.673,0z"/></svg>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-						<div class="single_creative_member">
-							<div class="creative_author">
-								<img src="img/author/m15.jpg" alt="" />
-							</div>
-							<div class="member_info">
-								<span class="member_name">Luka Biglia</span>
-								<span class="member_role">Programmer</span>
-							</div>
-							<div class="member_icons">
-								<a href="#"><i class="fa fa-facebook"></i></a>
-								<a href="#"><i class="fa fa-twitter"></i></a>
-								<a href="#"><i class="fa fa-google-plus"></i></a>
-								<svg xml:space="preserve" enable-background="new 0 0 52 52" viewBox="0 0 52 52" height="52px" width="52px" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1"><path d="M51.673,0H0v51.5c0.244-5.359,3.805-10.412,7.752-13.003l36.169-23.74c4.264-2.799,7.761-8.663,7.752-14.297V0L51.673,0z"/></svg>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-						<div class="single_creative_member">
-							<div class="creative_author">
-								<img src="img/author/m16.jpg" alt="" />
-							</div>
-							<div class="member_info">
-								<span class="member_name">Anzo Perez</span>
-								<span class="member_role">Designer</span>
-							</div>
-							<div class="member_icons">
-								<a href="#"><i class="fa fa-facebook"></i></a>
-								<a href="#"><i class="fa fa-twitter"></i></a>
-								<a href="#"><i class="fa fa-google-plus"></i></a>
-								<svg xml:space="preserve" enable-background="new 0 0 52 52" viewBox="0 0 52 52" height="52px" width="52px" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1"><path d="M51.673,0H0v51.5c0.244-5.359,3.805-10.412,7.752-13.003l36.169-23.74c4.264-2.799,7.761-8.663,7.752-14.297V0L51.673,0z"/></svg>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-						<div class="single_creative_member">
-							<div class="creative_author">
-								<img src="img/author/m17.jpg" alt="" />
-							</div>
-							<div class="member_info">
-								<span class="member_name">Martin Demichelis</span>
-								<span class="member_role">PHP Developer</span>
-							</div>
-							<div class="member_icons">
-								<a href="#"><i class="fa fa-facebook"></i></a>
-								<a href="#"><i class="fa fa-twitter"></i></a>
-								<a href="#"><i class="fa fa-google-plus"></i></a>
-								<svg xml:space="preserve" enable-background="new 0 0 52 52" viewBox="0 0 52 52" height="52px" width="52px" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1"><path d="M51.673,0H0v51.5c0.244-5.359,3.805-10.412,7.752-13.003l36.169-23.74c4.264-2.799,7.761-8.663,7.752-14.297V0L51.673,0z"/></svg>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!--End Creative Member area -->
+
 		
 		<!--Start Branding area -->
         <%@ include file="brand.jsp" %>
