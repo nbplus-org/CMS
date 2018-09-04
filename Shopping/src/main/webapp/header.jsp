@@ -140,9 +140,8 @@
 									<div class="single_megamenu">
 										<!-- 大标签的循环输出 -->
 										<h2>
-											<a href="shop.html">${bigtag.clothesbigtag }</a>&nbsp;&nbsp;&nbsp;
+											<a href="showShop.do?op=tag&clothesbigtag=${bigtag.clothesbigtag }">${bigtag.clothesbigtag }</a>&nbsp;&nbsp;&nbsp;
 										</h2>
-
 									</div>
 								</c:forEach>
 							</div></li>
@@ -154,7 +153,7 @@
 										<div class="single_megamenu">
 											<!-- 大标签的循环输出 -->
 											<h2>
-												<a href="shop.html">${brand.clothesbrand }</a>
+												<a href="showShop.do?op=brand&clothesbrand=${brand.clothesbrand}">${brand.clothesbrand }</a>
 											</h2>
 										</div>
 									</c:if>
@@ -204,10 +203,14 @@
 									%> --%>
 						<li><a href="about-us.jsp"><span class="Accessaries">帮助</span></a>
 							<div class="home_mega_menu">
+<<<<<<< HEAD
 								<ul>
 									<li><a href="contact.jsp">关于我们</a></li>
 									<li><a href="contact.jsp">联系我们</a></li>
 								</ul>
+=======
+								<a href="seeorder.do">我的订单</a> <a href="showCart.do">购物车</a>
+>>>>>>> branch 'master' of https://github.com/nbplus-org/CMS.git
 							</div></li>
 					</ul>
 				</div>
