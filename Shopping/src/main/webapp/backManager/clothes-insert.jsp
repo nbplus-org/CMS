@@ -55,7 +55,7 @@
 		</div>
 		<div class="mian_b">
 		 	 <form
-				action="clothesInsert.do" id="form"
+				action="clothesInsert.do" 
 				enctype="multipart/form-data" method="post">  
 			<table width="100%" border="0" cellpadding="0" cellspacing="0"
 				class="mian_b_bg_xz">
@@ -87,6 +87,8 @@
 					<td><select name="clothesbigtag">
 							<option>男装
 							<option>女装
+							<option>鞋子
+							<option>包包
 					</select></td>
 					<td name="brandpic" id="brandpic">品牌图片：<input type="file" name="file1" id="file1"
 					 accept="image/png, image/jpeg, image/gif, image/jpg"/></td>
