@@ -407,6 +407,18 @@ public class ClothesAction {
 					map.put("op", op);
 					map.put("value", price);
 					map.put("type", "price");
+				}else if("type".equals(op)){
+					map.put("op", op);
+					map.put("value", clothestype);
+					map.put("type", "clothestype");
+				}else if("brand".equals(op)){
+					map.put("op", op);
+					map.put("value", clothesbrand);
+					map.put("type", "clothesbrand");
+				}else if("brandpic".equals(op)){
+					map.put("op", op);
+					map.put("value", brandpic);
+					map.put("type", "brandpic");
 				}
 				//----------
 		//request.getSession().setAttribute("op", op);
