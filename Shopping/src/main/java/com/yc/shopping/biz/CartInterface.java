@@ -82,7 +82,7 @@ public interface CartInterface {
 	public int updateCartCnum(Integer cnum,Integer qty,Integer clodetailid);
 	
 	/**
-	 * 三个表关联查询     赋值购物车
+	 * 三个表关联查询     赋值购物车(根据用户id)
 	 * @return
 	 * 
 	 * liu
@@ -191,6 +191,10 @@ public interface CartInterface {
 	 * @return
 	 */
 	public int updatestocknum(Integer stocknum,Integer qty,Integer clodetailid);
-	
+	/**
+	 *  根据服装id 查询服装表标签类型   判断是否为包包
+	 * @param clothesid
+	 * @return
+	 */
 	ClothesVO checkBigTag(Integer clothesid);
 }

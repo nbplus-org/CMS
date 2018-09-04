@@ -94,7 +94,7 @@ public interface CartDao {
 	int updateCartCnum(@Param("cnum")Integer cnum,@Param("qty")Integer qty,@Param("clodetailid")Integer clodetailid);
 		
 	/**
-	 * 三个表关联查询     赋值购物车
+	 * 三个表关联查询     赋值购物车(根据用户id)
 	 * @return
 	 * 
 	 * liu
@@ -218,6 +218,11 @@ public interface CartDao {
 	@Update("update clothdetailvo set stocknum=#{stocknum}-#{qty} where clodetailid=#{clodetailid}")
 	int updatestocknum(@Param("stocknum") Integer stocknum,@Param("qty") Integer qty,@Param("clodetailid") Integer clodetailid);
 
-	@Select("select * from clothesvo where clothesid=#{clothesvo}")
+	/**
+	 * 根据服装id 查询服装表标签类型   判断是否为包包
+	 * @param clothesid
+	 * @return
+	 */
+	@Select("select * from clothesvo where clothesid=#{clothesid}")
     ClothesVO checkBigTag(Integer clothesid);
 }

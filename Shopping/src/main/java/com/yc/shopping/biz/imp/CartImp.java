@@ -96,7 +96,7 @@ public class CartImp implements CartInterface {
 
 
     /**
-     * 三个表关联查询     赋值购物车
+     * 三个表关联查询     赋值购物车(根据用户id)
      * 
      * liu
      */
@@ -224,6 +224,9 @@ public class CartImp implements CartInterface {
 		return cDao.updatestocknum(stocknum, qty, clodetailid);
 	}
 
+	/**
+	 *  根据服装id 查询服装表标签类型   判断是否为包包
+	 */
 	@Override
 	public ClothesVO checkBigTag(Integer clothesid) {
 		return cDao.checkBigTag(clothesid);
