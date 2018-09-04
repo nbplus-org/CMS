@@ -283,7 +283,7 @@ public interface ClothesDao {
 	 * @return
 	 */
 	@Insert("insert into clothesvo(aid,clothesname,clothestype,clothesbigtag,clothesbrand,brandpic,clothesintroduce,clothesorigprice,clothesprice)"
-			+ "values(1,#{clothesname},#{clothestype},#{clothesbigtag},#{clothesbrand},#{brandpic},#{clothesintroduce},#{clothesorigprice},#{clothesprice})")
+			+ "values(#{aid},#{clothesname},#{clothestype},#{clothesbigtag},#{clothesbrand},#{brandpic},#{clothesintroduce},#{clothesorigprice},#{clothesprice})")
 	@Options(useGeneratedKeys = true, keyColumn = "clothesid", keyProperty = "clothesid")
 	int insertToClothes(ClothesVO clothesVO);
 	/**
