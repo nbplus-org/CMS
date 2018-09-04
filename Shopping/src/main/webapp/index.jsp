@@ -246,10 +246,9 @@
 											class="Sales">全部商品</span></a></li>
 									<li><a class="home2_size"><span class="Accessaries">帮助</span></a>
 										<div class="home_mega_menu menu_home2_looktr">
-<<<<<<< HEAD
-=======
+
 											<a href="seeorder.do">我的订单</a> <a href="showCart.do">购物车</a>
->>>>>>> branch 'master' of https://github.com/nbplus-org/CMS.git
+
 											<a href="about-us.jsp">关于我们</a> <a href="contact.jsp">联系我们</a>
 
 										</div></li>
