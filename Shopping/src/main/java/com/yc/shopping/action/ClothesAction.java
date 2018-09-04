@@ -97,10 +97,7 @@ public class ClothesAction {
 		session.setAttribute("brandpic", brandpic);
 		UserVO userVo = (UserVO) request.getSession().getAttribute("UserVO");
 		
-		List<Map<String, Object>> cart = ctBiz.findAll(userVo.getUid());
-		System.out.println(cart);
-		model.addAttribute("cart", cart);
-		session.setAttribute("cart", cart);
+
 
 
 		if (userVo != null) {

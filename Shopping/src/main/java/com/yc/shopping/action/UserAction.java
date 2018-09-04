@@ -9,6 +9,7 @@ import java.util.Random;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,9 @@ public class UserAction {
 
 	@Resource(name = "UserImp")
 	private UserInterface uimp;
+	
+	@Resource(name = "CartImp")
+	CartInterface ctBiz;
 
 	/**
 	 * 退出登录，注销，使会话失效
@@ -359,7 +363,7 @@ public class UserAction {
 	 *             liu
 	 */
 	@RequestMapping("/login.do")
-	public String login(UserVO userVo, HttpServletRequest request, Model model) throws BizException {
+	public String login(UserVO userVo, HttpServletRequest request, Model model,HttpSession session) throws BizException {
 		System.out.println(userVo.getUname() + "=========" + userVo.getUpwd());
 		// 获取输入验证码
 		String vcode = request.getParameter("vcode");
@@ -371,6 +375,12 @@ public class UserAction {
 			if (vcode.equalsIgnoreCase(vscode)) {
 				model.addAttribute("userVo", userVo);
 				request.getSession().setAttribute("UserVO", userVo);
+				
+				List<Map<String, Object>> cart = ctBiz.findAll(userVo.getUid());
+				System.out.println(cart);
+				model.addAttribute("cart", cart);
+				session.setAttribute("cart", cart);
+				
 				return "redirect:show.do";
 			} else {
 				model.addAttribute("msgcode", "验证码错误!");
