@@ -50,7 +50,7 @@ public class UserAction {
 	@RequestMapping("/outLog.do")
 	public String outLog(HttpServletRequest request){
 		request.getSession().invalidate();
-		return "index";
+		return "redirect:show.do";
 	}
 	
 	/**

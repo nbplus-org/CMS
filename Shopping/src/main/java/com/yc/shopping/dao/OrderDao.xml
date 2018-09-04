@@ -74,7 +74,7 @@
      on b.clothesid=c.clothesid
      WHERE 
      <foreach collection="array" item="id" 
-            open="cartid=" close=" " separator="or">
+            open="cartid=" close=" " separator="or cartid=">
             #{id}
      </foreach>
    

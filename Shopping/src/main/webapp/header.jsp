@@ -107,7 +107,7 @@
 									</div>
 								</c:forEach>
 								<div class="cart_shoptings">
-									<a href="checkout.jsp">结账</a>
+									<a href="checkoutAll.do">结账</a>
 								</div>
 								<%
 									} 

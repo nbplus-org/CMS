@@ -67,6 +67,10 @@ text-decoration:none;  /*超链接无下划线*/
 .pinglun{
 color: red;
 }
+#aaa{
+text-decoration:none;  /*超链接无下划线*/
+}
+
 </style>
 
 </style>
@@ -93,17 +97,13 @@ color: red;
 
 		<section class="aui-scrollView">
 			<%@include file="header.jsp"%>
-			<header class="aui-navBar aui-navBar-fixed">
-				<a href="javascript:;" class="aui-navBar-item"> <i
-					class="icon icon-return"></i>
-				</a>
+			<!-- <header class="aui-navBar aui-navBar-fixed"> -->
+				
 				<div class="aui-center">
 					<span class="aui-center-title">我的订单</span>
 				</div>
-				<a href="javascript:;" class="aui-navBar-item"> <i
-					class="icon icon-sys"></i>
-				</a>
-			</header>
+				
+			<!-- </header> -->
 			<div class="aui-tab" data-ydui-tab>
 				<ul class="tab-nav">
 					<li class="tab-nav-item tab-active"><a href="javascript:;">全部</a>
@@ -139,7 +139,7 @@ color: red;
 							</a>
 							<c:forEach items="${v.orderDetailVo }" var="o" >
 							<div class="aui-mail-product">
-								<a href="javascript:;" class="aui-mail-product-item">
+								<a href="check.do?clothesid=${o.clothesDetailVo.clothesid}" class="aui-mail-product-item">
 									<div class="aui-mail-product-item-hd">
 										<img src="${o.clothesDetailVo.clothespic }" alt="">
 									</div>
@@ -163,7 +163,7 @@ color: red;
 								</a>
 							</div>
 							</c:forEach>
-							<a href="javascript:;" class="aui-mail-payment">
+							<a href="javascript:;" class="aui-mail-payment" id="aaa">
 								<p>
 									<!-- 共<em>1</em> 件商品 --> 实付款: ￥<i>${v.tranprice }</i>
 								</p>
@@ -203,7 +203,7 @@ color: red;
 							</a>
 							<c:forEach items="${v.orderDetailVo }" var="o" >
 							<div class="aui-mail-product">
-								<a href="javascript:;" class="aui-mail-product-item">
+								<a href="check.do?clothesid=${o.clothesDetailVo.clothesid}" class="aui-mail-product-item">
 									<div class="aui-mail-product-item-hd">
 										<img src="${o.clothesDetailVo.clothespic }" alt="">
 									</div>
@@ -227,7 +227,7 @@ color: red;
 								</a>
 							</div>
 							</c:forEach>
-							<a href="javascript:;" class="aui-mail-payment">
+							<a href="javascript:;" class="aui-mail-payment" id="aaa">
 								<p>
 									<!-- 共<em>1</em> 件商品 --> 实付款: ￥<i>${v.tranprice }</i>
 								</p>
@@ -267,7 +267,7 @@ color: red;
 							</a>
 							<c:forEach items="${v.orderDetailVo }" var="o" >
 							<div class="aui-mail-product">
-								<a href="javascript:;" class="aui-mail-product-item">
+								<a href="check.do?clothesid=${o.clothesDetailVo.clothesid}" class="aui-mail-product-item">
 									<div class="aui-mail-product-item-hd">
 										<img src="${o.clothesDetailVo.clothespic }" alt="">
 									</div>
@@ -291,7 +291,7 @@ color: red;
 								</a>
 							</div>
 							</c:forEach>
-							<a href="javascript:;" class="aui-mail-payment">
+							<a href="javascript:;" class="aui-mail-payment" id="aaa">
 								<p>
 									<!-- 共<em>1</em> 件商品 --> 实付款: ￥<i>${v.tranprice }</i>
 								</p>
@@ -332,7 +332,7 @@ color: red;
 							</a>
 							<c:forEach items="${v.orderDetailVo }" var="o" >
 							<div class="aui-mail-product">
-								<a href="javascript:;" class="aui-mail-product-item">
+								<a href="check.do?clothesid=${o.clothesDetailVo.clothesid}" class="aui-mail-product-item">
 									<div class="aui-mail-product-item-hd">
 										<img src="${o.clothesDetailVo.clothespic }" alt="">
 									</div>
@@ -356,7 +356,7 @@ color: red;
 								</a>
 							</div>
 							</c:forEach>
-							<a href="javascript:;" class="aui-mail-payment">
+							<a href="javascript:;" class="aui-mail-payment" id="aaa">
 								<p>
 									<!-- 共<em>1</em> 件商品 --> 实付款: ￥<i>${v.tranprice }</i>
 								</p>
@@ -395,7 +395,7 @@ color: red;
 							</a>
 							<c:forEach items="${v.orderDetailVo }" var="o" >
 							<div class="aui-mail-product">
-								<a href="javascript:;" class="aui-mail-product-item">
+								<a href="check.do?clothesid=${o.clothesDetailVo.clothesid}" class="aui-mail-product-item">
 									<div class="aui-mail-product-item-hd">
 										<img src="${o.clothesDetailVo.clothespic }" alt="">
 									</div>
@@ -420,7 +420,7 @@ color: red;
 								</a>
 							</div>
 							</c:forEach>
-							<a href="javascript:;" class="aui-mail-payment">
+							<a href="javascript:;" class="aui-mail-payment" id="aaa">
 								<p>
 									<!-- 共<em>1</em> 件商品 --> 实付款: ￥<i>${v.tranprice }</i>
 								</p>
