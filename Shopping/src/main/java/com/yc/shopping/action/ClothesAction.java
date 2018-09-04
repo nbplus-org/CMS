@@ -393,24 +393,36 @@ public class ClothesAction {
 		model.addAttribute("color", color);
 		List<ClothesVO> tag = cBiz.findtag();
 		model.addAttribute("tag", tag);
-		// Map<String,String> map=new HashMap<String,String>();
-		/// ----------
-		if ("tag".equals(op)) {
-			map.put("op", op);
-			map.put("value", clothesbigtag);
-			map.put("type", "clothesbigtag");
-		} else if ("shop".equals(op)) {
-			map.put("op", op);
-			map.put("value", " ");
-			map.put("type", "shop");
-		} else if ("price".equals(op)) {
-			map.put("op", op);
-			map.put("value", price);
-			map.put("type", "price");
-		}
-		// ----------
-		// request.getSession().setAttribute("op", op);
 
+		//Map<String,String> map=new HashMap<String,String>();
+
+				if("tag".equals(op)){
+					map.put("op",op);
+					map.put("value", clothesbigtag);
+					map.put("type", "clothesbigtag");
+				}else if("shop".equals(op)){
+					map.put("op", op);
+					map.put("value", " ");
+					map.put("type", "shop");
+				}else if("price".equals(op)){
+					map.put("op", op);
+					map.put("value", price);
+					map.put("type", "price");
+				}else if("type".equals(op)){
+					map.put("op", op);
+					map.put("value", clothestype);
+					map.put("type", "clothestype");
+				}else if("brand".equals(op)){
+					map.put("op", op);
+					map.put("value", clothesbrand);
+					map.put("type", "clothesbrand");
+				}else if("brandpic".equals(op)){
+					map.put("op", op);
+					map.put("value", brandpic);
+					map.put("type", "brandpic");
+				}
+				//----------
+		//request.getSession().setAttribute("op", op);
 		return "shop";
 	}
 
