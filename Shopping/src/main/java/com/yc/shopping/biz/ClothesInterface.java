@@ -269,6 +269,17 @@ public interface ClothesInterface {
 	 * @return
 	 */
 	public int updateStocknum(Integer stocknum, Integer clodetailid); 
+	
+	/**
+	 * index.jsp查询按钮,模糊查询  huang
+	 * 查类型,大标签，品牌
+	 * @param model
+	 * @param value
+	 */
+	List<ClothesVO> clothesType(String value);
+	List<ClothesVO> clothesBigTag(String value);
+	List<ClothesVO> clothesBrand(String value);
+	List<ClothesVO> clothesName(String value);
 	/**
 	 * 根据服装名查询服装表是否与此数据
 	 * @param clothesname

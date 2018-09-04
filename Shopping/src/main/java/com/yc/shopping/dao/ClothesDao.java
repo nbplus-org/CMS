@@ -346,6 +346,43 @@ public interface ClothesDao {
 	 */
 	@Update("update clothdetailvo set stocknum=stocknum+#{stocknum} where clodetailid=#{clodetailid}")
 	int updateStocknum(@Param("stocknum") Integer stocknum,@Param("clodetailid") Integer clodetailid);
+	
+	//========================================
+	/**
+	 * index.jsp查询按钮,模糊查询  huang
+	 * 查类型
+	 * @param model
+	 * @param value
+	 */
+	@Select("select DISTINCT * from clothesvo c,typevo t,typeclothesvo tc where c.clothesid=tc.clothesid and t.typeid=tc.typeid and t.typename like CONCAT('%',#{value},'%') ")
+	List<ClothesVO> clothesType(String value);
+	
+	/**
+	 * index.jsp查询按钮,模糊查询  huang
+	 * 查大标签
+	 * @param model
+	 * @param value
+	 */
+	@Select("select * from clothesvo where clothesbigtag like CONCAT('%',#{value},'%') ")
+	List<ClothesVO> clothesBigTag(String value);
+	
+	/**
+	 * index.jsp查询按钮,模糊查询  huang
+	 * 查品牌
+	 * @param model
+	 * @param value
+	 */
+	@Select("select * from clothesvo where clothesbrand like CONCAT('%',#{value},'%') ")
+	List<ClothesVO> clothesbrand(String value);
+	
+	/**
+	 * index.jsp查询按钮,模糊查询  huang
+	 * 查服装名称
+	 * @param model
+	 * @param value
+	 */
+	@Select("select * from clothesvo where clothesbrand like CONCAT('%',#{value},'%') ")
+	List<ClothesVO> clothesname(String value);
 	/**
 	 * 根据服装名查询服装表是否与此数据
 	 * @param clothesname

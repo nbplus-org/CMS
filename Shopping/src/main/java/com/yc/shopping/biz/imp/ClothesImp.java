@@ -357,5 +357,31 @@ public class ClothesImp implements ClothesInterface {
 		return cDao.updatenumNotsize(stocknum, clothesid, clothescolour);
 	}
 
-	
+	//=========================================
+	/**
+	 * index.jsp查询按钮,模糊查询  huang
+	 * 查类型,大标签，品牌,名字
+	 * @param model
+	 * @param value
+	 */
+	@Override
+	public List<ClothesVO> clothesType(String value) {
+		return cDao.clothesType(value);
+	}
+
+	@Override
+	public List<ClothesVO> clothesBigTag(String value) {
+		return cDao.clothesBigTag(value);
+	}
+
+	@Override
+	public List<ClothesVO> clothesName(String value) {
+		return cDao.clothesbrand(value);
+	}
+
+	@Override
+	public List<ClothesVO> clothesBrand(String value) {
+		return cDao.clothesname(value);
+	}
+
 }

@@ -2,6 +2,7 @@ package com.yc.shopping.action;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -119,7 +120,7 @@ public class ClothesAction {
 	 */
 	@RequestMapping("/showCarAgain.do")
 	public void showCarAgain(Model model, HttpSession session) {
-		
+
 		List<Map<String, Object>> cart = ctBiz.findAll();
 		System.out.println(cart);
 		model.addAttribute("cart", cart);
@@ -151,9 +152,8 @@ public class ClothesAction {
 	 */
 	@RequestMapping("/showShop.do")
 	public String showShop(String brandpic, String clothestype, String clothesbrand, String clothesbigtag,
-			String clothescolour, String op, String price, ClothesVO clothesVO, Model model,
-			HttpServletRequest request,
-			Map<String,String> map) {
+			String clothescolour, String op, String price, ClothesVO clothesVO, Model model, HttpServletRequest request,
+			Map<String, String> map) {
 		int pages;
 		int rows;
 		String page = request.getParameter("page");
@@ -166,8 +166,8 @@ public class ClothesAction {
 			rows = Integer.parseInt(row);
 		}
 		System.out.println("=========" + op);
-		System.out.println(pages+"2018 9-4--"+rows);
-		
+		System.out.println(pages + "2018 9-4--" + rows);
+
 		if ("shop".equals(op)) {
 			long total = cBiz.count(clothesVO);
 			model.addAttribute("total", total);
@@ -175,11 +175,11 @@ public class ClothesAction {
 			int allPage = (int) (total % rows == 0 ? total / rows : total / rows + 1);
 			model.addAttribute("allPage", allPage);
 			// 当前页数
-			if(allPage==0){
+			if (allPage == 0) {
 				pages = 1;
-			}else if (pages <= 1) {
+			} else if (pages <= 1) {
 				pages = 1;
-			} else if (pages > allPage ) {
+			} else if (pages > allPage) {
 				pages = allPage;
 			}
 			model.addAttribute("pages", pages);
@@ -210,11 +210,11 @@ public class ClothesAction {
 				int allPage = (int) (total % rows == 0 ? total / rows : total / rows + 1);
 				model.addAttribute("allPage", allPage);
 				// 当前页数
-				if(allPage==0){
+				if (allPage == 0) {
 					pages = 1;
-				}else if (pages <= 1) {
+				} else if (pages <= 1) {
 					pages = 1;
-				} else if (pages > allPage ) {
+				} else if (pages > allPage) {
 					pages = allPage;
 				}
 				model.addAttribute("pages", pages);
@@ -235,11 +235,11 @@ public class ClothesAction {
 				int allPage = (int) (total % rows == 0 ? total / rows : (total / rows + 1));
 				model.addAttribute("allPage", allPage);
 				// 当前页数
-				if(allPage==0){
+				if (allPage == 0) {
 					pages = 1;
-				}else if (pages <= 1) {
+				} else if (pages <= 1) {
 					pages = 1;
-				} else if (pages > allPage ) {
+				} else if (pages > allPage) {
 					pages = allPage;
 				}
 				model.addAttribute("pages", pages);
@@ -260,11 +260,11 @@ public class ClothesAction {
 				int allPage = (int) (total % rows == 0 ? total / rows : total / rows + 1);
 				model.addAttribute("allPage", allPage);
 				// 当前页数
-				if(allPage==0){
+				if (allPage == 0) {
 					pages = 1;
-				}else if (pages <= 1) {
+				} else if (pages <= 1) {
 					pages = 1;
-				} else if (pages > allPage ) {
+				} else if (pages > allPage) {
 					pages = allPage;
 				}
 				model.addAttribute("pages", pages);
@@ -284,11 +284,11 @@ public class ClothesAction {
 				int allPage = (int) (total % rows == 0 ? total / rows : total / rows + 1);
 				model.addAttribute("allPage", allPage);
 				// 当前页数
-				if(allPage==0){
+				if (allPage == 0) {
 					pages = 1;
-				}else if (pages <= 1) {
+				} else if (pages <= 1) {
 					pages = 1;
-				} else if (pages > allPage ) {
+				} else if (pages > allPage) {
 					pages = allPage;
 				}
 				model.addAttribute("pages", pages);
@@ -303,11 +303,11 @@ public class ClothesAction {
 				int allPage = (int) (total % rows == 0 ? total / rows : total / rows + 1);
 				model.addAttribute("allPage", allPage);
 				// 当前页数
-				if(allPage==0){
+				if (allPage == 0) {
 					pages = 1;
-				}else if (pages <= 1) {
+				} else if (pages <= 1) {
 					pages = 1;
-				} else if (pages > allPage ) {
+				} else if (pages > allPage) {
 					pages = allPage;
 				}
 				model.addAttribute("pages", pages);
@@ -324,11 +324,11 @@ public class ClothesAction {
 			int allPage = (int) (total % rows == 0 ? total / rows : total / rows + 1);
 			model.addAttribute("allPage", allPage);
 			// 当前页数
-			if(allPage==0){
+			if (allPage == 0) {
 				pages = 1;
-			}else if (pages <= 1) {
+			} else if (pages <= 1) {
 				pages = 1;
-			} else if (pages > allPage ) {
+			} else if (pages > allPage) {
 				pages = allPage;
 			}
 			model.addAttribute("pages", pages);
@@ -342,11 +342,11 @@ public class ClothesAction {
 			int allPage = (int) (total % rows == 0 ? total / rows : total / rows + 1);
 			model.addAttribute("allPage", allPage);
 			// 当前页数
-			if(allPage==0){
+			if (allPage == 0) {
 				pages = 1;
-			}else if (pages <= 1) {
+			} else if (pages <= 1) {
 				pages = 1;
-			} else if (pages > allPage ) {
+			} else if (pages > allPage) {
 				pages = allPage;
 			}
 			model.addAttribute("pages", pages);
@@ -360,11 +360,11 @@ public class ClothesAction {
 			int allPage = (int) (total % rows == 0 ? total / rows : total / rows + 1);
 			model.addAttribute("allPage", allPage);
 			// 当前页数
-			if(allPage==0){
+			if (allPage == 0) {
 				pages = 1;
-			}else if (pages <= 1) {
+			} else if (pages <= 1) {
 				pages = 1;
-			} else if (pages > allPage ) {
+			} else if (pages > allPage) {
 				pages = allPage;
 			}
 			model.addAttribute("pages", pages);
@@ -378,11 +378,11 @@ public class ClothesAction {
 			int allPage = (int) (total % rows == 0 ? total / rows : total / rows + 1);
 			model.addAttribute("allPage", allPage);
 			// 当前页数
-			if(allPage==0){
+			if (allPage == 0) {
 				pages = 1;
-			}else if (pages <= 1) {
+			} else if (pages <= 1) {
 				pages = 1;
-			} else if (pages > allPage ) {
+			} else if (pages > allPage) {
 				pages = allPage;
 			}
 			model.addAttribute("pages", pages);
@@ -393,8 +393,9 @@ public class ClothesAction {
 		model.addAttribute("color", color);
 		List<ClothesVO> tag = cBiz.findtag();
 		model.addAttribute("tag", tag);
+
 		//Map<String,String> map=new HashMap<String,String>();
-		///----------
+
 				if("tag".equals(op)){
 					map.put("op",op);
 					map.put("value", clothesbigtag);
@@ -422,7 +423,6 @@ public class ClothesAction {
 				}
 				//----------
 		//request.getSession().setAttribute("op", op);
-        
 		return "shop";
 	}
 
@@ -866,12 +866,13 @@ public class ClothesAction {
 	
 	/**
 	 * 展示现有服装
+	 * 
 	 * @param model
 	 * @param page
 	 * @return
 	 */
 	@RequestMapping("/backManager/clothesAll.do")
-     public String clothesAll(Model model, @Param("page") String page){
+	public String clothesAll(Model model, @Param("page") String page) {
 		// 每条页面显示数据条数pageSize
 		int pageSize = 8;
 		// 初始化默认为第一页
@@ -895,17 +896,18 @@ public class ClothesAction {
 		model.addAttribute("pageTimes", pageTimes);
 		model.addAttribute("allClothes", allClothes);
 		return "backManager/clothes-information";
-     } 
-	
+	}
+
 	/**
 	 * 展示对应服装详情
+	 * 
 	 * @param clothesid
 	 * @param model
 	 * @param page
 	 * @return
 	 */
 	@RequestMapping("/backManager/clothesSchedule.do")
-	public String  clothesSchedule(Integer clothesid,Model model, @Param("page") String page){
+	public String clothesSchedule(Integer clothesid, Model model, @Param("page") String page) {
 		// 每条页面显示数据条数pageSize
 		int pageSize = 4;
 		// 初始化默认为第一页
@@ -914,9 +916,9 @@ public class ClothesAction {
 		}
 		// 从第几条开始
 		int startPage = (Integer.parseInt(page) - 1) * pageSize;
-		List<Map<String, Object>> list=cBiz.selectClothesAndDetail(clothesid, startPage, pageSize);
+		List<Map<String, Object>> list = cBiz.selectClothesAndDetail(clothesid, startPage, pageSize);
 		// 查询总页数
-		int count=cBiz.selectCount(clothesid);
+		int count = cBiz.selectCount(clothesid);
 		int pageTimes;
 		if (count % pageSize == 0) {
 			pageTimes = count / pageSize;
@@ -929,35 +931,71 @@ public class ClothesAction {
 		model.addAttribute("allClothes", list);
 		return "backManager/clothes-schedule";
 	}
-	
+
 	/**
-	 * 增加库存按钮  跳转页面
+	 * 增加库存按钮 跳转页面
+	 * 
 	 * @param clodetailid
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping(value = "/backManager/addNum.do")
-	public String addNum(Integer clodetailid,Model model){
+	public String addNum(Integer clodetailid, Model model) {
 		model.addAttribute("clodetailid", clodetailid);
 
 		return "backManager/clothes-addnum";
 	}
-	
+
 	/**
 	 * 增加库存
+	 * 
 	 * @param model
 	 * @param clodetailid
 	 * @param stocknum
 	 * @return
 	 */
 	@RequestMapping(value = "/backManager/addStocknum.do", method = RequestMethod.POST)
-	public String addStocknum(Model model,Integer clodetailid,Integer stocknum){
-		int result=cBiz.updateStocknum(stocknum, clodetailid);
-		if(result>0){
+	public String addStocknum(Model model, Integer clodetailid, Integer stocknum) {
+		int result = cBiz.updateStocknum(stocknum, clodetailid);
+		if (result > 0) {
 			System.out.println("修改成功");
-		}else{
+		} else {
 			System.out.println("修改失败");
 		}
 		return "backManager/back-manager";
 	}
+
+	/**
+	 * index查询按钮,模糊查询 huang
+	 * 
+	 * @param model
+	 * @param value
+	 * @throws IOException
+	 */
+	@RequestMapping("fuzzySelect.do")
+	public String fuzzySelect(Model model, String value, HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
+
+		List<ClothesVO> list = new ArrayList<ClothesVO>();
+		System.out.println("==============value==================" + value);
+		// 用value模糊查询类型,大标签，品牌
+		if (value != null && !"".equals(value)) {
+			List<ClothesVO> type = cBiz.clothesType(value);
+			List<ClothesVO> bigtag = cBiz.clothesBigTag(value);
+			List<ClothesVO> brand = cBiz.clothesBrand(value);
+			if (type == null && bigtag == null && brand == null) {
+				list.addAll(cBiz.clothesName(value));
+			} else {
+				list.addAll(type);
+				list.addAll(bigtag);
+				list.addAll(brand);
+			}
+		}
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println("========================" + i + "=" + list.get(i));
+		}
+		model.addAttribute("show", list);
+		return "shop";
+	}
+
 }

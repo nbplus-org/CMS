@@ -74,10 +74,10 @@
 					'okBtn' : '好的',
 					'contentColor' : 'red',
 					'onConfirm' : function() {
-						window.location.href = "cart.jsp";
+						window.location.href = "showCart.do";
 					},
 					'onCancel' : function() {
-						window.location.href = "product.jsp";
+						window.location.href = "check.do?clothesid=${clothesid}";
 					}
 				});
 
@@ -249,7 +249,7 @@
 								<span class="rating_value_two">￥${clothes.clothesprice}</span>
 							</p>
 							<div class="add-to-cart">
-								<input type="text" title="Qty" name="qty" id="qty" class="qty" />
+								<span style="font-size: 22px">数量:&nbsp;&nbsp;</span><input type="text" title="Qty" name="qty" id="qty" class="qty" value="1" />
 								<button type="button" title="加入购物车" onclick="ajax()" id="buy"
 									class="cart_button">
 									<span>加入购物车</span>

@@ -254,7 +254,9 @@
 					</div>
 					<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
 					
-					    <!-- 样式 -->
+					     <!-- 样式 -->
+					     
+					     
 						<div class="row">
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							
@@ -264,8 +266,6 @@
 								
 							</div>
 						</div>
-						
-						
 						
 						<div class="my_tabs">
 							<ul class="tab_style">
@@ -288,17 +288,18 @@
 									<option value="Price">Price</option>
 								</select>
 								<a href=""><i class="fa fa-long-arrow-up"></i></a>
-							</div>
+							</div> -
 							<div class="tab-content tab_content_style">
 								<div id="tab1" class="tab-pane fade in active">
 							 <c:forEach items="${show }" var="s" varStatus="vs">
 				             <%-- <c:if test="${vs.index%3==0 }">
+>>>>>>> branch 'master' of https://github.com/nbplus-org/CMS.git
 									<div class="row">
 							 </c:if> --%>
 										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 											<div class="product_list">
 												<div class="single_product repomsive_768">
-													<a href="check.do?clothesid=${s.clothesid}" target="main"><img src="${s.clothespic}" alt="" /></a>
+													<a href="check.do?clothesid=${s.clothesid}" target="main"><img src="${s.brandpic}" alt="" /></a>
 													<div class="product_details">
 														<h2>${s.clothesname}</h2>
 														<p><span class="regular_price">￥${s.clothesorigprice }</span> <span class="popular_price">￥${s.clothesprice }</span></p>
@@ -331,8 +332,9 @@
 							 </c:if> --%>
 										
 								</c:forEach>
-																								
+																						
 									</div>
+									<br>
 									<div class="row" align="center">
 										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 										<%-- <%if(request.getSession().getAttribute("op")!=null) %> --%>

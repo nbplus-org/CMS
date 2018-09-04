@@ -49,8 +49,12 @@
 <link rel="stylesheet" href="css/responsive.css">
 <!-- modernizr JS -->
 <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+<!-- 弹框css -->
+<!--  <link rel="stylesheet" href="css/tankuang.min.css">  -->
+<link rel="stylesheet" href="css/tankuangAlertBox.css">
 
 <script src="js/jquery-1.9.1.js"></script>
+<!-- <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script> -->
 <script type="text/javascript">
 	function goLogin() {
 		PostbirdAlertBox.confirm({
@@ -65,6 +69,36 @@
 			'onCancel' : function() {
 			}
 		});
+	}
+
+	function seeOrder() {
+		PostbirdAlertBox.confirm({
+			'title' : '提示',
+			'content' : '您还没有登陆，去登陆?',
+			'okBtn' : '好的',
+			'contentColor' : 'red',
+			'onConfirm' : function() {
+				window.location.href = "reglogin.jsp";
+				//alert("回调触发后隐藏提示框");
+			},
+			'onCancel' : function() {
+			}
+		});
+	}
+	//搜索框的模糊查询
+	function fuzzySelect(value) {
+		$.get("fuzzySelect.do", {
+			value : value
+		}, function(data) {
+			$("#searchContent").autocomplete({
+				source : data
+			});
+		});
+	}
+
+	function search() {
+		var value=$("#searchContent").val();
+		window.location.href="fuzzySelect.do?value="+value;
 	}
 </script>
 </head>
@@ -102,6 +136,8 @@
  %> <a class="list_cl" href="reglogin.jsp"> <i class="fa fa-key"></i>请登录
 								</a> <%
  	}
+ %> <%
+ 	if (request.getSession().getAttribute("UserVO") != null) {
  %>
 									<div class="account_menu_list">
 										<div class="account_single_item">
@@ -111,7 +147,9 @@
 												<li><a href="outLog.do">退出登陆</a></li>
 											</ul>
 										</div>
-									</div>
+									</div> <%
+ 	}
+ %>
 								</li>
 								<%
 									if (request.getSession().getAttribute("UserVO") != null) {
@@ -138,17 +176,11 @@
 													<a href="trash.do?cartid=${cart.cartid}"><span><i
 															class="fa fa-trash"></i></span></a>
 												</h2>
-												<p>${cart.cnum }x$${cart.clothesprice }</p>
+												<p>${cart.cnum }x$${cart.clothesprice}</p>
 											</div>
 										</c:forEach>
 										<div class="cart_shoptings">
 											<a href="checkoutAll.do">结账</a>
-										</div>
-										<%
-											} else {
-										%>
-										<div class="cart_shoptings">
-											<a href="#">结账</a>
 										</div>
 										<%
 											}
@@ -192,7 +224,7 @@
 														</h2>
 													</c:if>
 												</c:forEach>
-												<h2><span>......</span></h2>
+												<span>......</span>
 											</div>
 										</div></li>
 
@@ -214,7 +246,10 @@
 											class="Sales">全部商品</span></a></li>
 									<li><a class="home2_size"><span class="Accessaries">帮助</span></a>
 										<div class="home_mega_menu menu_home2_looktr">
+<<<<<<< HEAD
+=======
 											<a href="seeorder.do">我的订单</a> <a href="showCart.do">购物车</a>
+>>>>>>> branch 'master' of https://github.com/nbplus-org/CMS.git
 											<a href="about-us.jsp">关于我们</a> <a href="contact.jsp">联系我们</a>
 
 										</div></li>
@@ -227,11 +262,21 @@
 							<div class="search_box_hopme2">
 								<form action="#" name="myForm">
 									<div class="search_box seach_box_home2_area">
-										<input name="Name" id="itp" class="input_text" type="text"
-											value="输入你想要的" />
-										<button type="button" class="btn-search" onclick="ajax()">
+										<input name="Name" id="searchContent" class="input_text"
+											type="text" list="source" placeholder="输入你想要的" autocomplete="off"
+											 />
+										<!-- oninput="fuzzySelect(value)" -->
+										<!-- 自定义下拉框 -->
+										<!-- <datalist id="source">
+
+										</datalist> -->
+										<%-- <c:forEach items="${searchResult }" var="result">
+												<option value="${result }"></option>
+											</c:forEach> --%>
+										<button type="button" class="btn-search" onclick="search()">
 											<i class="fa fa-search"></i>
 										</button>
+
 									</div>
 								</form>
 							</div>
@@ -289,8 +334,6 @@
 									<li><a href="showShop.do?op=shop">全部商品</a></li>
 									<li><a href="about-us.jsp">帮助</a>
 										<ul>
-											<li><a href="reglogin.jsp">我的账户</a></li>
-											<li><a href="showCart.do">购物车</a></li>
 											<li><a href="contact.jsp">关于我们</a></li>
 											<li><a href="contact.jsp">联系我们</a></li>
 										</ul></li>
@@ -325,13 +368,13 @@
 							</h3>
 							<h2
 								class="slider2-tiile-middle home2_slider2-tiile-middle middle-ani-2">
-								<span>真皮皮袋</span>
+								<span>Nike</span>
 							</h2>
 							<div class="slider2-readmore slider2-readmore_home2">
-								<a href="#">探险家</a>
+								<a href="#">耐克球鞋</a>
 							</div>
 							<div class="slider2-shop slider2-shop_home2">
-								<a href="#">不要犹豫</a>
+								<a href="#">不要犹豫，放肆起来！</a>
 							</div>
 						</div>
 					</div>
@@ -346,10 +389,10 @@
 								<span>疯狂夏日</span>
 							</h3>
 							<h2 class="slider-tiile-middle middle-ani-1">
-								<span>开始</span>
+								<span>凉快说来就来</span>
 							</h2>
 							<div class="slider-readmore">
-								<a href="#">explorer</a>
+								<a href="#">半腰短袖</a>
 							</div>
 							<div class="slider-shopping">
 								<a href="#">不要犹豫</a>
@@ -364,13 +407,13 @@
 					<div class="middle-text">
 						<div class="width-cap">
 							<h3 class="slider2-tiile-top top-ani-2">
-								<span>纯手工制作</span>
+								<span>真皮包包</span>
 							</h3>
 							<h2 class="slider2-tiile-middle middle-ani-2">
-								<span>Leather Bags</span>
+								<span>Michael Kors</span>
 							</h2>
 							<div class="slider2-readmore">
-								<a href="#">explorer</a>
+								<a href="#">MK时尚女包</a>
 							</div>
 							<div class="slider2-shop">
 								<a href="#">立刻买吧</a>
@@ -401,8 +444,8 @@
 							</a>
 						</div>
 						<div class="home2_banner_text">
-							<h4>leather bags</h4>
-							<h3>-35% 出售</h3>
+							<h4>真皮包包</h4>
+							<h3>6折厂价热销</h3>
 						</div>
 					</div>
 				</div>
@@ -413,8 +456,8 @@
 							</a>
 						</div>
 						<div class="home2_banner_text">
-							<h4>男士表</h4>
-							<h3>-35% 出售</h3>
+							<h4>品牌服装</h4>
+							<h3>全场七折</h3>
 						</div>
 					</div>
 				</div>
@@ -526,35 +569,20 @@
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 					<div class="service_list">
 						<h2>
-							<i class="fa fa-envelope-o"></i> info@liendobingo.com
+							<i class="fa fa-envelope-o"></i> 1628443167@qq.com
 						</h2>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 					<div class="service_list">
 						<h3>
-							<i class="fa fa-phone"></i> (+5555) 224 434
+							<i class="fa fa-phone"></i> 15570921217
 						</h3>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 					<div class="Social_list">
-						<h2>Connect us:</h2>
-						<div
-							class="social_icon my-class uk-scrollspy-init-inview uk-invisible">
-							<a data-toggle="tooltip" data-placement="top" title=""
-								data-original-title="Like 6k" class="red-tooltip" href="#"><i
-								class="fa fa-facebook"></i></a> <a data-toggle="tooltip"
-								data-placement="top" title=""
-								data-original-title="Followers 61k" class="red-tooltip" href="#"><i
-								class="fa fa-twitter"></i></a> <a data-toggle="tooltip"
-								data-placement="top" title=""
-								data-original-title="Followers 16k" class="red-tooltip" href="#"><i
-								class="fa fa-linkedin"></i></a> <a data-toggle="tooltip"
-								data-placement="top" title=""
-								data-original-title="Followers 10k" class="red-tooltip" href="#"><i
-								class="fa fa-pinterest"></i></a>
-						</div>
+						<h2 align="center">联系我们</h2>
 					</div>
 				</div>
 			</div>
@@ -567,7 +595,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="feature_text">
-						<h4>Blog Post</h4>
+						<h4>猜你喜欢</h4>
 					</div>
 				</div>
 			</div>
@@ -701,5 +729,7 @@
 	<script src="js/plugins.js"></script>
 	<!-- main JS  -->
 	<script src="js/main.js"></script>
+	<!-- 弹框js -->
+	<script src="js/tankuangAlertBox.min.js"></script>
 </body>
 </html>
