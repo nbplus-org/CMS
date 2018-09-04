@@ -2,6 +2,7 @@ package com.yc.shopping.action;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -133,6 +134,285 @@ public class ClothesAction {
 		}
 	}
 
+
+	/**
+	 * 头部按钮及shopjsp页面按钮查询
+	 * 
+	 * @param clothestype
+	 * @param clothesbrand
+	 * @param clothesbigtag
+	 * @param clothescolour
+	 * @param op
+	 * @param price
+	 * @param clothesVO
+	 * @param model
+	 * @param request
+	 * @return liu
+	 */
+	@RequestMapping("/showShop.do")
+	public String showShop(String brandpic, String clothestype, String clothesbrand, String clothesbigtag,
+			String clothescolour, String op, String price, ClothesVO clothesVO, Model model,
+			HttpServletRequest request,
+			Map<String,String> map) {
+		int pages;
+		int rows;
+		String page = request.getParameter("page");
+		String row = request.getParameter("rows");
+		if (page == null || row == null) {
+			pages = 1;
+			rows = 6;
+		} else {
+			pages = Integer.parseInt(page);
+			rows = Integer.parseInt(row);
+		}
+		System.out.println("=========" + op);
+		System.out.println(pages+"2018 9-4--"+rows);
+		
+		if ("shop".equals(op)) {
+			long total = cBiz.count(clothesVO);
+			model.addAttribute("total", total);
+			// 求总页数 放到model.addAttribute里面
+			int allPage = (int) (total % rows == 0 ? total / rows : total / rows + 1);
+			model.addAttribute("allPage", allPage);
+			// 当前页数
+			if(allPage==0){
+				pages = 1;
+			}else if (pages <= 1) {
+				pages = 1;
+			} else if (pages > allPage ) {
+				pages = allPage;
+			}
+			model.addAttribute("pages", pages);
+			List<Map<String, Object>> list = cBiz.findAll(pages, rows);
+			System.out.println("============" + list);
+			model.addAttribute("show", list);
+		} else if ("price".equals(op)) {
+			System.out.println("============" + price);
+			System.out.println("============" + price.length()); // 21 19 17
+			// request.getSession().setAttribute("length", price.length());
+			// request.getSession().setAttribute("price",price);
+			// Integer.parseInt(request.getSession().getAttribute().toString())
+			// System.out.println(Integer.parseInt(request.getSession().getAttribute("length").toString()));
+			// if(request.getSession().getAttribute("length")!=null){
+			if (price.length() == 8) {
+				// String price2=(String)
+				// request.getSession().getAttribute("price");
+				String lower = price.substring(1, 3);
+				String higher = price.substring(6, 8);
+				System.out.println("=====" + lower);
+				System.out.println("=====" + higher);
+
+
+
+				long total = cBiz.countByPrice(Double.parseDouble(lower), Double.parseDouble(higher));
+				model.addAttribute("total", total);
+				// 求总页数 放到model.addAttribute里面
+				int allPage = (int) (total % rows == 0 ? total / rows : total / rows + 1);
+				model.addAttribute("allPage", allPage);
+				// 当前页数
+				if(allPage==0){
+					pages = 1;
+				}else if (pages <= 1) {
+					pages = 1;
+				} else if (pages > allPage ) {
+					pages = allPage;
+				}
+				model.addAttribute("pages", pages);
+				List<Map<String, Object>> list = cBiz.searchByPrice(Double.parseDouble(lower),
+						Double.parseDouble(higher), pages, rows);
+				model.addAttribute("show", list);
+			} else if (price.length() == 9) {
+				// String price2=(String)
+				// request.getSession().getAttribute("price");
+				String lower = price.substring(1, 3);
+				String higher = price.substring(6, 9);
+				System.out.println("=====" + lower);
+				System.out.println("=====" + higher);
+
+				long total = cBiz.countByPrice(Double.parseDouble(lower), Double.parseDouble(higher));
+				model.addAttribute("total", total);
+				// 求总页数 放到model.addAttribute里面
+				int allPage = (int) (total % rows == 0 ? total / rows : (total / rows + 1));
+				model.addAttribute("allPage", allPage);
+				// 当前页数
+				if(allPage==0){
+					pages = 1;
+				}else if (pages <= 1) {
+					pages = 1;
+				} else if (pages > allPage ) {
+					pages = allPage;
+				}
+				model.addAttribute("pages", pages);
+				List<Map<String, Object>> list = cBiz.searchByPrice(Double.parseDouble(lower),
+						Double.parseDouble(higher), pages, rows);
+				model.addAttribute("show", list);
+			} else if (price.length() == 10) {
+				// String price2=(String)
+				// request.getSession().getAttribute("price");
+				String lower = price.substring(1, 4);
+				String higher = price.substring(7, 10);
+				System.out.println("=====" + lower);
+				System.out.println("=====" + higher);
+
+				long total = cBiz.countByPrice(Double.parseDouble(lower), Double.parseDouble(higher));
+				model.addAttribute("total", total);
+				// 求总页数 放到model.addAttribute里面
+				int allPage = (int) (total % rows == 0 ? total / rows : total / rows + 1);
+				model.addAttribute("allPage", allPage);
+				// 当前页数
+				if(allPage==0){
+					pages = 1;
+				}else if (pages <= 1) {
+					pages = 1;
+				} else if (pages > allPage ) {
+					pages = allPage;
+				}
+				model.addAttribute("pages", pages);
+				List<Map<String, Object>> list = cBiz.searchByPrice(Double.parseDouble(lower),
+						Double.parseDouble(higher), pages, rows);
+				model.addAttribute("show", list);
+				// }
+
+			}
+		} else if ("color".equals(op)) {
+			System.out.println("============" + clothescolour);
+			request.getSession().setAttribute("clothescolour", clothescolour);
+			if (request.getSession().getAttribute("clothescolour") == null) {
+				long total = cBiz.countByColor(clothescolour);
+				model.addAttribute("total", total);
+				// 求总页数 放到model.addAttribute里面
+				int allPage = (int) (total % rows == 0 ? total / rows : total / rows + 1);
+				model.addAttribute("allPage", allPage);
+				// 当前页数
+				if(allPage==0){
+					pages = 1;
+				}else if (pages <= 1) {
+					pages = 1;
+				} else if (pages > allPage ) {
+					pages = allPage;
+				}
+				model.addAttribute("pages", pages);
+				List<Map<String, Object>> list = cBiz.searchByColor(clothescolour, pages, rows);
+				model.addAttribute("show", list);
+			} else {
+				String mycolor = (String) request.getSession().getAttribute("clothescolour");
+				System.out.println("=====aaa=====" + mycolor);
+				long total = cBiz.countByColor(mycolor);
+				model.addAttribute("total", total);
+				// 求总页数 放到model.addAttribute里面
+				int allPage = (int) (total % rows == 0 ? total / rows : total / rows + 1);
+				model.addAttribute("allPage", allPage);
+				// 当前页数
+				if(allPage==0){
+					pages = 1;
+				}else if (pages <= 1) {
+					pages = 1;
+				} else if (pages > allPage ) {
+					pages = allPage;
+				}
+				model.addAttribute("pages", pages);
+				List<Map<String, Object>> list = cBiz.searchByColor(mycolor, pages, rows);
+				model.addAttribute("show", list);
+			}
+
+		} else if ("tag".equals(op)) {
+			System.out.println("============" + clothesbigtag);
+
+			long total = cBiz.countByTag(clothesbigtag);
+			model.addAttribute("total", total);
+			// 求总页数 放到model.addAttribute里面
+			int allPage = (int) (total % rows == 0 ? total / rows : total / rows + 1);
+			model.addAttribute("allPage", allPage);
+			// 当前页数
+			if(allPage==0){
+				pages = 1;
+			}else if (pages <= 1) {
+				pages = 1;
+			} else if (pages > allPage ) {
+				pages = allPage;
+			}
+			model.addAttribute("pages", pages);
+			List<Map<String, Object>> list = cBiz.searchByTag(clothesbigtag, pages, rows);
+			model.addAttribute("show", list);
+		} else if ("brand".equals(op)) {
+			System.out.println("==========" + clothesbrand);
+			long total = cBiz.countBybrand(clothesbrand);
+			model.addAttribute("total", total);
+			// 求总页数 放到model.addAttribute里面
+			int allPage = (int) (total % rows == 0 ? total / rows : total / rows + 1);
+			model.addAttribute("allPage", allPage);
+			// 当前页数
+			if(allPage==0){
+				pages = 1;
+			}else if (pages <= 1) {
+				pages = 1;
+			} else if (pages > allPage ) {
+				pages = allPage;
+			}
+			model.addAttribute("pages", pages);
+			List<Map<String, Object>> list = cBiz.searchBybrand(clothesbrand, pages, rows);
+			model.addAttribute("show", list);
+		} else if ("type".equals(op)) {
+			System.out.println("==========" + clothestype);
+			long total = cBiz.countBytype(clothestype);
+			model.addAttribute("total", total);
+			// 求总页数 放到model.addAttribute里面
+			int allPage = (int) (total % rows == 0 ? total / rows : total / rows + 1);
+			model.addAttribute("allPage", allPage);
+			// 当前页数
+			if(allPage==0){
+				pages = 1;
+			}else if (pages <= 1) {
+				pages = 1;
+			} else if (pages > allPage ) {
+				pages = allPage;
+			}
+			model.addAttribute("pages", pages);
+			List<Map<String, Object>> list = cBiz.searchBytype(clothestype, pages, rows);
+			model.addAttribute("show", list);
+		} else if ("brandpic".equals(op)) {
+			System.out.println("=========" + brandpic);
+			long total = cBiz.countBybrandpic(brandpic);
+			model.addAttribute("total", total);
+			// 求总页数 放到model.addAttribute里面
+			int allPage = (int) (total % rows == 0 ? total / rows : total / rows + 1);
+			model.addAttribute("allPage", allPage);
+			// 当前页数
+			if(allPage==0){
+				pages = 1;
+			}else if (pages <= 1) {
+				pages = 1;
+			} else if (pages > allPage ) {
+				pages = allPage;
+			}
+			model.addAttribute("pages", pages);
+			List<Map<String, Object>> list = cBiz.searchBybrandpic(brandpic, pages, rows);
+			model.addAttribute("show", list);
+		}
+		List<ClothesDetailVO> color = cBiz.findcolor();
+		model.addAttribute("color", color);
+		List<ClothesVO> tag = cBiz.findtag();
+		model.addAttribute("tag", tag);
+		//Map<String,String> map=new HashMap<String,String>();
+		///----------
+				if("tag".equals(op)){
+					map.put("op",op);
+					map.put("value", clothesbigtag);
+					map.put("type", "clothesbigtag");
+				}else if("shop".equals(op)){
+					map.put("op", op);
+					map.put("value", " ");
+					map.put("type", "shop");
+				}else if("price".equals(op)){
+					map.put("op", op);
+					map.put("value", price);
+					map.put("type", "price");
+				}
+				//----------
+		//request.getSession().setAttribute("op", op);
+        
+		return "shop";
+	}
 
 
 	/**

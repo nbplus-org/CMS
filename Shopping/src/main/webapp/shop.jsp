@@ -86,7 +86,7 @@
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="breadcrumb-single">
 							<ul id="breadcrumbs">
-								<li><a href="#"><i class="fa fa-home"></i>Home</a></li>
+								<li><a href="show.do"><i class="fa fa-home"></i>主页</a></li>
 								<li><span>Ι</span></li>
 								<li>Clothings</li>
 							</ul>
@@ -105,7 +105,7 @@
 							
 							
 							<div class="priceing_area">
-								<h2>Price</h2>
+								<h2>价格</h2>
 								<div class="info_widget">
 									<div class="price_filter">
 										<div id="slider-range"></div>
@@ -120,13 +120,13 @@
 							</div>
 							
 							<div class="catagory_area">
-								<h2>COLOR</h2>
+								<%-- <h2>COLOR</h2>
 								<ul class="catagory">
 								<!--  <form action="searchByColor.do" method="post"> id="clothescolour" onclick="searchByColor(this.text())" -->
 								<c:forEach items="${color}" var="c">
 									<li ><i class="fa fa-angle-right"></i><a href="showShop.do?op=color&clothescolour=${c.clothescolour}"  name="clothescolour" style="font-size:15px"  >${c.clothescolour}</a></li> 
-									<%-- <input type="submit"  id="clothescolour" name="clothescolour" onclick="searchByColor()" value="${c.clothescolour}"/>   --%>
-                               </c:forEach>
+									<input type="submit"  id="clothescolour" name="clothescolour" onclick="searchByColor()" value="${c.clothescolour}"/>  
+                               </c:forEach> --%>
 								 <!-- </form> -->	
 								<!-- <li><a href="#" id="clothescolour" name="clothescolour" onclick="searchByColor()"><i class="fa fa-angle-right"></i>${color[1].clothescolour}</a><span>(2)</span></li>
 					                 <li><a href="searchByColor.do" name="color"><i class="fa fa-angle-right"></i>绿色</a><span>(8)</span></li>
@@ -138,7 +138,7 @@
 						</div>
 						<div class="popular_tag_area">
 							<div class="popular_items">
-								<h2>POPULAR TAGS</h2>
+								<h2>产品标签</h2>
 								<ul id="single_popular">
 								<c:forEach items="${tag}" var="t">
 									<li><a href="showShop.do?op=tag&clothesbigtag=${t.clothesbigtag }">${t.clothesbigtag }</a></li>
@@ -292,9 +292,9 @@
 							<div class="tab-content tab_content_style">
 								<div id="tab1" class="tab-pane fade in active">
 							 <c:forEach items="${show }" var="s" varStatus="vs">
-				             <c:if test="${vs.index%4==0 }">
+				             <%-- <c:if test="${vs.index%3==0 }">
 									<div class="row">
-							 </c:if>
+							 </c:if> --%>
 										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 											<div class="product_list">
 												<div class="single_product repomsive_768">
@@ -326,17 +326,21 @@
 												</div>
 											</div>
 										</div>
+							 <%-- <c:if test="${vs.index%3==0 }">
+									</div>
+							 </c:if> --%>
+										
 								</c:forEach>
 																								
 									</div>
 									<div class="row" align="center">
 										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-										<%if(request.getSession().getAttribute("op")!=null) %>
+										<%-- <%if(request.getSession().getAttribute("op")!=null) %> --%>
 											 <p style="color: black; font-size: 14px; font-family: 宋体">
-					                            <a href="showShop.do?op=${op}&page=${pages-1}&rows=4"
+					                            <a href="showShop.do?op=${op}&${type}=${value}&page=${pages-1}&rows=6"
 						                       style="color: black; font-size: 14px; font-family: 宋体">上一页</a>  		
-					                           <mt:page href="showShop.do?op=${op}" total="${total }" rows="4" />
-					                          <a href="showShop.do?op=${op}&page=${pages+1}&rows=4"
+					                           <mt:page href="showShop.do?op=${op}&${type}=${value}" total="${total }" rows="6" />
+					                          <a href="showShop.do?op=${op}&${type}=${value}&page=${pages+1}&rows=6"
 						                       style="color:black; font-size: 14px; font-family: 宋体">下一页</a>  
 					                           <font style="font-weight: bold;color:black; font-size: 14px; font-family: 宋体">${pages}</font>/
 					                           <font style="font-weight: bold;color: black; font-size: 14px; font-family: 宋体">${allPage }</font>
