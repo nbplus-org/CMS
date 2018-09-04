@@ -65,7 +65,8 @@ public class CartAction {
 			System.out.println("评论表有数值");
 			model.addAttribute("list4", list4);
 			request.getSession().setAttribute("list4", list4);
-		}
+		};
+		model.addAttribute("clothesid", clothesid);
 		return "product";	
     }
     
@@ -85,7 +86,11 @@ public class CartAction {
     	System.out.println(color+"========="+size+"========="+qty);
     	System.out.println("========="+clothesid);
     	
-    	if(qty!=null && color!=null && size!=null){
+    	System.out.println("====================color======="+color);
+    	System.out.println("=================size======="+size);
+    	System.out.println("==================qty======="+qty);
+    	
+    	if(qty!=null && color!=null && size!=null &&!qty.equals("") && !color.equals("") && !size.equals("")){
     		System.out.println("信息完整");
         	ClothesDetailVO list=cBiz.CheckNum(clothesid, color, size);
         	if(list!=null){

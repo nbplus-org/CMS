@@ -47,14 +47,21 @@
 				<!--Start Header Right Cart area -->
 				<div class="account_card_area">
 					<ul id="account_nav">
-					<li>
+						<li>
 							<%
 								if (request.getSession().getAttribute("UserVO") != null) {
-							%> <li><a><i class="fa fa-key"></i>${sessionScope.UserVO.uname }</a> <%
-							 	} else {
-							 %> <li><a href="reglogin.jsp"><i class="fa fa-key"></i>请登陆</a> <%
-							 	}
-							 %>
+							%>
+						
+						<li><a><i class="fa fa-key"></i>${sessionScope.UserVO.uname }</a>
+							<%
+								} else {
+							%>
+						<li><a href="reglogin.jsp"><i class="fa fa-key"></i>请登陆</a> <%
+ 	}
+ %>
+							<%
+								if (request.getSession().getAttribute("UserVO") != null) {
+							%>
 							<div class="account_menu_list">
 
 								<div class="account_single_item">
@@ -66,9 +73,12 @@
 									</ul>
 
 
+
 								</div>
 
-							</div></li>
+							</div> <%
+ 	}
+ %></li>
 						<%
 							if (request.getSession().getAttribute("UserVO") != null && session.getAttribute("cartcount") != null) {
 						%>
@@ -76,7 +86,7 @@
 								<span class="cart_zero cart_zero1">${cartcount }</span></a> <%
  	} else {
  %>
-						<li><a href="showCart.do"><i class="fa fa-shopping-cart"></i>购物车
+						<li><a onclick="goLogin()"><i class="fa fa-shopping-cart"></i>购物车
 								<span></span></a> <%
  	}
  %>
@@ -87,8 +97,7 @@
 								<c:forEach items="${cart }" var="cart">
 									<div class="cart_single">
 										<a href="check.do?clothesid=${cart.clothesid}"><img
-											src="upload/${cart.clothespic }" width="50px" height="50px"
-											alt="" /></a>
+											src="${cart.clothespic }" width="50px" height="50px" alt="" /></a>
 										<h2>
 											<a href="check.do?clothesid=${cart.clothesid}">${cart.clothesname}</a>
 											<a href="trash.do?cartid=${cart.cartid}"><span><i
@@ -101,13 +110,7 @@
 									<a href="checkout.jsp">结账</a>
 								</div>
 								<%
-									} else {
-								%>
-								<div class="cart_shoptings">
-									<a href="#">结账</a>
-								</div>
-								<%
-									}
+									} 
 								%>
 							</div></li>
 					</ul>
@@ -175,16 +178,17 @@
 
 						<li><a><span class="Clothings">款式</span></a>
 							<div class="mega_menu_list">
-								<c:forEach items="${typename}" var="typename">
-
-									<div class="single_megamenu">
-										<!-- 大标签的循环输出 -->
-										<h2>
-											<a href="shop.html">${typename.typename }</a>&nbsp;&nbsp;&nbsp;
-										</h2>
-
-									</div>
+								<c:forEach items="${typename}" var="typename" varStatus="status">
+									<c:if test="${status.index<5 }">
+										<div class="single_megamenu">
+											<!-- 大标签的循环输出 -->
+											<h2>
+												<a href="shop.html">${typename.typename }</a>&nbsp;&nbsp;&nbsp;
+											</h2>
+										</div>
+									</c:if>
 								</c:forEach>
+								<span>......</span>
 							</div></li>
 						<%-- <%
 										if (session.getAttribute("typename") != null) {
@@ -198,9 +202,12 @@
 									<%
 										}
 									%> --%>
-						<li><a href="shop.jsp"><span class="Accessaries">帮助</span></a>
+						<li><a href="about-us.jsp"><span class="Accessaries">帮助</span></a>
 							<div class="home_mega_menu">
-								<a href="reglogin.jsp">我的账户</a> <a href="showCart.do">购物车</a>
+								<ul>
+									<li><a href="contact.jsp">关于我们</a></li>
+									<li><a href="contact.jsp">联系我们</a></li>
+								</ul>
 							</div></li>
 					</ul>
 				</div>

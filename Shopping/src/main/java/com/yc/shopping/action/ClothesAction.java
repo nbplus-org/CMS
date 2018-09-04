@@ -2,6 +2,7 @@ package com.yc.shopping.action;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -118,7 +119,7 @@ public class ClothesAction {
 	 */
 	@RequestMapping("/showCarAgain.do")
 	public void showCarAgain(Model model, HttpSession session) {
-		
+
 		List<Map<String, Object>> cart = ctBiz.findAll();
 		System.out.println(cart);
 		model.addAttribute("cart", cart);
@@ -151,6 +152,10 @@ public class ClothesAction {
 	public String showShop(String brandpic, String clothestype, String clothesbrand, String clothesbigtag,
 			String clothescolour, String op, String price, ClothesVO clothesVO, Model model,
 			HttpServletRequest request) {
+
+		System.out.println("=======clothestype======" + clothestype);
+		System.out.println("=======op======" + op);
+
 		int pages;
 		int rows;
 		String page = request.getParameter("page");
@@ -682,4 +687,36 @@ public class ClothesAction {
 		}
 		return "backManager/clothes-manager";
 	}
+	
+	/**
+	 * index查询按钮,模糊查询  huang
+	 * @param model
+	 * @param value
+	 * @throws IOException 
+	 */
+	@RequestMapping("fuzzySelect.do")
+	public String fuzzySelect(Model model,String value ,HttpServletRequest request,HttpServletResponse response) throws IOException{
+		
+		List<ClothesVO> list= new ArrayList<ClothesVO>();
+		System.out.println("==============value=================="+value);
+		//用value模糊查询类型,大标签，品牌
+		if(value!=null && !"".equals(value)){
+			List<ClothesVO> type= cBiz.clothesType(value);
+			List<ClothesVO> bigtag= cBiz.clothesBigTag(value);
+			List<ClothesVO> brand= cBiz.clothesBrand(value);
+			if(type==null && bigtag==null && brand==null){
+				list.addAll( cBiz.clothesName(value) );
+			}else{
+				list.addAll( type );
+				list.addAll( bigtag );
+				list.addAll( brand );
+			}
+		}
+		for(int i=0;i<list.size();i++){
+			System.out.println("========================"+i+"="+list.get(i));
+		}
+		model.addAttribute("show", list);
+		return "shop";
+	}
+	
 }
