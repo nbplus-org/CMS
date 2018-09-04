@@ -44,6 +44,8 @@
 		<!-- Responsive css -->
         <link rel="stylesheet" href="css/responsive.css">
 		<!-- modernizr JS -->
+		<!-- 自定义提示框css -->
+        <link rel="stylesheet" href="js/advice/message.css">
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
     <body>
@@ -74,7 +76,6 @@
 				</div>
 			</div>
 		</div>
-
 		<!--Start company details area -->
 		<div class="company_contact_details">
 			<div class="container">
@@ -82,41 +83,43 @@
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="get_touch">
 							 <h2>与我们取得联系</h2>
-							 <p>我们拥有两种思想。到目前为止，我只写有意识的头脑。现在我想向你们介绍你们的第二个想法，那就是隐藏的神秘的潜意识。我们的潜意识包含着这样的力量和复杂性，这简直让人难以想象。</p>
+							 <p>我们拥有两种思想。现在我想向你们介绍你们的第二个想法，那就是隐藏的神秘的潜意识。我们的潜意识包含着这样的力量和复杂性，这简直让人难以想象。</p>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
 						<div class="contact_us_info">
-							<input type="text" placeholder="Name *">
-							<input type="text" placeholder="Email *">
-							<input type="text" placeholder="Subject">
-							<textarea placeholder="Message *" rows="10" cols="30"></textarea>
+						    <form action="" method="post" id="form1">
+							<input type="text" placeholder="名字 *" id="name">
+							<input type="text" placeholder="您的邮箱 *" id="email">
+							<input type="text" placeholder="主题" id="title">
+							<textarea placeholder="内容 *" rows="10" cols="30" id="str"></textarea>
 							<div class="controls">
-								<input type="submit" class="btn btn-large btn-primary submit" value="Submit">
+								<input type="button" onclick="formsubmit()" class="btn btn-large btn-primary submit" value="提交">
 							</div>
+							</form>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
 						<div class="company_right_area">
-							<h6>INFORMATION</h6>
+							<h6>信息</h6>
 							<div class="contact_addon_content">
-								<p><span><i class="fa fa-map-marker"></i></span> Little Lonsdale St, Talay Victoria 8011</p>
-								<p><span><i class="fa fa-envelope"></i></span> support@demo.com</p>
-								<p><span><i class="fa fa-phone"></i></span> 1 (800) 557-4541</p>
+								<p><span><i class="fa fa-map-marker"></i></span> 湖南省衡阳市湖南工学院</p>
+								<p><span><i class="fa fa-envelope"></i></span> 1428383239@qq.com</p>
+								<p><span><i class="fa fa-phone"></i></span> 199-0841-2046</p>
 							</div>
                         </div>
 						<div class="company_right_hour">
-							<h6>BUSINESS HOURS</h6>
-						   <p>Monday &ndash; Friday: 9am to 20 pm Saturday: 9am to 17pm Sunday: day off</p>
+							<h6>营业时间</h6>
+						   <p>星期一 &ndash; 星期五: 9点 to 20 点 星晴六: 9点 to 17点 星期天: 全天</p>
 						   <div class="single_icons_contact">
 								<ul id="social_contact_icon">
-									<li><a href="#" class="black-tooltip s-1" title="" data-placement="top" data-toggle="tooltip" data-original-title="Follow us Facebook"><i class="fa fa-facebook"></i> </a></li>
-									<li><a href="#" class="black-tooltip s-2" title="" data-placement="top" data-toggle="tooltip" data-original-title="Follow us Twitter"><i class="fa fa-twitter"></i></a></li>
-									<li><a href="#" class="black-tooltip s-3" title="" data-placement="top" data-toggle="tooltip" data-original-title="Follow us Google-plus"><i class="fa fa-google-plus"></i></a></li>
-									<li><a href="#" class="black-tooltip s-4" title="" data-placement="top" data-toggle="tooltip" data-original-title="Follow us Pinterest"><i class="fa fa-pinterest"></i></a></li>
-									<li><a href="#" class="black-tooltip s-5" title="" data-placement="top" data-toggle="tooltip" data-original-title="Follow us Behance"><i class="fa fa-behance"></i></a></li>
+									<li><a  class="black-tooltip s-1" title="" data-placement="top" data-toggle="tooltip" ><i class="fa fa-facebook"></i> </a></li>
+									<li><a  class="black-tooltip s-2" title="" data-placement="top" data-toggle="tooltip" ><i class="fa fa-twitter"></i></a></li>
+									<li><a  class="black-tooltip s-3" title="" data-placement="top" data-toggle="tooltip" ><i class="fa fa-google-plus"></i></a></li>
+									<li><a  class="black-tooltip s-4" title="" data-placement="top" data-toggle="tooltip" ><i class="fa fa-pinterest"></i></a></li>
+									<li><a  class="black-tooltip s-5" title="" data-placement="top" data-toggle="tooltip" ><i class="fa fa-behance"></i></a></li>
 								</ul>
 							</div>
 						</div>
@@ -180,11 +183,47 @@
               });
 
             }
-            google.maps.event.addDomListener(window, 'load', initialize);
+         
+            
+            //表单提交
+            function formsubmit(){
+            	var name=$("#name").val();
+            	var email=$("#email").val();
+            	var title=$("#title").val();
+            	var str=$("#str").val();
+            	if(name==''||email==''||title==''||str==''){
+            		fail();
+            	}else{
+            	var data={name:name,email:email,title:title,str:str};
+            	$.post("contactUs.do",data,function(data){
+            		if(data=='0'){
+            			fail();
+            		}else if(data=='1'){
+            			success();
+            			 $(':input','#form1').not(':button,:submit,:reset,:hidden').val('') ;
+            		}
+            		
+            	});
+            	}
+            	
+            }
+          //信息提醒
+    		function fail(){
+            $.message({
+                message:'请完善信息',
+                type:'error'
+            });
+        }
+
+    		function success(){
+                $.message('提交成功');
+            }
 		</script>
 		<!-- plugins JS  -->
         <script src="js/plugins.js"></script>
 		<!-- main JS  -->
         <script src="js/main.js"></script>
+        <!-- 自定义弹框提示 -->
+	    <script src="js/advice/message.min.js"></script>
     </body>
 </html>

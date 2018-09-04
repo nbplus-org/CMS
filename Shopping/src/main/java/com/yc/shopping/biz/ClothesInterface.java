@@ -280,5 +280,46 @@ public interface ClothesInterface {
 	List<ClothesVO> clothesBigTag(String value);
 	List<ClothesVO> clothesBrand(String value);
 	List<ClothesVO> clothesName(String value);
+	/**
+	 * 根据服装名查询服装表是否与此数据
+	 * @param clothesname
+	 * @return
+	 */
+	public ClothesVO selectByClothesName(String clothesname);
+	
+	/**
+	 * 根据服装id 和服装颜色查询服装详情表 判断是否有此数据(前提是有尺码) 同名字不同  判断是否有不同颜色
+	 * @param clothescolour
+	 * @param clothesid
+	 * @return
+	 */
+	public List<ClothesDetailVO> selectByclothescolour(String clothescolour,Integer clothesid);
+	
+	/**
+	 * 服装颜色确定  根据服装尺寸，服装id，服装颜色判断服装详情表是否有数据(前提有尺码)  同名字同颜色不同尺码
+	 * @param clothessize
+	 * @param clothesid
+	 * @param clothescolour
+	 * @return
+	 */
+	public ClothesDetailVO selectByclothessize(String clothessize,Integer clothesid,String clothescolour);
+	
+	/**
+	 * 同名字同颜色同尺码     加其库存
+	 * @param stocknum
+	 * @param clothesid
+	 * @param clothescolour
+	 * @param clothessize
+	 * @return
+	 */
+	public int updatenum(Integer stocknum,Integer clothesid,String clothescolour,String clothessize);
+	
+	/**
+	 * 没有尺码的情况下   同名同颜色   加其库存
+	 * @param clothessize
+	 * @param clothesid
+	 * @return
+	 */
+	public int updatenumNotsize(Integer stocknum,Integer clothesid, String clothescolour);
 
 }

@@ -34,6 +34,10 @@
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="maxUploadSize" value="1000000" />
+		
+		<property name="maxInMemorySize">
+			<value>10240000</value>
+		</property>
 	</bean>
 
 	<!-- ======================以下是 mybatis 集成 spring 的相关配置======================= -->

@@ -320,7 +320,43 @@ public class ClothesImp implements ClothesInterface {
 		return cDao.updateStocknum(stocknum, clodetailid);
 	}
 
-	
+	/**
+	 * 根据服装名查询服装表是否与此数据
+	 */
+	@Override
+	public ClothesVO selectByClothesName(String clothesname) {
+		return cDao.selectByClothesName(clothesname);
+	}
+
+	/**
+	 * 根据服装id 和服装颜色查询服装详情表 判断是否有此数据(前提是有尺码) 同名字不同  判断是否有不同颜色
+	 */
+	@Override
+	public List<ClothesDetailVO> selectByclothescolour(String clothescolour,Integer clothesid) {
+		return cDao.selectByclothescolour(clothescolour,clothesid);
+	}
+
+	/**
+	 * 服装颜色确定  根据服装尺寸，服装id，服装颜色判断服装详情表是否有数据(前提有尺码)  同名字同颜色不同尺码
+	 */
+	@Override
+	public ClothesDetailVO selectByclothessize(String clothessize,Integer clothesid,String clothescolour) {
+		return cDao.selectByclothessize(clothessize,clothesid,clothescolour);
+	}
+
+	/**
+	 * 同名字同颜色同尺码     加其库存
+	 */
+	@Override
+	public int updatenum(Integer stocknum, Integer clothesid, String clothescolour, String clothessize) {
+		return cDao.updatenum(stocknum, clothesid, clothescolour, clothessize);
+	}
+
+	@Override
+	public int updatenumNotsize(Integer stocknum, Integer clothesid, String clothescolour) {
+		return cDao.updatenumNotsize(stocknum, clothesid, clothescolour);
+	}
+
 	//=========================================
 	/**
 	 * index.jsp查询按钮,模糊查询  huang
