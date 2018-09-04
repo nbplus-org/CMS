@@ -96,13 +96,13 @@ public class CartImp implements CartInterface {
 
 
     /**
-     * 三个表关联查询     赋值购物车
+     * 三个表关联查询     赋值购物车(根据用户id)
      * 
      * liu
      */
 	@Override
-	public List<Map<String, Object>> findAll() {
-		return cDao.findAll();
+	public List<Map<String, Object>> findAll(Integer uid) {
+		return cDao.findAll(uid);
 	}
     
 	/**
@@ -222,6 +222,14 @@ public class CartImp implements CartInterface {
 	@Override
 	public int updatestocknum(Integer stocknum, Integer qty, Integer clodetailid) {
 		return cDao.updatestocknum(stocknum, qty, clodetailid);
+	}
+
+	/**
+	 *  根据服装id 查询服装表标签类型   判断是否为包包
+	 */
+	@Override
+	public ClothesVO checkBigTag(Integer clothesid) {
+		return cDao.checkBigTag(clothesid);
 	}
 
 }

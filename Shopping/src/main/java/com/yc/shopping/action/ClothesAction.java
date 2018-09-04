@@ -95,13 +95,14 @@ public class ClothesAction {
 		List<ClothesVO> brandpic = cBiz.showbrandpic();
 		model.addAttribute("brandpic", brandpic);
 		session.setAttribute("brandpic", brandpic);
-
-		List<Map<String, Object>> cart = ctBiz.findAll();
+		UserVO userVo = (UserVO) request.getSession().getAttribute("UserVO");
+		
+		List<Map<String, Object>> cart = ctBiz.findAll(userVo.getUid());
 		System.out.println(cart);
 		model.addAttribute("cart", cart);
 		session.setAttribute("cart", cart);
 
-		UserVO userVo = (UserVO) request.getSession().getAttribute("UserVO");
+
 		if (userVo != null) {
 			long cartcount = ctBiz.cartCount(userVo.getUid());
 			model.addAttribute("cartcount", cartcount);
@@ -120,13 +121,14 @@ public class ClothesAction {
 	 */
 	@RequestMapping("/showCarAgain.do")
 	public void showCarAgain(Model model, HttpSession session) {
-
-		List<Map<String, Object>> cart = ctBiz.findAll();
+		UserVO userVo = (UserVO) session.getAttribute("UserVO");
+		
+		List<Map<String, Object>> cart = ctBiz.findAll(userVo.getUid());
 		System.out.println(cart);
 		model.addAttribute("cart", cart);
 		session.setAttribute("cart", cart);
 
-		UserVO userVo = (UserVO) session.getAttribute("UserVO");
+
 		if (userVo != null) {
 			long cartcount = ctBiz.cartCount(userVo.getUid());
 			model.addAttribute("cartcount", cartcount);

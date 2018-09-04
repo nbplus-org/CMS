@@ -94,13 +94,13 @@ public interface CartDao {
 	int updateCartCnum(@Param("cnum")Integer cnum,@Param("qty")Integer qty,@Param("clodetailid")Integer clodetailid);
 		
 	/**
-	 * 三个表关联查询     赋值购物车
+	 * 三个表关联查询     赋值购物车(根据用户id)
 	 * @return
 	 * 
 	 * liu
 	 */
-	@Select("select * from cartvo a,clothdetailvo b,clothesvo c where a.clodetailid=b.clodetailid and c.clothesid=b.clothesid")
-	List<Map<String, Object>> findAll();
+	@Select("select * from cartvo a,clothdetailvo b,clothesvo c where a.clodetailid=b.clodetailid and c.clothesid=b.clothesid and uid=#{uid}")
+	List<Map<String, Object>> findAll(Integer uid);
 	
 	/**
 	 * 购物车加减控件操作  控制购物车cnum改变
@@ -217,4 +217,12 @@ public interface CartDao {
 	 */
 	@Update("update clothdetailvo set stocknum=#{stocknum}-#{qty} where clodetailid=#{clodetailid}")
 	int updatestocknum(@Param("stocknum") Integer stocknum,@Param("qty") Integer qty,@Param("clodetailid") Integer clodetailid);
+
+	/**
+	 * 根据服装id 查询服装表标签类型   判断是否为包包
+	 * @param clothesid
+	 * @return
+	 */
+	@Select("select * from clothesvo where clothesid=#{clothesid}")
+    ClothesVO checkBigTag(Integer clothesid);
 }
