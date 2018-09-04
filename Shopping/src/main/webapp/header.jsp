@@ -203,14 +203,11 @@
 									%> --%>
 						<li><a href="about-us.jsp"><span class="Accessaries">帮助</span></a>
 							<div class="home_mega_menu">
-<<<<<<< HEAD
-								<ul>
-									<li><a href="contact.jsp">关于我们</a></li>
-									<li><a href="contact.jsp">联系我们</a></li>
-								</ul>
-=======
-								<a href="seeorder.do">我的订单</a> <a href="showCart.do">购物车</a>
->>>>>>> branch 'master' of https://github.com/nbplus-org/CMS.git
+
+								<a href="seeorder.do">我的订单</a> 
+								<a href="showCart.do">购物车</a>
+                                <a href="about-us.jsp">关于我们我们</a>
+								<a href="contact.jsp">联系我们</a>
 							</div></li>
 					</ul>
 				</div>
