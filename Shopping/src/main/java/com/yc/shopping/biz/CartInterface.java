@@ -87,7 +87,7 @@ public interface CartInterface {
 	 * 
 	 * liu
 	 */
-	public List<Map<String, Object>> findAll();
+	public List<Map<String, Object>> findAll(Integer uid);
 	
 	/**
 	 * 购物车加减控件操作  控制购物车cnum改变
@@ -191,4 +191,6 @@ public interface CartInterface {
 	 * @return
 	 */
 	public int updatestocknum(Integer stocknum,Integer qty,Integer clodetailid);
+	
+	ClothesVO checkBigTag(Integer clothesid);
 }

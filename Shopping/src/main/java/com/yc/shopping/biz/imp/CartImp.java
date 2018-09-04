@@ -101,8 +101,8 @@ public class CartImp implements CartInterface {
      * liu
      */
 	@Override
-	public List<Map<String, Object>> findAll() {
-		return cDao.findAll();
+	public List<Map<String, Object>> findAll(Integer uid) {
+		return cDao.findAll(uid);
 	}
     
 	/**
@@ -222,6 +222,11 @@ public class CartImp implements CartInterface {
 	@Override
 	public int updatestocknum(Integer stocknum, Integer qty, Integer clodetailid) {
 		return cDao.updatestocknum(stocknum, qty, clodetailid);
+	}
+
+	@Override
+	public ClothesVO checkBigTag(Integer clothesid) {
+		return cDao.checkBigTag(clothesid);
 	}
 
 }

@@ -426,4 +426,6 @@ public interface ClothesDao {
 	 */
 	@Update("update clothdetailvo set stocknum=stocknum+#{stocknum} where clothesid=#{clothesid} and clothescolour=#{clothescolour}")
     int updatenumNotsize(@Param("stocknum") Integer stocknum,@Param("clothesid") Integer clothesid,@Param("clothescolour") String clothescolour);
+
+
 }

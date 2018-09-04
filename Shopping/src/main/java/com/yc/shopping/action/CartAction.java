@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.gson.Gson;
+import com.sun.mail.imap.protocol.UID;
 import com.yc.shopping.biz.CartInterface;
 import com.yc.shopping.biz.ReviewInterface;
 import com.yc.shopping.vo.CartVO;
@@ -90,76 +91,152 @@ public class CartAction {
     	System.out.println("=================size======="+size);
     	System.out.println("==================qty======="+qty);
     	
-    	if(qty!=null && color!=null && size!=null &&!qty.equals("") && !color.equals("") && !size.equals("")){
-    		System.out.println("信息完整");
-        	ClothesDetailVO list=cBiz.CheckNum(clothesid, color, size);
-        	if(list!=null){
-            	if(list.getStocknum()>qty){
-            		System.out.println("货还很足哦！");
-            			ClothesDetailVO clothDetailVO=cBiz.findId(clothesid, color, size);
-            				UserVO userVo=(UserVO) request.getSession().getAttribute("UserVO");
-                			System.out.println("=====****====="+userVo);
-                			CartVO cartVO=cBiz.selectClodetailid(clothDetailVO.getClodetailid());
-                			if(userVo!=null){
-                    			if(cartVO==null){
-                    				System.out.println("购物车表没有重复的商品");
-                    			int in=cBiz.Insert(userVo.getUid(), clothDetailVO.getClodetailid(), qty);
-                    			if(in>0){
-                    				System.out.println("已添加到购物车");
-                    				int updatestocknum=cBiz.updatestocknum(list.getStocknum(), qty, clothDetailVO.getClodetailid());
-                    				if(updatestocknum>0){
-                    					System.out.println("库存已改变");
+    	ClothesVO aa=cBiz.checkBigTag(clothesid);
+    	if(!aa.getClothesbigtag().equals("包包")){
+        	if(qty!=null && color!=null && size!=null &&!qty.equals("") && !color.equals("") && !size.equals("")){
+        		System.out.println("信息完整");
+            	ClothesDetailVO list=cBiz.CheckNum(clothesid, color, size);
+            	if(list!=null){
+                	if(list.getStocknum()>qty){
+                		System.out.println("货还很足哦！");
+                			ClothesDetailVO clothDetailVO=cBiz.findId(clothesid, color, size);
+                				UserVO userVo=(UserVO) request.getSession().getAttribute("UserVO");
+                    			System.out.println("=====****====="+userVo);
+                    			CartVO cartVO=cBiz.selectClodetailid(clothDetailVO.getClodetailid());
+                    			if(userVo!=null){
+                        			if(cartVO==null){
+                        				System.out.println("购物车表没有重复的商品");
+                        			int in=cBiz.Insert(userVo.getUid(), clothDetailVO.getClodetailid(), qty);
+                        			if(in>0){
+                        				System.out.println("已添加到购物车");
+                        				int updatestocknum=cBiz.updatestocknum(list.getStocknum(), qty, clothDetailVO.getClodetailid());
+                        				if(updatestocknum>0){
+                        					System.out.println("库存已改变");
+                            				try {
+                        						response.getWriter().print(0);
+                        					} catch (IOException e) {
+                        						e.printStackTrace();
+                        					}  
+                        				}		
+                        			}else{
+                        				System.out.println("系统故障,请稍后再试");
                         				try {
-                    						response.getWriter().print(0);
-                    					} catch (IOException e) {
-                    						e.printStackTrace();
-                    					}  
-                    				}		
-                    			}else{
-                    				System.out.println("系统故障,请稍后再试");
-                    				try {
-    									response.getWriter().print(4);
-    								} catch (IOException e) {
-    									e.printStackTrace();
-    								}
-                    			} 
+        									response.getWriter().print(4);
+        								} catch (IOException e) {
+        									e.printStackTrace();
+        								}
+                        			} 
+                        		}else{
+                        			System.out.println("购物车表有重复的商品,已经叠加");
+                        			cBiz.updateCartCnum(cartVO.getCnum(),qty,clothDetailVO.getClodetailid());
+                        		}
                     		}else{
-                    			System.out.println("购物车表有重复的商品,已经叠加");
-                    			cBiz.updateCartCnum(cartVO.getCnum(),qty,clothDetailVO.getClodetailid());
+                    			System.out.println("用户未登录");
+                    			try {
+    								response.getWriter().println(5);
+    							} catch (IOException e) {
+    								e.printStackTrace();
+    							}
                     		}
-                		}else{
-                			System.out.println("用户未登录");
-                			try {
-								response.getWriter().println(5);
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-                		}
 
-            	   }else{
-            		   System.out.println("您选择的商品库存不足,请选择其他商品或降低购物量");
-        			   try {
+                	   }else{
+                		   System.out.println("您选择的商品库存不足,请选择其他商品或降低购物量");
+            			   try {
+            				response.getWriter().print(0);
+            			} catch (IOException e) {
+            				e.printStackTrace();
+            			}
+                	  }
+            	}else{
+            		System.out.println("此类型商品现已缺货,请选择其他商品");
+            		try {
         				response.getWriter().print(0);
         			} catch (IOException e) {
         				e.printStackTrace();
         			}
-            	  }
+            	}
         	}else{
-        		System.out.println("此类型商品现已缺货,请选择其他商品");
+        		System.out.println("请填写完整的信息");
         		try {
-    				response.getWriter().print(0);
+    				response.getWriter().print(1);
     			} catch (IOException e) {
     				e.printStackTrace();
     			}
         	}
     	}else{
-    		System.out.println("请填写完整的信息");
-    		try {
-				response.getWriter().print(1);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-    	}	
+        	if(qty!=null && color!=null &&!qty.equals("") && !color.equals("")){
+        		System.out.println("信息完整");
+            	ClothesDetailVO list=cBiz.CheckNum(clothesid, color, size);
+            	if(list!=null){
+                	if(list.getStocknum()>qty){
+                		System.out.println("货还很足哦！");
+                			ClothesDetailVO clothDetailVO=cBiz.findId(clothesid, color, size);
+                				UserVO userVo=(UserVO) request.getSession().getAttribute("UserVO");
+                    			System.out.println("=====****====="+userVo);
+                    			CartVO cartVO=cBiz.selectClodetailid(clothDetailVO.getClodetailid());
+                    			if(userVo!=null){
+                        			if(cartVO==null){
+                        				System.out.println("购物车表没有重复的商品");
+                        			int in=cBiz.Insert(userVo.getUid(), clothDetailVO.getClodetailid(), qty);
+                        			if(in>0){
+                        				System.out.println("已添加到购物车");
+                        				int updatestocknum=cBiz.updatestocknum(list.getStocknum(), qty, clothDetailVO.getClodetailid());
+                        				if(updatestocknum>0){
+                        					System.out.println("库存已改变");
+                            				try {
+                        						response.getWriter().print(0);
+                        					} catch (IOException e) {
+                        						e.printStackTrace();
+                        					}  
+                        				}		
+                        			}else{
+                        				System.out.println("系统故障,请稍后再试");
+                        				try {
+        									response.getWriter().print(4);
+        								} catch (IOException e) {
+        									e.printStackTrace();
+        								}
+                        			} 
+                        		}else{
+                        			System.out.println("购物车表有重复的商品,已经叠加");
+                        			cBiz.updateCartCnum(cartVO.getCnum(),qty,clothDetailVO.getClodetailid());
+                        		}
+                    		}else{
+                    			System.out.println("用户未登录");
+                    			try {
+    								response.getWriter().println(5);
+    							} catch (IOException e) {
+    								e.printStackTrace();
+    							}
+                    		}
+
+                	   }else{
+                		   System.out.println("您选择的商品库存不足,请选择其他商品或降低购物量");
+            			   try {
+            				response.getWriter().print(0);
+            			} catch (IOException e) {
+            				e.printStackTrace();
+            			}
+                	  }
+            	}else{
+            		System.out.println("此类型商品现已缺货,请选择其他商品");
+            		try {
+        				response.getWriter().print(0);
+        			} catch (IOException e) {
+        				e.printStackTrace();
+        			}
+            	}
+        	}else{
+        		System.out.println("请填写完整的信息");
+        		try {
+    				response.getWriter().print(1);
+    			} catch (IOException e) {
+    				e.printStackTrace();
+    			}
+        	}
+    	}
+
+    	
        }
     
 
@@ -174,7 +251,7 @@ public class CartAction {
     public String addCart(Model model,HttpServletRequest request){ 
     	UserVO userVo=(UserVO) request.getSession().getAttribute("UserVO");
     	if(userVo!=null){
-        	List<Map<String, Object>> list=cBiz.findAll();
+        	List<Map<String, Object>> list=cBiz.findAll(userVo.getUid());
         	System.out.println(list);
         	model.addAttribute("list", list);
         	return "cart";

@@ -99,8 +99,8 @@ public interface CartDao {
 	 * 
 	 * liu
 	 */
-	@Select("select * from cartvo a,clothdetailvo b,clothesvo c where a.clodetailid=b.clodetailid and c.clothesid=b.clothesid")
-	List<Map<String, Object>> findAll();
+	@Select("select * from cartvo a,clothdetailvo b,clothesvo c where a.clodetailid=b.clodetailid and c.clothesid=b.clothesid and uid=#{uid}")
+	List<Map<String, Object>> findAll(Integer uid);
 	
 	/**
 	 * 购物车加减控件操作  控制购物车cnum改变
@@ -217,4 +217,7 @@ public interface CartDao {
 	 */
 	@Update("update clothdetailvo set stocknum=#{stocknum}-#{qty} where clodetailid=#{clodetailid}")
 	int updatestocknum(@Param("stocknum") Integer stocknum,@Param("qty") Integer qty,@Param("clodetailid") Integer clodetailid);
+
+	@Select("select * from clothesvo where clothesid=#{clothesvo}")
+    ClothesVO checkBigTag(Integer clothesid);
 }
