@@ -298,7 +298,7 @@
                 	}else if(data1==1){
                 		//提示
                 		//刷新小购物车
-                		 $.get("showCarAgain.do", {}, function() {	}); 
+                		$.get("showCarAgain.do", {}, function() {	}); 
                 		/* window.location.href="showCarAgain.do";  */
                 		window.location.href="seeorder.do";  //密码正确，跳转页面
                 	}else{
