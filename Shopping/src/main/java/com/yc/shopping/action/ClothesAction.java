@@ -96,14 +96,14 @@ public class ClothesAction {
 		model.addAttribute("brandpic", brandpic);
 		session.setAttribute("brandpic", brandpic);
 		UserVO userVo = (UserVO) request.getSession().getAttribute("UserVO");
-		
+
 		if (userVo != null) {
-			
+
 			List<Map<String, Object>> cart = ctBiz.findAll(userVo.getUid());
 			System.out.println(cart);
 			model.addAttribute("cart", cart);
 			session.setAttribute("cart", cart);
-			
+
 			long cartcount = ctBiz.cartCount(userVo.getUid());
 			model.addAttribute("cartcount", cartcount);
 			session.setAttribute("cartcount", cartcount);
@@ -122,12 +122,11 @@ public class ClothesAction {
 	@RequestMapping("/showCarAgain.do")
 	public void showCarAgain(Model model, HttpSession session) {
 		UserVO userVo = (UserVO) session.getAttribute("UserVO");
-		
+
 		List<Map<String, Object>> cart = ctBiz.findAll(userVo.getUid());
 		System.out.println(cart);
 		model.addAttribute("cart", cart);
 		session.setAttribute("cart", cart);
-
 
 		if (userVo != null) {
 			long cartcount = ctBiz.cartCount(userVo.getUid());
@@ -136,7 +135,6 @@ public class ClothesAction {
 			System.out.println("show.do   userVo" + userVo.getUname());
 		}
 	}
-
 
 	/**
 	 * 头部按钮及shopjsp页面按钮查询
@@ -155,7 +153,7 @@ public class ClothesAction {
 	@RequestMapping("/showShop.do")
 	public String showShop(String brandpic, String clothestype, String clothesbrand, String clothesbigtag,
 			String clothescolour, String op, String price, ClothesVO clothesVO, Model model, HttpServletRequest request,
-			Map<String, String> map) {
+			Map<String, String> map,String value) {
 		int pages;
 		int rows;
 		String page = request.getParameter("page");
@@ -169,7 +167,59 @@ public class ClothesAction {
 		}
 		System.out.println("=========" + op);
 		System.out.println(pages + "2018 9-4--" + rows);
+		
+		if("search".equals(op)){
+			List<ClothesVO> list = new ArrayList<ClothesVO>();
+			// 用value模糊查询类型,大标签，品牌
+			if (value != null && !"".equals(value)) {
+				List<ClothesVO> type = cBiz.clothesType(value);
+				List<ClothesVO> bigtag = cBiz.clothesBigTag(value);
+				List<ClothesVO> brand = cBiz.clothesBrand(value);
+				if (type == null && bigtag == null && brand == null) {
+					list.addAll(cBiz.clothesName(value));
+				} else {
+					list.addAll(type);
+					list.addAll(bigtag);
+					list.addAll(brand);
+				}
+			}
+			// 判断list中是否有相同的数据，如果有，则删除
+			for (int i = 0; i < list.size(); i++) {
+				for (int j = i + 1; j < list.size(); j++) {
+					if (list.get(i).getClothesid() == list.get(j).getClothesid()) {
+						list.remove(j);
+						j--;
+					}
+				}
+			}
 
+			// 分页
+			long total = list.size();
+			model.addAttribute("total", total);
+			// 求总页数 放到model.addAttribute里面
+			int allPage = (int) (total % rows == 0 ? total / rows : total / rows + 1);
+			model.addAttribute("allPage", allPage);
+
+			// 当前页数 也可写成pages<=1 pages>=allPage
+			if (pages < 1) {
+				pages = 1;
+			} else if (pages > allPage - 1) {
+				pages = allPage;
+			}
+			model.addAttribute("pages", pages);
+			int startIndex=(pages-1)*rows;
+			int endIndex=pages*rows;
+			if(pages*rows>list.size()){
+				endIndex=list.size();
+			}
+			list=list.subList(startIndex, endIndex);
+			model.addAttribute("show", list);
+			model.addAttribute("op", "search");
+			model.addAttribute("value", value);
+			model.addAttribute("type", "value");
+			return "shop";
+		}
+		
 		if ("shop".equals(op)) {
 			long total = cBiz.count(clothesVO);
 			model.addAttribute("total", total);
@@ -203,8 +253,6 @@ public class ClothesAction {
 				String higher = price.substring(6, 8);
 				System.out.println("=====" + lower);
 				System.out.println("=====" + higher);
-
-
 
 				long total = cBiz.countByPrice(Double.parseDouble(lower), Double.parseDouble(higher));
 				model.addAttribute("total", total);
@@ -396,38 +444,37 @@ public class ClothesAction {
 		List<ClothesVO> tag = cBiz.findtag();
 		model.addAttribute("tag", tag);
 
-		//Map<String,String> map=new HashMap<String,String>();
+		// Map<String,String> map=new HashMap<String,String>();
 
-				if("tag".equals(op)){
-					map.put("op",op);
-					map.put("value", clothesbigtag);
-					map.put("type", "clothesbigtag");
-				}else if("shop".equals(op)){
-					map.put("op", op);
-					map.put("value", " ");
-					map.put("type", "shop");
-				}else if("price".equals(op)){
-					map.put("op", op);
-					map.put("value", price);
-					map.put("type", "price");
-				}else if("type".equals(op)){
-					map.put("op", op);
-					map.put("value", clothestype);
-					map.put("type", "clothestype");
-				}else if("brand".equals(op)){
-					map.put("op", op);
-					map.put("value", clothesbrand);
-					map.put("type", "clothesbrand");
-				}else if("brandpic".equals(op)){
-					map.put("op", op);
-					map.put("value", brandpic);
-					map.put("type", "brandpic");
-				}
-				//----------
-		//request.getSession().setAttribute("op", op);
+		if ("tag".equals(op)) {
+			map.put("op", op);
+			map.put("value", clothesbigtag);
+			map.put("type", "clothesbigtag");
+		} else if ("shop".equals(op)) {
+			map.put("op", op);
+			map.put("value", " ");
+			map.put("type", "shop");
+		} else if ("price".equals(op)) {
+			map.put("op", op);
+			map.put("value", price);
+			map.put("type", "price");
+		} else if ("type".equals(op)) {
+			map.put("op", op);
+			map.put("value", clothestype);
+			map.put("type", "clothestype");
+		} else if ("brand".equals(op)) {
+			map.put("op", op);
+			map.put("value", clothesbrand);
+			map.put("type", "clothesbrand");
+		} else if ("brandpic".equals(op)) {
+			map.put("op", op);
+			map.put("value", brandpic);
+			map.put("type", "brandpic");
+		}
+		// ----------
+		// request.getSession().setAttribute("op", op);
 		return "shop";
 	}
-
 
 	/**
 	 * 查所有服装并分页 huang（后台）
@@ -565,6 +612,7 @@ public class ClothesAction {
 
 	/**
 	 * 新增服装
+	 * 
 	 * @param file1
 	 * @param file2
 	 * @param typeVO
@@ -581,291 +629,303 @@ public class ClothesAction {
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "/backManager/clothesInsert.do", method = RequestMethod.POST)
-	public String clothesInsert(@Param("file1") MultipartFile file1,@Param("file2") MultipartFile file2,TypeVO typeVO,String clothessize,String clothestype,
-			Model model,ClothesVO clothesVO,ClothesDetailVO clothesDetailVO,HttpSession session) throws IllegalStateException, IOException{
-		System.out.println(clothesVO.getClothesname()+"....");
-		ClothesVO ww=cBiz.selectByClothesName(clothesVO.getClothesname());
-		if(ww!=null){
-			Integer clothesid=ww.getClothesid();
-			System.out.println(clothesid+"..."+clothesDetailVO.getClothescolour());
-			List<ClothesDetailVO> bb=cBiz.selectByclothescolour(clothesDetailVO.getClothescolour(),clothesid);
-			if(bb.size()>0){
-				if(!"".equals(clothessize)){
-					String[] sizes=clothessize.split("[,;:，、；]");
-						for(String size:sizes){
-							System.out.println(size+clothesid+clothesDetailVO.getClothescolour()+"...");
-							ClothesDetailVO cc=cBiz.selectByclothessize(size,clothesid,clothesDetailVO.getClothescolour());
-							if(cc!=null){
-								int result=cBiz.updatenum(clothesDetailVO.getStocknum(), clothesid, clothesDetailVO.getClothescolour(), size);
-								System.out.println("服装详情库存修改成功");
-							}else{
-								if (!file2.isEmpty()) {
-									String filename = file2.getOriginalFilename();
-									if(clothesVO.getClothesbigtag().equals("男装")){
-										clothesDetailVO.setClothespic("img/menswear/shirt/"+ filename );
-										File f2 = new File("E:/Git/CMS/Shopping/src/main/webapp/img/menswear/shirt/" + filename);
-										// 上传
-										if(!f2.exists()){
-											file2.transferTo(f2);
-										}
-										clothesDetailVO.setClothesid(clothesid);
-										clothesDetailVO.setClothessize(size);
-										int result=cBiz.insertToClothdetail(clothesDetailVO);
-										if(result>0){
-											System.out.println("服装详情插入成功");
-										}
-									}else if(clothesVO.getClothesbigtag().equals("女装")){
-										clothesDetailVO.setClothespic("img/womenswear/dress/"+ filename );
-										File f2 = new File("E:/Git/CMS/Shopping/src/main/webapp/img/womenswear/dress/" + filename);
-										// 上传
-										if(!f2.exists()){
-											file2.transferTo(f2);
-										}
-										clothesDetailVO.setClothesid(clothesid);
-										clothesDetailVO.setClothessize(size);
-										int result=cBiz.insertToClothdetail(clothesDetailVO);
-										if(result>0){
-											System.out.println("服装详情插入成功");
-										}
-									}else if(clothesVO.getClothesbigtag().equals("鞋子")){
-										clothesDetailVO.setClothespic("img/menswear/shoes/"+ filename );
-										File f2 = new File("E:/Git/CMS/Shopping/src/main/webapp/img/menswear/shoes/" + filename);
-										// 上传
-										if(!f2.exists()){
-											file2.transferTo(f2);
-										}
-										clothesDetailVO.setClothesid(clothesid);
-										clothesDetailVO.setClothessize(size);
-										int result=cBiz.insertToClothdetail(clothesDetailVO);
-										if(result>0){
-											System.out.println("服装详情插入成功");
-										}
-									}else{
-										clothesDetailVO.setClothespic("img/womenswear/bags/"+ filename );
-										File f2 = new File("E:/Git/CMS/Shopping/src/main/webapp/img/womenswear/bags/" + filename);
-										// 上传
-										if(!f2.exists()){
-											file2.transferTo(f2);
-										}
-										clothesDetailVO.setClothesid(clothesid);
-										clothesDetailVO.setClothessize(size);
-										int result=cBiz.insertToClothdetail(clothesDetailVO);
-										if(result>0){
-											System.out.println("服装详情插入成功");
-										}
-									}
-								}
-							}
-						}
-				}else{
-						int result=cBiz.updatenumNotsize(clothesDetailVO.getStocknum(), clothesid, clothesDetailVO.getClothescolour());
-						if(result>0){
-							System.out.println("没有尺码，服装详情库存修改成功");
-						}
-
-				}
-			}else{
-				if(!"".equals(clothessize)){
-					String[] sizes=clothessize.split("[,;:，、；]");
-						for(String size:sizes){
-							
+	public String clothesInsert(@Param("file1") MultipartFile file1, @Param("file2") MultipartFile file2, TypeVO typeVO,
+			String clothessize, String clothestype, Model model, ClothesVO clothesVO, ClothesDetailVO clothesDetailVO,
+			HttpSession session) throws IllegalStateException, IOException {
+		System.out.println(clothesVO.getClothesname() + "....");
+		ClothesVO ww = cBiz.selectByClothesName(clothesVO.getClothesname());
+		if (ww != null) {
+			Integer clothesid = ww.getClothesid();
+			System.out.println(clothesid + "..." + clothesDetailVO.getClothescolour());
+			List<ClothesDetailVO> bb = cBiz.selectByclothescolour(clothesDetailVO.getClothescolour(), clothesid);
+			if (bb.size() > 0) {
+				if (!"".equals(clothessize)) {
+					String[] sizes = clothessize.split("[,;:，、；]");
+					for (String size : sizes) {
+						System.out.println(size + clothesid + clothesDetailVO.getClothescolour() + "...");
+						ClothesDetailVO cc = cBiz.selectByclothessize(size, clothesid,
+								clothesDetailVO.getClothescolour());
+						if (cc != null) {
+							int result = cBiz.updatenum(clothesDetailVO.getStocknum(), clothesid,
+									clothesDetailVO.getClothescolour(), size);
+							System.out.println("服装详情库存修改成功");
+						} else {
 							if (!file2.isEmpty()) {
 								String filename = file2.getOriginalFilename();
-								if(clothesVO.getClothesbigtag().equals("男装")){
-									clothesDetailVO.setClothespic("img/menswear/shirt/"+ filename );
-									File f2 = new File("E:/Git/CMS/Shopping/src/main/webapp/img/menswear/shirt/" + filename);
+								if (clothesVO.getClothesbigtag().equals("男装")) {
+									clothesDetailVO.setClothespic("img/menswear/shirt/" + filename);
+									File f2 = new File(
+											"E:/Git/CMS/Shopping/src/main/webapp/img/menswear/shirt/" + filename);
 									// 上传
-									if(!f2.exists()){
+									if (!f2.exists()) {
 										file2.transferTo(f2);
 									}
 									clothesDetailVO.setClothesid(clothesid);
 									clothesDetailVO.setClothessize(size);
-									int result=cBiz.insertToClothdetail(clothesDetailVO);
-									if(result>0){
+									int result = cBiz.insertToClothdetail(clothesDetailVO);
+									if (result > 0) {
 										System.out.println("服装详情插入成功");
 									}
-								}else if(clothesVO.getClothesbigtag().equals("女装")){
-									clothesDetailVO.setClothespic("img/womenswear/dress/"+ filename );
-									File f2 = new File("E:/Git/CMS/Shopping/src/main/webapp/img/womenswear/dress/" + filename);
+								} else if (clothesVO.getClothesbigtag().equals("女装")) {
+									clothesDetailVO.setClothespic("img/womenswear/dress/" + filename);
+									File f2 = new File(
+											"E:/Git/CMS/Shopping/src/main/webapp/img/womenswear/dress/" + filename);
 									// 上传
-									if(!f2.exists()){
+									if (!f2.exists()) {
 										file2.transferTo(f2);
 									}
 									clothesDetailVO.setClothesid(clothesid);
 									clothesDetailVO.setClothessize(size);
-									int result=cBiz.insertToClothdetail(clothesDetailVO);
-									if(result>0){
+									int result = cBiz.insertToClothdetail(clothesDetailVO);
+									if (result > 0) {
 										System.out.println("服装详情插入成功");
 									}
-								}else if(clothesVO.getClothesbigtag().equals("鞋子")){
-									clothesDetailVO.setClothespic("img/menswear/shoes/"+ filename );
-									File f2 = new File("E:/Git/CMS/Shopping/src/main/webapp/img/menswear/shoes/" + filename);
+								} else if (clothesVO.getClothesbigtag().equals("鞋子")) {
+									clothesDetailVO.setClothespic("img/menswear/shoes/" + filename);
+									File f2 = new File(
+											"E:/Git/CMS/Shopping/src/main/webapp/img/menswear/shoes/" + filename);
 									// 上传
-									if(!f2.exists()){
+									if (!f2.exists()) {
 										file2.transferTo(f2);
 									}
 									clothesDetailVO.setClothesid(clothesid);
 									clothesDetailVO.setClothessize(size);
-									int result=cBiz.insertToClothdetail(clothesDetailVO);
-									if(result>0){
+									int result = cBiz.insertToClothdetail(clothesDetailVO);
+									if (result > 0) {
 										System.out.println("服装详情插入成功");
 									}
-								}else{
-									clothesDetailVO.setClothespic("img/womenswear/bags/"+ filename );
-									File f2 = new File("E:/Git/CMS/Shopping/src/main/webapp/img/womenswear/bags/" + filename);
+								} else {
+									clothesDetailVO.setClothespic("img/womenswear/bags/" + filename);
+									File f2 = new File(
+											"E:/Git/CMS/Shopping/src/main/webapp/img/womenswear/bags/" + filename);
 									// 上传
-									if(!f2.exists()){
+									if (!f2.exists()) {
 										file2.transferTo(f2);
 									}
 									clothesDetailVO.setClothesid(clothesid);
 									clothesDetailVO.setClothessize(size);
-									int result=cBiz.insertToClothdetail(clothesDetailVO);
-									if(result>0){
+									int result = cBiz.insertToClothdetail(clothesDetailVO);
+									if (result > 0) {
 										System.out.println("服装详情插入成功");
 									}
 								}
 							}
 						}
-				}else{
+					}
+				} else {
+					int result = cBiz.updatenumNotsize(clothesDetailVO.getStocknum(), clothesid,
+							clothesDetailVO.getClothescolour());
+					if (result > 0) {
+						System.out.println("没有尺码，服装详情库存修改成功");
+					}
+
+				}
+			} else {
+				if (!"".equals(clothessize)) {
+					String[] sizes = clothessize.split("[,;:，、；]");
+					for (String size : sizes) {
+
+						if (!file2.isEmpty()) {
+							String filename = file2.getOriginalFilename();
+							if (clothesVO.getClothesbigtag().equals("男装")) {
+								clothesDetailVO.setClothespic("img/menswear/shirt/" + filename);
+								File f2 = new File(
+										"E:/Git/CMS/Shopping/src/main/webapp/img/menswear/shirt/" + filename);
+								// 上传
+								if (!f2.exists()) {
+									file2.transferTo(f2);
+								}
+								clothesDetailVO.setClothesid(clothesid);
+								clothesDetailVO.setClothessize(size);
+								int result = cBiz.insertToClothdetail(clothesDetailVO);
+								if (result > 0) {
+									System.out.println("服装详情插入成功");
+								}
+							} else if (clothesVO.getClothesbigtag().equals("女装")) {
+								clothesDetailVO.setClothespic("img/womenswear/dress/" + filename);
+								File f2 = new File(
+										"E:/Git/CMS/Shopping/src/main/webapp/img/womenswear/dress/" + filename);
+								// 上传
+								if (!f2.exists()) {
+									file2.transferTo(f2);
+								}
+								clothesDetailVO.setClothesid(clothesid);
+								clothesDetailVO.setClothessize(size);
+								int result = cBiz.insertToClothdetail(clothesDetailVO);
+								if (result > 0) {
+									System.out.println("服装详情插入成功");
+								}
+							} else if (clothesVO.getClothesbigtag().equals("鞋子")) {
+								clothesDetailVO.setClothespic("img/menswear/shoes/" + filename);
+								File f2 = new File(
+										"E:/Git/CMS/Shopping/src/main/webapp/img/menswear/shoes/" + filename);
+								// 上传
+								if (!f2.exists()) {
+									file2.transferTo(f2);
+								}
+								clothesDetailVO.setClothesid(clothesid);
+								clothesDetailVO.setClothessize(size);
+								int result = cBiz.insertToClothdetail(clothesDetailVO);
+								if (result > 0) {
+									System.out.println("服装详情插入成功");
+								}
+							} else {
+								clothesDetailVO.setClothespic("img/womenswear/bags/" + filename);
+								File f2 = new File(
+										"E:/Git/CMS/Shopping/src/main/webapp/img/womenswear/bags/" + filename);
+								// 上传
+								if (!f2.exists()) {
+									file2.transferTo(f2);
+								}
+								clothesDetailVO.setClothesid(clothesid);
+								clothesDetailVO.setClothessize(size);
+								int result = cBiz.insertToClothdetail(clothesDetailVO);
+								if (result > 0) {
+									System.out.println("服装详情插入成功");
+								}
+							}
+						}
+					}
+				} else {
 					if (!file2.isEmpty()) {
 						String filename = file2.getOriginalFilename();
-					       
-							clothesDetailVO.setClothespic("img/womenswear/bags/"+ filename );
-							File f2 = new File("E:/Git/CMS/Shopping/src/main/webapp/img/womenswear/bags/" + filename);
-							// 上传
-							if(!f2.exists()){
-								file2.transferTo(f2);
-							}
-							clothesDetailVO.setClothesid(clothesid);
-							int result=cBiz.insertToClothdetail(clothesDetailVO);
-							System.out.println(clothesDetailVO.getClothescolour()+clothesDetailVO.getClothespic());
-							if(result>0){
-								System.out.println("没有尺码，服装详情插入成功");
-							}		    
-					}	
-				}		
-			}
-		}else{
-		if(!"".equals(clothestype)){
-			
-			// 一次遍历所有文件
-			if (!file1.isEmpty()) {
-				String filename = file1.getOriginalFilename();
 
-				if(clothesVO.getClothesbigtag().equals("男装")){
-					clothesVO.setBrandpic("img/menswear/shirt/"+ filename );
-					File f1 = new File("E:/Git/CMS/Shopping/src/main/webapp/img/menswear/shirt/" + filename);
-					// 上传
-					if(!f1.exists()){
-						file1.transferTo(f1);
-					}
-				}else if(clothesVO.getClothesbigtag().equals("女装")){
-					clothesVO.setBrandpic("img/womenswear/dress/"+ filename );
-					File f1 = new File("E:/Git/CMS/Shopping/src/main/webapp/img/womenswear/dress/" + filename);
-					// 上传
-					if(!f1.exists()){
-						file1.transferTo(f1);
-					}
-				}else if(clothesVO.getClothesbigtag().equals("鞋子")){
-					clothesVO.setBrandpic("img/menswear/shoes/"+ filename );
-					File f1 = new File("E:/Git/CMS/Shopping/src/main/webapp/img/menswear/shoes/" + filename);
-					// 上传
-					if(!f1.exists()){
-						file1.transferTo(f1);
-					}
-				}else{
-					clothesVO.setBrandpic("img/womenswear/bags/"+ filename );
-					File f1 = new File("E:/Git/CMS/Shopping/src/main/webapp/img/womenswear/bags/" + filename);
-					// 上传
-					if(!f1.exists()){
-						file1.transferTo(f1);
-					}
-				}
-
-			}
-			if (!file2.isEmpty()) {
-				String filename = file2.getOriginalFilename();
-
-				if(clothesVO.getClothesbigtag().equals("男装")){
-					clothesDetailVO.setClothespic("img/menswear/shirt/"+ filename );
-					File f2 = new File("E:/Git/CMS/Shopping/src/main/webapp/img/menswear/shirt/" + filename);
-					// 上传
-					if(!f2.exists()){
-						file2.transferTo(f2);
-					}
-				}else if(clothesVO.getClothesbigtag().equals("女装")){
-					clothesDetailVO.setClothespic("img/womenswear/dress/"+ filename );
-					File f2 = new File("E:/Git/CMS/Shopping/src/main/webapp/img/womenswear/dress/" + filename);
-					// 上传
-					if(!f2.exists()){
-						file2.transferTo(f2);
-					}
-				}else if(clothesVO.getClothesbigtag().equals("鞋子")){
-					clothesDetailVO.setClothespic("img/menswear/shoes/"+ filename );
-					File f2 = new File("E:/Git/CMS/Shopping/src/main/webapp/img/menswear/shoes/" + filename);
-					// 上传
-					if(!f2.exists()){
-						file2.transferTo(f2);
-					}
-				}else{
-					clothesDetailVO.setClothespic("img/womenswear/bags/"+ filename );
-					File f2 = new File("E:/Git/CMS/Shopping/src/main/webapp/img/womenswear/bags/" + filename);
-					// 上传
-					if(!f2.exists()){
-						file2.transferTo(f2);
+						clothesDetailVO.setClothespic("img/womenswear/bags/" + filename);
+						File f2 = new File("E:/Git/CMS/Shopping/src/main/webapp/img/womenswear/bags/" + filename);
+						// 上传
+						if (!f2.exists()) {
+							file2.transferTo(f2);
+						}
+						clothesDetailVO.setClothesid(clothesid);
+						int result = cBiz.insertToClothdetail(clothesDetailVO);
+						System.out.println(clothesDetailVO.getClothescolour() + clothesDetailVO.getClothespic());
+						if (result > 0) {
+							System.out.println("没有尺码，服装详情插入成功");
+						}
 					}
 				}
 			}
-			AdminVO adminVo=(AdminVO) session.getAttribute("admin");
-			System.out.println(adminVo.getAid());
-			clothesVO.setAid(adminVo.getAid());
-			int insert=cBiz.insertToClothes(clothesVO);
-			if(insert>0){
-				System.out.println("新增成功");		
-			}else{
-				System.out.println("新增失败");
-			}
-	        Integer clothesid=clothesVO.getClothesid();
-			System.out.println(clothesVO.getClothesid());
-			
-			String[] types=clothestype.split("[,;:，、；]");
-			for(String type:types){
-				TypeVO aa=cBiz.selectBytype(type);
-				if(aa==null){
-					typeVO=new TypeVO();
-					typeVO.setTypename(type);
-					cBiz.InsertToTypevo(typeVO);
+		} else {
+			if (!"".equals(clothestype)) {
+
+				// 一次遍历所有文件
+				if (!file1.isEmpty()) {
+					String filename = file1.getOriginalFilename();
+
+					if (clothesVO.getClothesbigtag().equals("男装")) {
+						clothesVO.setBrandpic("img/menswear/shirt/" + filename);
+						File f1 = new File("E:/Git/CMS/Shopping/src/main/webapp/img/menswear/shirt/" + filename);
+						// 上传
+						if (!f1.exists()) {
+							file1.transferTo(f1);
+						}
+					} else if (clothesVO.getClothesbigtag().equals("女装")) {
+						clothesVO.setBrandpic("img/womenswear/dress/" + filename);
+						File f1 = new File("E:/Git/CMS/Shopping/src/main/webapp/img/womenswear/dress/" + filename);
+						// 上传
+						if (!f1.exists()) {
+							file1.transferTo(f1);
+						}
+					} else if (clothesVO.getClothesbigtag().equals("鞋子")) {
+						clothesVO.setBrandpic("img/menswear/shoes/" + filename);
+						File f1 = new File("E:/Git/CMS/Shopping/src/main/webapp/img/menswear/shoes/" + filename);
+						// 上传
+						if (!f1.exists()) {
+							file1.transferTo(f1);
+						}
+					} else {
+						clothesVO.setBrandpic("img/womenswear/bags/" + filename);
+						File f1 = new File("E:/Git/CMS/Shopping/src/main/webapp/img/womenswear/bags/" + filename);
+						// 上传
+						if (!f1.exists()) {
+							file1.transferTo(f1);
+						}
+					}
+
 				}
-				TypeVO bb=cBiz.selectBytype(type);
-				System.out.println(bb.getTypeid());
-				cBiz.insertTotypeclothesvo(bb.getTypeid(), clothesVO.getClothesid());
-			}
-			if(!"".equals(clothessize)){
-				String[] sizes=clothessize.split("[,;:，、；]");
-					for(String size:sizes){
+				if (!file2.isEmpty()) {
+					String filename = file2.getOriginalFilename();
+
+					if (clothesVO.getClothesbigtag().equals("男装")) {
+						clothesDetailVO.setClothespic("img/menswear/shirt/" + filename);
+						File f2 = new File("E:/Git/CMS/Shopping/src/main/webapp/img/menswear/shirt/" + filename);
+						// 上传
+						if (!f2.exists()) {
+							file2.transferTo(f2);
+						}
+					} else if (clothesVO.getClothesbigtag().equals("女装")) {
+						clothesDetailVO.setClothespic("img/womenswear/dress/" + filename);
+						File f2 = new File("E:/Git/CMS/Shopping/src/main/webapp/img/womenswear/dress/" + filename);
+						// 上传
+						if (!f2.exists()) {
+							file2.transferTo(f2);
+						}
+					} else if (clothesVO.getClothesbigtag().equals("鞋子")) {
+						clothesDetailVO.setClothespic("img/menswear/shoes/" + filename);
+						File f2 = new File("E:/Git/CMS/Shopping/src/main/webapp/img/menswear/shoes/" + filename);
+						// 上传
+						if (!f2.exists()) {
+							file2.transferTo(f2);
+						}
+					} else {
+						clothesDetailVO.setClothespic("img/womenswear/bags/" + filename);
+						File f2 = new File("E:/Git/CMS/Shopping/src/main/webapp/img/womenswear/bags/" + filename);
+						// 上传
+						if (!f2.exists()) {
+							file2.transferTo(f2);
+						}
+					}
+				}
+				AdminVO adminVo = (AdminVO) session.getAttribute("admin");
+				System.out.println(adminVo.getAid());
+				clothesVO.setAid(adminVo.getAid());
+				int insert = cBiz.insertToClothes(clothesVO);
+				if (insert > 0) {
+					System.out.println("新增成功");
+				} else {
+					System.out.println("新增失败");
+				}
+				Integer clothesid = clothesVO.getClothesid();
+				System.out.println(clothesVO.getClothesid());
+
+				String[] types = clothestype.split("[,;:，、；]");
+				for (String type : types) {
+					TypeVO aa = cBiz.selectBytype(type);
+					if (aa == null) {
+						typeVO = new TypeVO();
+						typeVO.setTypename(type);
+						cBiz.InsertToTypevo(typeVO);
+					}
+					TypeVO bb = cBiz.selectBytype(type);
+					System.out.println(bb.getTypeid());
+					cBiz.insertTotypeclothesvo(bb.getTypeid(), clothesVO.getClothesid());
+				}
+				if (!"".equals(clothessize)) {
+					String[] sizes = clothessize.split("[,;:，、；]");
+					for (String size : sizes) {
 						clothesDetailVO.setClothesid(clothesid);
 						clothesDetailVO.setClothessize(size);
-						int result=cBiz.insertToClothdetail(clothesDetailVO);
-						if(result>0){
+						int result = cBiz.insertToClothdetail(clothesDetailVO);
+						if (result > 0) {
 							System.out.println("服装详情插入成功");
 						}
 					}
-			}else{
-				clothesDetailVO.setClothesid(clothesid);
-				int result=cBiz.insertToClothdetail(clothesDetailVO);
-				if(result>0){
-					System.out.println("服装详情依旧插入成功");
+				} else {
+					clothesDetailVO.setClothesid(clothesid);
+					int result = cBiz.insertToClothdetail(clothesDetailVO);
+					if (result > 0) {
+						System.out.println("服装详情依旧插入成功");
+					}
 				}
-			}		
-		}else{
-			int insert=cBiz.insertToClothes(clothesVO);
-			System.out.println("依旧插入数据");
+			} else {
+				int insert = cBiz.insertToClothes(clothesVO);
+				System.out.println("依旧插入数据");
+			}
+
 		}
-	 	
-	}	
 		return "redirect:clothesAll.do";
 	}
-	
+
 	/**
 	 * 展示现有服装
 	 * 
@@ -957,7 +1017,7 @@ public class ClothesAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/backManager/addStocknum.do", method = RequestMethod.POST)
-	public String addStocknum(Model model, Integer clodetailid, Integer stocknum,HttpServletResponse response) {
+	public String addStocknum(Model model, Integer clodetailid, Integer stocknum, HttpServletResponse response) {
 		int result = cBiz.updateStocknum(stocknum, clodetailid);
 		if (result > 0) {
 			System.out.println("修改成功");
@@ -975,11 +1035,9 @@ public class ClothesAction {
 	 * @throws IOException
 	 */
 	@RequestMapping("fuzzySelect.do")
-	public String fuzzySelect(Model model, String value, HttpServletRequest request, HttpServletResponse response)
-			throws IOException {
+	public String fuzzySelect(Model model, String value, HttpServletRequest request) throws IOException {
 
 		List<ClothesVO> list = new ArrayList<ClothesVO>();
-		System.out.println("==============value==================" + value);
 		// 用value模糊查询类型,大标签，品牌
 		if (value != null && !"".equals(value)) {
 			List<ClothesVO> type = cBiz.clothesType(value);
@@ -993,9 +1051,43 @@ public class ClothesAction {
 				list.addAll(brand);
 			}
 		}
+		// 判断list中是否有相同的数据，如果有，则删除
 		for (int i = 0; i < list.size(); i++) {
-			System.out.println("========================" + i + "=" + list.get(i));
+			for (int j = i + 1; j < list.size(); j++) {
+				if (list.get(i).getClothesid() == list.get(j).getClothesid()) {
+					list.remove(j);
+					j--;
+				}
+			}
 		}
+
+		// 分页
+		int pages;
+		int rows;
+		String page = request.getParameter("page");
+		String row = request.getParameter("rows");
+
+		if (page == null || row == null) {
+			pages = 1;
+			rows = 6;
+		} else {
+			pages = Integer.parseInt(page);
+			rows = Integer.parseInt(row);
+		}
+		long total = list.size();
+		model.addAttribute("total", total);
+		// 求总页数 放到model.addAttribute里面
+		int allPage = (int) (total % rows == 0 ? total / rows : total / rows + 1);
+		model.addAttribute("allPage", allPage);
+
+		// 当前页数 也可写成pages<=1 pages>=allPage
+		if (pages < 1) {
+			pages = 1;
+		} else if (pages > allPage - 1) {
+			pages = allPage;
+		}
+		model.addAttribute("pages", pages);
+
 		model.addAttribute("show", list);
 		return "shop";
 	}
