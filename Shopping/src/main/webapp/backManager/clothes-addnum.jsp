@@ -5,18 +5,49 @@
 <head>
 <title>修改服装信息</title>
 <link rel="stylesheet" type="text/css" href="css/index.css" />
+	<!-- 弹框js -->
+    <script src="js/tankuangAlertBox.min.js"></script>
+    <!-- 自定义弹框提示 -->
+	<script src="js/advice/message.min.js"></script>
 <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
 
 <script language="javascript" type="text/javascript">
-	function come() {
-<%String success = request.getParameter("success");
-			String failure = request.getParameter("failure");
-			if (success != null) {%>
-	alert(success);
-<%} else if (failure != null) {%>
-	alert(failure);
-<%}%>
-	}
+
+/*          function ajax(){
+        	 var clodetailid=$("#clodetailid").val();
+        	 var stocknum=$("#stocknum").val();
+        	 alert(clodetailid+stocknum);
+        	  var data={
+        			  clodetailid:clodetailid,
+        			  stocknum:stocknum,
+        	  };
+        	 $.post("addStocknum.do",data,function(data){
+        		 if(data==0){
+    				 success();//成功弹窗
+
+        		 }else{
+        			 showAlert();
+        		 } 
+        	 });
+         }
+         
+         //失败的弹窗
+         function showAlert() {
+             PostbirdAlertBox.alert({
+                 'title': '提示',
+                 'content': '操作失败',
+                 'okBtn': '好的',
+                 'contentColor': 'red',
+                 'onConfirm': function () {
+                 
+                 }
+             });
+         }
+         
+         //成功提示框
+     	function success(){
+             $.message('操作成功');
+          } */
 </script>
 </head>
 <body class="mian_bj" onload="come()">
@@ -35,7 +66,7 @@
 		</div>
 		<div class="mian_b">
 			<!-- ==================================form提交修改信息 -->
-			<form action="addStocknum.do?clodetailid=${clodetailid }" method="post">
+			<form action="addStocknum.do?clodetailid=${clodetailid }" method="post"> 
 
 				<table width="100%" border="0" cellpadding="0" cellspacing="0"
 					class="mian_b_bg_xz">
@@ -57,8 +88,10 @@
 						<td>&nbsp;</td>
 						<td>
 							<div align="center">
-								<input type="submit" value="增加库存" /> <input type="button"
+								<input type="submit" value="增加库存" onclick="ajax()" /> <input type="button"
 									onclick="javascript:history.go(-1)" value="取消返回" />
+								<%-- <span id="check"></span> <input type="hidden" name="clodetailid"
+									id="clodetailid" value="${clodetailid }" /> --%>
 							</div>
 						</td>
 						<td></td>

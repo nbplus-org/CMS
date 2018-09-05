@@ -97,10 +97,13 @@ public class ClothesAction {
 		session.setAttribute("brandpic", brandpic);
 		UserVO userVo = (UserVO) request.getSession().getAttribute("UserVO");
 		
-
-
-
 		if (userVo != null) {
+			
+			List<Map<String, Object>> cart = ctBiz.findAll(userVo.getUid());
+			System.out.println(cart);
+			model.addAttribute("cart", cart);
+			session.setAttribute("cart", cart);
+			
 			long cartcount = ctBiz.cartCount(userVo.getUid());
 			model.addAttribute("cartcount", cartcount);
 			session.setAttribute("cartcount", cartcount);
@@ -860,7 +863,7 @@ public class ClothesAction {
 		}
 	 	
 	}	
-		return "backManager/back-manager";
+		return "redirect:clothesAll.do";
 	}
 	
 	/**
@@ -881,7 +884,7 @@ public class ClothesAction {
 		// 从第几条开始
 		int startPage = (Integer.parseInt(page) - 1) * pageSize;
 
-		List<ClothesVO> allClothes = cBiz.selectAllClothes(startPage, pageSize);
+		List<ClothesVO> allClothes = cBiz.selectClothes(startPage, pageSize);
 
 		// 查询总页数
 		int count = cBiz.selectAllCount();
@@ -954,14 +957,14 @@ public class ClothesAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/backManager/addStocknum.do", method = RequestMethod.POST)
-	public String addStocknum(Model model, Integer clodetailid, Integer stocknum) {
+	public String addStocknum(Model model, Integer clodetailid, Integer stocknum,HttpServletResponse response) {
 		int result = cBiz.updateStocknum(stocknum, clodetailid);
 		if (result > 0) {
 			System.out.println("修改成功");
 		} else {
 			System.out.println("修改失败");
 		}
-		return "backManager/back-manager";
+		return "redirect:clothesAll.do";
 	}
 
 	/**

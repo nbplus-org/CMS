@@ -8,37 +8,63 @@
 <script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
 
 <script language="javascript" type="text/javascript">
+         
+         function checkInfo(){
+        	 if(document.insertForm.clothesname.value==""){
+        		    alert("服装名不能为空");
+        		    return false;
+        		 }
+        	 if(document.insertForm.clothesbrand.value==""){
+     		    alert("服装品牌不能为空");
+     		    return false;
+     		 }
+        	 if(document.insertForm.file1.value==""){
+      		    alert("品牌图片不能为空");
+      		    return false;
+      		 }
+        	 if(document.insertForm.clothestype.value==""){
+       		    alert("服装类型不能为空");
+       		    return false;
+       		 }
+        	 if(document.insertForm.clothesintroduce.value==""){
+        		    alert("服装描述不能为空");
+        		    return false;
+        		 }
+        	 if(document.insertForm.clothesintroduce.value==""){
+     		    alert("服装描述不能为空");
+     		    return false;
+     		 }
+        	 if(document.insertForm.clothesbigtag.value!="包包"){
+            	 if(document.insertForm.clothessize.value==""){
+          		    alert("服装尺寸不能为空");
+          		    return false;
+          		 }else{
+          			 return true;
+          		 }
 
-/*        function newadd(){
-        PostbirdAlertBox.alert({
-        'title': '提示',
-        'content': '添加成功',
-        'okBtn': '好的',
-        'contentColor': 'green',
-        'onConfirm': function () {
-        	window.location.href="clothesAll.do"; 
-        }
-    });
-  }  
-         function ajax(){
-        	     $.ajax({
-                    //几个参数需要注意一下
-                        type: "POST",//方法类型
-                        dataType: "json",//预期服务器返回的数据类型
-                        url: "clothesInsert.do" ,//url
-                        data: $('#form').serialize(),
-                        success: function (result) {
-                            console.log(result);//打印服务端返回的数据(调试用)
-                            if (result.resultCode == 0) {
-                                alert("SUCCESS");
-                            }
-                            ;
-                        },
-                        error : function() {
-                            alert("异常！");
-                        }
-                    });        
-         } */
+     		 }
+           	 if(document.insertForm.clothescolour.value==""){
+      		    alert("服装颜色不能为空");
+      		    return false;
+      		 }       	 
+           	 if(document.insertForm.stocknum.value==""){
+       		    alert("库存数量不能为空");
+       		    return false;
+       		 }          	 
+           	 if(document.insertForm.clothesorigprice.value==""){
+        		    alert("进货单价不能为空");
+        		    return false;
+        		 }          	 
+           	 if(document.insertForm.file2.value==""){
+     		    alert("服装图片不能为空");
+     		    return false;
+     		 }
+           	 if(document.insertForm.clothesprice.value==""){
+      		    alert("销售单价不能为空");
+      		    return false;
+      		 }
+           	 
+         }
 
 </script>
 </head>
@@ -56,7 +82,7 @@
 		<div class="mian_b">
 		 	 <form
 				action="clothesInsert.do" 
-				enctype="multipart/form-data" method="post">  
+				enctype="multipart/form-data" method="post" name="insertForm" onSubmit="return checkInfo()">  
 			<table width="100%" border="0" cellpadding="0" cellspacing="0"
 				class="mian_b_bg_xz">
 				<tr>
@@ -156,7 +182,7 @@
 					<td>&nbsp;</td>
 					<td>
 						<div align="center">
-							<input type="submit" value="新增商品" onclick="ajax()" /> <input type="button"
+							<input type="submit" value="新增商品" /> <input type="button"
 									onclick="javascript:history.go(-1)" value="取消返回" />
 						</div>
 					</td>

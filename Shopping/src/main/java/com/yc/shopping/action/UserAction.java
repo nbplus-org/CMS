@@ -376,10 +376,7 @@ public class UserAction {
 				model.addAttribute("userVo", userVo);
 				request.getSession().setAttribute("UserVO", userVo);
 				
-				List<Map<String, Object>> cart = ctBiz.findAll(userVo.getUid());
-				System.out.println(cart);
-				model.addAttribute("cart", cart);
-				session.setAttribute("cart", cart);
+
 				
 				return "redirect:show.do";
 			} else {

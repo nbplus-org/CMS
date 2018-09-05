@@ -384,4 +384,12 @@ public class ClothesImp implements ClothesInterface {
 		return cDao.clothesname(value);
 	}
 
+	/**
+	 * 降序查找服装表
+	 */
+	@Override
+	public List<ClothesVO> selectClothes(int startPage, int pageSize) {
+		return cDao.selectClothes(startPage, pageSize);
+	}
+
 }
