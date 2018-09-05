@@ -427,5 +427,12 @@ public interface ClothesDao {
 	@Update("update clothdetailvo set stocknum=stocknum+#{stocknum} where clothesid=#{clothesid} and clothescolour=#{clothescolour}")
     int updatenumNotsize(@Param("stocknum") Integer stocknum,@Param("clothesid") Integer clothesid,@Param("clothescolour") String clothescolour);
 
-
+    /**
+     * 降序查找服装表
+     * @param startPage
+     * @param pageSize
+     * @return
+     */
+	@Select("select * from clothesvo  order by clothesid DESC limit #{startPage},#{pageSize}")
+	List<ClothesVO> selectClothes(@Param("startPage") int startPage, @Param("pageSize") int pageSize);
 }

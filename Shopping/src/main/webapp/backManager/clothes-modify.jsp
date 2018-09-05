@@ -76,7 +76,7 @@
 						<td valign="top">服装服装标签：</td>
 						<td width="30%"><input type="text" class="input_01"
 							name="clothestype" id="text1" value="${clothesMsg.clothestype }" /></td>
-						<td rowspan="10"><img src="../upload/${clothesMsg.brandpic }"
+						<td rowspan="10"><img src="../${clothesMsg.brandpic }"
 							width="200px" height="200px" id="showPic" /></td>
 						<td>&nbsp;</td>
 					</tr>

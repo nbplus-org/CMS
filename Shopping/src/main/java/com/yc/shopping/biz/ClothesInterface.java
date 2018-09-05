@@ -321,5 +321,13 @@ public interface ClothesInterface {
 	 * @return
 	 */
 	public int updatenumNotsize(Integer stocknum,Integer clothesid, String clothescolour);
+	
+	/**
+	 * 降序查找服装表
+	 * @param startPage
+	 * @param pageSize
+	 * @return
+	 */
+	public List<ClothesVO> selectClothes(int startPage,int pageSize);
 
 }
