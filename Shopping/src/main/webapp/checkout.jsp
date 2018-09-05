@@ -295,10 +295,16 @@
                 $.post("panduanPwd.do",data1,function(data1){
                 	if(data1==0){
                 		showAlert();//密码错误
-                	}else{
+                	}else if(data1==1){
                 		//提示
+                		//刷新小购物车
+                		 $.get("showCarAgain.do", {}, function() {	}); 
+                		/* window.location.href="showCarAgain.do";  */
                 		window.location.href="seeorder.do";  //密码正确，跳转页面
+                	}else{
+                		showAlerts();//下单失败
                 	}
+                	
                 });    
 	
                 },
@@ -319,6 +325,19 @@
             }
         });
     }
+        
+        function showAlerts() {
+            PostbirdAlertBox.alert({
+                'title': '错误',
+                'content': '下单失败',
+                'okBtn': '确定',
+                'contentColor': 'red',
+                'onConfirm': function () {
+                    //console.log("回调触发后隐藏提示框");
+                    //alert("回调触发后隐藏提示框");
+                }
+            });
+        }
         
    </script>
         

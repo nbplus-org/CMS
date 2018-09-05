@@ -128,19 +128,25 @@ public class OrderAction {
 		try {
 
 			List<Map<String, Object>> list = orderimp.findCartByUserAll(u);// 查服装
-			double total = 0;
-			for (int i = 0; i < list.size(); i++) {
-				Integer cnum = (Integer) list.get(i).get("cnum");
-				double price = (double) list.get(i).get("clothesprice");
-				double tprice = cnum * price;
-				total += tprice;
-			}
+			if(list.get(0).get("clothesprice")!=null){
+				double total = 0;
+				for (int i = 0; i < list.size(); i++) {
+					Integer cnum = (Integer) list.get(i).get("cnum");
+					double price = (double) list.get(i).get("clothesprice");
+					double tprice = cnum * price;
+					total += tprice;
+				}
 
-			model.addAttribute("list", list);// 存服装
-			model.addAttribute("f", f);// 存用户折扣
-			model.addAttribute("total", total);// 存合计
-			model.addAttribute("f", f);// 存用户折扣
-			return "checkout";
+				model.addAttribute("list", list);// 存服装
+				model.addAttribute("f", f);// 存用户折扣
+				model.addAttribute("total", total);// 存合计
+				model.addAttribute("f", f);// 存用户折扣
+				return "checkout";
+				
+			}else{
+				return "cart";
+			}
+			
 		} catch (BizException e) {
 			System.out.println("请先购买商品");
 			return "cart";
@@ -205,6 +211,7 @@ public class OrderAction {
 			// OrderVO order=new OrderVO();//订单对象
 			int orderid = orderimp.addOrderVo(order);// 插入订单表
 			int[] arry = (int[]) request.getSession().getAttribute("arry");
+			
 			//如果数组为空说明是全部购物
 			List<Map<String, Object>> list=null;
 			if(arry!=null){
@@ -215,18 +222,22 @@ public class OrderAction {
 					 orderimp.changeStokNum((int)list.get(i).get("cnum"),(int)list.get(i).get("clodetailid"));
 				 }
 				 orderimp.removeCart(arry);//清空购物车
-				 
+				 request.getSession().removeAttribute("arry");
+				 response.getWriter().print("1");// 密码正确
 			}else{
 				 list = orderimp.findCartByUserAll(user);
 				 orderimp.addOrderDetailVo(list, orderid);// 插入订单详情表
 				 //修改库存数量
 				 for(int i=0;i<list.size();i++){
 				 orderimp.changeStokNum((int)list.get(i).get("cnum"),(int)list.get(i).get("clodetailid"));
+				 
 				 }
 				 orderimp.removeCartAll();//清空购物车
+				 response.getWriter().print("1");// 密码正确
 			}
+			//response.getWriter().print("2");// 下单失败
+		
 			
-			response.getWriter().print("1");// 密码正确
 		}
 
 	}
