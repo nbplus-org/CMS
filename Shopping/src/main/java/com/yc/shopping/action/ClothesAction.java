@@ -169,12 +169,12 @@ public class ClothesAction {
 		System.out.println(pages + "2018 9-4--" + rows);
 		
 		if("search".equals(op)){
-			List<ClothesVO> list = new ArrayList<ClothesVO>();
+			List<Map<String, String>> list = new ArrayList<Map<String, String>>();
 			// 用value模糊查询类型,大标签，品牌
 			if (value != null && !"".equals(value)) {
-				List<ClothesVO> type = cBiz.clothesType(value);
-				List<ClothesVO> bigtag = cBiz.clothesBigTag(value);
-				List<ClothesVO> brand = cBiz.clothesBrand(value);
+				List<Map<String, String>> type = cBiz.clothesType(value);
+				List<Map<String, String>> bigtag = cBiz.clothesBigTag(value);
+				List<Map<String, String>> brand = cBiz.clothesBrand(value);
 				if (type == null && bigtag == null && brand == null) {
 					list.addAll(cBiz.clothesName(value));
 				} else {
@@ -185,8 +185,8 @@ public class ClothesAction {
 			}
 			// 判断list中是否有相同的数据，如果有，则删除
 			for (int i = 0; i < list.size(); i++) {
-				for (int j = i + 1; j < list.size(); j++) {
-					if (list.get(i).getClothesid() == list.get(j).getClothesid()) {
+				for (int j = i + 1; j < list.size(); j++) {//((ClothesDetailVO) list.get(i)).getClothesid() == ((ClothesDetailVO) list.get(j)).getClothesid()
+					if (list.get(i).get("clothesid") == list.get(j).get("clothesid")) {
 						list.remove(j);
 						j--;
 					}
@@ -1027,69 +1027,5 @@ public class ClothesAction {
 		return "redirect:clothesAll.do";
 	}
 
-	/**
-	 * index查询按钮,模糊查询 huang
-	 * 
-	 * @param model
-	 * @param value
-	 * @throws IOException
-	 */
-	@RequestMapping("fuzzySelect.do")
-	public String fuzzySelect(Model model, String value, HttpServletRequest request) throws IOException {
-
-		List<ClothesVO> list = new ArrayList<ClothesVO>();
-		// 用value模糊查询类型,大标签，品牌
-		if (value != null && !"".equals(value)) {
-			List<ClothesVO> type = cBiz.clothesType(value);
-			List<ClothesVO> bigtag = cBiz.clothesBigTag(value);
-			List<ClothesVO> brand = cBiz.clothesBrand(value);
-			if (type == null && bigtag == null && brand == null) {
-				list.addAll(cBiz.clothesName(value));
-			} else {
-				list.addAll(type);
-				list.addAll(bigtag);
-				list.addAll(brand);
-			}
-		}
-		// 判断list中是否有相同的数据，如果有，则删除
-		for (int i = 0; i < list.size(); i++) {
-			for (int j = i + 1; j < list.size(); j++) {
-				if (list.get(i).getClothesid() == list.get(j).getClothesid()) {
-					list.remove(j);
-					j--;
-				}
-			}
-		}
-
-		// 分页
-		int pages;
-		int rows;
-		String page = request.getParameter("page");
-		String row = request.getParameter("rows");
-
-		if (page == null || row == null) {
-			pages = 1;
-			rows = 6;
-		} else {
-			pages = Integer.parseInt(page);
-			rows = Integer.parseInt(row);
-		}
-		long total = list.size();
-		model.addAttribute("total", total);
-		// 求总页数 放到model.addAttribute里面
-		int allPage = (int) (total % rows == 0 ? total / rows : total / rows + 1);
-		model.addAttribute("allPage", allPage);
-
-		// 当前页数 也可写成pages<=1 pages>=allPage
-		if (pages < 1) {
-			pages = 1;
-		} else if (pages > allPage - 1) {
-			pages = allPage;
-		}
-		model.addAttribute("pages", pages);
-
-		model.addAttribute("show", list);
-		return "shop";
-	}
 
 }

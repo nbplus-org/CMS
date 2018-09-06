@@ -95,7 +95,22 @@
 			}
 		});
 	}
-
+	
+	function outLog(){
+		PostbirdAlertBox.confirm({
+			'title' : '提示',
+			'content' : '您确定要注销吗？?',
+			'okBtn' : '是的',
+			'contentColor' : 'red',
+			'onConfirm' : function() {
+				window.location.href = "outLog.do";
+				//alert("回调触发后隐藏提示框");
+			},
+			'onCancel' : function() {
+			}
+		});
+	}
+	
 	function seeOrder() {
 		PostbirdAlertBox.confirm({
 			'title' : '提示',
@@ -169,7 +184,7 @@
 											<ul id="account_single_nav_3">
 												<li><a href="showCart.do">我的购物车</a></li>
 												<li><a href="seeorder.do">我的订单</a></li>
-												<li><a href="outLog.do">退出登陆</a></li>
+												<li><a onclick="outLog()">注销</a></li>
 											</ul>
 										</div>
 									</div> <%
@@ -271,8 +286,14 @@
 											class="Sales">全部商品</span></a></li>
 									<li><a class="home2_size"><span class="Accessaries">帮助</span></a>
 										<div class="home_mega_menu menu_home2_looktr">
-
+											<%
+												if (request.getSession().getAttribute("UserVO") != null) {
+											%>
 											<a href="seeorder.do">我的订单</a> <a href="showCart.do">购物车</a>
+											<%}else{
+												
+											} %>
+											<a onclick="goLogin()">我的订单</a> <a onclick="goLogin()">购物车</a>
 
 											<a href="about-us.jsp">关于我们</a> <a href="contact.jsp">联系我们</a>
 

@@ -354,8 +354,9 @@ public interface ClothesDao {
 	 * @param model
 	 * @param value
 	 */
-	@Select("select DISTINCT * from clothesvo c,typevo t,typeclothesvo tc where c.clothesid=tc.clothesid and t.typeid=tc.typeid and t.typename like CONCAT('%',#{value},'%') ")
-	List<ClothesVO> clothesType(String value);
+	@Select("select DISTINCT * from clothesvo c,clothdetailvo ct, typevo t,typeclothesvo tc where c.clothesid=tc.clothesid "
+			+ "and t.typeid=tc.typeid and c.clothesid=ct.clothesid and t.typename like CONCAT('%',#{value},'%') GROUP BY clothesname ")
+	List<Map<String,String>> clothesType(String value);
 	
 	/**
 	 * index.jsp查询按钮,模糊查询  huang
@@ -363,8 +364,8 @@ public interface ClothesDao {
 	 * @param model
 	 * @param value
 	 */
-	@Select("select * from clothesvo where clothesbigtag like CONCAT('%',#{value},'%') ")
-	List<ClothesVO> clothesBigTag(String value);
+	@Select("select * from clothesvo c,clothdetailvo ct where clothesbigtag like CONCAT('%',#{value},'%') and c.clothesid=ct.clothesid GROUP BY clothesname  ")
+	List<Map<String,String>> clothesBigTag(String value);
 	
 	/**
 	 * index.jsp查询按钮,模糊查询  huang
@@ -372,8 +373,8 @@ public interface ClothesDao {
 	 * @param model
 	 * @param value
 	 */
-	@Select("select * from clothesvo where clothesbrand like CONCAT('%',#{value},'%') ")
-	List<ClothesVO> clothesbrand(String value);
+	@Select("select * from clothesvo c,clothdetailvo ct where clothesbrand like CONCAT('%',#{value},'%') and c.clothesid=ct.clothesid GROUP BY clothesname")
+	List<Map<String,String>> clothesbrand(String value);
 	
 	/**
 	 * index.jsp查询按钮,模糊查询  huang
@@ -381,8 +382,8 @@ public interface ClothesDao {
 	 * @param model
 	 * @param value
 	 */
-	@Select("select * from clothesvo where clothesbrand like CONCAT('%',#{value},'%') ")
-	List<ClothesVO> clothesname(String value);
+	@Select("select * from clothesvo c,clothdetailvo ct where clothesname like CONCAT('%',#{value},'%') and c.clothesid=ct.clothesid GROUP BY clothesname")
+	List<Map<String,String>> clothesname(String value);
 	/**
 	 * 根据服装名查询服装表是否与此数据
 	 * @param clothesname
