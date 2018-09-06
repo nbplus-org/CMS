@@ -164,6 +164,8 @@
         		var d=eval('('+data+')');
         		if(d.end==null){
         			$("#tr"+id).remove();
+        			$.get("showCarAgain.do", {}, function() {
+        			});
         		}else{
         			alert("删除失败");
         		}
@@ -216,7 +218,7 @@
 									<td><a href="#">${c.clothesname}</a></td>
 									<td>${c.clothescolour }</td>
 									<td>${c.clothessize }</td>
-									<td>$<strong id="price${status.count }">${c.clothesprice }</strong></td>
+									<td>￥<strong id="price${status.count }">${c.clothesprice }</strong></td>
 									<td><a href="javascript:void(0);"
 										onclick="changeNum('reduce',${status.count})"
 										style="color: blue">-</a> <span class="order_num"
@@ -224,7 +226,7 @@
 										href="javascript:void(0);"
 										onclick="changeNum('add',${status.count})" style="color: blue">+</a>
 									</td>
-									<td>$<strong class="order_price" id="pri${status.count }">${c.clothesprice*c.cnum }</strong></td>
+									<td>￥<strong class="order_price" id="pri${status.count }">${c.clothesprice*c.cnum }</strong></td>
 									<td><a href="#"><img src="img/arrow/btn_trash.gif"
 											onclick="Delete('delete',${status.count})" alt="" /></a></td>
 								</tr>

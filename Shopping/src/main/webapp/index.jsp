@@ -201,7 +201,7 @@
 													<a href="trash.do?cartid=${cart.cartid}"><span><i
 															class="fa fa-trash"></i></span></a>
 												</h2>
-												<p>${cart.cnum }x$${cart.clothesprice}</p>
+												<p>${cart.cnum }x￥${cart.clothesprice}</p>
 											</div>
 										</c:forEach>
 										<div class="cart_shoptings">

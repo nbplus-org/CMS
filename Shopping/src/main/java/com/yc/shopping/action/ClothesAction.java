@@ -84,16 +84,12 @@ public class ClothesAction {
 		model.addAttribute("show", list);
 
 		List<ClothesVO> clothesbigtag = cBiz.showClothesbigtag();
-		model.addAttribute("clothesbigtag", clothesbigtag);
 		session.setAttribute("clothesbigtag", clothesbigtag);
 		List<ClothesVO> clothesbrand = cBiz.showClothesbrand();
-		model.addAttribute("clothesbrand", clothesbrand);
 		session.setAttribute("clothesbrand", clothesbrand);
 		List<TypeVO> typename = cBiz.showtypename();
-		model.addAttribute("typename", typename);
 		session.setAttribute("typename", typename);
 		List<ClothesVO> brandpic = cBiz.showbrandpic();
-		model.addAttribute("brandpic", brandpic);
 		session.setAttribute("brandpic", brandpic);
 		UserVO userVo = (UserVO) request.getSession().getAttribute("UserVO");
 		
@@ -101,11 +97,9 @@ public class ClothesAction {
 			
 			List<Map<String, Object>> cart = ctBiz.findAll(userVo.getUid());
 			System.out.println(cart);
-			model.addAttribute("cart", cart);
 			session.setAttribute("cart", cart);
 			
 			long cartcount = ctBiz.cartCount(userVo.getUid());
-			model.addAttribute("cartcount", cartcount);
 			session.setAttribute("cartcount", cartcount);
 			System.out.println("show.do   userVo" + userVo.getUname());
 		}
@@ -125,13 +119,11 @@ public class ClothesAction {
 		
 		List<Map<String, Object>> cart = ctBiz.findAll(userVo.getUid());
 		System.out.println(cart);
-		model.addAttribute("cart", cart);
 		session.setAttribute("cart", cart);
 
 
 		if (userVo != null) {
 			long cartcount = ctBiz.cartCount(userVo.getUid());
-			model.addAttribute("cartcount", cartcount);
 			session.setAttribute("cartcount", cartcount);
 			System.out.println("show.do   userVo" + userVo.getUname());
 		}

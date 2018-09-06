@@ -11,14 +11,13 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import org.apache.taglibs.standard.lang.jstl.test.beans.PublicBean1;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.gson.Gson;
-import com.sun.mail.imap.protocol.UID;
 import com.yc.shopping.biz.CartInterface;
 import com.yc.shopping.biz.ReviewInterface;
 import com.yc.shopping.vo.CartVO;
@@ -248,12 +247,16 @@ public class CartAction {
      * liu 
      */
     @RequestMapping("/showCart.do")
-    public String addCart(Model model,HttpServletRequest request){ 
+    public String addCart(Model model,HttpServletRequest request,HttpSession session){ 
     	UserVO userVo=(UserVO) request.getSession().getAttribute("UserVO");
     	if(userVo!=null){
         	List<Map<String, Object>> list=cBiz.findAll(userVo.getUid());
         	System.out.println(list);
         	model.addAttribute("list", list);
+        	
+			long cartcount = cBiz.cartCount(userVo.getUid());
+			session.setAttribute("cartcount", cartcount);
+			System.out.println("show.do   userVo" + userVo.getUname());
         	return "cart";
     	}
             return "reglogin";
