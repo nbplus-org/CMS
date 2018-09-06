@@ -123,7 +123,7 @@
 
 	function search() {
 		var value=$("#searchContent").val();
-		window.location.href="fuzzySelect.do?value="+value;
+		window.location.href="showShop.do?op=search&value="+value;
 	}
 </script>
 </head>
@@ -147,7 +147,7 @@
 				<div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
 					<div class="home2_contact_info">
 						<div class="contact_info_text">
-							<p>联系我们:15570921217</p>
+							<h3>联系我们:15570921217</h3>
 						</div>
 						<!--账户开始区域 -->
 						<div class="account_card_area account_cart_home2">

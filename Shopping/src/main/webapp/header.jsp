@@ -17,7 +17,12 @@
 
 	}
 </script> -->
-
+<script type="text/javascript">
+	function search() {
+		var value = $("#searchContent").val();
+		window.location.href = "showShop.do?op=search&value=" + value;
+	}
+</script>
 <div class="header_area_top">
 	<div class="container">
 		<div class="row">
@@ -25,10 +30,10 @@
 				<!--Start Search area -->
 				<form action="#" name="myForm">
 					<div class="search_box">
-						<input name="Name" id="itp" class="input_text" type="text"
-							placeholder="搜索你想要的" />
-						<button type="submit" class="btn-search">
-							<span><i class="fa fa-search"></i></span>
+						<input name="Name" id="searchContent" class="input_text"
+							autocomplete="off" type="text" placeholder="搜索你想要的" />
+						<button type="button" class="btn-search" onclick="search()">
+							<i class="fa fa-search"></i>
 						</button>
 					</div>
 				</form>
@@ -58,10 +63,9 @@
 							%>
 						<li><a href="reglogin.jsp"><i class="fa fa-key"></i>请登陆</a> <%
  	}
+ %> <%
+ 	if (request.getSession().getAttribute("UserVO") != null) {
  %>
-							<%
-								if (request.getSession().getAttribute("UserVO") != null) {
-							%>
 							<div class="account_menu_list">
 
 								<div class="account_single_item">
@@ -110,7 +114,7 @@
 									<a href="checkoutAll.do">结账</a>
 								</div>
 								<%
-									} 
+									}
 								%>
 							</div></li>
 					</ul>
@@ -140,7 +144,8 @@
 									<div class="single_megamenu">
 										<!-- 大标签的循环输出 -->
 										<h2>
-											<a href="showShop.do?op=tag&clothesbigtag=${bigtag.clothesbigtag }">${bigtag.clothesbigtag }</a>&nbsp;&nbsp;&nbsp;
+											<a
+												href="showShop.do?op=tag&clothesbigtag=${bigtag.clothesbigtag }">${bigtag.clothesbigtag }</a>&nbsp;&nbsp;&nbsp;
 										</h2>
 									</div>
 								</c:forEach>
@@ -153,7 +158,8 @@
 										<div class="single_megamenu">
 											<!-- 大标签的循环输出 -->
 											<h2>
-												<a href="showShop.do?op=brand&clothesbrand=${brand.clothesbrand}">${brand.clothesbrand }</a>
+												<a
+													href="showShop.do?op=brand&clothesbrand=${brand.clothesbrand}">${brand.clothesbrand }</a>
 											</h2>
 										</div>
 									</c:if>
@@ -162,19 +168,6 @@
 								<h2 align="left">......</h2>
 							</div></li>
 
-						<%-- <%
-										if (session.getAttribute("clothesbrand") != null) {
-									%>
-									<c:forEach items="${clothesbrand }" var="brand">
-										<h2>
-											<i class="fa fa-angle-right"></i><a
-												href="showShop.do?op=brand&clothesbrand=${brand.clothesbrand}">${brand.clothesbrand}</a>
-										</h2>
-									</c:forEach>
-									<%
-										}
-									%> --%>
-
 						<li><a><span class="Clothings">款式</span></a>
 							<div class="mega_menu_list">
 								<c:forEach items="${typename}" var="typename" varStatus="status">
@@ -182,7 +175,8 @@
 										<div class="single_megamenu">
 											<!-- 大标签的循环输出 -->
 											<h2>
-												<a href="showShop.do?op=type&clothestype=${typename.typename }">${typename.typename }</a>&nbsp;&nbsp;&nbsp;
+												<a
+													href="showShop.do?op=type&clothestype=${typename.typename }">${typename.typename }</a>&nbsp;&nbsp;&nbsp;
 											</h2>
 										</div>
 									</c:if>
@@ -204,10 +198,8 @@
 						<li><a href="about-us.jsp"><span class="Accessaries">帮助</span></a>
 							<div class="home_mega_menu">
 
-								<a href="seeorder.do">我的订单</a> 
-								<a href="showCart.do">购物车</a>
-                                <a href="about-us.jsp">关于我们</a>
-								<a href="contact.jsp">联系我们</a>
+								<a href="seeorder.do">我的订单</a> <a href="showCart.do">购物车</a> <a
+									href="about-us.jsp">关于我们</a> <a href="contact.jsp">联系我们</a>
 							</div></li>
 					</ul>
 				</div>
