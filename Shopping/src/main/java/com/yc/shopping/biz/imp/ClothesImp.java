@@ -365,22 +365,22 @@ public class ClothesImp implements ClothesInterface {
 	 * @param value
 	 */
 	@Override
-	public List<ClothesVO> clothesType(String value) {
+	public List<Map<String, String>> clothesType(String value) {
 		return cDao.clothesType(value);
 	}
 
 	@Override
-	public List<ClothesVO> clothesBigTag(String value) {
+	public List<Map<String, String>> clothesBigTag(String value) {
 		return cDao.clothesBigTag(value);
 	}
 
 	@Override
-	public List<ClothesVO> clothesName(String value) {
+	public List<Map<String, String>> clothesName(String value) {
 		return cDao.clothesbrand(value);
 	}
 
 	@Override
-	public List<ClothesVO> clothesBrand(String value) {
+	public List<Map<String, String>> clothesBrand(String value) {
 		return cDao.clothesname(value);
 	}
 

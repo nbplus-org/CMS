@@ -326,7 +326,7 @@
 										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 											<div class="product_list">
 												<div class="single_product repomsive_768">
-													<a href="check.do?clothesid=${s.clothesid}" target="main"><img src="${s.brandpic}" alt="" /></a>
+													<a href="check.do?clothesid=${s.clothesid}" target="main"><img src="${s.clothespic}" alt="" /></a>
 													<div class="product_details">
 														<h2 class="icoFontlist" title="${s.clothesname}">${s.clothesname}</h2>
 														<p><span class="regular_price">￥${s.clothesorigprice }</span> <span class="popular_price">￥${s.clothesprice }</span></p>

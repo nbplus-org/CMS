@@ -276,10 +276,10 @@ public interface ClothesInterface {
 	 * @param model
 	 * @param value
 	 */
-	List<ClothesVO> clothesType(String value);
-	List<ClothesVO> clothesBigTag(String value);
-	List<ClothesVO> clothesBrand(String value);
-	List<ClothesVO> clothesName(String value);
+	List<Map<String, String>> clothesType(String value);
+	List<Map<String, String>> clothesBigTag(String value);
+	List<Map<String, String>> clothesBrand(String value);
+	List<Map<String, String>> clothesName(String value);
 	/**
 	 * 根据服装名查询服装表是否与此数据
 	 * @param clothesname
