@@ -234,7 +234,7 @@ public interface ClothesDao {
 	 * @param rows
 	 * @return
 	 */
-	@Select("select * from clothesvo a,clothdetailvo b where a.clothesid=b.clothesid AND brandpic=#{brandpic} GROUP BY clothesname order by clothesname LIMIT #{pages},#{rows}")
+	@Select("select DISTINCT * from clothesvo a,clothdetailvo b where a.clothesid=b.clothesid AND brandpic=#{brandpic} GROUP BY clothesname order by clothesname LIMIT #{pages},#{rows}")
 	List<Map<String, Object>> searchBybrandpic(@Param("brandpic")String brandpic,@Param("pages")Integer pages,@Param("rows")Integer rows);
 	
 	/**
