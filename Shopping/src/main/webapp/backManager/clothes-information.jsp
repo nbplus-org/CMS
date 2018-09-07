@@ -37,7 +37,7 @@
 					<td width="10%" class="mian_b_bg_lm"><span></span>服装品牌</td>
 					<td width="8%" class="mian_b_bg_lm"><span></span>服装类型</td>
 					<td width="12%" class="mian_b_bg_lm"><span></span>服装标签</td>
-					<td width="8%" class="mian_b_bg_lm"><span></span>图片</td>
+					<td width="8%" class="mian_b_bg_lm"><span></span>品牌图片</td>
 					<td width="12%" class="mian_b_bg_lm"><span></span>描述</td>
 					<td class="mian_b_bg_lm"><span></span>操作</td>
 				</tr>

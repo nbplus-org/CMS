@@ -586,16 +586,6 @@ public class ClothesAction {
 		ClothesVO clothes=new ClothesVO();
 		clothes.setAid(Integer.parseInt(aid));
 		clothes.setClothesid(Integer.parseInt(clothesid));
-		System.out.println("============================"+clothes.getAid());
-		System.out.println("============================"+clothes.getClothesid());
-		System.out.println("============================"+srcpic);
-		System.out.println("============================"+clothesname);
-		System.out.println("============================"+clothesbrand);
-		System.out.println("============================"+clothesintroduce);
-		System.out.println("============================"+clothestype);
-		System.out.println("============================"+clothesbigtag);
-		System.out.println("============================"+clothesorigprice);
-		System.out.println("============================"+clothesprice);
 		clothes.setClothesname(clothesname);
 		clothes.setClothesbrand(clothesbrand);
 		clothes.setClothesname(clothesname);
@@ -675,9 +665,9 @@ public class ClothesAction {
 							if (!file2.isEmpty()) {
 								String filename = file2.getOriginalFilename();
 								if (clothesVO.getClothesbigtag().equals("男装")) {
-									clothesDetailVO.setClothespic("img/menswear/shirt/" + filename);
+									clothesDetailVO.setClothespic("upload/"+filename);
 									File f2 = new File(
-											"C:/Users/Administrator/Desktop/Shopping/src/main/webapp/img/menswear/shirt/" + filename);
+											"C:/Users/Administrator/Desktop/Shopping/src/main/webapp/upload/" + filename);
 									// 上传
 									if (!f2.exists()) {
 										file2.transferTo(f2);
@@ -689,9 +679,9 @@ public class ClothesAction {
 										System.out.println("服装详情插入成功");
 									}
 								} else if (clothesVO.getClothesbigtag().equals("女装")) {
-									clothesDetailVO.setClothespic("img/womenswear/dress/" + filename);
+									clothesDetailVO.setClothespic("upload/"+filename);
 									File f2 = new File(
-											"C:/Users/Administrator/Desktop/Shopping/src/main/webapp/img/womenswear/dress/" + filename);
+											"C:/Users/Administrator/Desktop/Shopping/src/main/webapp/upload/" + filename);
 									// 上传
 									if (!f2.exists()) {
 										file2.transferTo(f2);
@@ -703,9 +693,9 @@ public class ClothesAction {
 										System.out.println("服装详情插入成功");
 									}
 								} else if (clothesVO.getClothesbigtag().equals("鞋子")) {
-									clothesDetailVO.setClothespic("img/menswear/shoes/" + filename);
+									clothesDetailVO.setClothespic("upload/"+filename);
 									File f2 = new File(
-											"C:/Users/Administrator/Desktop/Shopping/src/main/webapp/img/menswear/shoes/" + filename);
+											"C:/Users/Administrator/Desktop/Shopping/src/main/webapp/upload/" + filename);
 									// 上传
 									if (!f2.exists()) {
 										file2.transferTo(f2);
@@ -717,9 +707,9 @@ public class ClothesAction {
 										System.out.println("服装详情插入成功");
 									}
 								} else if(clothesVO.getClothesbigtag().equals("包包")){
-									clothesDetailVO.setClothespic("img/womenswear/bags/" + filename);
+									clothesDetailVO.setClothespic("upload/"+filename);
 									File f2 = new File(
-											"C:/Users/Administrator/Desktop/Shopping/src/main/webapp/img/womenswear/bags/" + filename);
+											"C:/Users/Administrator/Desktop/Shopping/src/main/webapp/upload/" + filename);
 									// 上传
 									if (!f2.exists()) {
 										file2.transferTo(f2);
@@ -731,7 +721,7 @@ public class ClothesAction {
 										System.out.println("服装详情插入成功");
 									}
 								}else{
-									clothesDetailVO.setClothespic(filename);
+									clothesDetailVO.setClothespic("upload/"+filename);
 									File f2 = new File(
 											"C:/Users/Administrator/Desktop/Shopping/src/main/webapp/upload/" + filename);
 									// 上传
@@ -764,9 +754,9 @@ public class ClothesAction {
 						if (!file2.isEmpty()) {
 							String filename = file2.getOriginalFilename();
 							if (clothesVO.getClothesbigtag().equals("男装")) {
-								clothesDetailVO.setClothespic("img/menswear/shirt/" + filename);
+								clothesDetailVO.setClothespic("upload/"+filename);
 								File f2 = new File(
-										"C:/Users/Administrator/Desktop/Shopping/src/main/webapp/img/menswear/shirt/" + filename);
+										"C:/Users/Administrator/Desktop/Shopping/src/main/webapp/upload/" + filename);
 								// 上传
 								if (!f2.exists()) {
 									file2.transferTo(f2);
@@ -778,9 +768,9 @@ public class ClothesAction {
 									System.out.println("服装详情插入成功");
 								}
 							} else if (clothesVO.getClothesbigtag().equals("女装")) {
-								clothesDetailVO.setClothespic("img/womenswear/dress/" + filename);
+								clothesDetailVO.setClothespic("upload/"+filename);
 								File f2 = new File(
-										"C:/Users/Administrator/Desktop/Shopping/src/main/webapp/img/womenswear/dress/" + filename);
+										"C:/Users/Administrator/Desktop/Shopping/src/main/webapp/upload/" + filename);
 								// 上传
 								if (!f2.exists()) {
 									file2.transferTo(f2);
@@ -792,9 +782,9 @@ public class ClothesAction {
 									System.out.println("服装详情插入成功");
 								}
 							} else if (clothesVO.getClothesbigtag().equals("鞋子")) {
-								clothesDetailVO.setClothespic("img/menswear/shoes/" + filename);
+								clothesDetailVO.setClothespic("upload/"+filename);
 								File f2 = new File(
-										"C:/Users/Administrator/Desktop/Shopping/src/main/webapp/img/menswear/shoes/" + filename);
+										"C:/Users/Administrator/Desktop/Shopping/src/main/webapp/upload/" + filename);
 								// 上传
 								if (!f2.exists()) {
 									file2.transferTo(f2);
@@ -806,9 +796,9 @@ public class ClothesAction {
 									System.out.println("服装详情插入成功");
 								}
 							} else if(clothesVO.getClothesbigtag().equals("包包")){
-								clothesDetailVO.setClothespic("img/womenswear/bags/" + filename);
+								clothesDetailVO.setClothespic("upload/"+filename);
 								File f2 = new File(
-										"C:/Users/Administrator/Desktop/Shopping/src/main/webapp/img/womenswear/bags/" + filename);
+										"C:/Users/Administrator/Desktop/Shopping/src/main/webapp/upload/" + filename);
 								// 上传
 								if (!f2.exists()) {
 									file2.transferTo(f2);
@@ -820,7 +810,7 @@ public class ClothesAction {
 									System.out.println("服装详情插入成功");
 								}
 							}else{
-								clothesDetailVO.setClothespic( filename);
+								clothesDetailVO.setClothespic("upload/"+filename);
 								File f2 = new File(
 										"C:/Users/Administrator/Desktop/Shopping/src/main/webapp/upload/" + filename);
 								// 上传
@@ -840,8 +830,8 @@ public class ClothesAction {
 					if (!file2.isEmpty()) {
 						String filename = file2.getOriginalFilename();
 
-						clothesDetailVO.setClothespic("img/womenswear/bags/" + filename);
-						File f2 = new File("E:/Git/CMS/Shopping/src/main/webapp/img/womenswear/bags/" + filename);
+						clothesDetailVO.setClothespic("upload/"+filename);
+						File f2 = new File("C:/Users/Administrator/Desktop/Shopping/src/main/webapp/upload/" + filename);
 						// 上传
 						if (!f2.exists()) {
 							file2.transferTo(f2);
@@ -863,35 +853,35 @@ public class ClothesAction {
 					String filename = file1.getOriginalFilename();
 
 					if (clothesVO.getClothesbigtag().equals("男装")) {
-						clothesVO.setBrandpic("img/menswear/shirt/" + filename);
-						File f1 = new File("C:/Users/Administrator/Desktop/Shopping/src/main/webapp/img/menswear/shirt/" + filename);
+						clothesVO.setBrandpic("img/other/"+filename);
+						File f1 = new File("C:/Users/Administrator/Desktop/Shopping/src/main/webapp/upload/" + filename);
 						// 上传
 						if (!f1.exists()) {
 							file1.transferTo(f1);
 						}
 					} else if (clothesVO.getClothesbigtag().equals("女装")) {
-						clothesVO.setBrandpic("img/womenswear/dress/" + filename);
-						File f1 = new File("C:/Users/Administrator/Desktop/Shopping/src/main/webapp/img/womenswear/dress/" + filename);
+						clothesVO.setBrandpic("img/other/"+filename);
+						File f1 = new File("C:/Users/Administrator/Desktop/Shopping/src/main/webapp/upload/" + filename);
 						// 上传
 						if (!f1.exists()) {
 							file1.transferTo(f1);
 						}
 					} else if (clothesVO.getClothesbigtag().equals("鞋子")) {
-						clothesVO.setBrandpic("img/menswear/shoes/" + filename);
-						File f1 = new File("C:/Users/Administrator/Desktop/Shopping/src/main/webapp/img/menswear/shoes/" + filename);
+						clothesVO.setBrandpic("img/other/"+filename);
+						File f1 = new File("C:/Users/Administrator/Desktop/Shopping/src/main/webapp/upload/" + filename);
 						// 上传
 						if (!f1.exists()) {
 							file1.transferTo(f1);
 						}
 					} else if(clothesVO.getClothesbigtag().equals("包包")){
-						clothesVO.setBrandpic("img/womenswear/bags/" + filename);
-						File f1 = new File("C:/Users/Administrator/Desktop/Shopping/src/main/webapp/img/womenswear/bags/" + filename);
+						clothesVO.setBrandpic("img/other/"+filename);
+						File f1 = new File("C:/Users/Administrator/Desktop/Shopping/src/main/webapp/upload/" + filename);
 						// 上传
 						if (!f1.exists()) {
 							file1.transferTo(f1);
 						}
 					}else{
-						clothesVO.setBrandpic(filename);
+						clothesVO.setBrandpic("img/other/"+filename);
 						File f1 = new File("C:/Users/Administrator/Desktop/Shopping/src/main/webapp/upload/" + filename);
 						// 上传
 						if (!f1.exists()) {
@@ -904,35 +894,35 @@ public class ClothesAction {
 					String filename = file2.getOriginalFilename();
 
 					if (clothesVO.getClothesbigtag().equals("男装")) {
-						clothesDetailVO.setClothespic("img/menswear/shirt/" + filename);
-						File f2 = new File("C:/Users/Administrator/Desktop/Shopping/src/main/webapp/img/menswear/shirt/" + filename);
+						clothesDetailVO.setClothespic("upload/"+filename);
+						File f2 = new File("C:/Users/Administrator/Desktop/Shopping/src/main/webapp/upload/" + filename);
 						// 上传
 						if (!f2.exists()) {
 							file2.transferTo(f2);
 						}
 					} else if (clothesVO.getClothesbigtag().equals("女装")) {
-						clothesDetailVO.setClothespic("img/womenswear/dress/" + filename);
-						File f2 = new File("C:/Users/Administrator/Desktop/Shopping/src/main/webapp/img/womenswear/dress/" + filename);
+						clothesDetailVO.setClothespic("upload/"+filename);
+						File f2 = new File("C:/Users/Administrator/Desktop/Shopping/src/main/webapp/upload/" + filename);
 						// 上传
 						if (!f2.exists()) {
 							file2.transferTo(f2);
 						}
 					} else if (clothesVO.getClothesbigtag().equals("鞋子")) {
-						clothesDetailVO.setClothespic("img/menswear/shoes/" + filename);
-						File f2 = new File("C:/Users/Administrator/Desktop/Shopping/src/main/webapp/img/menswear/shoes/" + filename);
+						clothesDetailVO.setClothespic("upload/"+filename);
+						File f2 = new File("C:/Users/Administrator/Desktop/Shopping/src/main/webapp/upload/" + filename);
 						// 上传
 						if (!f2.exists()) {
 							file2.transferTo(f2);
 						}
 					} else if(clothesVO.getClothesbigtag().equals("包包")){
-						clothesDetailVO.setClothespic("img/womenswear/bags/" + filename);
-						File f2 = new File("C:/Users/Administrator/Desktop/Shopping/src/main/webapp/img/womenswear/bags/" + filename);
+						clothesDetailVO.setClothespic("upload/"+filename);
+						File f2 = new File("C:/Users/Administrator/Desktop/Shopping/src/main/webapp/upload/" + filename);
 						// 上传
 						if (!f2.exists()) {
 							file2.transferTo(f2);
 						}
 					}else{
-						clothesDetailVO.setClothespic(filename);
+						clothesDetailVO.setClothespic("upload/"+filename);
 						File f2 = new File("C:/Users/Administrator/Desktop/Shopping/src/main/webapp/upload/" + filename);
 						// 上传
 						if (!f2.exists()) {

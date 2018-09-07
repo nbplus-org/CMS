@@ -65,7 +65,24 @@
       		 }
            	 
          }
-
+	
+         //onchang事件，显示图片
+         function showBrandPic1(){
+        	var value = $("#file1").val();
+     		var picDir = value.substring(value.lastIndexOf("\\") + 1);
+     		$("#showBrandPic").show();
+     		$("#showBrandPic").attr('src', "../upload/" + picDir);
+     		alert(showBrandPic.src);
+         }
+         
+         function showClothesPic2(){
+         	var value = $("#file2").val();
+      		var picDir = value.substring(value.lastIndexOf("\\") + 1);
+      		$("#showClothesPic").show();
+      		$("#showClothesPic").attr('src', "../upload/" + picDir);
+      		alert(showClothesPic.src);
+          }
+         
 </script>
 </head>
 <body class="mian_bj" onload="come()">
@@ -87,14 +104,14 @@
 				class="mian_b_bg_xz">
 				<tr>
 					<td width="5%" class="mian_b_bg_lm">&nbsp;</td>
-					<td colspan="4" class="mian_b_bg_lm">添加服装</td>
+					<td colspan="5" class="mian_b_bg_lm">添加服装</td>
 				</tr>
 				<tr>
 					<td>&nbsp;</td>
 					<td width="10%" valign="top">服装名称：</td>
 					<td width="30%"><input type="text" class="input_01"
 						name="clothesname"  /></td>
-					<td width="40%">&nbsp;</td>
+					<td width="10%">&nbsp;</td>
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
@@ -102,7 +119,9 @@
 					<td valign="top">服装品牌：</td>
 					<td width="30%"><input type="text" class="input_01"
 						name="clothesbrand" /></td>
-					<td width="40%">&nbsp;</td>
+					<td width="20%">&nbsp;</td>
+					<td rowspan="5"><img src="../"
+						width="150px" height="150px" id="showBrandPic" name="showBrandPic" style="display: none;"/></td>
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
@@ -112,8 +131,8 @@
 					<td valign="top">服装标签：</td>
 					<td><input type="text" class="input_01" name="clothesbigtag"
 						 /></td>
-					<td name="brandpic" id="brandpic">品牌图片：<input type="file" name="file1" id="file1"
-					 accept="image/png, image/jpeg, image/gif, image/jpg"/></td>
+					<td  id="brandpic">品牌图片：<input type="file" name="file1" id="file1" onchange="showBrandPic1()"
+					 accept="image/png, image/jpeg, image/gif, image/jpg" /></td>
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
@@ -163,7 +182,9 @@
 					<td><input type="text" class="input_01" name="clothesorigprice"
 						 /></td>
 					<td name="clothespic" id="clothespic">服装图片：<input type="file" name="file2" id="file2"
-					 accept="image/png, image/jpeg, image/gif, image/jpg"/></td>
+					 accept="image/png, image/jpeg, image/gif, image/jpg" onchange="showClothesPic2()"/></td>
+					 <td rowspan="10"><img src="../"
+						width="150px" height="150px" id="showClothesPic" name="showClothesPic" style="display: none;"/></td>
 					<td>&nbsp;</td>
 				</tr>
 				<tr>
