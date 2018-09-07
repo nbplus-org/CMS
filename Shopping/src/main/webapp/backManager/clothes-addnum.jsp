@@ -13,25 +13,21 @@
 
 <script language="javascript" type="text/javascript">
 
-/*          function ajax(){
+         function ajax(){
         	 var clodetailid=$("#clodetailid").val();
         	 var stocknum=$("#stocknum").val();
-        	 alert(clodetailid+stocknum);
+        	 var clothesid=$("#clothesid").val();
         	  var data={
         			  clodetailid:clodetailid,
         			  stocknum:stocknum,
         	  };
         	 $.post("addStocknum.do",data,function(data){
-        		 if(data==0){
-    				 success();//成功弹窗
-
-        		 }else{
-        			 showAlert();
-        		 } 
+        		alert(data);
+        		window.location.href="clothesSchedule.do?clothesid="+clothesid;
         	 });
          }
          
-         //失败的弹窗
+       /*   //失败的弹窗
          function showAlert() {
              PostbirdAlertBox.alert({
                  'title': '提示',
@@ -47,7 +43,7 @@
          //成功提示框
      	function success(){
              $.message('操作成功');
-          } */
+          }  */
 </script>
 </head>
 <body class="mian_bj" onload="come()">
@@ -78,7 +74,7 @@
 						<td>&nbsp;</td>
 						<td valign="top">您需要增加的库存数：</td>
 						<td width="30%"><input type="text" class="input_01"
-							name="stocknum" id="stocknum"/></td>
+							name="stocknum" id="stocknum"/><input type="hidden" value="${clothesid }" id="clothesid"></input></td>
 						<td width="50%">&nbsp;</td>
 						<td>&nbsp;</td>
 					</tr>

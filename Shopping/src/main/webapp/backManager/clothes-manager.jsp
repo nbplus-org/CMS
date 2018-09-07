@@ -37,26 +37,29 @@
 			<div class="mian_b1">
 
 				 <p class="mian_b1_sousuo">
-					<input id="clothesname" type="text" placeholder="服装名称">
+					<input id="clothesname" type="text" placeholder="服装名称" value="${clothes.clothesname }"/>
 				</p>
 				<p class="mian_b1_sousuo">
-					<input id="clothesbrand" type="text" placeholder="服装品牌">
+					<input id="clothesbrand" type="text" placeholder="服装品牌" value="${clothes.clothesbrand }"/>
 				</p>
 				<p class="mian_b1_sousuo">
-					<input id="clothesbigtag" type="text" placeholder="服装类型">
+					<input id="clothesbigtag" type="text" placeholder="服装类型" value="${clothes.clothesbigtag }"/>
 				</p>
 				<p class="mian_b1_sousuo">
-					<input id="clothestype" type="text" placeholder="服装标签">
+					<input id="clothestype" type="text" placeholder="服装标签" value="${clothes.clothestype }"/>
 				</p>
 				<a onclick="conditionSelectClothes()" title="搜索">
 					<p class="mian_b1_a3"></p>
+				</a> 
+				<a href="selectAllClothes.do" title="搜索全部">
+				<p class="mian_b1_a3"></p>
 				</a> 
 			</div>
 			<table width="100%" border="0" cellpadding="0" cellspacing="0"
 				class="mian_b_bg">
 				<tr>
 					<td width="3%" class="mian_b_bg_lm"><input name=""
-						type="hidden" value="">&nbsp;&nbsp; </td>
+						type="hidden" value=""/>&nbsp;&nbsp; </td>
 					<td width="8%" class="mian_b_bg_lm"><span></span>订单编号</td>
 					<td width="10%" class="mian_b_bg_lm"><span></span>服装名称</td>
 					<td width="10%" class="mian_b_bg_lm"><span></span>服装品牌</td>
@@ -70,13 +73,13 @@
 				<!-- 循环得到服装 -->
 				<c:forEach items="${allClothes }" var="c">
 					<tr>
-						<td><input name="" type="checkbox" value="">&nbsp; </td>
+						<td><input name="" type="checkbox" value=""/>&nbsp; </td>
 						<td>${c.clothesid }</td>
 						<td>${c.clothesname }</td>
 						<td>${c.clothesbrand }</td>
 						<td>${c.clothesbigtag }</td>
 						<td>${c.clothestype }</td>
-						<td><img src="../${c. brandpic}" width="60px" 
+						<td><img src="../${c. clothespicture}" width="60px" 
 							height="50px" /></td>
 						<td>${c. clothesintroduce}</td>
 						<td width="8%">

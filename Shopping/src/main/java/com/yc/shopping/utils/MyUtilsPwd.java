@@ -12,10 +12,10 @@ import javax.mail.internet.MimeMessage;
 
 public class MyUtilsPwd {
 	// 设置谁发邮件 注意，不能用qq邮箱 ssl链接
-	public static String myEmailAccount = "zp1455665803@163.com";
+	public static String myEmailAcc = "15570921217@163.com";
 	// 这不是登录密码，是授权密码
-	public static String myEmailPassword = "zp1455665803";
-	public static String myEmailSMTPHost = "smtp.163.com";
+	public static String myEmailPwd = "1628443167hb";
+	public static String myEmailSMTP = "smtp.163.com";
 
 	// 邮件内容收件人邮箱
 	public void sendMail(String receiveMail, String md5Pwd) {
@@ -25,7 +25,7 @@ public class MyUtilsPwd {
 			// 1、创建参数配置，用于连接邮件服务器的参数配置
 			Properties props = new Properties(); // 参数配置
 			props.setProperty("mail.transport.protocol", "smtp");// 使用的协议（javaMail规范要求）
-			props.setProperty("mail.smtp.host", myEmailSMTPHost);// 发件人的邮箱的SMTP
+			props.setProperty("mail.smtp.host", myEmailSMTP);// 发件人的邮箱的SMTP
 																	// 服务器地址
 			props.setProperty("mail.smtp.auth", "true");// 需要请求认证
 			// 2、根据配置创建会话对象，用于和邮件服务器交互
@@ -33,7 +33,7 @@ public class MyUtilsPwd {
 			session.setDebug(false);
 			// 3、创建一封邮件
 			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(myEmailAccount, "nbsp购物系统", "UTF-8"));
+			message.setFrom(new InternetAddress(myEmailAcc, "nbsp购物系统", "UTF-8"));
 			message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(receiveMail, "用户", "UTF-8"));
 			message.setSubject("新密码", "UTF-8");
 			message.setContent("亲，您的新密码为：" + code + " ,请妥善保管好自己的密码，以防泄露信息哦。", "text/html;charset=UTF-8");
@@ -41,7 +41,7 @@ public class MyUtilsPwd {
 			message.saveChanges();
 			// 4、根据Session获取邮件传输对象
 			Transport transport = session.getTransport();
-			transport.connect(myEmailAccount, myEmailPassword);
+			transport.connect(myEmailAcc, myEmailPwd);
 			transport.sendMessage(message, message.getAllRecipients());
 			// 7、关闭连接
 			transport.close();

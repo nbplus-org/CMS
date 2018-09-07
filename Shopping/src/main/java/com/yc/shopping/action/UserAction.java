@@ -428,7 +428,7 @@ public class UserAction {
 	 * @return
 	 */
 	@RequestMapping("/backManager/resetPwd.do")
-	public String deleteUser(@RequestParam("ids") Object[] ids, Model model, HttpServletResponse response) {
+	public void deleteUser(@RequestParam("ids") Object[] ids, Model model, HttpServletResponse response) {
 
 		// 随机生成6位数的密码存入数据库并md5加密
 		Random r = new Random();
@@ -445,8 +445,11 @@ public class UserAction {
 			// 发送邮件的密码不能是加密的
 			mypwd.sendMail(uimp.selectEmailByUid(ids[id]), pwd);
 		}
-
-		return "backManager/user-manager";
+		try {
+			response.getWriter().print("重置密码成功");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -496,6 +499,21 @@ public class UserAction {
 	@RequestMapping(value = "/backManager/topSearch.do")
 	public String topSearch(UserVO user, Model model, @Param("page") String page) {
 
+		if(user.getUname()==null){
+			user.setUname("");
+		}
+		if(user.getUemail()==null){
+			user.setUemail("");
+		}
+		if(user.getUphone()==null){
+			user.setUphone("");
+		}
+		if(user.getUsex().equals("1")){
+			user.setUsex("男");
+		}else if(user.getUsex().equals("0")){
+			user.setUsex("女");
+		}
+		
 		if ("女".equals(user.getUsex())) {
 			user.setUsex("0");
 		} else if ("男".equals(user.getUsex())) {
@@ -503,7 +521,7 @@ public class UserAction {
 		} else {
 			user.setUsex("");
 		}
-
+		
 		// 每条页面显示数据条数pageSize
 		int pageSize = 5;
 		// 初始化默认为第一页
@@ -523,6 +541,7 @@ public class UserAction {
 		} else {
 			pageTimes = count / pageSize + 1;
 		}
+		model.addAttribute("user", user);
 		model.addAttribute("currentPage", Integer.parseInt(page));
 		model.addAttribute("pageTimes", pageTimes);
 		model.addAttribute("allUser", allUser);

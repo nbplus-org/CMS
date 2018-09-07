@@ -143,7 +143,7 @@ public interface ClothesInterface {
 	 * 查所有服装 huang(后台服装查询)
 	 * @return
 	 */
-	public List<ClothesVO> selectAllClothes(int startPage,int pageSize);
+	public List<Map<String,String>> selectAllClothes(int startPage,int pageSize);
 	
 	/**
 	 * 查分页总数count
@@ -157,7 +157,7 @@ public interface ClothesInterface {
 	 * @param pageSize
 	 * @return
 	 */
-	public List<ClothesVO> selectClothesByCondition(ClothesVO clothes,int startPage,int pageSize);
+	public List<Map<String, String>> selectClothesByCondition(ClothesVO clothes,int startPage,int pageSize);
 	
 	public int selectCountByCondition(ClothesVO clothes);
 	
@@ -167,7 +167,7 @@ public interface ClothesInterface {
 	 * @param clothesid
 	 * @return
 	 */
-	ClothesVO modifyOfSelect(int clothesid);
+	List<Map<String, String>> modifyOfSelect(String clothesid);
 	
 	int modifyClothes(ClothesVO clothes);
 	/**

@@ -61,11 +61,11 @@ public class CartAction {
     	model.addAttribute("clothespic", clothespic);
     	System.out.println(clothespic);
     			
-		List<ReviewVO> list4=rBiz.selectById(clothesid);
-		if(list4!=null){
+		List<Map<String, String>> list1=rBiz.selectById(clothesid);
+		if(list1!=null){
 			System.out.println("评论表有数值");
-			model.addAttribute("list4", list4);
-			request.getSession().setAttribute("list4", list4);
+			model.addAttribute("review", list1);
+			request.getSession().setAttribute("list4", list1);
 		};
 		model.addAttribute("clothesid", clothesid);
 		return "product";	
@@ -385,7 +385,7 @@ public class CartAction {
     	model.addAttribute("clothespic", clothespic);
     	System.out.println(clothespic);
     	
-		List<ReviewVO> list4=rBiz.selectById(clothDetailVO.getClothesid());
+		List<Map<String, String>> list4=rBiz.selectById(clothDetailVO.getClothesid());
 		if(list4!=null){
 			System.out.println("评论表有数值");
 			model.addAttribute("list4", list4);

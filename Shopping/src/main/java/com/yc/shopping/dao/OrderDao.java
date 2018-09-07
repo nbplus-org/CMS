@@ -190,7 +190,7 @@ public interface OrderDao {
 	 * @param orderid
 	 * @return
 	 */
-	@Update("update ordervo set orderstatus = '1' ,aid= where orderid=#{orderid}")
+	@Update("update ordervo set orderstatus = '1' ,aid= #{aid} where orderid=#{orderid}")
 	int updateStatus(@Param("orderid") int orderid, @Param("aid") int aid);
 	
 	/**

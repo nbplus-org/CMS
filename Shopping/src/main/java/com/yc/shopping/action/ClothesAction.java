@@ -2,6 +2,7 @@ package com.yc.shopping.action;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -495,7 +496,7 @@ public class ClothesAction {
 		// 从第几条开始
 		int startPage = (Integer.parseInt(page) - 1) * pageSize;
 
-		List<ClothesVO> allClothes = cBiz.selectAllClothes(startPage, pageSize);
+		List<Map<String, String>> allClothes = cBiz.selectAllClothes(startPage, pageSize);
 
 		// 查询总页数
 		int count = cBiz.selectAllCount();
@@ -541,7 +542,7 @@ public class ClothesAction {
 		}
 		// 从第几条开始
 		int startPage = (Integer.parseInt(page) - 1) * pageSize;
-		List<ClothesVO> allClothes = cBiz.selectClothesByCondition(clothes, startPage, pageSize);
+		List<Map<String, String>> allClothes = cBiz.selectClothesByCondition(clothes, startPage, pageSize);
 
 		// 查询总页数
 		int count = cBiz.selectCountByCondition(clothes);
@@ -566,8 +567,10 @@ public class ClothesAction {
 	 * @return
 	 */
 	@RequestMapping("/backManager/clothes-modify.do")
-	public String clothesModify(Model model, @Param("clothedid") String clothesid) {
-		model.addAttribute("clothesMsg", cBiz.modifyOfSelect(Integer.parseInt(clothesid)));
+	public String clothesModify(Model model, @Param("clothesid") String clothesid) {
+		System.out.println("============clothes-modify.do=================");
+		model.addAttribute("clothesMsg", cBiz.modifyOfSelect(clothesid));
+		System.out.println("==============报错=======================");
 		return "backManager/clothes-modify";
 	}
 
@@ -579,35 +582,62 @@ public class ClothesAction {
 	 * @throws IllegalStateException
 	 * @throws IOException
 	 */
-	@RequestMapping(value = "/backManager/springUpload.do", method = RequestMethod.POST)
-	public String springUpload(HttpServletRequest request, Model model, @Param("clothedid") String clothesid,
-			@Param("aid") String aid, ClothesVO clothes, @Param("file") MultipartFile file)
+	@RequestMapping(value = "/backManager/springUpload.do" ,method=RequestMethod.POST)
+	public void springUpload(HttpServletRequest request, HttpServletResponse response,Model model, @Param("clothesid") String clothesid,
+			@Param("aid") String aid, @Param("srcpic")String srcpic,@Param("clothesname")String clothesname,
+			@Param("clothesbrand")String clothesbrand,@Param("clothesintroduce")String clothesintroduce,@Param("clothestype")String clothestype,
+			@Param("clothesbigtag")String clothesbigtag,@Param("clothesorigprice")String clothesorigprice,@Param("clothesprice")String clothesprice)
 			throws IllegalStateException, IOException {
 		if (aid == "" || aid == null) {
 			aid = "1";
 		}
+		ClothesVO clothes=new ClothesVO();
 		clothes.setAid(Integer.parseInt(aid));
 		clothes.setClothesid(Integer.parseInt(clothesid));
-
+		System.out.println("============================"+clothes.getAid());
+		System.out.println("============================"+clothes.getClothesid());
+		System.out.println("============================"+srcpic);
+		System.out.println("============================"+clothesname);
+		System.out.println("============================"+clothesbrand);
+		System.out.println("============================"+clothesintroduce);
+		System.out.println("============================"+clothestype);
+		System.out.println("============================"+clothesbigtag);
+		System.out.println("============================"+clothesorigprice);
+		System.out.println("============================"+clothesprice);
+		clothes.setClothesname(clothesname);
+		clothes.setClothesbrand(clothesbrand);
+		clothes.setClothesname(clothesname);
+		clothes.setClothesintroduce(clothesintroduce);
+		clothes.setClothestype(clothestype);
+		clothes.setClothesbigtag(clothesbigtag);
+		clothes.setClothesorigprice(Double.parseDouble(clothesorigprice));
+		clothes.setClothesprice(Double.parseDouble(clothesprice));
+		
 		/* clothes.setAid(Integer.parseInt(aid)); */
-		// 一次遍历所有文件
+		/*// 一次遍历所有文件
 		if (!file.isEmpty()) {
 			String filename = file.getOriginalFilename();
-			clothes.setBrandpic(filename);
-			File f = new File("F:/git/CMS/CMS/Shopping/src/main/webapp/upload/" + filename);
+			clothes.setBrandpic("img/brandlog/"+filename);
+			System.out.println("=======filename=========="+filename);
+			File f = new File("F:/giit/CMS/Shopping/src/main/webapp/img/brandlog/" + filename);
 			// 上传
 			if (!f.exists()) {
 				file.transferTo(f);
 			}
-			int result = cBiz.modifyClothes(clothes);
-			if (result > 0) {
-				model.addAttribute("success", "修改成功");
-			} else {
-				model.addAttribute("failure", "修改失败");
-			}
+		}else{
+				
+		}*/
+		
+		String clothespic=srcpic;
+		System.out.println("========clothespic============="+clothespic);
+		clothes.setClothespicture(clothespic);
+		int result = cBiz.modifyClothes(clothes);
+		if (result > 0) {
+			response.getWriter().print("修改成功");
+		} else {
+			response.getWriter().print("修改失败");
 		}
-		model.addAttribute("clothesMsg", cBiz.modifyOfSelect(Integer.parseInt(clothesid)));
-		return "backManager/clothes-modify";
+		model.addAttribute("clothesMsg", cBiz.modifyOfSelect(clothesid));
 	}
 
 	/**
@@ -1002,9 +1032,9 @@ public class ClothesAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/backManager/addNum.do")
-	public String addNum(Integer clodetailid, Model model) {
+	public String addNum(Integer clodetailid, Model model,Integer clothesid) {
 		model.addAttribute("clodetailid", clodetailid);
-
+		model.addAttribute("clothesid", clothesid);
 		return "backManager/clothes-addnum";
 	}
 
@@ -1017,14 +1047,22 @@ public class ClothesAction {
 	 * @return
 	 */
 	@RequestMapping(value = "/backManager/addStocknum.do", method = RequestMethod.POST)
-	public String addStocknum(Model model, Integer clodetailid, Integer stocknum, HttpServletResponse response) {
+	public void addStocknum(Model model, Integer clodetailid, Integer stocknum, HttpServletResponse response) {
 		int result = cBiz.updateStocknum(stocknum, clodetailid);
+		System.out.println("===============result============"+result);
 		if (result > 0) {
-			System.out.println("修改成功");
+			try {
+				response.getWriter().print("添加成功");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		} else {
-			System.out.println("修改失败");
+			try {
+				response.getWriter().print("添加成功");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-		return "redirect:clothesAll.do";
 	}
 
 

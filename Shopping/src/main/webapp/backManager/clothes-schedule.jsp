@@ -55,7 +55,7 @@
 						<td>${c. clothesintroduce}</td>
 						<td width="8%">
 							<div class="mian_b_icon_04">
-								<a href="addNum.do?clodetailid=${c.clodetailid }">添加库存</a>
+								<a href="addNum.do?clodetailid=${c.clodetailid }&clothesid=${c.clothesid}">添加库存</a>
 							</div>
 						</td>
 					</tr>

@@ -442,5 +442,27 @@ public class OrderAction {
 		}
 
 	}
-
+	@RequestMapping("backManager/updateStatus.do")
+	public void updateStatus(@Param("orderid")String orderid,@Param("aid")String aid ,HttpServletResponse response){
+		System.out.println("==================发货===================");
+		if(aid==null){
+			aid="1";
+		}
+		int result=orderimp.updateStatus(Integer.parseInt(orderid), Integer.parseInt(aid));
+		if(result>0){
+			try {
+				response.getWriter().print("已发货");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else{
+			try {
+				response.getWriter().print("发货失败,请检查是否还有库存");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
 }

@@ -1,8 +1,7 @@
 package com.yc.shopping.biz;
 
 import java.util.List;
-
-import com.yc.shopping.vo.ReviewVO;
+import java.util.Map;
 
 public interface ReviewInterface {	
 	/**
@@ -12,5 +11,5 @@ public interface ReviewInterface {
 	 * 
 	 * liu
 	 */
-	public List<ReviewVO> selectById(Integer clothesid);
+	public List<Map<String,String>> selectById(Integer clothesid);
 }

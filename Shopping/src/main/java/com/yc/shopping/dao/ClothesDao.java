@@ -172,8 +172,8 @@ public interface ClothesDao {
 	 * 
 	 * @return
 	 */
-	@Select("select * from clothesvo limit #{startPage},#{pageSize}")
-	List<ClothesVO> selectAllClothes(@Param("startPage") int startPage, @Param("pageSize") int pageSize);
+	@Select("select * from clothesvo c,clothdetailvo cd where c.clothesid=cd.clothesid group by c.clothesid limit #{startPage},#{pageSize}")
+	List<Map<String,String>> selectAllClothes(@Param("startPage") int startPage, @Param("pageSize") int pageSize);
 
 	/**
 	 * 查分页总数count
@@ -186,11 +186,11 @@ public interface ClothesDao {
 	 * 
 	 * @return
 	 */
-	@Select("select * from clothesvo where clothesname like concat('%',#{clothes.clothesname},'%') and "
-			+ "clothesbrand like concat('%',#{clothes.clothesbrand},'%') and "
-			+ "clothesbigtag like concat('%',#{clothes.clothesbigtag},'%') and "
-			+ "clothestype like concat('%',#{clothes.clothestype},'%') limit #{startPage},#{pageSize}")
-	List<ClothesVO> selectClothesByCondition(@Param("clothes") ClothesVO clothes, @Param("startPage") int startPage,
+	@Select("select * from clothesvo c,clothdetailvo cd where c.clothesname like concat('%',#{clothes.clothesname},'%') and "
+			+ "c.clothesbrand like concat('%',#{clothes.clothesbrand},'%') and "
+			+ "c.clothesbigtag like concat('%',#{clothes.clothesbigtag},'%') and "
+			+ "c.clothestype like concat('%',#{clothes.clothestype},'%') and c.clothesid= cd.clothesid group by c.clothesid limit #{startPage},#{pageSize}")
+	List<Map<String, String>> selectClothesByCondition(@Param("clothes") ClothesVO clothes, @Param("startPage") int startPage,
 			@Param("pageSize") int pageSize);
 
 	@Select("select count(*) from clothesvo where clothesname like concat('%',#{clothesname},'%') and "
@@ -205,8 +205,8 @@ public interface ClothesDao {
 	 * @param clothesid
 	 * @return
 	 */
-	@Select("select * from clothesvo where clothesid=#{clothesid}")
-	ClothesVO modifyOfSelect(int clothesid);
+	@Select("select * from clothesvo c,clothdetailvo cd where c.clothesid=cd.clothesid and c.clothesid=#{clothesid} group by c.clothesid")
+	 List<Map<String,String>> modifyOfSelect(String clothesid);
 
 	/**
 	 * 修改服装信息之 修改服装信息s
@@ -214,11 +214,11 @@ public interface ClothesDao {
 	 * @param clothes
 	 * @return
 	 */
-	@Update("update clothesvo set aid =#{clothes.clothesid} , clothesname=#{clothes.clothesname} , clothestype=#{clothes.clothestype} "
-			+ ", clothesbigtag=#{clothes.clothesbigtag} , clothesbrand=#{clothes.clothesbrand} , brandpic=#{clothes.brandpic} "
-			+ ", clothesintroduce=#{clothes.clothesintroduce} , clothesorigprice=#{clothes.clothesorigprice} "
-			+ ", clothesprice=#{clothes.clothesprice} where clothesid=#{clothes.clothesid}")
-	int modifyClothes(@Param("clothes") ClothesVO clothes);
+	@Update("update clothesvo set aid =#{aid} , clothesname=#{clothesname} , clothestype=#{clothestype} "
+			+ ", clothesbigtag=#{clothesbigtag} , clothesbrand=#{clothesbrand} , clothespicture=#{clothespicture} "
+			+ ", clothesintroduce=#{clothesintroduce} , clothesorigprice=#{clothesorigprice} "
+			+ ", clothesprice=#{clothesprice} where clothesid=#{clothesid}")
+	int modifyClothes(ClothesVO clothes);
 	
 	/**
 	 * 查询品牌图片

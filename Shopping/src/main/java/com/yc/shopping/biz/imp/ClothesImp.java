@@ -175,7 +175,7 @@ public class ClothesImp implements ClothesInterface {
 	 * @return
 	 */
 	@Override
-	public List<ClothesVO> selectAllClothes(int startPage,int pageSize) {
+	public List<Map<String,String>> selectAllClothes(int startPage,int pageSize) {
 		return cDao.selectAllClothes(startPage, pageSize);
 	}
 	/**
@@ -187,7 +187,7 @@ public class ClothesImp implements ClothesInterface {
 	}
 
 	@Override
-	public List<ClothesVO> selectClothesByCondition(ClothesVO clothes, int startPage, int pageSize) {
+	public List<Map<String, String>> selectClothesByCondition(ClothesVO clothes, int startPage, int pageSize) {
 		return cDao.selectClothesByCondition(clothes, startPage, pageSize);
 	}
 	
@@ -202,7 +202,7 @@ public class ClothesImp implements ClothesInterface {
 	 * @return
 	 */
 	@Override
-	public ClothesVO modifyOfSelect(int clothesid) {
+	public List<Map<String, String>> modifyOfSelect(String clothesid) {
 		return cDao.modifyOfSelect(clothesid);
 	}
 

@@ -10,7 +10,17 @@
 
 <script language="javascript" type="text/javascript">
 	function sendout(orderid,aid){
-		window.location.href = "updateStatus.do?orderid="+orderid+"&aid="+aid;
+		$.post(
+			"updateStatus.do",
+			{
+				orderid:orderid,
+				aid:aid
+			},
+			function(data){
+				alert(data);
+				window.location.href="processOrder.do?orderid="+orderid;
+			}
+		);
 	}
 </script>
 </head>
@@ -68,19 +78,25 @@
 					<td valign="top">订单状态：<c:if
 							test="${OrderDetails[0].orderstatus ==-1}">
 							<input type="button" value="<c:out value="订单已取消"></c:out>" />
-							<input type="button" value="<c:out value="返回上一级"></c:out>" onclick="javascript:history.go(-1)"/>
+							<input type="button" value="<c:out value="返回上一级"></c:out>"
+								onclick="javascript:history.go(-1)" />
 						</c:if> <c:if test="${OrderDetails[0].orderstatus ==0}">
-							<input type="button" value="<c:out value="点击发货"></c:out>" onclick="sendout(${OrderDetails[0].orderid },${admin.aid })"/>
-							<input type="button" value="<c:out value="返回上一级"></c:out>" onclick="javascript:history.go(-1)"/>
+							<input type="button" value="<c:out value="点击发货"></c:out>"
+								onclick="sendout(${OrderDetails[0].orderid },${admin.aid })" />
+							<input type="button" value="<c:out value="返回上一级"></c:out>"
+								onclick="javascript:history.go(-1)" />
 						</c:if> <c:if test="${OrderDetails[0].orderstatus ==1}">
 							<input type="button" value="<c:out value="配送中"></c:out>" />
-							<input type="button" value="<c:out value="返回上一级"></c:out>" onclick="javascript:history.go(-1)"/>
+							<input type="button" value="<c:out value="返回上一级"></c:out>"
+								onclick="javascript:history.go(-1)" />
 						</c:if> <c:if test="${OrderDetails[0].orderstatus ==2}">
 							<input type="button" value="<c:out value="已收货"></c:out>" />
-							<input type="button" value="<c:out value="返回上一级"></c:out>" onclick="javascript:history.go(-1)"/>
+							<input type="button" value="<c:out value="返回上一级"></c:out>"
+								onclick="javascript:history.go(-1)" />
 						</c:if> <c:if test="${OrderDetails[0].orderstatus ==4}">
 							<input type="button" value="<c:out value="用户删除的订单"></c:out>" />
-							<input type="button" value="<c:out value="返回上一级"></c:out>" onclick="javascript:history.go(-1)"/>
+							<input type="button" value="<c:out value="返回上一级"></c:out>"
+								onclick="javascript:history.go(-1)" />
 						</c:if>
 					</td>
 					<td width="40%">&nbsp;</td>

@@ -1,11 +1,10 @@
 package com.yc.shopping.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
-
-import com.yc.shopping.vo.ReviewVO;
 
 @Repository("ReviewDao")
 public interface ReviewDao {	
@@ -14,6 +13,6 @@ public interface ReviewDao {
 	 * 
 	 * liu
 	 */
-	@Select("select *from reviewvo where clothesid=#{clothesid}")
-	List<ReviewVO> selectById(Integer clothesid);
+	@Select("select * from reviewvo r , uservo u where clothesid=#{clothesid} and r.uid=u.uid")
+	List<Map<String,String>> selectById(Integer clothesid);
 }

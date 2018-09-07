@@ -297,36 +297,6 @@
 								target="mainFrame" onmousedown="javascript:pr('xx5')"
 								onmouseover="show(5)" onmouseout="hidden1(5)"><span></span>
 									<p class="icon_05">报表管理</p> </a></li>
-							<li class="y_css" id="xx6"><a href="item/Item.html"
-								onclick="changeIcon('Item')" target="mainFrame"
-								onmousedown="javascript:pr('xx6')" onmouseover="show(6)"
-								onmouseout="hidden1(6)"><span></span>
-									<p class="icon_07">公告查看</p> </a></li>
-							<li class="y_css" id="xx7"><a href="#"
-								onclick="changeIcon('Count')" target="mainFrame"
-								onmousedown="javascript:pr('xx7')" onmouseover="show(7)"
-								onmouseout="hidden1(7)"><span></span>
-									<p class="icon_11">统计分析</p> </a></li>
-							<li class="y_css" id="xx8"><a href="xtsz/Branch.html"
-								onclick="changeIcon('System')" target="mainFrame"
-								onmousedown="javascript:pr('xx8')" onmouseover="show(8)"
-								onmouseout="hidden1(8)"><span></span>
-									<p class="icon_12">系统设置</p> </a></li>
-							<li class="y_css" id="xx9"><a
-								href="product/productManage.html" target="mainFrame"
-								onclick="changeIcon('Product')"
-								onmousedown="javascript:pr('xx9')" onmouseover="show(9)"
-								onmouseout="hidden1(9)"> <span></span>
-									<p class="icon_03">产品资料管理</p>
-							</a></li>
-						</ul>
-					</div>
-					<div class="side_02">
-						<ul>
-							<li class="y_css" id="xx10"><a
-								href="../zhanshi_web/index.htm" target="_blank">
-									<p class="icon_08">产品展示</p>
-							</a></li>
 						</ul>
 					</div>
 				</td>

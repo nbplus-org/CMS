@@ -32,6 +32,8 @@ public class ClothesVO {
 
 	private Double clothesprice;// 服装现价
 
+	private String clothespicture; //服装图片
+	
 	private List<ClothesDetailVO> closthesDetailVo;//服装详情属性
 	
 	
@@ -125,6 +127,15 @@ public class ClothesVO {
 	public void setClothesprice(Double clothesprice) {
 		this.clothesprice = clothesprice;
 	}
+
+	public String getClothespicture() {
+		return clothespicture;
+	}
+
+	public void setClothespicture(String clothespicture) {
+		this.clothespicture = clothespicture;
+	}
+
 
 	
 

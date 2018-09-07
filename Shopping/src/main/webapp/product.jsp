@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
@@ -63,56 +64,61 @@
 			color : color,
 			size : size,
 		};
-		$.post("checkNum.do?clothesid=" + clothesid, data, function(data) {
-			$.get("showCarAgain.do", {}, function() {
-			});
-			$("#check").html("");
-			if (data == 0) {
-				PostbirdAlertBox.confirm({
-					'title' : '提示',
-					'content' : '添加成功,去购物车结算?',
-					'okBtn' : '好的',
-					'contentColor' : 'red',
-					'onConfirm' : function() {
-						window.location.href = "showCart.do";
-					},
-					'onCancel' : function() {
-						window.location.href = "check.do?clothesid=${clothesid}";
-					}
-				});
+		$
+				.post(
+						"checkNum.do?clothesid=" + clothesid,
+						data,
+						function(data) {
+							$.get("showCarAgain.do", {}, function() {
+							});
+							$("#check").html("");
+							if (data == 0) {
+								PostbirdAlertBox
+										.confirm({
+											'title' : '提示',
+											'content' : '添加成功,去购物车结算?',
+											'okBtn' : '好的',
+											'contentColor' : 'red',
+											'onConfirm' : function() {
+												window.location.href = "showCart.do";
+											},
+											'onCancel' : function() {
+												window.location.href = "check.do?clothesid=${clothesid}";
+											}
+										});
 
-				//alert("成功添加到购物车");
-			} else if (data == 1) {
-				$("#check").html("请填写完整的信息!");
-				$("#check").css("color", "red");
-			} else if (data == 4) {
-				PostbirdAlertBox.alert({
-					'title' : '提示',
-					'content' : '系统故障,请稍后再试!',
-					'okBtn' : '好的',
-					'contentColor' : 'red',
-					'onConfirm' : function() {
-					},
-				});
-				//alert("系统故障,请稍后再试!");
-			} else if (data == 5) {
-				//未登陆
-				PostbirdAlertBox.confirm({
-					'title' : '提示',
-					'content' : '您还没有登陆，去登陆?',
-					'okBtn' : '好的',
-					'contentColor' : 'red',
-					'onConfirm' : function() {
-						window.location.href = "reglogin.jsp";
-					},
-					'onCancel' : function() {
-					}
-				});
+								//alert("成功添加到购物车");
+							} else if (data == 1) {
+								$("#check").html("请填写完整的信息!");
+								$("#check").css("color", "red");
+							} else if (data == 4) {
+								PostbirdAlertBox.alert({
+									'title' : '提示',
+									'content' : '系统故障,请稍后再试!',
+									'okBtn' : '好的',
+									'contentColor' : 'red',
+									'onConfirm' : function() {
+									},
+								});
+								//alert("系统故障,请稍后再试!");
+							} else if (data == 5) {
+								//未登陆
+								PostbirdAlertBox.confirm({
+									'title' : '提示',
+									'content' : '您还没有登陆，去登陆?',
+									'okBtn' : '好的',
+									'contentColor' : 'red',
+									'onConfirm' : function() {
+										window.location.href = "reglogin.jsp";
+									},
+									'onCancel' : function() {
+									}
+								});
 
-				/* $("#check").html("请先登录!")
-				$("#check").css("color", "red"); */
-			}
-		});
+								/* $("#check").html("请先登录!")
+								$("#check").css("color", "red"); */
+							}
+						});
 	}
 
 	function showPic(path) {
@@ -249,7 +255,9 @@
 								<span class="rating_value_two">￥${clothes.clothesprice}</span>
 							</p>
 							<div class="add-to-cart">
-								<span style="font-size: 22px">数量:&nbsp;&nbsp;</span><input type="text" title="Qty" name="qty" id="qty" class="qty" value="1" />
+								<span style="font-size: 22px">数量:&nbsp;&nbsp;</span><input
+									type="text" title="Qty" name="qty" id="qty" class="qty"
+									value="1" />
 								<button type="button" title="加入购物车" onclick="ajax()" id="buy"
 									class="cart_button">
 									<span>加入购物车</span>
@@ -288,11 +296,8 @@
 										<h2 style="FONT-SIZE: 20px">现有标签:</h2>
 										<ul id="product_tags">
 											<li><a style="color: blue" href="#">${clothes.clothestype }</a>
-												<span>(1)</span></li>
 											<li><a style="color: blue" href="#">${clothes.clothesbigtag }</a>
-												<span>(1)</span></li>
 											<li><a style="color: blue" href="#">${clothes.clothesbrand}</a>
-												<span>(1)</span></li>
 										</ul>
 									</div>
 								</div>
@@ -300,38 +305,43 @@
 							<div id="tab-3" class="tab-pane fade">
 								<div class="product_description">
 									<ul id="Motorola">
-										<li><a href="#">${clothes.clothesname }</a> 回顾 <span
-											class="Motorola_cl">${clothes.clothesname }</span></li>
-										<li><span>质量</span> <i class="fa fa-star"></i> <i
+										<li><a href="#">${clothes.clothesname }</a></li>
+										<li><span>评分</span> <i class="fa fa-star"></i> <i
 											class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 											class="fa fa-star"></i> <i class="fa fa-star"></i></li>
-										<li><span>价格</span> <i class="fa fa-star"></i> <i
-											class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-											class="fa fa-star"></i> <i class="fa fa-star"></i></li>
-										<li><span>价值</span> <i class="fa fa-star"></i> <i
-											class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-											class="fa fa-star"></i> <i class="fa fa-star"></i></li>
-										<li>${clothes.clothesname }（11/2/2015发布）</li>
+
+										<c:forEach items="${review}" var="r" varStatus="status">
+											<div class="product_tag_area">
+												<h2 style="Font-Size: 20px">
+													<c:if test="${r.state}==1">
+													${uame }:
+												</c:if>
+												</h2>
+												<ul id="product_tags">
+													<%-- <li style="color: blue"><span>服装名称:${clothes.clothesname}</span></li> --%>
+													<li><span>评分</span> 
+														<c:forEach items="${r.reviewstar }" var="ra" begin="0" end="${r.reviewstar }">
+																${r.reviewstar }<i class="fa fa-star"></i>
+														</c:forEach>
+													<li>
+													<%
+													List<Map<String, String>> list=(List<Map<String, String>>)request.getAttribute("review");
+													%>
+												</ul>
+												<div class="add_tags">
+													<h2>评论:</h2>
+												</div>
+												<div>
+													<p>${r.reviewstr }</p>
+												</div>
+												<div>
+													<a><img src="${r.reviewpic}" width="200px"
+														height="200px" alt="" /></a>
+												</div>
+											</div>
+											<hr>
+										</c:forEach>
 									</ul>
-									<c:forEach items="${list4}" var="r">
-										<div class="product_tag_area">
-											<h2 style="Font-Size: 20px">${r.state}</h2>
-											<ul id="product_tags">
-												<li style="color: blue"><span>服装名称:${clothes.clothesname}</span></li>
-											</ul>
-											<div class="add_tags">
-												<h2>评论:</h2>
-											</div>
-											<div>
-												<p>${r.reviewstr }</p>
-											</div>
-											<div>
-												<a><img src="${r.reviewpic}" width="200px"
-													height="200px" alt="" /></a>
-											</div>
-										</div>
-										<hr>
-									</c:forEach>
 								</div>
 							</div>
 						</div>
