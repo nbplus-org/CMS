@@ -245,37 +245,7 @@ public interface ClothesDao {
 	@Select("select count(*) from clothesvo where brandpic=#{brandpic}")
 	long countBybrandpic(String brandpic);
 	
-    /**
-     * 模糊查询
-     * @param clothesname
-     * @param clothesbrand
-     * @param clothesbigtag
-     * @param clothestype
-     * @param pages
-     * @param rows
-     * @return
-     */
-	@Select("select * from clothesvo where clothesname like CONCAT('%',#{clothesname},'%')"
-			+ " or clothesbrand like CONCAT('%',#{clothesbrand},'%') or clothesbigtag like CONCAT('%','#{clothesbigtag}','%') or" 
-            + "clothestype like CONCAT('%',#{clothestype},'%') GROUP BY clothesname LIMIT #{pages},#{rows}")
-	List<Map<String, Object>> selectByClothes(@Param("clothesname") String clothesname,@Param("clothesbrand") String clothesbrand,
-			@Param("clothesbigtag") String clothesbigtag,@Param("clothestype") String clothestype, @Param("pages") int pages,
-			@Param("rows") int rows);
-	
-	
-	/**
-	 * 模糊查询的数量
-	 * @param clothesname
-	 * @param clothesbrand
-	 * @param clothesbigtag
-	 * @param clothestype
-	 * @return
-	 */
-	@Select("select count(*) from clothesvo where clothesname like CONCAT('%',#{clothesname},'%')"
-			+ "or clothesbrand like CONCAT('%',#{clothesbrand},'%') or clothesbigtag like CONCAT('%','#{clothesbigtag}','%') or"
-			+ "clothestype like CONCAT('%',#{clothestype},'%')")
-	long countByClothes(@Param("clothesname") String clothesname,@Param("clothesbrand") String clothesbrand,
-			@Param("clothesbigtag") String clothesbigtag,@Param("clothestype") String clothestype);
+
 	
 	/**
 	 * 新增服装表

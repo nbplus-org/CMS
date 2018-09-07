@@ -293,7 +293,6 @@
 											<%}else{
 												
 											} %>
-											<a onclick="goLogin()">我的订单</a> <a onclick="goLogin()">购物车</a>
 
 											<a href="about-us.jsp">关于我们</a> <a href="contact.jsp">联系我们</a>
 

@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Random;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -363,21 +364,20 @@ public class UserAction {
 	 *             liu
 	 */
 	@RequestMapping("/login.do")
-	public String login(UserVO userVo, HttpServletRequest request, Model model,HttpSession session) throws BizException {
+	public String login(UserVO userVo, HttpServletRequest request, Model model,HttpSession session,HttpServletResponse response) throws BizException {
 		System.out.println(userVo.getUname() + "=========" + userVo.getUpwd());
 		// 获取输入验证码
 		String vcode = request.getParameter("vcode");
 		// 取会话中的验证码
 		String vscode = (String) request.getSession().getAttribute("vscode");
+			
 
 		userVo = uimp.checkByNP(userVo.getUname(), userVo.getUpwd());
 		if (userVo != null) {
 			if (vcode.equalsIgnoreCase(vscode)) {
 				model.addAttribute("userVo", userVo);
 				request.getSession().setAttribute("UserVO", userVo);
-				
-
-				
+	
 				return "redirect:show.do";
 			} else {
 				model.addAttribute("msgcode", "验证码错误!");
