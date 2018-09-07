@@ -237,22 +237,6 @@ public class ClothesImp implements ClothesInterface {
 		return cDao.countBybrandpic(brandpic);
 	}
 	
-	/**
-	 * 模糊查询
-	 */
-	@Override
-	public List<Map<String, Object>> selectByClothes(String clothesname, String clothesbrand, String clothesbigtag,
-			String clothestype, Integer pages, Integer rows) {
-		return cDao.selectByClothes(clothesname, clothesbrand, clothesbigtag, clothestype, pages, rows);
-	}
-
-	/**
-	 * 模糊查询的数量
-	 */
-	@Override
-	public long countByClothes(String clothesname, String clothesbrand, String clothesbigtag, String clothestype) {
-		return cDao.countByClothes(clothesname, clothesbrand, clothesbigtag, clothestype);
-	}
 
 	/**
 	 * 新增服装表

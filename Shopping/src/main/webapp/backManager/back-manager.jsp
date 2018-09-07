@@ -247,7 +247,7 @@
 						<div id="header">
 							<div class="header01">
 								<p class="logo">
-									<a href="index-x.html"> <img src="images/logo_03.gif"
+									<a href="#"> <img src="images/logo_03.gif"
 										alt=""></a>
 								</p>
 								<p class="right_01"

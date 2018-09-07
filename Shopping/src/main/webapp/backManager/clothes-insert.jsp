@@ -110,12 +110,8 @@
 							style="text-decoration: underline;">查看产品图库</a> -->
 					<td>&nbsp;</td>
 					<td valign="top">服装标签：</td>
-					<td><select name="clothesbigtag">
-							<option>男装
-							<option>女装
-							<option>鞋子
-							<option>包包
-					</select></td>
+					<td><input type="text" class="input_01" name="clothesbigtag"
+						 /></td>
 					<td name="brandpic" id="brandpic">品牌图片：<input type="file" name="file1" id="file1"
 					 accept="image/png, image/jpeg, image/gif, image/jpg"/></td>
 					<td>&nbsp;</td>

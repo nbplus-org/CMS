@@ -3,7 +3,6 @@ package com.yc.shopping.biz;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Param;
 
 import com.yc.shopping.vo.ClothesDetailVO;
 import com.yc.shopping.vo.ClothesVO;
@@ -190,27 +189,6 @@ public interface ClothesInterface {
 	 */
 	public long countBybrandpic(String brandpic);
 	
-	/**
-	 * 模糊查询
-	 * @param clothesname
-	 * @param clothesbrand
-	 * @param clothesbigtag
-	 * @param clothestype
-	 * @param pages
-	 * @param rows
-	 * @return
-	 */
-	public List<Map<String, Object>> selectByClothes(String clothesname,String clothesbrand,String clothesbigtag,String clothestype,Integer pages,Integer rows);
-
-	/**
-	 * 模糊查询的数量
-	 * @param clothesname
-	 * @param clothesbrand
-	 * @param clothesbigtag
-	 * @param clothestype
-	 * @return
-	 */
-	public long countByClothes(String clothesname,String clothesbrand,String clothesbigtag,String clothestype);
 	/**
 	 * 新增服装表
 	 * @param clothesVO

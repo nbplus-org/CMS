@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+
 <!doctype html>
 <html class="no-js" lang="en">
 <head>
@@ -335,7 +336,7 @@
 							<li>
 								<div class="email_address">
 									<input type="text" name="uname" class="email_test" required
-										placeholder="请输入用户名" autocomplete="off" />
+										placeholder="请输入用户名" autocomplete="off"/>
 									<c:forEach items="${msg}">
 										<span style="color: red">${msg}</span>
 									</c:forEach>
