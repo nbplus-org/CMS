@@ -72,7 +72,7 @@
      		var picDir = value.substring(value.lastIndexOf("\\") + 1);
      		$("#showBrandPic").show();
      		$("#showBrandPic").attr('src', "../upload/" + picDir);
-     		alert(showBrandPic.src);
+     	//	alert(showBrandPic.src);
          }
          
          function showClothesPic2(){
@@ -80,7 +80,7 @@
       		var picDir = value.substring(value.lastIndexOf("\\") + 1);
       		$("#showClothesPic").show();
       		$("#showClothesPic").attr('src', "../upload/" + picDir);
-      		alert(showClothesPic.src);
+      	//	alert(showClothesPic.src);
           }
          
 </script>

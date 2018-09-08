@@ -79,7 +79,7 @@
 						<td>${c.clothesbrand }</td>
 						<td>${c.clothesbigtag }</td>
 						<td>${c.clothestype }</td>
-						<td><img src="../${c. clothespicture}" width="60px" 
+						<td><img src="../${c. clothespic}" width="60px" 
 							height="50px" /></td>
 						<td>${c. clothesintroduce}</td>
 						<td width="8%">

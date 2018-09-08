@@ -11,7 +11,7 @@
 	function getPicDir() {
 		var value = $("#file").val();
 		var picDir = value.substring(value.lastIndexOf("\\") + 1);
-		$("#showPic").attr('src', "../img/womenswear/dress/" + picDir);
+		$("#showPic").attr('src', "../upload/" + picDir);
 		//alert(showPic.src);
 	}
 
@@ -98,7 +98,7 @@
 					<td width="30%"><input type="text" class="input_01"
 						name="clothestype" id="clothestype"
 						value="${clothesMsg[0].clothestype }" /></td>
-					<td rowspan="10"><img src="../${clothesMsg[0].clothespicture }"
+					<td rowspan="10"><img src="../${clothesMsg[0].clothespic }"
 						width="200px" height="200px" id="showPic" name="srcpic" /></td>
 					<td>&nbsp;</td>
 				</tr>
