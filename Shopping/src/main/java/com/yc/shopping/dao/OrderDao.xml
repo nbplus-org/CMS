@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.shopping.dao.OrderDao">
+
+	<!-- <resultMap type="com.yc.shopping.vo.UserVO" id="myOrder">
+
+		<id property="uid" column="uid" />
+		<collection property="clothesDetailVo" column="uid"
+			fetchType="lazy" select="selectUserClothesDetailVO">
+		</collection>
+
+		<collection property="clothesVo" column="uid" fetchType="lazy"
+			select="selectUserClothesVO">
+		</collection>
+
+		<collection property="cartVo" column="uid" fetchType="lazy"
+			select="selectUserCartVO">
+		</collection>
+
+	</resultMap>
+
+
+	根据用户账号查购物车的信息
+	<select id="selectCartByUser" resultMap="myOrder">
+		select * from uservo WHERE uname=#{uname}
+	</select>
+
+	<select id="selectUserClothesDetailVO" resultType="com.yc.shopping.vo.ClothesDetailVO">
+		select c.*
+		from Uservo a
+		left join Cartvo b on a.uid=b.uid
+		LEFT JOIN ClothDetailvo c on
+		b.clodetailid=c.clodetailid
+		LEFT JOIN Clothesvo d ON
+		d.clothesid=c.clothesid
+		where a.uid=#{uid}
+	</select>
+
+	<select id="selectUserClothesVO" resultType="com.yc.shopping.vo.ClothesVO">
+		select d.*
+		from Uservo a
+		left join Cartvo b on a.uid=b.uid
+		LEFT JOIN ClothDetailvo c on
+		b.clodetailid=c.clodetailid
+		LEFT JOIN Clothesvo d ON
+		d.clothesid=c.clothesid
+		where a.uid=#{uid}
+	</select>
+	<select id="selectUserCartVO" resultType="com.yc.shopping.vo.CartVO">
+		select b.cnum
+		from Uservo a
+		left join Cartvo b on a.uid=b.uid
+		LEFT JOIN ClothDetailvo c on
+		b.clodetailid=c.clodetailid
+		LEFT JOIN Clothesvo d ON
+		d.clothesid=c.clothesid
+		where a.uid=#{uid}
+	</select> -->
+   
+   
+   
+   
+   
+   
+   
+   <!-- 结算部分购物车 -->
+   <select id="selectCartByUser" resultType="java.util.Map">
+      
+     SELECT * 
+     from Cartvo a LEFT JOIN ClothDetailvo b
+     on a.clodetailid=b.clodetailid LEFT JOIN Clothesvo c
+     on b.clothesid=c.clothesid
+     WHERE 
+     <foreach collection="array" item="id" 
+            open="cartid=" close=" " separator="or cartid=">
+            #{id}
+     </foreach>
+   
+   </select>
+
+
+
+	<!-- 查订单 -->
+
+
+
+	<resultMap type="com.yc.shopping.vo.OrderVO" id="myorder">
+		<result property="orderid" column="orderid" />
+
+		<!-- 查用户订单详情 2表关联 -->
+		<collection property="orderDetailVo" column="orderid"
+			fetchType="lazy" select="selectOrderDetail">
+		</collection>
+	</resultMap>
+
+	<resultMap type="com.yc.shopping.vo.OrderDetailVO" id="OrderDetailVO">
+		<result property="clodetailid" column="clodetailid" />
+
+		<collection property="clothesDetailVo" column="clodetailid"
+			fetchType="lazy" select="selectOrderDetailClothesDetail">
+		</collection>
+	</resultMap>
+
+	<resultMap type="com.yc.shopping.vo.ClothesDetailVO" id="ClothesDetailVO">
+		<result property="clothesid" column="clothesid" />
+
+		<collection property="clothesVo" column="clothesid"
+			fetchType="lazy" select="selectOrderDetailClothesDetailClothes">
+		</collection>
+
+	</resultMap>
+
+	<!-- 查用户全部订单 -->
+	<select id="selectUserOrder" resultMap="myorder">
+		select * from Ordervo where uid=#{uid} and orderstatus!=4  ORDER BY ordertime DESC 
+		<!-- LIMIT #{offset},#{rows} -->
+	</select>
+	<!-- 查用户订单详情 2表关联 -->
+	<select id="selectOrderDetail" resultMap="OrderDetailVO">
+		select a.* from OrderDetailvo a LEFT JOIN
+		ClothDetailvo b ON a.clodetailid=b.clodetailid
+		where orderid=#{orderid}
+	</select>
+
+	<select id="selectOrderDetailClothesDetail" resultMap="ClothesDetailVO">
+		select * from
+		ClothDetailvo
+		where clodetailid=#{clodetailid}
+	</select>
+
+	<!-- 通过订单查订单详情再查服装详情再查服装 -->
+	<select id="selectOrderDetailClothesDetailClothes" resultType="com.yc.shopping.vo.ClothesVO">
+		select * from
+		Clothesvo
+		where clothesid=#{clothesid}
+	</select>
+
+	<!-- 查 有状态值的订单0待发货 1待收货 2已完成   待评价？ -->
+
+	<resultMap type="com.yc.shopping.vo.OrderVO" id="Status0">
+		<result property="orderid" column="orderid" />
+		<collection property="orderDetailVo" column="orderid"
+			fetchType="lazy" select="selectOrderDetail">
+		</collection>
+	</resultMap>
+
+	<select id="selectOrderByStatus0" resultMap="Status0">
+		select * from Ordervo where uid=#{uid} and orderstatus=#{orderstatus}  ORDER BY ordertime DESC 
+	</select>
+	
+    <!-- 查看待评价订单 -->
+    
+    <resultMap type="com.yc.shopping.vo.OrderVO" id="Status1">
+		<result property="orderid" column="orderid" />
+		<collection property="orderDetailVo" column="orderid"
+			fetchType="lazy" select="selectOrderDetailweipingjia">
+		</collection>
+	</resultMap>
+    <select id="selectOrderdaipingjia" resultMap="Status1">
+         select * from Ordervo where uid=#{uid} and orderstatus=2  ORDER BY ordertime DESC 
+    </select>
+    <select id="selectOrderDetailweipingjia" resultMap="OrderDetailVO">
+        select a.* from OrderDetailvo a LEFT JOIN
+		ClothDetailvo b ON a.clodetailid=b.clodetailid
+		where orderid=#{orderid} and reviewstatus='0'
+    </select> 
+    
+    
+    
+    
+
+	<!-- 修改订单状态 -->
+	<update id="updateOrderStatus">
+		update Ordervo
+		<set>
+			<if test="orderstatus ==0">
+				orderstatus=-1,
+			</if>
+			<if test="orderstatus ==1">
+				orderstatus=2,
+			</if>
+			<if test="orderstatus ==2">
+				orderstatus=4,
+			</if>
+			<if test="orderstatus ==-1">
+				orderstatus=4,
+			</if>
+			<!-- <if test="orderstatus ==''">
+				orderstatus=4,
+			</if> -->
+		</set>
+		where orderid=#{orderid}
+	</update>
+
+    <!-- 下单后删除购物车记录      部分下单   -->
+    <delete id="deleteCart">
+    
+     DELETE from cartvo where cartid in
+     <foreach collection="array" item="id" 
+            open="(" close=")" separator=",">
+            #{id}
+     </foreach>
+    </delete>
+    
+
+
+
+
+</mapper>
