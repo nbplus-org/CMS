@@ -139,6 +139,7 @@ text-decoration:none;  /*超链接无下划线*/
 							</a>
 							<c:forEach items="${v.orderDetailVo }" var="o" >
 							<div class="aui-mail-product">
+<<<<<<< HEAD
 								<a href="javascript:;" class="aui-mail-product-item">
 									<div class="aui-mail-product-item-hd">
 										<img src="${o.clothesDetailVo.clothespic }" alt="">
@@ -396,6 +397,265 @@ text-decoration:none;  /*超链接无下划线*/
 							<c:forEach items="${v.orderDetailVo }" var="o" >
 							<div class="aui-mail-product">
 								<a href="javascript:;" class="aui-mail-product-item">
+=======
+								<a href="check.do?clothesid=${o.clothesDetailVo.clothesid}" class="aui-mail-product-item">
+									<div class="aui-mail-product-item-hd">
+										<img src="${o.clothesDetailVo.clothespic }" alt="">
+									</div>
+									<div class="aui-mail-product-item-bd">
+										<p>商品名:${o.clothesDetailVo.clothesVo.clothesname }
+										        ${o.clothesDetailVo.clothesVo.clothesbrand }
+										        ${o.clothesDetailVo.clothescolour }
+										        ${o.clothesDetailVo.clothessize }码
+										</p>
+										<p>价格:￥${o.clothesDetailVo.clothesVo.clothesprice }</p>
+										<p>数量:${o.num }</p>
+									</div>
+									
+									<div class="">
+										<p>地址 :${v.useraddress }</p>
+									</div>
+									&nbsp;&nbsp;
+									<div class="">
+									<p  id="${o.orderdetailid}" onclick="pinglun(this)" class="pinglun">${v.orderstatus==2&&o.reviewstatus==0?'未评论':v.orderstatus==2&&o.reviewstatus==1?'已评论':'' }</p> 
+									</div>
+								</a>
+							</div>
+							</c:forEach>
+							<a href="javascript:;" class="aui-mail-payment" id="aaa">
+								<p>
+									<!-- 共<em>1</em> 件商品 --> 实付款: ￥<i>${v.tranprice }</i>
+								</p>
+							</a>
+							<div class="aui-mail-button">
+								<a  id="${v.orderid }" onclick="operation(this)">${v.orderstatus==0?'取消订单':v.orderstatus==1?'确认收货':'删除订单' }</a> 
+							</div>
+						</div>
+						<div class="divHeight"></div>
+					</c:forEach>
+					<mt:page href="ResfoodServlet?op=query" total="${total}" rows="4"/></p>
+					</div>
+					
+					
+					<!-- 待发货 -->
+					<div class="tab-panel-item">
+					
+						<c:forEach items="${order0 }" var="v" >
+						<div class="tab-item">
+							<a id="aa" class="aui-well-item aui-well-item-clear">
+								<div class="aui-well-item-bd">
+									<h3>订单号:${v.orderid }</h3>
+								</div>
+								<div class="aui-well-item-bd">
+									<h3>下单时间:
+									<fmt:formatDate value="${v.ordertime }" pattern="yyyy年MM月dd日"/>
+									</h3>
+								</div>
+								<div class="aui-well-item-bd">
+									<h3>预计送达:
+									<fmt:formatDate value="${v.arrivaltime }" pattern="yyyy年MM月dd日" /> 
+									</h3>
+								</div>
+							    <p>收货人:${v.uname }</p>&nbsp;&nbsp;&nbsp;
+							    <p>电话:${v.uphone }</p>&nbsp;&nbsp;&nbsp;
+								<span class="aui-well-item-fr">${v.orderstatus==-1?'已取消':v.orderstatus==0?'已支付  待发货':v.orderstatus==1?'已发货,正在路上':'交易完成' }</span>
+							</a>
+							<c:forEach items="${v.orderDetailVo }" var="o" >
+							<div class="aui-mail-product">
+								<a href="check.do?clothesid=${o.clothesDetailVo.clothesid}" class="aui-mail-product-item">
+									<div class="aui-mail-product-item-hd">
+										<img src="${o.clothesDetailVo.clothespic }" alt="">
+									</div>
+									<div class="aui-mail-product-item-bd">
+										<p>商品名:${o.clothesDetailVo.clothesVo.clothesname }
+										        ${o.clothesDetailVo.clothesVo.clothesbrand }
+										        ${o.clothesDetailVo.clothescolour }
+										        ${o.clothesDetailVo.clothessize }码
+										</p>
+										<p>价格:￥${o.clothesDetailVo.clothesVo.clothesprice }</p>
+										<p>数量:${o.num }</p>
+									</div>
+									
+									<div class="">
+										<p>地址 :${v.useraddress }</p>
+									</div>
+									&nbsp;&nbsp;
+									<div class="">
+									<p  id="${o.orderdetailid}" onclick="pinglun(this)" class="pinglun">${v.orderstatus==2&&o.reviewstatus==0?'未评论':v.orderstatus==2&&o.reviewstatus==1?'已评论':'' }</p>
+									</div>
+								</a>
+							</div>
+							</c:forEach>
+							<a href="javascript:;" class="aui-mail-payment" id="aaa">
+								<p>
+									<!-- 共<em>1</em> 件商品 --> 实付款: ￥<i>${v.tranprice }</i>
+								</p>
+							</a>
+							<div class="aui-mail-button">
+								<a  id="${v.orderid }" onclick="operation(this)">${v.orderstatus==0?'取消订单':v.orderstatus==1?'确认收货':'删除订单' }</a> 
+							</div>
+						</div>
+						<div class="divHeight"></div>
+					</c:forEach>
+					
+					
+					</div>
+					
+					
+					<!-- 待收货 -->
+					<div class="tab-panel-item">
+							    <c:forEach items="${order1 }" var="v" >
+						<div class="tab-item">
+							<a id="aa" class="aui-well-item aui-well-item-clear">
+								<div class="aui-well-item-bd">
+									<h3>订单号:${v.orderid }</h3>
+								</div>
+								<div class="aui-well-item-bd">
+									<h3>下单时间:
+									<fmt:formatDate value="${v.ordertime }" pattern="yyyy年MM月dd日"/>
+									</h3>
+								</div>
+								<div class="aui-well-item-bd">
+									<h3>预计送达:
+									<fmt:formatDate value="${v.arrivaltime }" pattern="yyyy年MM月dd日" /> 
+									</h3>
+								</div>
+							    <p>收货人:${v.uname }</p>&nbsp;&nbsp;&nbsp;
+							    <p>电话:${v.uphone }</p>&nbsp;&nbsp;&nbsp;
+								<span class="aui-well-item-fr">${v.orderstatus==-1?'已取消':v.orderstatus==0?'已支付  待发货':v.orderstatus==1?'已发货,正在路上':'交易完成' }</span>
+							</a>
+							<c:forEach items="${v.orderDetailVo }" var="o" >
+							<div class="aui-mail-product">
+								<a href="check.do?clothesid=${o.clothesDetailVo.clothesid}" class="aui-mail-product-item">
+									<div class="aui-mail-product-item-hd">
+										<img src="${o.clothesDetailVo.clothespic }" alt="">
+									</div>
+									<div class="aui-mail-product-item-bd">
+										<p>商品名:${o.clothesDetailVo.clothesVo.clothesname }
+										        ${o.clothesDetailVo.clothesVo.clothesbrand }
+										        ${o.clothesDetailVo.clothescolour }
+										        ${o.clothesDetailVo.clothessize }码
+										</p>
+										<p>价格:￥${o.clothesDetailVo.clothesVo.clothesprice }</p>
+										<p>数量:${o.num }</p>
+									</div>
+									
+									<div class="">
+										<p>地址 :${v.useraddress }</p>
+									</div>
+									&nbsp;&nbsp;
+									<div class="">
+									<p  id="${o.orderdetailid}" onclick="pinglun(this)" class="pinglun">${v.orderstatus==2&&o.reviewstatus==0?'未评论':v.orderstatus==2&&o.reviewstatus==1?'已评论':'' }</p>
+									</div>
+								</a>
+							</div>
+							</c:forEach>
+							<a href="javascript:;" class="aui-mail-payment" id="aaa">
+								<p>
+									<!-- 共<em>1</em> 件商品 --> 实付款: ￥<i>${v.tranprice }</i>
+								</p>
+							</a>
+							<div class="aui-mail-button">
+								<a  id="${v.orderid }" onclick="operation(this)">${v.orderstatus==0?'取消订单':v.orderstatus==1?'确认收货':'删除订单' }</a> 
+							</div>
+						</div>
+						<div class="divHeight"></div>
+					</c:forEach>
+					
+					
+					</div>
+					
+					
+					
+					<!-- 待评价 -->
+					<div class="tab-panel-item">
+						<c:forEach items="${order4 }" var="v" >
+						<div class="tab-item">
+							<a id="aa" class="aui-well-item aui-well-item-clear">
+								<div class="aui-well-item-bd">
+									<h3>订单号:${v.orderid }</h3>
+								</div>
+								<div class="aui-well-item-bd">
+									<h3>下单时间:
+									<fmt:formatDate value="${v.ordertime }" pattern="yyyy年MM月dd日"/>
+									</h3>
+								</div>
+								<div class="aui-well-item-bd">
+									<h3>预计送达:
+									<fmt:formatDate value="${v.arrivaltime }" pattern="yyyy年MM月dd日" /> 
+									</h3>
+								</div>
+							    <p>收货人:${v.uname }</p>&nbsp;&nbsp;&nbsp;
+							    <p>电话:${v.uphone }</p>&nbsp;&nbsp;&nbsp;
+								<span class="aui-well-item-fr">${v.orderstatus==-1?'已取消':v.orderstatus==0?'已支付  待发货':v.orderstatus==1?'已发货,正在路上':'交易完成' }</span>
+							</a>
+							<c:forEach items="${v.orderDetailVo }" var="o" >
+							<div class="aui-mail-product">
+								<a href="check.do?clothesid=${o.clothesDetailVo.clothesid}" class="aui-mail-product-item">
+									<div class="aui-mail-product-item-hd">
+										<img src="${o.clothesDetailVo.clothespic }" alt="">
+									</div>
+									<div class="aui-mail-product-item-bd">
+										<p>商品名:${o.clothesDetailVo.clothesVo.clothesname }
+										        ${o.clothesDetailVo.clothesVo.clothesbrand }
+										        ${o.clothesDetailVo.clothescolour }
+										        ${o.clothesDetailVo.clothessize }码
+										</p>
+										<p>价格:￥${o.clothesDetailVo.clothesVo.clothesprice }</p>
+										<p>数量:${o.num }</p>
+									</div>
+									
+									<div class="">
+										<p>地址 :${v.useraddress }</p>
+									</div>
+									&nbsp;&nbsp;
+									<div class="">
+									<p  id="${o.orderdetailid}" onclick="pinglun(this)" class="pinglun">${v.orderstatus==2&&o.reviewstatus==0?'未评论':v.orderstatus==2&&o.reviewstatus==1?'已评论':'' }</p>
+									</div>
+								</a>
+							</div>
+							</c:forEach>
+							<a href="javascript:;" class="aui-mail-payment" id="aaa">
+								<p>
+									<!-- 共<em>1</em> 件商品 --> 实付款: ￥<i>${v.tranprice }</i>
+								</p>
+							</a>
+							<div class="aui-mail-button">
+								<a  id="${v.orderid }" onclick="operation(this)">${v.orderstatus==0?'取消订单':v.orderstatus==1?'确认收货':'删除订单' }</a>  
+							</div>
+						</div>
+						<div class="divHeight"></div>
+					</c:forEach> 
+					
+					
+					</div>
+					
+					<!-- 已完成-->
+					<div class="tab-panel-item">
+							    <c:forEach items="${order2 }" var="v" >
+						<div class="tab-item">
+							<a id="aa" class="aui-well-item aui-well-item-clear">
+								<div class="aui-well-item-bd">
+									<h3>订单号:${v.orderid }</h3>
+								</div>
+								<div class="aui-well-item-bd">
+									<h3>下单时间:
+									<fmt:formatDate value="${v.ordertime }" pattern="yyyy年MM月dd日"/>
+									</h3>
+								</div>
+								<div class="aui-well-item-bd">
+									<h3>预计送达:
+									<fmt:formatDate value="${v.arrivaltime }" pattern="yyyy年MM月dd日" /> 
+									</h3>
+								</div>
+							    <p>收货人:${v.uname }</p>&nbsp;&nbsp;&nbsp;
+							    <p>电话:${v.uphone }</p>&nbsp;&nbsp;&nbsp;
+								<span class="aui-well-item-fr">${v.orderstatus==-1?'已取消':v.orderstatus==0?'已支付  待发货':v.orderstatus==1?'已发货,正在路上':'交易完成' }</span>
+							</a>
+							<c:forEach items="${v.orderDetailVo }" var="o" >
+							<div class="aui-mail-product">
+								<a href="check.do?clothesid=${o.clothesDetailVo.clothesid}" class="aui-mail-product-item">
+>>>>>>> branch 'master' of https://github.com/nbplus-org/CMS.git
 									<div class="aui-mail-product-item-hd">
 										<img src="${o.clothesDetailVo.clothespic }" alt="">
 									</div>

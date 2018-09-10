@@ -45,6 +45,7 @@ public class UserAction {
 	CartInterface ctBiz;
 
 	/**
+<<<<<<< HEAD
 	 * 退出登录，注销，使会话失效--前台
 	 * @return
 	 */

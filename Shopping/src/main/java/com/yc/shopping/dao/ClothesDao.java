@@ -405,5 +405,6 @@ public interface ClothesDao {
      * @return
      */
 	@Select("select * from clothesvo limit #{startPage},#{pageSize}")
+
 	List<ClothesVO> selectClothes(@Param("startPage") int startPage, @Param("pageSize") int pageSize);
 }

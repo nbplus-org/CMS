@@ -415,6 +415,7 @@
 								<span>Nike</span>
 							</h2>
 							<div class="slider2-readmore slider2-readmore_home2">
+<<<<<<< HEAD
 								<a href="showShop.do?op=search&value=耐克">耐克球鞋</a>
 							</div>
 							<div class="slider2-shop slider2-shop_home2">
@@ -747,6 +748,341 @@
 		</div>
 	</div>
 	博客结束 -->
+=======
+								<a href="#">耐克球鞋</a>
+							</div>
+							<div class="slider2-shop slider2-shop_home2">
+								<a href="#">不要犹豫，放肆起来！</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="htmlcaption1" class="nivo-html-caption slider-caption">
+				<div class="slider-progress"></div>
+				<div class="slider-text">
+					<div class="middle-text">
+						<div class="width-cap">
+							<h3 class="slider-tiile-top top-ani-1">
+								<span>疯狂夏日</span>
+							</h3>
+							<h2 class="slider-tiile-middle middle-ani-1">
+								<span>凉快说来就来</span>
+							</h2>
+							<div class="slider-readmore">
+								<a href="#">半腰短袖</a>
+							</div>
+							<div class="slider-shopping">
+								<a href="#">不要犹豫</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="htmlcaption2" class="nivo-html-caption slider-caption">
+				<div class="slider-progress"></div>
+				<div class="slider-text">
+					<div class="middle-text">
+						<div class="width-cap">
+							<h3 class="slider2-tiile-top top-ani-2">
+								<span>真皮包包</span>
+							</h3>
+							<h2 class="slider2-tiile-middle middle-ani-2">
+								<span>Michael Kors</span>
+							</h2>
+							<div class="slider2-readmore">
+								<a href="#">MK时尚女包</a>
+							</div>
+							<div class="slider2-shop">
+								<a href="#">立刻买吧</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- slider end -->
+	</section>
+	<!-- slider-area end -->
+	<!--start home-2 banner area -->
+	<div class="home2_banner_area">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="shopping_world">
+						<p>全世界免费送货. 不需要最低呢限度的追捕.</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+					<div class="home2_banner_single">
+						<div class="home2_banner_one">
+							<a href="#"> <img src="img/banner/banner-1.jpg" alt="banner" />
+							</a>
+						</div>
+						<div class="home2_banner_text">
+							<h4>真皮包包</h4>
+							<h3>6折厂价热销</h3>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+					<div class="home2_banner_single">
+						<div class="home2_banner_one">
+							<a href="#"> <img src="img/banner/banner-2.jpg" alt="banner" />
+							</a>
+						</div>
+						<div class="home2_banner_text">
+							<h4>品牌服装</h4>
+							<h3>全场七折</h3>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+					<div class="home2_banner_single">
+						<div class="home2_banner_one">
+							<a href="#"> <img src="img/banner/banner-3.jpg" alt="banner" />
+							</a>
+						</div>
+						<div class="home2_banner_text">
+							<h4>潮流鞋</h4>
+							<h3>-35% 出售</h3>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--End home-2 banner area -->
+	<!--品牌开始区域 -->
+
+
+
+	<%@ include file="brand.jsp"%>
+
+
+
+
+	<!--品牌结束区域 -->
+	<!--特色区域      div循环-->
+	<div class="feature_area">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="feature_text">
+						<h4>本店特色</h4>
+					</div>
+				</div>
+			</div>
+			<c:forEach items="${show }" var="s" varStatus="vs">
+				<c:if test="${vs.index%4==0 }">
+					<div class="row">
+				</c:if>
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+					<div class="product_list">
+						<div class="single_product">
+							<a href="check.do?clothesid=${s.clothesid}" target="main"><img
+								src="${s.clothespic}" alt="" /></a>
+							<div class="product_details">
+								<h2 class="icoFontlist">${s.clothesname}</h2>
+								<p>
+									<span class="regular_price">￥${s.clothesorigprice }</span> <span
+										class="popular_price">￥${s.clothesprice }</span>
+								</p>
+							</div>
+							<div class="product_detail">
+								<div class="star_icon">
+									<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+										class="fa fa-star"></i> <i class="fa fa-star"></i> <i
+										class="fa fa-star-half-o"></i>
+								</div>
+								<div class="product_button">
+									<div class="cart_details">
+										<a href="check.do?clothesid=${s.clothesid}" target="blank">添加购物车</a>
+									</div>
+									<div class="cart_details">
+										<a href="check.do?clothesid=${s.clothesid}" target="expand"><i
+											class="fa fa-expand"></i></a>
+									</div>
+									<div class="cart_details">
+										<a href="#" target="heart"><i class="fa fa-heart-o"></i></a>
+									</div>
+								</div>
+							</div>
+							<div class="sale_product">
+								<h5>售卖</h5>
+							</div>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
+
+
+			<div class="row" align="center">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<p style="color: black; font-size: 14px; font-family: 宋体">
+						<a href="show.do?page=${pages-1}&rows=8"
+							style="color: black; font-size: 14px; font-family: 宋体">上一页</a>
+						<mt:page href="show.do" total="${total }" rows="8" />
+						<a href="show.do?page=${pages+1}&rows=8"
+							style="color: black; font-size: 14px; font-family: 宋体">下一页</a> <font
+							style="font-weight: bold; color: black; font-size: 14px; font-family: 宋体">${pages}</font>/
+						<font
+							style="font-weight: bold; color: black; font-size: 14px; font-family: 宋体">${allPage }</font>
+						<font style="color: black; font-size: 14px; font-family: 宋体">共
+							<font style="font-weight: bold; color: black">${total }</font>条纪录
+						</font>
+
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--特色区域结束 -->
+	<!--联系信息区域结束 -->
+	<div class="service_info_area home2_service_info">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+					<div class="service_list">
+						<h2>
+							<i class="fa fa-envelope-o"></i> 1628443167@qq.com
+						</h2>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+					<div class="service_list">
+						<h3>
+							<i class="fa fa-phone"></i> 15570921217
+						</h3>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+				<a href="contact.jsp">
+					<div class="Social_list">
+						<h2 align="center">联系我们</h2>
+					</div>
+				</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--联系信息结束区域 -->
+	<!--博客开始区域 -->
+	<div class="blog_post_area home2_blog_bt">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="feature_text">
+						<h4>猜你喜欢</h4>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="carousel_blog_list">
+					<div class="col-lg-3">
+						<div class="single_blog">
+							<a href="#"><img src="img/blog-post-image/cl-1.jpg" alt="" /></a>
+							<div class="blog_details">
+								<a href="#">William Eto</a>
+								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+									sed diam...</p>
+								<h3>18 Aug 2015</h3>
+								<a href="#">
+									<div class="read_more">
+										<i class="fa fa-angle-right"></i>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3">
+						<div class="single_blog">
+							<a href="#"><img src="img/blog-post-image/cl-2.jpg" alt="" /></a>
+							<div class="blog_details">
+								<a href="#">William Eto</a>
+								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+									sed diam...</p>
+								<h3>18 Aug 2015</h3>
+								<a href="#">
+									<div class="read_more">
+										<i class="fa fa-angle-right"></i>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3">
+						<div class="single_blog">
+							<a href="#"><img src="img/blog-post-image/cl-3.jpg" alt="" /></a>
+							<div class="blog_details">
+								<a href="#">William Eto</a>
+								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+									sed diam...</p>
+								<h3>18 Aug 2015</h3>
+								<a href="#">
+									<div class="read_more">
+										<i class="fa fa-angle-right"></i>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3">
+						<div class="single_blog">
+							<a href="#"><img src="img/blog-post-image/cl-4.jpg" alt="" /></a>
+							<div class="blog_details">
+								<a href="#">William Eto</a>
+								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+									sed diam...</p>
+								<h3>18 Aug 2015</h3>
+								<a href="#">
+									<div class="read_more">
+										<i class="fa fa-angle-right"></i>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3">
+						<div class="single_blog">
+							<a href="#"><img src="img/blog-post-image/cl-3.jpg" alt="" /></a>
+							<div class="blog_details">
+								<a href="#">William Eto</a>
+								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+									sed diam...</p>
+								<h3>18 Aug 2015</h3>
+								<a href="#">
+									<div class="read_more">
+										<i class="fa fa-angle-right"></i>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3">
+						<div class="single_blog">
+							<a href="#"><img src="img/blog-post-image/cl-1.jpg" alt="" /></a>
+							<div class="blog_details">
+								<a href="#">William Eto</a>
+								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+									sed diam...</p>
+								<h3>18 Aug 2015</h3>
+								<a href="#">
+									<div class="read_more">
+										<i class="fa fa-angle-right"></i>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--博客结束 -->
+>>>>>>> branch 'master' of https://github.com/nbplus-org/CMS.git
 	<!--页尾区域开始 -->
 	<%@include file="footer.jsp"%>
 	<!--页尾结束 -->
