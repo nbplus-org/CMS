@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  
+ <mapper namespace="com.yc.shopping.dao.ClothesDao">
+            
+      <!--  <resultMap type="com.yc.shopping.vo.ClothesDetailVO" id="myClothesDetail">
+
+	   <id property="clothesid" column="clothesid" />
+		  <collection property="clothesVo" column="clothesid" fetchType="lazy"
+		 	select="SelectClothesDetailToClothes">
+		  </collection>
+	   </resultMap>
+            
+      <select id="Select" resultMap="myClothesDetail">
+             select * from 
+             ClothDetailvo 
+             GROUP BY clothesid limit #{pages},#{rows}
+      </select>
+      <select id="SelectClothesDetailToClothes" resultType="com.yc.shopping.vo.ClothesVO">
+             select * from clothesvo
+             where clothesid=#{clothesid}
+      </select> -->
+      
+      
+         <!--条件查询  -->
+    <!--    <resultMap type="com.yc.shopping.vo.ClothesDetailVO" id="myClothes">
+
+	   <id property="clothesid" column="clothesid" />
+		  <collection property="clothesVo" column="clothesid" fetchType="lazy"
+		 	select="selectClothesDetailByPrice">
+		  </collection>
+	   </resultMap>
+            
+      <select id="searchByPrice" resultMap="myClothes">
+             select * from clothesvo
+             where clothesprice between #{lower} and #{higher}
+            
+      </select>
+      <select id="selectClothesDetailByPrice" resultType="com.yc.shopping.vo.ClothesDetailVO">
+              select * from clothdetailvo
+             where clothesid=#{clothesid}
+      </select> -->
+      
+           
+           
+           
+  </mapper> 
